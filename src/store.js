@@ -2,6 +2,7 @@ import thunk from "redux-thunk";
 import Cookie from "js-cookie";
 
 import {
+  categoryListReducer,
   categoryListsReducer,
 //   productDeleteReducer,
 //   productDetailReducer,
@@ -33,7 +34,7 @@ const reducer = combineReducers({
 //   userRegister: userRegisterReducer,
 //   productSave: productSaveReducer,
 //   cart: cartReducer,
-//   categoryList: categoryListReducer,
+  categoryList: categoryListReducer,
   categoryLists: categoryListsReducer,
 //   productUpdate: productUpdateReducer,
 //   productDelete: productDeleteReducer,
