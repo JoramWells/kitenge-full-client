@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Image, Row, Col, Button, Card, Typography, Skeleton } from "antd";
-import axios from "axios";
+import React from "react";
+import { Image, Row, Col } from "antd";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 import a4 from "../img/a4.jpeg";
 import a2 from "../img/a2.jpeg";
 import a3 from "../img/a3.jpeg";
-import { listCategory } from "../../_actions/productActions";
-import { useDispatch, useSelector } from "react-redux";
+// import { listCategory } from "../../_actions/productActions";
+// import { useDispatch, useSelector } from "react-redux";
 
-const { Meta } = Card;
-const { Title } = Typography;
+// const { Meta } = Card;
+// const { Title } = Typography;
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -33,27 +32,27 @@ const responsive = {
 };
 
 export default function CarouselHeader() {
-  const CategoryList = useSelector((state) => state.categoryLists);
+//   const CategoryList = useSelector((state) => state.categoryLists);
 
-  const { loading, posts, error } = CategoryList;
-  const [cats, setCat] = useState([]);
-  const [show, setShow] = useState(false);
-  const dispatch = useDispatch();
+//   const { loading, posts, error } = CategoryList;
+//   const [cats, setCat] = useState([]);
+//   const [show, setShow] = useState(false);
+//   const dispatch = useDispatch();
 
-  const fetchData = async (id) => {
-    const { data } = await axios.get("/category/" + id);
-    setCat(data);
-    setShow(true);
-  };
+//   const fetchData = async (id) => {
+//     const { data } = await axios.get("/category/" + id);
+//     setCat(data);
+//     setShow(true);
+//   };
 
-  useEffect(() => {
-    dispatch(listCategory());
-    return () => {};
-  }, []);
+//   useEffect(() => {
+//     dispatch(listCategory());
+//     return () => {};
+//   }, []);
   return (
     <>
       <>
-        {loading ? (
+        {/* {loading ? (
           <Row justify="space-around" align="middle" style={{marginTop:"3rem"}} span={6} >
             <Col>
               <Skeleton.Input
@@ -122,11 +121,11 @@ export default function CarouselHeader() {
           </Col>
           </Row>
 
-        )}
+        )} */}
       </>
 
       <Row
-        hidden={show}
+        // hidden={show}
         justify="space-around"
         align="middle"
         style={{ margin: "1rem" }}
@@ -145,7 +144,7 @@ export default function CarouselHeader() {
           <Image src={a3} width="200px" height="auto" alt="shoes_img" />
         </Col>
       </Row>
-      <Carousel
+      {/* <Carousel
         swipeable={false}
         draggable={false}
         responsive={responsive}
@@ -154,8 +153,8 @@ export default function CarouselHeader() {
         renderButtonGroupOutside={true}
         arrows={false}
         
-      >
-        {cats.map((product) => (
+      > */}
+        {/* {cats.map((product) => (
           <Row justify="space-around" align="middle" key={product.id}>
             <Col>
               <Card
@@ -167,8 +166,8 @@ export default function CarouselHeader() {
               </Card>
             </Col>
           </Row>
-        ))}
-      </Carousel>
+        ))} */}
+      {/* </Carousel> */}
     </>
   );
 }
