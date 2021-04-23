@@ -1,13 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Image, Row, Col } from "antd";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useDispatch, useSelector } from "react-redux";
+
 
 import a4 from "../img/a4.jpeg";
 import a2 from "../img/a2.jpeg";
 import a3 from "../img/a3.jpeg";
-// import { listCategory } from "../../_actions/productActions";
-// import { useDispatch, useSelector } from "react-redux";
+import { listCategory } from "../_actions/productActions";
 
 // const { Meta } = Card;
 // const { Title } = Typography;
@@ -32,12 +33,12 @@ const responsive = {
 };
 
 export default function CarouselHeader() {
-//   const CategoryList = useSelector((state) => state.categoryLists);
+  const CategoryList = useSelector((state) => state.categoryLists);
 
-//   const { loading, posts, error } = CategoryList;
+  const { loading, posts, error } = CategoryList;
 //   const [cats, setCat] = useState([]);
 //   const [show, setShow] = useState(false);
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
 //   const fetchData = async (id) => {
 //     const { data } = await axios.get("/category/" + id);
@@ -45,10 +46,10 @@ export default function CarouselHeader() {
 //     setShow(true);
 //   };
 
-//   useEffect(() => {
-//     dispatch(listCategory());
-//     return () => {};
-//   }, []);
+  useEffect(() => {
+    dispatch(listCategory());
+    return () => {};
+  }, []);
   return (
     <>
       <>
