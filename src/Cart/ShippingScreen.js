@@ -1,19 +1,18 @@
-import React, { useEffect } from "react";
-import { addToCart, removeFromCart } from "../_actions/cartActions";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  Button,
   Row,
   Col,
-  Empty,
-  Image,
   Typography,
+  Button,
+  Descriptions,
+  message,
+  Space,
   Table,
-
+  Image
 } from "antd";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import NumberFormat from "react-number-format";
+import { confirmPayment, makePayment } from "../_actions/paymentActions";
+import { useEffect } from "react";
 
 const columns = [
   {
@@ -48,91 +47,163 @@ const columns = [
 ];
 
 const { Title, Text } = Typography;
-export default function CartScreen(props) {
-  const history = useHistory();
-  const productId = props.match.params.id;
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+const Cookie = require("js-cookie");
 
-  const qty = props.location.search
-    ? Number(props.location.search.split("=")[1])
-    : 1;
+export default function ShippingScreen() {
+  const userSignin = useSelector((state) => state.userSignin);
+  const paymentDetail = useSelector((state) => state.payment);
+  let qt = "";
+  const[payment,setPayment] = useState([])
+  const { loading, paymentDetails, error } = paymentDetail;
+  const confirmDetails = useSelector((state) => state.confirmDetails);
+  const {
+    loadingDetails,
+    confirmPaymentDetails,
+    errorDetails,
+  } = confirmDetails;
+  
+  const payDetail = Cookie.getJSON("paymentDetails");  
+  // const {} = confirmPayment;
+  const { userInfo } = userSignin;
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   const dispatch = useDispatch();
-  const removeFromCartHandler = (productId) => {
-    dispatch(removeFromCart(productId));
-  };
 
-  const back = () => {
-    history.goBack();
-  };
-  const forward = () => {
-    history.goForward();
-  };
+  const confirmPay =  () => {
+    {loading ?(message.info('loading...')): error?(message.warn('error')):(
+      // await dispatch(confirmPayment(paymentDetails.CheckoutrequestID))
+      console.log("pays " + paymentDetails)
+      
+    )}
 
+  };
+  console.log(payment)
+  const paymentHandler =async(e) => {
+    e.preventDefault()
+     await dispatch(makePayment("+254799980846", 1)); 
+    //  setTimeout( ()=>{
+    //    dispatch(confirmPayment(paymentDetails.CheckoutRequestID))
+
+    // },2000)   
+
+  };
+  // if(!payDetail){
+  // }else{
+  //   setTimeout( async()=>{
+  //     await dispatch(confirmPayment(paymentDetails.CheckoutrequestID))
+
+  //   },1000)
+
+  //   message.success('Finished..')
+
+  // }
   useEffect(() => {
-    if (productId && userInfo) {
-      dispatch(addToCart(productId, qty, userInfo.name, userInfo.phone));
-    } else {
-      console.log()
-    }
-    return () => {};
-  }, []);
-  return (
-    <div style={{ padding: "1rem" }}>
+          confirmPay()
 
-      {cartItems.length === 0 ? (
-        <Row justify="space-around" align="middle" style={{ padding: "2rem" }}>
-          <Col>
-            <Empty description="Cart is empty"></Empty>
-          </Col>
-        </Row>
-      ) : (
-        <Table dataSource={cartItems} columns={columns}></Table>
-      )}
-      <div>
-        <Row justify="space-around" align="middle">
-          <Col>
-            <Title level={5}>
-              {" "}
-              Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items): ksh{" "}
-              <NumberFormat
-                value={cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
-                thousandSeparator={true}
-                displayType={"text"}
-              />
-            </Title>
-          </Col>
-        </Row>
-        <Row justify="space-around" align="middle">
-          <Col>
-            <Button
-              block
-              type="primary"
-              size="large"
-              style={{ borderRadius: "50px" }}
-            >
-              CONTINUE SHOPPING
-            </Button>
-          </Col>
-          <Col>
-            <Button
-              className="cart"
-              size="large"
-              type="primary"
-              block
-              style={{ border: "0", borderRadius: "50px" }}
-            >
-              <Text disabled={cartItems.length === 0}>
-                <Link to="/shipping" style={{ color: "black" }}>
-                  PROCEED TO CHECKOUT
-                </Link>
-              </Text>
-            </Button>
-          </Col>
-        </Row>
-      </div>
-    </div>
+    console.log(payDetail)
+    return () => {
+      
+    }
+  }, [])
+
+
+
+  // if (payDetail) {
+  //   message.info(payDetail.ResponseDescription);
+  //   setTimeout(() => {
+  //      dispatch(confirmPay(payDetail.CheckoutRequestID));
+  //   }, 2000);
+  // }
+  // const confirmPaid = Cookie.getJSON("confirmPaid");
+  // if(confirmPaid){
+    
+  // }
+
+
+
+
+  return (
+    <>
+      <Row
+        justify="space-around"
+        align="middle"
+        style={{ marginTop: "40px", padding: "2rem" }}
+      >
+        <Col>
+          <Descriptions title="Your Details">
+            <Descriptions.Item>
+              {userInfo.name}, {userInfo.email}, {userInfo.phone},{" "}
+              {userInfo.address}
+            </Descriptions.Item>
+          </Descriptions>
+          <Table columns={columns} dataSource={cartItems} />
+        </Col>
+      </Row>
+      <Row justify="space-around" align="middle">
+        <Col>
+          <Title level={5}>
+            {" "}
+            Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items): ${" "}
+            {(qt = cartItems.reduce((a, c) => a + c.price * c.qty, 0))}
+          </Title>
+        </Col>
+      </Row>
+      <Row justify="space-around" align="middle" style={{ padding: "1rem" }}>
+        <Col span={6}>
+          <Button
+            className="cart"
+            style={{ border: "0" }}
+            type="ghost"
+            block
+            size="large"
+            onClick={paymentHandler}
+          >
+            <Text>BUY NOW!!</Text>
+          </Button>
+        </Col>
+      </Row>
+      <Row>
+        {loading ? (
+          <div>{message.info("loading..")}</div>
+        ) : error ? (
+          <div>{message.warn(error)}</div>
+        ) : (
+          <div>
+            {!paymentDetails ? (
+              <div></div>
+            ) : (
+              <Space>
+                <Button
+                  onClick={() => confirmPay(paymentDetails.CheckoutRequestID)}
+                  size="large"
+                  type="primary"
+                  block
+                  style={{ margin: "2rem" }}
+                >
+                  Please Confirm
+                </Button>
+                <>
+                  {loadingDetails ? (
+                    <div>Loading...</div>
+                  ) : errorDetails ? (
+                    <div>{message.warn(errorDetails)}</div>
+                  ) : (
+                    <div>
+                      {!confirmPaymentDetails ? (
+                        <div></div>
+                      ) : (
+                        <Col>
+                          {message.info(confirmPaymentDetails.ResultDesc)}
+                        </Col>
+                      )}
+                    </div>
+                  )}
+                </>
+              </Space>
+            )}
+          </div>
+        )}
+      </Row>
+    </>
   );
 }
