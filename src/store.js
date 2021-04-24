@@ -5,7 +5,7 @@ import {
   categoryListReducer,
   categoryListsReducer,
 //   productDeleteReducer,
-//   productDetailReducer,
+  productDetailReducer,
   productListReducer,
 //   productSaveReducer,
 //   productUpdateReducer,
@@ -29,7 +29,7 @@ const initialState = { cart: { cartItems }, userSignin: { userInfo } };
 
 const reducer = combineReducers({
   productList: productListReducer,
-//   productDetail: productDetailReducer,
+  productDetail: productDetailReducer,
   userSignin: userSigninReducer,
   userRegister: userRegisterReducer,
 //   productSave: productSaveReducer,

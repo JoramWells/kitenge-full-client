@@ -7,6 +7,7 @@ import CarouselItems from "./Desktop/CarouselItems";
 import AddProduct from "./Products/AddProduct";
 import ManageProducts from "./Products/ManageProducts";
 import NavigationBar from "./Desktop/NavSections/NavigationBar";
+import ProductDetail from "./Products/ProductDetail";
 
 
 function App() {
@@ -21,6 +22,10 @@ function App() {
           <Route path="/register" exact component={Register} />
           <Route path="/products/add" exact component={AddProduct} />
           <Route path="/produc/manage" exact component={ManageProducts} />
+          <Route
+              path="/product-detail/:id?"
+              exact
+              component={ProductDetail}/>
 
         </Switch>
       </Router>
