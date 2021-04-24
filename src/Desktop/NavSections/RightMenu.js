@@ -124,7 +124,7 @@ function RightMenu(props) {
               <Badge count={cartItems.length}>
                 <ShoppingCartOutlined
                   onClick={showModal}
-                  style={{ fontSize: "1.8rem", margin:"0" }}
+                  style={{ fontSize: "1.4rem", margin:"0" }}
                 />
               </Badge>
               
@@ -132,24 +132,12 @@ function RightMenu(props) {
             <Menu.Item>
               <Badge dot count={cartItems.length}>
                 <MailOutlined
-                  style={{ fontSize: "1.5rem", margin:"0" }}
+                  style={{ fontSize: "1.3rem", margin:"0" }}
                 />
               </Badge>
               
             </Menu.Item>
-            <SubMenu
-                style={{ marginBottom: "0.3rem", borderRadius: "10px", marginLeft:"0" }}
-                title={<SettingOutlined style={{ fontSize: "1.3rem" }} />}
-              >
-            <Menu.Item icon={<PlusOutlined/>}>
-              <Link to="/products/add">
-              Add Product
-              </Link>
-               
-              </Menu.Item>
 
-
-              </SubMenu>
             <SubMenu
               title={<QuestionCircleOutlined style={{ fontSize: "1.3rem" }} />}
             >
@@ -161,7 +149,7 @@ function RightMenu(props) {
 
             </SubMenu>
             <SubMenu
-                style={{ marginBottom: "0.3rem", borderRadius: "10px", marginLeft:"0" }}
+                style={{ borderRadius: "10px", marginLeft:"0" }}
                 title={<SettingOutlined style={{ fontSize: "1.3rem" }} />}
               >
             <Menu.Item icon={<PlusOutlined/>}>
@@ -173,7 +161,7 @@ function RightMenu(props) {
 
 
               </SubMenu>
-            <SubMenu title={<Avatar   src={userInfo.avatar} style={{marginBottom:"0.8rem", width:"30px", height:"inherit"}} />}>
+            <SubMenu style={{marginLeft:"0"}} title={<Avatar   src={userInfo.avatar} style={{marginBottom:"0.5rem", width:"25px", height:"inherit"}} />}>
 
               <Menu.Item>{userInfo.email}</Menu.Item>
               <Menu.Item style={{justifyContent:"space-around", display:"flex", margin:"0"}}>

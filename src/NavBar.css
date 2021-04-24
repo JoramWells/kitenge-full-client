@@ -144,9 +144,13 @@
 .close{
   color: #404040;
 }
+.close:focus{
+  background-color: #fdba45;
+  font-size: 1.7rem;
+}
 
 .skip-link:focus{
-  border:solid 1px #fdba45;
+  background-color: #fdba45;
   border-radius: 50px;
   padding: 0px;
   

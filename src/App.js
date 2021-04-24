@@ -8,6 +8,8 @@ import AddProduct from "./Products/AddProduct";
 import ManageProducts from "./Products/ManageProducts";
 import NavigationBar from "./Desktop/NavSections/NavigationBar";
 import ProductDetail from "./Products/ProductDetail";
+import CartScreen from "./Cart/CartScreen";
+import ShippingScreen from "./Cart/ShippingScreen";
 
 
 function App() {
@@ -26,6 +28,9 @@ function App() {
               path="/product-detail/:id?"
               exact
               component={ProductDetail}/>
+          <Route path="/cart/:id?" component={CartScreen} />
+          <Route path="/shipping" exact component={ShippingScreen} />
+
 
         </Switch>
       </Router>

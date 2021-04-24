@@ -35,11 +35,14 @@ export default function SignIn() {
   return (
     <Row justify="space-around" align="middle" style={{ marginTop: "5rem", marginBottom:"2rem" }}>
       <Card style={{ width: "25rem" }}>
-        <Row justify="end">
+        <Row justify="space-around" align="middle">
+          <Col>
+          <h2>Login</h2>
+          </Col>
           <Col>
             <CloseCircleOutlined
               className="close"
-              style={{ fontSize: "1.5rem", marginBottom: "1rem" }}
+              style={{ fontSize: "1.5rem", marginBottom: "0.3rem" }}
               onClick={closeHandler}
             />
           </Col>
@@ -96,7 +99,9 @@ export default function SignIn() {
             } = props;
             return (
               <Form onSubmit={handleSubmit} layout="vertical" size="large">
-                <Form.Item required>
+                <Form.Item
+                label="Email Address"
+                 required>
                   <Input
                     prefix={<MailOutlined />}
                     id="email"
@@ -115,7 +120,9 @@ export default function SignIn() {
                   )}
                 </Form.Item>
 
-                <Form.Item required>
+                <Form.Item 
+                label="Password"
+                required>
                   <Input.Password
                     id="password"
                     prefix={<LockOutlined />}
