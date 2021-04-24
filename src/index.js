@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store'
 import {Provider } from 'react-redux'
+import "./NavBar.css";
+import "react-multi-carousel/lib/styles.css";
+
 
 ReactDOM.hydrate(
   <React.StrictMode>

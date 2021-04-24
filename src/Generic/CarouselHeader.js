@@ -126,7 +126,7 @@ export default function CarouselHeader() {
       </>
 
       <Row
-        // hidden={show}
+        hidden={show}
         justify="space-around"
         align="middle"
         style={{ margin: "1rem" }}

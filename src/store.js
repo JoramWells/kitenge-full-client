@@ -11,11 +11,11 @@ import {
 //   productUpdateReducer,
 } from "./_reducers/productListReducer";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
-// import {
-//   userGoogleReducer,
-//   userRegisterReducer,
-//   userSigninReducer,
-// } from "./_reducers/userReducers";
+import {
+  // userGoogleReducer,
+  userRegisterReducer,
+  userSigninReducer,
+} from "./_reducers/userReducers";
 // import { cartReducer } from "./_reducers/cartReducers";
 // import {
 //   confirmPaymentReducer,
@@ -30,8 +30,8 @@ const initialState = { cart: { cartItems }, userSignin: { userInfo } };
 const reducer = combineReducers({
   productList: productListReducer,
 //   productDetail: productDetailReducer,
-//   userSignin: userSigninReducer,
-//   userRegister: userRegisterReducer,
+  userSignin: userSigninReducer,
+  userRegister: userRegisterReducer,
 //   productSave: productSaveReducer,
 //   cart: cartReducer,
   categoryList: categoryListReducer,

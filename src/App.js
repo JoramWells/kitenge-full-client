@@ -1,10 +1,11 @@
 import React,{lazy,Suspense,Fragment} from 'react'
 import './App.css'
-import CarouselHeader from './Generic/CarouselHeader';
+import CarouselItems from './Desktop/CarouselItems';
 function App() {
   return (
     <Fragment >
-      <CarouselHeader />
+      <CarouselItems/>
+      
 
 
     </Fragment>
