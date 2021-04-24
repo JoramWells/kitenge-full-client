@@ -62,7 +62,11 @@ export default function AddProduct(props) {
         // dispatch(saveProduct(name, shop, price, image, description));
       }
       if (info.file.status === "done") {
-        const filename = info.file.name.replace('.jpeg', '.webp')
+        const regex = /.jpeg/
+        // var mapObjs = {
+        //   svg
+        // }
+        const filename = info.file.name.replace(regex, '.webp')
 
         
 

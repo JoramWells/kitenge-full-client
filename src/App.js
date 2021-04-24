@@ -11,6 +11,7 @@ import CartScreen from "./Cart/CartScreen";
 import ShippingScreen from "./Cart/ShippingScreen";
 import HomeRoutes from "./HomeRoutes";
 import DesktopNavbarMobile from "./DesktopNavbarMobile";
+import Footer from "./Desktop/Footer";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/shipping" exact component={ShippingScreen} />
         </Switch>
       </Router>
+      <Footer />
     </div>
   );
 }
