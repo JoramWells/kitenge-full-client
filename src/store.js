@@ -16,7 +16,7 @@ import {
   userRegisterReducer,
   userSigninReducer,
 } from "./_reducers/userReducers";
-// import { cartReducer } from "./_reducers/cartReducers";
+import { cartReducer } from "./_reducers/cartReducers";
 // import {
 //   confirmPaymentReducer,
 //   paymentListReducer,
@@ -33,7 +33,7 @@ const reducer = combineReducers({
   userSignin: userSigninReducer,
   userRegister: userRegisterReducer,
 //   productSave: productSaveReducer,
-//   cart: cartReducer,
+  cart: cartReducer,
   categoryList: categoryListReducer,
   categoryLists: categoryListsReducer,
 //   productUpdate: productUpdateReducer,

@@ -1,14 +1,22 @@
-import React,{lazy,Suspense,Fragment} from 'react'
-import './App.css'
-import CarouselItems from './Desktop/CarouselItems';
+import React, { lazy, Suspense, Fragment } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
+import Register from "./Login/Register";
+import Login from "./Login/Login";
+import CarouselItems from "./Desktop/CarouselItems";
 function App() {
   return (
-    <Fragment >
-      <CarouselItems/>
-      
+    <div>
+      <Router>      
 
 
-    </Fragment>
+        <Switch>
+        <Route path="/" exact component={CarouselItems} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/register" exact component={Register} />
+        </Switch>
+      </Router>
+    </div>
   );
 }
 

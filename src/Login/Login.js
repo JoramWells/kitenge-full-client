@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { signin } from "../../_actions/userActions";
+import { signin } from "../_actions/userActions";
 import { Form, Input, Button, Card, Row, Col, message } from "antd";
 import {
   CloseCircleOutlined,
