@@ -121,7 +121,7 @@ function CarouselItem(props) {
                       src={item.image}
                       effect="blur"
                       alt="product-Image"
-                      style={{maxHeight:"12rem", maxWidth: "18rem",width:"auto", height:"auto", display:"flex", margin:"auto" }}
+                      style={{maxHeight:"14rem", maxWidth: "17.8rem",width:"auto", height:"auto", display:"flex", margin:"auto" }}
                     />
                   }
                   extra={

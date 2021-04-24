@@ -19,7 +19,6 @@ import {
 
 
 
-
 export default function AddProduct(props) {
   const history = useHistory()
   const [name, setName] = useState("");
@@ -46,6 +45,7 @@ export default function AddProduct(props) {
           const img = document.createElement("img");
           img.src = reader.result;
           img.onload = () => {
+
             const canvas = document.createElement("canvas");
             canvas.width = img.naturalWidth;
             canvas.height = img.naturalHeight;
@@ -62,7 +62,12 @@ export default function AddProduct(props) {
         // dispatch(saveProduct(name, shop, price, image, description));
       }
       if (info.file.status === "done") {
-        setImage("/" + info.file.name);
+        const filename = info.file.name.replace('.jpeg', '.webp')
+
+        
+
+
+        setImage("/" + filename);
         message.success(`${info.file.name}`);
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed`);
