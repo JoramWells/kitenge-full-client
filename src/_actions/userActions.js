@@ -52,7 +52,7 @@ import {
         address,
       }).then(response=>{
         console.log(response.data)
-        if(response.data.success == 0){
+        if(response.data.success === 0){
       dispatch({ type: USER_REGISTER_FAIL, payload: 'User already exists' });
       Cookie.set("userFailure", JSON.stringify(response.data),{
         expires:1/28800

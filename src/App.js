@@ -6,32 +6,28 @@ import Login from "./Login/Login";
 import CarouselItems from "./Desktop/CarouselItems";
 import AddProduct from "./Products/AddProduct";
 import ManageProducts from "./Products/ManageProducts";
-import NavigationBar from "./Desktop/NavSections/NavigationBar";
 import ProductDetail from "./Products/ProductDetail";
 import CartScreen from "./Cart/CartScreen";
 import ShippingScreen from "./Cart/ShippingScreen";
-
+import HomeRoutes from "./HomeRoutes";
+import DesktopNavbarMobile from "./DesktopNavbarMobile";
 
 function App() {
   return (
     <div>
-      <Router>      
+      <Router>
+        <DesktopNavbarMobile/>
 
-<NavigationBar />
+        
         <Switch>
-        <Route path="/" exact component={CarouselItems} />
+          <Route path="/" exact component={HomeRoutes} />
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
           <Route path="/products/add" exact component={AddProduct} />
           <Route path="/produc/manage" exact component={ManageProducts} />
-          <Route
-              path="/product-detail/:id?"
-              exact
-              component={ProductDetail}/>
+          <Route path="/product-detail/:id?" exact component={ProductDetail} />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/shipping" exact component={ShippingScreen} />
-
-
         </Switch>
       </Router>
     </div>
