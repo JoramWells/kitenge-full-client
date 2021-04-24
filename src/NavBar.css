@@ -145,7 +145,7 @@
   color: #404040;
 }
 .close:focus{
-  background-color: #fdba45;
+  color: #fdba45;
   font-size: 1.7rem;
 }
 

@@ -4,7 +4,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { signin } from "../_actions/userActions";
-import { Form, Input, Button, Card, Row, Col, message } from "antd";
+import { Form, Input, Button, Card, Row, Col, message,Divider } from "antd";
 import {
   CloseCircleOutlined,
   LockOutlined,
@@ -35,10 +35,8 @@ export default function SignIn() {
   return (
     <Row justify="space-around" align="middle" style={{ marginTop: "5rem", marginBottom:"2rem" }}>
       <Card style={{ width: "25rem" }}>
-        <Row justify="space-around" align="middle">
-          <Col>
-          <h2>Login</h2>
-          </Col>
+        <Row justify="end">
+
           <Col>
             <CloseCircleOutlined
               className="close"
@@ -47,6 +45,9 @@ export default function SignIn() {
             />
           </Col>
         </Row>
+        <Divider>
+          <h3>LOGIN</h3>
+        </Divider>
 
         <Formik
           initialValues={{

@@ -6,7 +6,7 @@ import { GoogleLogin } from "react-google-login";
 import PhoneInput from "react-phone-input-2";
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
-import { Row, Col, Form, Input, Button, Avatar, Card, message } from "antd";
+import { Row, Col, Form, Input, Button, Avatar, Card, message,Divider } from "antd";
 import {
   CloseCircleOutlined,
   LockOutlined,
@@ -70,7 +70,8 @@ export default function SignUp() {
         align="middle"
         style={{ marginBottom: "1rem" }}
       >
-        <Card style={{ width: "25rem", marginTop:"5rem" }}>
+        <Card style={{ width: "25rem", marginTop:"3rem" }}>
+
           <Row justify="space-between" align="middle">
             <Col>
               <Avatar src={avatar} style={{ margin: "0.3rem" }} />
@@ -83,9 +84,12 @@ export default function SignUp() {
               />
             </Col>
           </Row>
+          <Divider>
+            <h3>REGISTER</h3>
+          </Divider>
 
           <Form layout="vertical" size="large" onSubmit={submitHandler}>
-            <Form.Item required>
+            <Form.Item required label="Name">
               <Input
                 prefix={<UserOutlined />}
                 id="name"
@@ -104,7 +108,10 @@ export default function SignUp() {
             >
               <Input />
             </Form.Item>
-            <Form.Item required>
+            <Form.Item 
+            label="Email address"
+            required
+            >
               <Input
                 prefix={<MailOutlined />}
                 value={email}
@@ -114,7 +121,10 @@ export default function SignUp() {
               />
             </Form.Item>
 
-            <Form.Item required>
+            <Form.Item
+                label="Current location"
+
+             required>
               <Input
                 id="address"
                 name="address"
@@ -157,6 +167,7 @@ export default function SignUp() {
                 </PlacesAutocomplete>
               </Form.Item> */}
             <Form.Item
+            label="Phone number"
               required
               id="phone"
               name="phone"
@@ -170,7 +181,7 @@ export default function SignUp() {
               />
             </Form.Item>
 
-            <Form.Item required>
+            <Form.Item label="Password" required>
               <Input.Password
                 prefix={<LockOutlined />}
                 id="password"
