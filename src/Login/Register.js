@@ -43,7 +43,7 @@ export default function SignUp() {
     const userSuccess = Cookie.getJSON("userInfo");
     if (!userSuccess) console.log();
     else {
-      message.success("Successfully login");
+      message.success("Successfully registered");
       history.goBack();
     }
   };

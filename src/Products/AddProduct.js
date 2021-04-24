@@ -51,9 +51,6 @@ export default function AddProduct(props) {
             canvas.height = img.naturalHeight;
             const ctx = canvas.getContext("2d");
             ctx.drawImage(img, 0, 0);
-            ctx.fillStyle = "red";
-            ctx.textBaseline = "middle";
-            ctx.font = "33px Arial";
             canvas.toBlob(resolve);
           };
         };
@@ -62,8 +59,9 @@ export default function AddProduct(props) {
     onChange(info) {
       if (info.file.status !== "uploading") {
         console.log(info.file, info.fileList);
+        // dispatch(saveProduct(name, shop, price, image, description));
       }
-      if (info.file.status === "d/one") {
+      if (info.file.status === "done") {
         setImage("/" + info.file.name);
         message.success(`${info.file.name}`);
       } else if (info.file.status === "error") {
@@ -75,10 +73,10 @@ export default function AddProduct(props) {
 
   const productAdd = async (e) => {
     e.preventDefault();
-    await dispatch(saveProduct(name, shop, price, image, category, description));
+    await dispatch(saveProduct(name,price, shop,  image, category, description));
     setTimeout(() => {
       message.success("Product added succefully");
-      props.history.push("/produc/manage");
+      history.go("/produc/manage");
     }, 2000);
   };
 
