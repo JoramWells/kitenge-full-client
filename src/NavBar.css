@@ -1,0 +1,154 @@
+@import "~antd/dist/antd.css";
+
+.menu {
+  padding: 20 20px;
+  overflow: hidden;
+  background-color: white;
+  position: sticky;
+
+  border-bottom: solid 1px #e8e8e8;
+  /* box-shadow: 0 0 30px #f3f1f1; */
+}
+
+.menu__logo {
+  /* width: 150px; */
+  float: left;
+}
+
+.menu__logo a {
+  display: inline-block;
+  font-size: 20px;
+  margin-left: 1rem;
+  text-decoration: none;
+  /* background-color: cornflowerblue; */
+}
+
+.menu__container .ant-menu-item {
+  padding: 0px 5px;
+  position: sticky;
+}
+
+.menu__container .ant-menu-submenu-title {
+  padding: 10px 20px;
+}
+
+.menu__container .ant-menu-item a,
+.menu__container .ant-menu-submenu-title a {
+  padding: 10px 15px;
+}
+
+.menu__container .ant-menu-horizontal {
+  border-bottom: none;
+}
+
+.menu__container .menu_left {
+  float: left;
+}
+
+.menu__container .menu_rigth {
+  float: right;
+}
+
+.menu__mobile-button {
+  float: right;
+  height: 32px;
+  border: 0;
+  padding: 6px;
+  margin-top: 8px;
+  display: none !important; /* use of important to overwrite ant-btn */
+}
+
+.menu_drawer .ant-drawer-body {
+  padding: 0 !important;
+}
+
+/* align header of Drawer with header of page */
+.menu_drawer .ant-drawer-header {
+  padding: 14px 24px !important;
+}
+.mobile__carousel {
+  display: none !important;
+}
+
+.mobile__navbar {
+  display: none !important;
+}
+
+@media (max-width: 767px) {
+  .menu__mobile-button {
+    display: inline-block !important;
+  }
+
+  .menu_left,
+  .menu_rigth {
+    display: none;
+  }
+
+  .menu__logo a {
+    margin-left: -20px;
+  }
+
+  .menu__container .ant-menu-item,
+  .menu__container .ant-menu-submenu-title {
+    padding: 1px 20px;
+  }
+
+  .menu__logo a {
+    display: inline-block;
+    font-size: 20px;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    /* background-color: cornflowerblue; */
+    color: rgb(40, 44, 53);
+  }
+  .carousel__header {
+    display: none;
+  }
+  .footer {
+    display: none;
+  }
+  .desktop__carousel {
+    display: none;
+  }
+  .desktop__navbar {
+    display: none !important;
+  }
+  .mobile__carousel {
+    display: block !important;
+  }
+  .mobile__navbar {
+    display: block !important;
+  }
+}
+
+.cart {
+  background-color: #fdba45;
+  border-radius: 5px;
+}
+.cart:hover {
+  background-color: #a0a0a0;
+}
+
+.reverse__cart {
+  background-color: #a0a0a0;
+  border-radius: 5px;
+}
+.reverse__cart:hover {
+  background-color: #fdba45;
+}
+.close :hover{
+  cursor: pointer;
+  color: #fdba45;
+}
+.close{
+  color: #404040;
+}
+
+.skip-link:focus{
+  border:solid 1px #fdba45;
+  border-radius: 50px;
+  padding: 0px;
+  
+}
+

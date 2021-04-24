@@ -1,17 +1,17 @@
-import React, {useEffect} from "react";
-import { Image, Row, Col } from "antd";
+import React, {useEffect, useState} from "react";
+import { Image, Row, Col, Skeleton,Button,Card,Typography } from "antd";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
-
+import axios from 'axios'
 
 import a4 from "../img/a4.jpeg";
 import a2 from "../img/a2.jpeg";
 import a3 from "../img/a3.jpeg";
 import { listCategory } from "../_actions/productActions";
 
-// const { Meta } = Card;
-// const { Title } = Typography;
+const { Meta } = Card;
+const { Title } = Typography;
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -36,15 +36,15 @@ export default function CarouselHeader() {
   const CategoryList = useSelector((state) => state.categoryLists);
 
   const { loading, posts, error } = CategoryList;
-//   const [cats, setCat] = useState([]);
-//   const [show, setShow] = useState(false);
+  const [cats, setCat] = useState([]);
+  const [show, setShow] = useState(false);
   const dispatch = useDispatch();
 
-//   const fetchData = async (id) => {
-//     const { data } = await axios.get("/category/" + id);
-//     setCat(data);
-//     setShow(true);
-//   };
+  const fetchData = async (id) => {
+    const { data } = await axios.get("/category/" + id);
+    setCat(data);
+    setShow(true);
+  };
 
   useEffect(() => {
     dispatch(listCategory());
@@ -53,7 +53,7 @@ export default function CarouselHeader() {
   return (
     <>
       <>
-        {/* {loading ? (
+        {loading ? (
           <Row justify="space-around" align="middle" style={{marginTop:"3rem"}} span={6} >
             <Col>
               <Skeleton.Input
@@ -122,7 +122,7 @@ export default function CarouselHeader() {
           </Col>
           </Row>
 
-        )} */}
+        )}
       </>
 
       <Row
@@ -145,7 +145,7 @@ export default function CarouselHeader() {
           <Image src={a3} width="200px" height="auto" alt="shoes_img" />
         </Col>
       </Row>
-      {/* <Carousel
+      <Carousel
         swipeable={false}
         draggable={false}
         responsive={responsive}
@@ -154,21 +154,21 @@ export default function CarouselHeader() {
         renderButtonGroupOutside={true}
         arrows={false}
         
-      > */}
-        {/* {cats.map((product) => (
+      > 
+        {cats.map((product) => (
           <Row justify="space-around" align="middle" key={product.id}>
             <Col>
               <Card
                 style={{ width: "18rem" }}
-                cover={<img alt="category image"  src={product.image} style={{width:"auto", height:"auto",maxWidth:"18rem", maxHeight:"12rem"}} />}
+                cover={<img alt={product.image}  src={product.image} style={{width:"auto", height:"auto",maxWidth:"18rem", maxHeight:"12rem"}} />}
               >
                 <Meta title={product.product_name} description={product.shop} />
                 <Title level={5}>{product.price}</Title>
               </Card>
             </Col>
           </Row>
-        ))} */}
-      {/* </Carousel> */}
+        ))}
+      </Carousel>
     </>
   );
 }
