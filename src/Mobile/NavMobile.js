@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-
   LoginOutlined,
   MailOutlined,
   PlusOutlined,
@@ -65,26 +64,27 @@ export default function NavMobile(props) {
           display: "block",
           width: "100%",
           zIndex: "1",
-          top:"0"
+          top: "0",
         }}
       >
-        <div className="menu__logo" style={{marginTop:"0.4rem"}}>
-        <Link to="/" style={{ color:"#484848" }}>
-                <b>Kitenge</b>
-              </Link>
+        <div className="menu__logo" style={{ marginTop: "0.4rem" }}>
+          <Link to="/" style={{ color: "#484848" }}>
+            <b>Kitenge</b>
+          </Link>
         </div>
 
-        <Menu mode="horizontal" style={{ float: "right", border:"0" }}>
-          <Menu.Item icon={<LoginOutlined style={{fontSize:"1rem", margin:"0px"}} />}>
-            <Link to="/login">
-              {"  "}Login
-
-            </Link>
+        <Menu mode="horizontal" style={{ float: "right", border: "0" }}>
+          <Menu.Item
+            icon={<LoginOutlined style={{ fontSize: "1rem", margin: "0px" }} />}
+          >
+            <Link to="/login">{"  "}Login</Link>
           </Menu.Item>
-          <Menu.Item icon={<UserAddOutlined style={{fontSize:"1rem", margin:"0px"}} />}>
-          <Link to="/register">
-            {"  "}Register
-          </Link>
+          <Menu.Item
+            icon={
+              <UserAddOutlined style={{ fontSize: "1rem", margin: "0px" }} />
+            }
+          >
+            <Link to="/register">{"  "}Register</Link>
           </Menu.Item>
         </Menu>
       </nav>
@@ -99,13 +99,13 @@ export default function NavMobile(props) {
             display: "block",
             width: "100%",
             zIndex: "1",
-            top:"0",
+            top: "0",
           }}
         >
-          <div className="menu__logo" style={{marginTop:"0.5rem"}}>
-          <a href="/" style={{  color:"#484848" }}>
-           <b > Kitenge</b>
-              </a>
+          <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
+            <a href="/" style={{ color: "#484848" }}>
+              <b> Kitenge</b>
+            </a>
           </div>
           <Menu
             mode="horizontal"
@@ -122,19 +122,16 @@ export default function NavMobile(props) {
             <SubMenu
               title={<QuestionCircleOutlined style={{ fontSize: "1.3rem" }} />}
             >
-              <Menu.Item style={{margin:"0px"}} >Contact supplier</Menu.Item>
-              <Menu.Item style={{margin:"0px"}}>How to add product</Menu.Item>
+              <Menu.Item style={{ margin: "0px" }}>Contact supplier</Menu.Item>
+              <Menu.Item style={{ margin: "0px" }}>
+                How to add product
+              </Menu.Item>
               <Menu.Item>Creating account</Menu.Item>
               <Menu.Item>Tracking your order</Menu.Item>
-
-
             </SubMenu>
             <SubMenu title={<SettingOutlined style={{ fontSize: "1.3rem" }} />}>
-            <Menu.Item icon={<PlusOutlined/>}>
-              <Link to="/products/add">
-              Add Product
-              </Link>
-               
+              <Menu.Item icon={<PlusOutlined />}>
+                <Link to="/products/add">Add Product</Link>
               </Menu.Item>
             </SubMenu>
 
@@ -143,7 +140,7 @@ export default function NavMobile(props) {
               title={
                 <Avatar
                   src={
-                      userInfo.avatar
+                    userInfo.avatar
                       ? userInfo.avatar
                       : `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
                   }
@@ -185,8 +182,8 @@ export default function NavMobile(props) {
               top: "0",
             }}
           >
-            <div className="menu__logo" style={{marginTop:"0.5rem"}}>
-              <a href="/" style={{ color:"#484848" }}>
+            <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
+              <a href="/" style={{ color: "#484848" }}>
                 <b>Kitenge</b>
               </a>
             </div>
@@ -198,12 +195,11 @@ export default function NavMobile(props) {
                 float: "right",
               }}
             >
-
               <Menu.Item>
                 <Badge count={cartItems.length}>
                   <ShoppingCartOutlined
                     onClick={showModal}
-                    style={{ fontSize: "1.5rem",margin:"0" }}
+                    style={{ fontSize: "1.5rem", margin: "0" }}
                   />
                 </Badge>
               </Menu.Item>
@@ -215,23 +211,25 @@ export default function NavMobile(props) {
                 }
               ></Menu.Item>
 
-
               <SubMenu
-                style={{ marginBottom: "0rem", borderRadius: "10px", marginLeft:"0" }}
+                style={{
+                  marginBottom: "0rem",
+                  borderRadius: "10px",
+                  marginLeft: "0",
+                }}
                 title={<SettingOutlined style={{ fontSize: "1.3rem" }} />}
               >
-            <Menu.Item icon={<PlusOutlined/>}>
-              <Link to="/products/add">
-              Add Product
-              </Link>
-               
-              </Menu.Item>
-
-
+                <Menu.Item icon={<PlusOutlined />}>
+                  <Link to="/products/add">Add Product</Link>
+                </Menu.Item>
               </SubMenu>
 
               <SubMenu
-                style={{ marginBottom: "0.3rem", borderRadius: "10px", marginLeft:"0" }}
+                style={{
+                  marginBottom: "0.3rem",
+                  borderRadius: "10px",
+                  marginLeft: "0",
+                }}
                 title={
                   <Avatar
                     src={userInfo.avatar}
@@ -239,9 +237,7 @@ export default function NavMobile(props) {
                   />
                 }
               >
-                <Menu.Item style={{ margin: "0" }}>
-                  {userInfo.email}
-                </Menu.Item>
+                <Menu.Item style={{ margin: "0" }}>{userInfo.email}</Menu.Item>
                 <Menu.Item
                   style={{
                     justifyContent: "space-around",
@@ -249,7 +245,7 @@ export default function NavMobile(props) {
                     margin: "0",
                   }}
                 >
-                  <Button style={{ borderRadius: "50px"}}>
+                  <Button style={{ borderRadius: "50px" }}>
                     <Link to="/register">Manage account</Link>
                   </Button>
                 </Menu.Item>
@@ -279,4 +275,4 @@ export default function NavMobile(props) {
       );
     }
   }
-} 
+}

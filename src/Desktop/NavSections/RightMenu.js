@@ -3,6 +3,7 @@ import { Menu, Space, Badge, Modal, Col, Row, Typography, Image,message, Button 
 import Cookie from "js-cookie";
 import {withRouter,Link, useHistory} from "react-router-dom"
 import {
+  EditOutlined,
   LoginOutlined,
   MailOutlined,
   PlusOutlined,
@@ -100,6 +101,13 @@ function RightMenu(props) {
               </Link>
                
               </Menu.Item>
+              <Menu.Item icon={<EditOutlined />}>
+              <Link to="/produc/manage">
+              Edit Product
+              </Link>
+               
+              </Menu.Item>
+              
 
 
               </SubMenu>
@@ -161,7 +169,7 @@ function RightMenu(props) {
               </Link>
                
               </Menu.Item>
-              <Menu.Item icon={<PlusOutlined/>}>
+              <Menu.Item icon={<EditOutlined/>}>
               <Link to="/produc/manage">
               Edit Product
               </Link>

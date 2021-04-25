@@ -1,4 +1,4 @@
-import React, {  lazy, useState } from "react";
+import React, { lazy, useState } from "react";
 import { withRouter } from "react-router-dom";
 import {
   Row,
@@ -10,18 +10,15 @@ import {
   Skeleton,
   message,
   Alert,
-  Divider
-
+  Divider,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 // import { listProducts } from "../../_actions/productActions";
-import {
-  EllipsisOutlined,
-} from "@ant-design/icons";
+import { EllipsisOutlined } from "@ant-design/icons";
 import { addToCart } from "../_actions/cartActions";
-import CarouselHeader from "../Generic/CarouselHeader"
+import CarouselHeader from "../Generic/CarouselHeader";
 
 const { Meta } = Card;
 const { Text } = Typography;
@@ -85,48 +82,50 @@ function CarouselItem(props) {
       message.warn("Redirecting to login page...");
       props.history.push("/login");
     } else {
-      setTimeout(async()=>{
-        await dispatch(addToCart(productId, 1, userInfo.name, userInfo.phone))
-        
-      },2000)
+      setTimeout(async () => {
+        await dispatch(addToCart(productId, 1, userInfo.name, userInfo.phone));
+      }, 2000);
 
       message.success(`${product_name} added to cart`);
     }
   };
 
-
-
   return (
-
-      <main
-        
-        style={{ backgroundColor: "#F8F8F8", marginTop: "5rem" }}
-      >
+    <main style={{ backgroundColor: "#F8F8F8", marginTop: "5rem" }}>
       <CarouselHeader />
 
-        {loading ? (
-          <Row justify="space-around" align="middle">
-            {renderSkeleton}
-          </Row>
-        ) : error ? (
-          <div>{error}</div>
-        ) : (
-          <>
-                    <Row justify="space-around" align="middle" gutter={[0, 16]}>
+      {loading ? (
+        <Row justify="space-around" align="middle">
+          {renderSkeleton}
+        </Row>
+      ) : error ? (
+        <div>{error}</div>
+      ) : (
+        <>
+          <Row justify="space-around" align="middle" gutter={[0, 16]}>
             {posts.map((item) => (
-                            <Col key={item.id}>
-                
+              <Col key={item.id}>
                 <Card
-                  style={{ width: "18rem", height:"auto", backgroundColor:"#282c35"  }}
+                  style={{
+                    width: "18rem",
+                    height: "auto",
+                    backgroundColor: "#282c35",
+                  }}
                   cover={
                     <LazyLoadImage
                       src={item.image}
                       effect="blur"
                       alt="product-Image"
-                      style={{maxHeight:"16rem", maxWidth: "17.8rem",width:"auto", height:"auto", display:"flex", margin:"auto" }}
+                      style={{
+                        maxHeight: "16rem",
+                        maxWidth: "17.8rem",
+                        width: "auto",
+                        height: "auto",
+                        display: "flex",
+                        margin: "auto",
+                      }}
                     />
                   }
-                 
                 >
                   <Link
                     to={`/product-detail/${item.id}/?category=${item.category}`}
@@ -142,16 +141,22 @@ function CarouselItem(props) {
                   <Text style={{ color: "grey", fontSize: "1rem" }}>
                     <b>ksh {item.price}</b>
                   </Text>
-                  <Divider/>
+                  <Divider />
                   <Row justify="space-around" align="middle">
                     <Col>
-                    <Alert message="Buy" type="error" style={{ borderRadius:"5px", padding:".2rem"}} />
-
+                      <Alert
+                        message="Buy"
+                        type="error"
+                        style={{ borderRadius: "5px", padding: ".2rem" }}
+                      />
                     </Col>
                     <Col>2</Col>
                     <Col>
-                    <EllipsisOutlined onClick={showModal} key="ellipsis" style={{transform:"rotate(90deg)"}}/>
-
+                      <EllipsisOutlined
+                        onClick={showModal}
+                        key="ellipsis"
+                        style={{ transform: "rotate(90deg)" }}
+                      />
                     </Col>
                   </Row>
                 </Card>
@@ -171,16 +176,11 @@ function CarouselItem(props) {
                                 
                               </Modal> */}
               </Col>
-                                
-
             ))}
           </Row>
-
-          </>
-
-        )}
-
-      </main>
+        </>
+      )}
+    </main>
   );
 }
 

@@ -70,7 +70,7 @@ export default function SignUp() {
         align="middle"
         style={{ marginBottom: "1rem" }}
       >
-        <Card style={{ width: "25rem", marginTop:"3rem" }}>
+        <Card style={{ width: "25rem", marginTop:"4rem" }}>
 
           <Row justify="space-between" align="middle">
             <Col>
@@ -85,11 +85,10 @@ export default function SignUp() {
             </Col>
           </Row>
           <Divider>
-            <h3>REGISTER</h3>
           </Divider>
 
           <Form layout="vertical" size="large" onSubmit={submitHandler}>
-            <Form.Item required label="Name">
+            <Form.Item required >
               <Input
                 prefix={<UserOutlined />}
                 id="name"
@@ -101,7 +100,6 @@ export default function SignUp() {
             <Form.Item
               hidden
               name="avatar"
-              label="image"
               value={avatar}
               rules={[{ message: "Enter image" }]}
               onChange={(e) => setAvatar(e.target.value)}
@@ -109,7 +107,6 @@ export default function SignUp() {
               <Input />
             </Form.Item>
             <Form.Item 
-            label="Email address"
             required
             >
               <Input
@@ -122,7 +119,6 @@ export default function SignUp() {
             </Form.Item>
 
             <Form.Item
-                label="Current location"
 
              required>
               <Input
@@ -167,7 +163,6 @@ export default function SignUp() {
                 </PlacesAutocomplete>
               </Form.Item> */}
             <Form.Item
-            label="Phone number"
               required
               id="phone"
               name="phone"
