@@ -4,24 +4,22 @@ import {
   Row,
   Col,
   Card,
-  Typography,
   Rate,
   Form,
   Skeleton,
   message,
   Alert,
-  Divider,
+  Button,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 // import { listProducts } from "../../_actions/productActions";
-import { EllipsisOutlined } from "@ant-design/icons";
+import { DownloadOutlined, EllipsisOutlined, MoneyCollectOutlined } from "@ant-design/icons";
 import { addToCart } from "../_actions/cartActions";
 import CarouselHeader from "../Generic/CarouselHeader";
 
-const { Meta } = Card;
-const { Text } = Typography;
+
 const posts = [1, 2, 3, 4, 5];
 
 const renderSkeleton = posts.map((post) => {
@@ -107,7 +105,7 @@ function CarouselItem(props) {
               <Col key={item.id}>
                 <Card
                   style={{
-                    width: "18rem",
+                    width: "17rem",
                     height: "auto",
                     backgroundColor: "#282c35",
                   }}
@@ -117,9 +115,9 @@ function CarouselItem(props) {
                       effect="blur"
                       alt="product-Image"
                       style={{
-                        maxHeight: "16rem",
-                        maxWidth: "17.8rem",
-                        width: "auto",
+                        maxHeight: "16.8rem",
+                        maxWidth: "16.8rem",
+                        width: "16.8",
                         height: "auto",
                         display: "flex",
                         margin: "auto",
@@ -130,7 +128,11 @@ function CarouselItem(props) {
                   <Link
                     to={`/product-detail/${item.id}/?category=${item.category}`}
                   >
-                    <Meta title={item.product_name} description={item.shop} />
+                  <h2 
+                    style={{color:"#0080ff"}}
+
+                  >{item.product_name}</h2>
+
                   </Link>
                   <Rate
                     name="size-small"
@@ -138,24 +140,19 @@ function CarouselItem(props) {
                     defaultValue={item.ratings}
                   />
                   <br />
-                  <Text style={{ color: "grey", fontSize: "1rem" }}>
+                  <h3 style={{ color: "grey" }}>
                     <b>ksh {item.price}</b>
-                  </Text>
-                  <Divider />
-                  <Row justify="space-around" align="middle">
+                  </h3>
+                  <Row justify="space-between" align="middle">
                     <Col>
-                      <Alert
-                        message="Buy"
-                        type="error"
-                        style={{ borderRadius: "5px", padding: ".2rem" }}
-                      />
+                    <Button style={{borderRadius:"7px"}}>BUY</Button>
+
                     </Col>
-                    <Col>2</Col>
                     <Col>
                       <EllipsisOutlined
                         onClick={showModal}
                         key="ellipsis"
-                        style={{ transform: "rotate(90deg)" }}
+                        style={{ transform: "rotate(90deg)", fontSize:"1.5rem"}}
                       />
                     </Col>
                   </Row>

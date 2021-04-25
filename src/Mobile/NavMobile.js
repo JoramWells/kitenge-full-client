@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  EditOutlined,
   LoginOutlined,
   MailOutlined,
   PlusOutlined,
@@ -133,6 +134,9 @@ export default function NavMobile(props) {
               <Menu.Item icon={<PlusOutlined />}>
                 <Link to="/products/add">Add Product</Link>
               </Menu.Item>
+              <Menu.Item icon={<EditOutlined />}>
+                <Link to="/produc/manage">Edit Product</Link>
+              </Menu.Item>
             </SubMenu>
 
             <SubMenu
@@ -222,6 +226,9 @@ export default function NavMobile(props) {
                 <Menu.Item icon={<PlusOutlined />}>
                   <Link to="/products/add">Add Product</Link>
                 </Menu.Item>
+                <Menu.Item icon={<EditOutlined />}>
+                <Link to="/produc/manage">Edit Product</Link>
+              </Menu.Item>
               </SubMenu>
 
               <SubMenu
