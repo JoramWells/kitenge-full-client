@@ -17,11 +17,11 @@ import {
   userSigninReducer,
 } from "./_reducers/userReducers";
 import { cartReducer } from "./_reducers/cartReducers";
-// import {
-//   confirmPaymentReducer,
-//   paymentListReducer,
-//   paymentReducer,
-// } from "./_reducers/paymentReducer";
+import {
+  confirmPaymentReducer,
+  paymentListReducer,
+  paymentReducer,
+} from "./_reducers/paymentReducer";
 
 const cartItems = Cookie.getJSON("cartItems") || [];
 const userInfo = Cookie.getJSON("userInfo") || null;
@@ -39,9 +39,9 @@ const reducer = combineReducers({
 //   productUpdate: productUpdateReducer,
 //   productDelete: productDeleteReducer,
 //   googleUser: userGoogleReducer,
-//   payment: paymentReducer,
-//   confirmDetails: confirmPaymentReducer,
-//   paymentList: paymentListReducer,
+  payment: paymentReducer,
+  confirmDetails: confirmPaymentReducer,
+  paymentList: paymentListReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

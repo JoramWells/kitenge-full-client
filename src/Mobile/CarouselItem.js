@@ -9,6 +9,8 @@ import {
   Form,
   Skeleton,
   message,
+  Alert,
+  Divider
 
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -115,18 +117,14 @@ function CarouselItem(props) {
                             <Col key={item.id}>
                 
                 <Card
-                  style={{ width: "18rem", height:"auto"  }}
+                  style={{ width: "18rem", height:"auto", backgroundColor:"#282c35"  }}
                   cover={
                     <LazyLoadImage
                       src={item.image}
                       effect="blur"
                       alt="product-Image"
-                      style={{maxHeight:"14rem", maxWidth: "17.8rem",width:"auto", height:"auto", display:"flex", margin:"auto" }}
+                      style={{maxHeight:"16rem", maxWidth: "17.8rem",width:"auto", height:"auto", display:"flex", margin:"auto" }}
                     />
-                  }
-                  extra={
-                    <EllipsisOutlined onClick={showModal} key="ellipsis" style={{transform:"rotate(90deg)"}}/>
-
                   }
                  
                 >
@@ -144,6 +142,18 @@ function CarouselItem(props) {
                   <Text style={{ color: "grey", fontSize: "1rem" }}>
                     <b>ksh {item.price}</b>
                   </Text>
+                  <Divider/>
+                  <Row justify="space-around" align="middle">
+                    <Col>
+                    <Alert message="Buy" type="error" style={{ borderRadius:"5px", padding:".2rem"}} />
+
+                    </Col>
+                    <Col>2</Col>
+                    <Col>
+                    <EllipsisOutlined onClick={showModal} key="ellipsis" style={{transform:"rotate(90deg)"}}/>
+
+                    </Col>
+                  </Row>
                 </Card>
                 {/* <Modal
                                 title="Product details"

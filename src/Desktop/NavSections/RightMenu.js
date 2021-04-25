@@ -161,6 +161,12 @@ function RightMenu(props) {
               </Link>
                
               </Menu.Item>
+              <Menu.Item icon={<PlusOutlined/>}>
+              <Link to="/produc/manage">
+              Edit Product
+              </Link>
+               
+              </Menu.Item>
 
 
               </SubMenu>
