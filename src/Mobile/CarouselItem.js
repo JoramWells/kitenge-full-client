@@ -8,16 +8,16 @@ import {
   Form,
   Skeleton,
   message,
-  Alert,
   Button,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 // import { listProducts } from "../../_actions/productActions";
-import { DownloadOutlined, EllipsisOutlined, MoneyCollectOutlined } from "@ant-design/icons";
+import {  EllipsisOutlined } from "@ant-design/icons";
 import { addToCart } from "../_actions/cartActions";
 import CarouselHeader from "../Generic/CarouselHeader";
+import { AutoSizer,List } from "react-virtualized";
 
 
 const posts = [1, 2, 3, 4, 5];
@@ -100,6 +100,8 @@ function CarouselItem(props) {
         <div>{error}</div>
       ) : (
         <>
+
+
           <Row justify="space-around" align="middle" gutter={[0, 16]} style={{
                     backgroundColor: "#282c35"
 
