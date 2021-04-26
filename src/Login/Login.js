@@ -13,7 +13,7 @@ import {
 
 const Cookie = require("js-cookie");
 
-export default function SignIn() {
+export default function SignIn(props) {
   const history = useHistory();
   const [formErrorMessage, setFormErrorMessage] = useState("");
   const userSignin = useSelector((state) => state.userSignin);
@@ -81,7 +81,7 @@ export default function SignIn() {
               if (!userSuccess) console.log();
               else {
                 message.success("Successfully login");
-                history.goBack();
+                props.history.push('/')
               }
 
               setSubmitting(false);
