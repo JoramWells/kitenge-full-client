@@ -21,6 +21,8 @@ import { CaretRightOutlined, UploadOutlined } from "@ant-design/icons";
 
 export default function ManageProducts() {
   const ProductList = useSelector((state) => state.productList);
+  const ProductUpdate = useSelector((state)=>state.productUpdate)
+  const { product, loadingUpdate, errorUpdate } = ProductUpdate
   const { posts, loading, error } = ProductList;
 
   const ProductDelete = useSelector((state) => state.productDelete);
@@ -51,6 +53,12 @@ export default function ManageProducts() {
     dispatch(
       await updateProduct(id, name, shop, price, image, category, description)
     );
+    setTimeout(()=>{
+      dispatch(listProducts())
+      setIsModalVisible(false)
+      if(product)message.success('Product update successfully')
+
+    },1000)
   };
   const deleteHandler = () => {
     dispatch(deleteProduct(id));
@@ -164,12 +172,13 @@ export default function ManageProducts() {
       }
       if (info.file.status === "done") {
         setShowButton(false)
-        const regex = /.jpeg/;
+        // const regex = /.jpeg/;
         // var mapObjs = {
         //   svg
         // }
         const filename = info.file.name.replace(regex, ".webp");
-        setImage('/'+filename);
+        // setImage('/'+filename);
+        setImage(info.file.name)
         message.success(`${info.file.name}`);
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed`);

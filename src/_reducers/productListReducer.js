@@ -86,11 +86,11 @@ const {
   function productUpdateReducer(state = { product: {} }, action) {
     switch (action.type) {
       case PRODUCT_UPDATE_REQUEST:
-        return { loading: true };
+        return { loadingUpdate: true };
       case PRODUCT_UPDATE_SUCCESS:
-        return { loading: false, success: true, product: action.payload };
+        return { loadingUpdate: false, success: true, product: action.payload };
       case PRODUCT_UPDATE_FAIL:
-        return { loading: false, error: action.payload };
+        return { loadingUpdate: false, errorUpdate: action.payload };
       default:
         return state;
     }
