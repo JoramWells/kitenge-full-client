@@ -176,7 +176,7 @@ export default function ManageProducts() {
         // var mapObjs = {
         //   svg
         // }
-        const filename = info.file.name.replace(regex, ".webp");
+        // const filename = info.file.name.replace(regex, ".webp");
         // setImage('/'+filename);
         setImage(info.file.name)
         message.success(`${info.file.name}`);
