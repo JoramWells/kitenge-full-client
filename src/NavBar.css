@@ -155,6 +155,12 @@
   padding: 0px;
   
 }
+.tableClass tr,td,th{
+    border: .11rem solid whitesmoke;
+    padding: .5rem;
+
+}
+
 
 
 

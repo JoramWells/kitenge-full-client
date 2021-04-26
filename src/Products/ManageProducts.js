@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {  Button, Modal, Input, Form, Upload,Row,Col, message} from "antd";
+import {  Button, Modal, Input, Form, Upload,Row,Col, message, Skeleton, Empty} from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteProduct,
@@ -163,19 +163,54 @@ export default function ManageProducts() {
   return (
     <div>
       {loading ? (
-        <div>Loading...</div>
+        <div>
+          <table>
+            <thead>
+              <th><Skeleton.Input style={{width:"200px"}}/></th>
+              <th><Skeleton.Input style={{width:"200px"}}/></th>
+              <th><Skeleton.Input style={{width:"200px"}}/></th>
+              <th><Skeleton.Input style={{width:"200px"}}/></th>
+
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                <Skeleton.Input style={{width:"200px"}}/>
+                </td>
+                <td>
+                <Skeleton.Input style={{width:"200px"}}/>
+                </td>                <td>
+                <Skeleton.Input style={{width:"200px"}}/>
+                </td>                <td>
+                <Skeleton.Input style={{width:"200px"}}/>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
       ) : error ? (
-        <div>{error}</div>
+        <Row style={{marginTop:"5rem"}} justify="space-around" align="middle">
+          <Col>
+          <Empty
+          image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+          imageStyle={{
+            height: 60,
+          }}
+          description={error}
+        ></Empty>
+          </Col>
+
+        </Row>
       ) : (
         // <Table dataSource={posts} columns={columns}/>
-        <Row justify="space-around" align="middle">
+        <Row style={{marginTop:"3rem", marginBottom:"3rem"}} justify="space-around" align="middle">
           <Col>
-            <table>
+            <table className="tableClass">
               <thead>
                 <th>id</th>
                 <th>name</th>
                 <th>price</th>
-                <th>category</th>
                 <th>image</th>
                 <th>action</th>
               </thead>
@@ -185,12 +220,11 @@ export default function ManageProducts() {
                     <td>{item.id}</td>
                     <td>{item.product_name}</td>
                     <td>{item.price}</td>
-                    <td>{item.category}</td>
                     <td>
                       <img
                         src={item.image}
                         style={{ width: "100px" }}
-                        alt="dosjfljdsfdj"
+                        alt={item.product_name}
                       />
                     </td>
                     <td>
@@ -213,7 +247,7 @@ export default function ManageProducts() {
         onCancel={handleCancel}
       >
         <Form layout="vertical" name="basic" encType="multipart/form-data">
-          <img src={image} width="100px" alt="djkflsjf" />
+          <img src={image} width="70px" alt="djkflsjf" />
           <Form.Item
             required
             id="name"
