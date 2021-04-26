@@ -1,13 +1,23 @@
-import React, { useEffect, useState } from "react";
-import {  Button, Modal, Input, Form, Upload,Row,Col, message, Skeleton, Empty} from "antd";
+import React, { useEffect, useState, Fragment } from "react";
+import {
+  Button,
+  Modal,
+  Input,
+  Form,
+  Upload,
+  Row,
+  Col,
+  message,
+  Skeleton,
+  Empty,
+} from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteProduct,
   listProducts,
   updateProduct,
 } from "../_actions/productActions";
-import {  UploadOutlined } from "@ant-design/icons";
-
+import { CaretRightOutlined, UploadOutlined } from "@ant-design/icons";
 
 export default function ManageProducts() {
   const ProductList = useSelector((state) => state.productList);
@@ -29,6 +39,9 @@ export default function ManageProducts() {
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [showButton, setShowButton] = useState(true);
+  const [showLoading, setShowLoading] = useState(false);
+
 
   useEffect(() => {
     dispatch(listProducts());
@@ -64,6 +77,8 @@ export default function ManageProducts() {
     setCategory(item.category);
     setDescription(item.description);
   };
+
+
 
   const handleOk = () => {
     setIsModalVisible(false);
@@ -112,8 +127,7 @@ export default function ManageProducts() {
   //             <Button onClick={() => showModal(...posts)}>Edit</Button>
 
   //         <Button>Delete</Button>
-  
-  
+
   //       </Space>
   //     ),
   //   },
@@ -145,13 +159,17 @@ export default function ManageProducts() {
       if (info.file.status !== "uploading") {
         console.log(info.file, info.fileList);
         // dispatch(saveProduct(name, shop, price, image, description));
+        setShowLoading(false)
+
+
       }
       if (info.file.status === "done") {
-        const regex = /.jpeg/
+        setShowButton(false)
+        const regex = /.jpeg/;
         // var mapObjs = {
         //   svg
         // }
-        const filename = info.file.name.replace(regex, '.webp')
+        const filename = info.file.name.replace(regex, ".webp");
         setImage("/" + filename);
         message.success(`${info.file.name}`);
       } else if (info.file.status === "error") {
@@ -161,126 +179,275 @@ export default function ManageProducts() {
   };
 
   return (
-    <div>
-      {loading ? (
-                    <table style={{marginTop:"5rem"}}>
-                    <thead>
-                      <th><Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/></th>
-                      <th><Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/></th>
-                      <th><Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/></th>
-                      <th><Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/></th>
-        
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>
-                        <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>                <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>                <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>
-        
-                      </tr>
-                      <tr>
-                        <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>
-                        <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>                <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>                <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>
-        
-                      </tr>
-                      <tr>
-                        <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>
-                        <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>                <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>                <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>
-        
-                      </tr>
-                      <tr>
-                        <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>
-                        <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>                <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>                <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>
-        
-                      </tr>
-                      <tr>
-                        <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>
-                        <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>                <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>                <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>
-        
-                      </tr>
-                      <tr>
-                        <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>
-                        <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>                <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>                <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>
-        
-                      </tr>
-                      <tr>
-                        <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>
-                        <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>                <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>                <td>
-                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
-                        </td>
-        
-                      </tr>
-                    </tbody>
-                  </table>
-      ) : error ? (
-        <Row style={{marginTop:"5rem"}} justify="space-around" align="middle">
-          <Col>
-          <Empty
-          image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-          imageStyle={{
-            height: 60,
-          }}
-          description={error}
-        ></Empty>
-          </Col>
+    <Fragment>
+      <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <Form
+          layout="vertical"
+          name="basic"
+          encType="multipart/form-data"
+          size="large"
+        >
+          <img
+            src={image}
+            style={{ width: "70px", marginBottom: ".3rem" }}
+            alt={name}
+          />
+          <Form.Item
+            required
+            id="name"
+            name="name"
+            onChange={(e) => setName(e.target.value)}
+          >
+            <Input
+              value={name}
+              prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
+            />
+            <input hidden type="text" />
+          </Form.Item>
+          <Form.Item
+            name="price"
+            name="price"
+            onChange={(e) => setPrice(e.target.value)}
+          >
+            <Input
+              value={price}
+              prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
+            />
 
+            <input
+              hidden
+              type="text"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </Form.Item>
+
+          <Form.Item
+            hidden
+            name="image"
+            name="image"
+            onChange={(e) => setImage(e.target.value)}
+          >
+            <Input value={image} />
+
+            <input
+              hidden
+              type="text"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+            />
+          </Form.Item>
+
+          <Form.Item
+            id="shop"
+            name="shop"
+            onChange={(e) => setShop(e.target.value)}
+          >
+            <Input
+              value={shop}
+              prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
+            />
+            <input
+              hidden
+              type="text"
+              value={shop}
+              onChange={(e) => setShop(e.target.value)}
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="category"
+            id="category"
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <Input
+              value={category}
+              prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
+            />
+            <input
+              hidden
+              type="text"
+              onChange={(e) => setCategory(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item
+            name="description"
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          >
+            <Input.TextArea value={description} />
+            <input
+              hidden
+              type="text"
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </Form.Item>
+          <Row justify="space-around" align="middle">
+            <Col>
+              <Form.Item>
+                <Upload {...prop}>
+                  <Button icon={<UploadOutlined />}>UPLOAD IMAGE</Button>
+                </Upload>
+              </Form.Item>
+            </Col>
+            <Col>
+              <Form.Item>
+                <Button
+                loading={showLoading}
+                  disabled={showButton}
+                  htmlType="submit"
+                  type="primary"
+                  onClick={productEdit}
+                  style={{ backgroundColor: "#fdba45", border: "0" }}
+                >
+                  COMPLETE
+                </Button>
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
+      </Modal>
+      {loading ? (
+        <table style={{ marginTop: "5rem" }}>
+          <thead>
+            <th>
+              <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+            </th>
+            <th>
+              <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+            </th>
+            <th>
+              <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+            </th>
+            <th>
+              <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+            </th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>{" "}
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>{" "}
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>{" "}
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>{" "}
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>{" "}
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>{" "}
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>{" "}
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>{" "}
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>{" "}
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>{" "}
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>{" "}
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>{" "}
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>{" "}
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>{" "}
+              <td>
+                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      ) : error ? (
+        <Row
+          style={{ marginTop: "5rem" }}
+          justify="space-around"
+          align="middle"
+        >
+          <Col>
+            <Empty
+              image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+              imageStyle={{
+                height: 60,
+              }}
+              description={error}
+            ></Empty>
+          </Col>
         </Row>
       ) : (
         // <Table dataSource={posts} columns={columns}/>
-        <Row style={{marginTop:"3rem", marginBottom:"3rem"}} justify="space-around" align="middle">
+        <Row
+          style={{ marginTop: "3rem", marginBottom: "3rem" }}
+          justify="space-around"
+          align="middle"
+        >
           <Col>
             <table className="tableClass">
               <thead>
@@ -304,10 +471,16 @@ export default function ManageProducts() {
                       />
                     </td>
                     <td>
-                      <Button onClick={() => showModal(item)}>Edit</Button>
-                      <Button onClick={() => deleteHandler(item.id)}>
-                        Delete
-                      </Button>
+                      <Row justify="space-around">
+                        <Col>
+                          <Button onClick={() => showModal(item)}>Edit</Button>
+                        </Col>
+                        <Col>
+                          <Button onClick={() => deleteHandler(item.id)}>
+                            Delete
+                          </Button>
+                        </Col>
+                      </Row>
                     </td>
                   </tr>
                 ))}
@@ -316,114 +489,6 @@ export default function ManageProducts() {
           </Col>
         </Row>
       )}
-      <Modal
-        title="Edit products"
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <Form layout="vertical" name="basic" encType="multipart/form-data">
-          <img src={image} width="70px" alt="djkflsjf" />
-          <Form.Item
-            required
-            id="name"
-            label="Item name"
-            name="name"
-            // rules={[{ message: "Enter item name", value: 1 }]}
-            onChange={(e) => setName(e.target.value)}
-          >
-            <Input value={name} />
-            <input hidden type="text" />
-          </Form.Item>
-          <Form.Item
-            name="price"
-            label="Price"
-            name="price"
-            onChange={(e) => setPrice(e.target.value)}
-          >
-            <Input value={price} />
-
-            <input
-              hidden
-              type="text"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-          </Form.Item>
-
-          <Form.Item
-            hidden
-            name="image"
-            label="image"
-            name="image"
-            onChange={(e) => setImage(e.target.value)}
-          >
-            <Input value={image} />
-
-            <input
-              hidden
-              type="text"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-            />
-          </Form.Item>
-
-          <Form.Item
-            id="shop"
-            label="Online shop"
-            name="shop"
-            onChange={(e) => setShop(e.target.value)}
-          >
-            <Input value={shop} />
-            <input
-              hidden
-              type="text"
-              value={shop}
-              onChange={(e) => setShop(e.target.value)}
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="category"
-            label="category"
-            id="category"
-            onChange={(e) => setCategory(e.target.value)}
-            rules={[{ message: "Enter image" }]}
-          >
-            <Input value={category} />
-            <input
-              hidden
-              type="text"
-              onChange={(e) => setCategory(e.target.value)}
-            />
-          </Form.Item>
-          <Form.Item
-            name="description"
-            label="description"
-            id="description"
-            value={description}
-            rules={[{ message: "Enter description" }]}
-            onChange={(e) => setDescription(e.target.value)}
-          >
-            <Input.TextArea value={description} />
-            <input
-              hidden
-              type="text"
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </Form.Item>
-          <Form.Item>
-            <Upload {...prop}>
-              <Button icon={<UploadOutlined />}>Upload Item</Button>
-            </Upload>
-          </Form.Item>
-          <Form.Item>
-            <Button htmlType="submit" type="primary" onClick={productEdit}>
-              Update
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
-    </div>
+    </Fragment>
   );
 }
