@@ -17,7 +17,6 @@ import { Link } from "react-router-dom";
 import {  EllipsisOutlined } from "@ant-design/icons";
 import { addToCart } from "../_actions/cartActions";
 import CarouselHeader from "../Generic/CarouselHeader";
-import { AutoSizer,List } from "react-virtualized";
 
 
 const posts = [1, 2, 3, 4, 5];
@@ -27,7 +26,7 @@ const renderSkeleton = posts.map((post) => {
     <Col key={post}>
       <Form layout="vertical">
         <Form.Item>
-          <Skeleton.Input style={{ width: "20rem", height: "150px" }} /> <br />
+          <Skeleton.Input style={{ width: "18rem", height: "150px" }} /> <br />
         </Form.Item>
 
         <Form.Item>

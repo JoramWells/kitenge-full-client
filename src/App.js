@@ -12,6 +12,7 @@ import ShippingScreen from "./Cart/ShippingScreen";
 import HomeRoutes from "./HomeRoutes";
 import DesktopNavbarMobile from "./DesktopNavbarMobile";
 import Footer from "./Desktop/Footer";
+import Product from "./Products/Product";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/products/add" exact component={AddProduct} />
           <Route path="/produc/manage" exact component={ManageProducts} />
           <Route path="/product-detail/:id?" exact component={ProductDetail} />
+          <Route path="/product-info/:category" exact component={Product} />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/shipping" exact component={ShippingScreen} />
         </Switch>

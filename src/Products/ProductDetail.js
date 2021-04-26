@@ -73,9 +73,7 @@ export default function ProductDetail(props) {
   const params = new URLSearchParams(search);
   const category = params.getAll("category");
 
-  const redirect = props.location.search
-    ? props.location.search.split("=")[1]
-    : "/";
+
 
   const dispatch = useDispatch();
   useEffect(() => {
