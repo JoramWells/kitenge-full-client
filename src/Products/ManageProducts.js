@@ -165,12 +165,12 @@ export default function ManageProducts() {
       }
       if (info.file.status === "done") {
         setShowButton(false)
-        const regex = /.jpeg/;
-        // var mapObjs = {
-        //   svg
-        // }
-        const filename = info.file.name.replace(regex, ".webp");
-        setImage("/" + filename);
+        // const regex = /.jpeg/;
+        // // var mapObjs = {
+        // //   svg
+        // // }
+        // const filename = info.file.name.replace(regex, ".webp");
+        setImage(info.file.name);
         message.success(`${info.file.name}`);
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed`);
@@ -309,7 +309,9 @@ export default function ManageProducts() {
         </Form>
       </Modal>
       {loading ? (
-        <table style={{ marginTop: "5rem" }}>
+        <Row justify="space-around" align="middle">
+          <Col>
+          <table style={{ marginTop: "5rem" }}>
           <thead>
             <th>
               <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
@@ -425,6 +427,8 @@ export default function ManageProducts() {
             </tr>
           </tbody>
         </table>
+          </Col>
+        </Row>
       ) : error ? (
         <Row
           style={{ marginTop: "5rem" }}
@@ -433,6 +437,7 @@ export default function ManageProducts() {
         >
           <Col>
             <Empty
+            style={{marginBottom:"2rem"}}
               image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
               imageStyle={{
                 height: 60,
