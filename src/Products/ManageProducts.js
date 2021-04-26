@@ -163,32 +163,108 @@ export default function ManageProducts() {
   return (
     <div>
       {loading ? (
-        <div>
-          <table>
-            <thead>
-              <th><Skeleton.Input style={{width:"200px"}}/></th>
-              <th><Skeleton.Input style={{width:"200px"}}/></th>
-              <th><Skeleton.Input style={{width:"200px"}}/></th>
-              <th><Skeleton.Input style={{width:"200px"}}/></th>
-
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                <Skeleton.Input style={{width:"200px"}}/>
-                </td>
-                <td>
-                <Skeleton.Input style={{width:"200px"}}/>
-                </td>                <td>
-                <Skeleton.Input style={{width:"200px"}}/>
-                </td>                <td>
-                <Skeleton.Input style={{width:"200px"}}/>
-                </td>
-
-              </tr>
-            </tbody>
-          </table>
-        </div>
+                    <table style={{marginTop:"5rem"}}>
+                    <thead>
+                      <th><Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/></th>
+                      <th><Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/></th>
+                      <th><Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/></th>
+                      <th><Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/></th>
+        
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>
+                        <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>                <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>                <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>
+        
+                      </tr>
+                      <tr>
+                        <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>
+                        <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>                <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>                <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>
+        
+                      </tr>
+                      <tr>
+                        <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>
+                        <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>                <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>                <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>
+        
+                      </tr>
+                      <tr>
+                        <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>
+                        <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>                <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>                <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>
+        
+                      </tr>
+                      <tr>
+                        <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>
+                        <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>                <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>                <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>
+        
+                      </tr>
+                      <tr>
+                        <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>
+                        <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>                <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>                <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>
+        
+                      </tr>
+                      <tr>
+                        <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>
+                        <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>                <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>                <td>
+                        <Skeleton.Input style={{width:"4.5rem", height:"1.5rem"}}/>
+                        </td>
+        
+                      </tr>
+                    </tbody>
+                  </table>
       ) : error ? (
         <Row style={{marginTop:"5rem"}} justify="space-around" align="middle">
           <Col>
