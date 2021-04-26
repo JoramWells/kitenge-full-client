@@ -47,10 +47,9 @@ export default function ManageProducts() {
     dispatch(listProducts());
   }, []);
 
-  const productEdit = (e) => {
-    e.preventDefault();
+  const productEdit = async() => {
     dispatch(
-      updateProduct(id, name, shop, price, image, category, description)
+      await updateProduct(id, name, shop, price, image, category, description)
     );
   };
   const deleteHandler = () => {
@@ -165,12 +164,12 @@ export default function ManageProducts() {
       }
       if (info.file.status === "done") {
         setShowButton(false)
-        // const regex = /.jpeg/;
-        // // var mapObjs = {
-        // //   svg
-        // // }
-        // const filename = info.file.name.replace(regex, ".webp");
-        setImage(info.file.name);
+        const regex = /.jpeg/;
+        // var mapObjs = {
+        //   svg
+        // }
+        const filename = info.file.name.replace(regex, ".webp");
+        setImage('/'+filename);
         message.success(`${info.file.name}`);
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed`);
@@ -298,7 +297,7 @@ export default function ManageProducts() {
                   disabled={showButton}
                   htmlType="submit"
                   type="primary"
-                  onClick={productEdit}
+                  onClick={()=>productEdit()}
                   style={{ backgroundColor: "#fdba45", border: "0" }}
                 >
                   COMPLETE

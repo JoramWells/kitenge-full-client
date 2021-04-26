@@ -118,12 +118,12 @@ const updateProduct = (
   description,
   category
 ) => async (dispatch, getState) => {
-  dispatch({ type: PRODUCT_UPDATE_REQUEST });
+  dispatch({ type: PRODUCT_UPDATE_REQUEST, payload:{id,name,shop,price,image,description,category} });
   const {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = axios.put(
+    await axios.put(
       `/product/add/${id}`,
       { id, name, shop, price, image, description, category },
       {
@@ -131,8 +131,13 @@ const updateProduct = (
           Authorization: "Bearer " + userInfo.token,
         },
       }
-    );
-    dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
+    ).then(response=>{
+      console.log(response)
+    dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: response.data })
+
+    }
+
+      ).catch(err=>console.log(err))
   } catch (error) {
     dispatch({ type: PRODUCT_UPDATE_FAIL, payload: error.message });
   }

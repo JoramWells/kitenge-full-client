@@ -7,8 +7,8 @@ import {
 //   productDeleteReducer,
   productDetailReducer,
   productListReducer,
-//   productSaveReducer,
-//   productUpdateReducer,
+  productSaveReducer,
+  productUpdateReducer,
 } from "./_reducers/productListReducer";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import {
@@ -32,11 +32,11 @@ const reducer = combineReducers({
   productDetail: productDetailReducer,
   userSignin: userSigninReducer,
   userRegister: userRegisterReducer,
-//   productSave: productSaveReducer,
+  productSave: productSaveReducer,
   cart: cartReducer,
   categoryList: categoryListReducer,
   categoryLists: categoryListsReducer,
-//   productUpdate: productUpdateReducer,
+  productUpdate: productUpdateReducer,
 //   productDelete: productDeleteReducer,
 //   googleUser: userGoogleReducer,
   payment: paymentReducer,
