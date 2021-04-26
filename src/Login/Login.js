@@ -101,10 +101,9 @@ export default function SignIn() {
             return (
               <Form onSubmit={handleSubmit} layout="vertical" size="large">
                 <Form.Item
-                label="Email Address"
                  required>
                   <Input
-                    prefix={<MailOutlined />}
+                    prefix={<MailOutlined style={{color:"#423F3B", fontSize:"1.5rem"}} />}
                     id="email"
                     placeholder="Enter email addrress"
                     onChange={handleChange}
@@ -122,11 +121,10 @@ export default function SignIn() {
                 </Form.Item>
 
                 <Form.Item 
-                label="Password"
                 required>
                   <Input.Password
                     id="password"
-                    prefix={<LockOutlined />}
+                    prefix={<LockOutlined style={{color:"#423F3B", fontSize:"1.5rem"}}/>}
                     placeholder="Enter password"
                     onChange={handleChange}
                     onBlur={handleBlur}
