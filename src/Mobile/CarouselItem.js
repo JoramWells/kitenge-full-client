@@ -10,20 +10,25 @@ import {
   message,
   Button,
   Image,
+  Divider,
 } from "antd";
-import moment from 'moment'
-import PhoneInput from "react-phone-input-2";
+import moment from "moment";
 import NumberFormat from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 // import { listProducts } from "../../_actions/productActions";
-import { EllipsisOutlined } from "@ant-design/icons";
+import {
+  CloseCircleOutlined,
+  EllipsisOutlined,
+  ShoppingOutlined,
+} from "@ant-design/icons";
 import { addToCart } from "../_actions/cartActions";
 import CarouselHeader from "../Generic/CarouselHeader";
 import Modal from "react-modal";
 
 Modal.setAppElement("#root");
+const { Meta } = Card;
 const posts = [1, 2, 3, 4, 5];
 
 const renderSkeleton = posts.map((post) => {
@@ -62,6 +67,7 @@ function CarouselItem(props) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [date, setDate] = useState("");
+  const [rate, setRate] = useState("");
 
   const [description, setDescription] = useState("");
   const userSignin = useSelector((state) => state.userSignin);
@@ -74,12 +80,13 @@ function CarouselItem(props) {
     setVisible(true);
     setId(item.id);
     setImage(item.image);
-    setDate(item.updatedAt)
+    setDate(item.updatedAt);
     setName(item.product_name);
     setShop(item.shop);
     setPrice(item.price);
     setCategory(item.category);
     setDescription(item.description);
+    setRate(item.rate)
   };
 
   const handleOk = () => {
@@ -116,14 +123,26 @@ function CarouselItem(props) {
         ariaHideApp={false}
         style={{
           overlay: {
-            backgroundColor: "",
+            background: "rgba(0, 0, 0, 0.5)",
           },
           content: {
             marginTop: "3rem",
-            height: "355px",
+            height: "450px",
+            // boxShadow: "2px 2px 10px 2px #D3D3D3",
+            // width:"20rem",
+            margin: "auto",
           },
         }}
       >
+        <Row justify="end">
+          <Col>
+            <CloseCircleOutlined
+              className="close"
+              style={{ fontSize: "1.5rem", marginBottom: "0.3rem" }}
+              onClick={handleCancel}
+            />
+          </Col>
+        </Row>
         <Row justify="space-around" align="middle">
           <Col>
             <Image
@@ -133,22 +152,50 @@ function CarouselItem(props) {
           </Col>
         </Row>
         <div>
-          <h3>{name}</h3>
+          <Link
+                        
+                        to={`/product-detail/${id}/?category=${category}`}
+                      >
+                        <h3 style={{ color: "rgba(89, 171, 227, 1)" }}> {name}</h3>
+                      </Link>
           <NumberFormat
-                value={price}
-                thousandSeparator={true}
-                displayType={"text"}
-                prefix="Kshs: "
-                suffix=" /="
-              />
-          <h5>{description}</h5>
+            value={price}
+            thousandSeparator={true}
+            displayType={"text"}
+            prefix="Kshs: "
+            suffix=" /="
+          />
+
+          <Rate
+                        name="size-small"
+                        allowHalf={true}
+                        style={{
+                          fontSize: "1rem",
+                          color: "#f9812a",
+                        }}
+                        defaultValue={rate}
+                      />
+          <Divider />
+
+          <address style={{ color: "grey", textAlign: "center" }}>
+            {description}
+          </address>
         </div>
 
-        Purchases: (74)
-        <br/>
-        {moment(date,"hh").fromNow()}
         <Row justify="space-around" align="middle">
-          <Col><Button style={{border:"0"}}>Purchase</Button></Col>
+          <Col>
+            <Button
+              icon={<ShoppingOutlined style={{ fontSize: "1rem" }} />}
+              style={{
+                border: "0",
+                backgroundColor: "rgba(249, 180, 45,1",
+                color: "white",
+              }}
+            >
+              {" "}
+              <b>Purchase</b>{" "}
+            </Button>
+          </Col>
         </Row>
       </Modal>
       <CarouselHeader />
@@ -161,14 +208,7 @@ function CarouselItem(props) {
         <div>{error}</div>
       ) : (
         <>
-          <Row
-            justify="space-around"
-            align="middle"
-            gutter={[0, 16]}
-            style={{
-              backgroundColor: "#282c35",
-            }}
-          >
+          <Row justify="space-around" align="middle" gutter={[0, 16]}>
             {posts.map((item) => (
               <Col key={item.id}>
                 <Card
@@ -176,6 +216,15 @@ function CarouselItem(props) {
                     width: "17rem",
                     height: "auto",
                   }}
+                  extra={
+                    <EllipsisOutlined
+                      onClick={() => showModal(item)}
+                      key="ellipsis"
+                      style={{
+                        fontSize: "1.3rem",
+                      }}
+                    />
+                  }
                   cover={
                     <LazyLoadImage
                       src={item.image}
@@ -192,40 +241,44 @@ function CarouselItem(props) {
                     />
                   }
                 >
-                  <Link
-                    to={`/product-detail/${item.id}/?category=${item.category}`}
-                  >
-                    <h2 style={{ color: "#0080ff" }}>{item.product_name}</h2>
-                  </Link>
-                  <Rate
-                    name="size-small"
-                    style={{ fontSize: "1rem", color: "#f9812a" }}
-                    defaultValue={item.ratings}
-                  />
-                  <br />
-                  <h3 style={{ color: "grey" }}>
-                    <b>ksh {item.price}</b>
-                  </h3>
-                  <Row justify="space-between" align="middle">
-                    <Col>
-                      <Button
-                        style={{ borderRadius: "7px" }}
-                        onClick={() => showModal(item)}
+                  <Meta
+                    title={
+                      <Link
+                        style={{ color: "rgba(89, 171, 227, 1)" }}
+                        to={`/product-detail/${item.id}/?category=${item.category}`}
                       >
-                        BUY
-                      </Button>
-                    </Col>
-                    <Col>
-                      <EllipsisOutlined
-                        onClick={showModal}
-                        key="ellipsis"
+                        {item.product_name}
+                      </Link>
+                    }
+                    description={
+                      <Rate
+                        name="size-small"
+                        allowHalf={true}
                         style={{
-                          transform: "rotate(90deg)",
-                          fontSize: "1.5rem",
+                          fontSize: "1rem",
+                          color: "rgba(252, 214, 112, 1)",
+                          marginBottom: ".6rem",
                         }}
+                        defaultValue={item.ratings}
                       />
-                    </Col>
-                  </Row>
+                    }
+                  />
+                            <Row>
+            <Col style={{ color: "rgba(129, 207, 224, 1)" }}>
+              <span style={{ color: "grey" }}> Updated :</span>{" "}
+              {moment(item.updatedAt, "hh").fromNow()}
+            </Col>
+          </Row>
+                      <b style={{color:"grey"}}>
+                                          <NumberFormat
+                    value={item.price}
+                    thousandSeparator={true}
+                    displayType={"text"}
+                    prefix="Kshs: "
+                    suffix=" /="
+                  />
+                      </b>
+
                 </Card>
                 {/* <Modal
                                 title="Product details"
