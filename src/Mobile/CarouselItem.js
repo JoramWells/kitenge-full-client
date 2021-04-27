@@ -143,7 +143,7 @@ function CarouselItem(props) {
         </Row>
         <div>
           <Link to={`/product-detail/${id}/?category=${category}`}>
-            <h3 style={{ color: "rgba(89, 171, 227, 1)" }}> {name}</h3>
+            <h3 style={{ color: "rgba(232, 126, 4, 1)" }}> {name}</h3>
           </Link>
           <NumberFormat
             value={price}
@@ -234,10 +234,10 @@ function CarouselItem(props) {
                   <Meta
                     title={
                       <Link
-                        style={{ color: "rgba(89, 171, 227, 1)" }}
+                        
                         to={`/product-detail/${item.id}/?category=${item.category}`}
                       >
-                        {item.product_name}
+                        <h3 style={{ color: "rgba(232, 126, 4, 1)",margin:"0" }}> {item.product_name}</h3>
                       </Link>
                     }
                     description={
@@ -246,20 +246,15 @@ function CarouselItem(props) {
                         allowHalf={true}
                         style={{
                           fontSize: "1rem",
-                          color: "rgba(252, 214, 112, 1)",
+                          color: "rgba(255, 203, 5, 1)",
                           marginBottom: ".6rem",
                         }}
                         defaultValue={item.ratings}
                       />
                     }
                   />
-                  <Row>
-                    <Col style={{ color: "rgba(129, 207, 224, 1)" }}>
-                      <span style={{ color: "grey" }}> Updated :</span>{" "}
-                      {moment(item.updatedAt, "hh").fromNow()}
-                    </Col>
-                  </Row>
-                  <b style={{ color: "grey" }}>
+
+                  <h3 style={{ color: "grey" }}>
                     <NumberFormat
                       value={item.price}
                       thousandSeparator={true}
@@ -267,7 +262,7 @@ function CarouselItem(props) {
                       prefix="Kshs: "
                       suffix=" /="
                     />
-                  </b>
+                  </h3>
                 </Card>
               </Col>
             ))}
