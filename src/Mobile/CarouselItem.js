@@ -29,11 +29,10 @@ import Modal from "react-modal";
 
 Modal.setAppElement("#root");
 const { Meta } = Card;
-const posts = [1, 2, 3, 4, 5];
 
-const renderSkeleton = posts.map((post) => {
+const renderSkeleton = [...Array(5).keys()].map((i) => {
   return (
-    <Col key={post}>
+    <Col key={i}>
       <Form layout="vertical">
         <Form.Item>
           <Skeleton.Input style={{ width: "18rem", height: "150px" }} /> <br />
@@ -193,7 +192,7 @@ function CarouselItem(props) {
       <CarouselHeader />
 
       {loading ? (
-        <Row justify="space-around" align="middle" gutter={[0,16]}>
+        <Row justify="space-around" align="middle" gutter={[0, 16]}>
           {renderSkeleton}
         </Row>
       ) : error ? (

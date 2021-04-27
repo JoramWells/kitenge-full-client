@@ -4,40 +4,48 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../_actions/productActions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Row, Col, Typography, Card, Skeleton, Form, Result,Button } from "antd";
+import {
+  Row,
+  Col,
+  Typography,
+  Card,
+  Skeleton,
+  Form,
+  Result,
+  Button,
+  Rate
+} from "antd";
 import CarouselHeader from "../Generic/CarouselHeader";
-import RecentItemsBar from '../Generic/RecentItemsBar'
+import RecentItemsBar from "../Generic/RecentItemsBar";
 import { RedoOutlined } from "@ant-design/icons";
-
+import NumberFormat from "react-number-format";
 
 const { Text } = Typography;
 const { Meta } = Card;
-const renderSkeleton = [...Array(4).keys()].map((i)=>{
-  return(
+const renderSkeleton = [...Array(4).keys()].map((i) => {
+  return (
     <Col key={i}>
-    <Form layout="vertical">
-      <Form.Item>
-        <Skeleton.Input style={{ width: "16rem", height: "150px" }} /> <br />
-      </Form.Item>
+      <Form layout="vertical">
+        <Form.Item>
+          <Skeleton.Input style={{ width: "16rem", height: "150px" }} /> <br />
+        </Form.Item>
 
-      <Form.Item>
-        <Skeleton.Input
-          style={{ width: "150px", height: "1rem" }}
-          active={true}
-        />
-      </Form.Item>
-      <Form.Item>
-        <Skeleton.Input
-          style={{ width: "200px", height: "1rem" }}
-          active={true}
-        />
-      </Form.Item>
-    </Form>
-  </Col>
-
-  )
-})
-
+        <Form.Item>
+          <Skeleton.Input
+            style={{ width: "150px", height: "1rem" }}
+            active={true}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Skeleton.Input
+            style={{ width: "200px", height: "1rem" }}
+            active={true}
+          />
+        </Form.Item>
+      </Form>
+    </Col>
+  );
+});
 
 const responsive = {
   superLargeDesktop: {
@@ -63,9 +71,9 @@ export default function CarouselItems() {
   const dispatch = useDispatch();
   const ProductList = useSelector((state) => state.productList);
   const { posts, loading, error } = ProductList;
-  const reloadHandler = () =>{
-    window.location.reload()
-  }
+  const reloadHandler = () => {
+    window.location.reload();
+  };
 
   useEffect(() => {
     dispatch(listProducts());
@@ -73,31 +81,32 @@ export default function CarouselItems() {
   }, []);
   return (
     <main style={{ padding: "20px" }}>
-      <CarouselHeader/>
-      <RecentItemsBar title="Available Now!!"/>
+      <CarouselHeader />
+      <RecentItemsBar title="Available Now!!" />
       {loading ? (
         <Row justify="space-around" align="middle">
           {renderSkeleton}
         </Row>
       ) : error ? (
         <Result
-        status="500"
-        subTitle={error}
-        extra={<Button onClick={reloadHandler} icon={<RedoOutlined/>}>RETRY</Button>}
+          status="500"
+          subTitle={error}
+          extra={
+            <Button onClick={reloadHandler} icon={<RedoOutlined />}>
+              RETRY
+            </Button>
+          }
         />
-
       ) : (
         <Carousel
           swipeable={true}
-          draggable={false}
+          draggable={true}
           responsive={responsive}
-          ssr={true} // means to render carousel on server-side.
           infinite={true}
           autoPlay={true}
-          
         >
           {posts.map((product) => (
-            <Row key={product.id} justify="space-around" align="middle"   >
+            <Row key={product.id} justify="space-around" align="middle">
               <Col>
                 <Link
                   to={`/product-detail/${product.id}/?category=${product.category}`}
@@ -106,28 +115,57 @@ export default function CarouselItems() {
                   <Card
                     style={{
                       border: "0",
-                      width:"16rem",
-                      height:"300px",
-                      
+                      width: "17rem",
+                      height: "340px",
                     }}
                     cover={
                       <LazyLoadImage
                         src={product.image}
                         effect="blur"
                         alt="productimage"
-                        style={{width:"auto", height:"auto", maxWidth: "15.8rem", maxHeight: "10.9rem", display:"flex", margin:"auto" }}
+                        style={{
+                          width: "auto",
+                          height: "auto",
+                          maxWidth: "16.8rem",
+                          maxHeight: "13.9rem",
+                          display: "flex",
+                          margin: "auto",
+                        }}
                         // visibleByDefault={product.image}
                       />
                     }
                   >
                     <Meta
-                      title={product.product_name}
-                      description={product.shop}
+                      title={
+                        <Link
+                        style={{ color: "rgba(89, 171, 227, 1)" }}
+                        to={`/product-detail/${product.id}/?category=${product.category}`}
+                      >
+                        {product.product_name}
+                      </Link>
+                      }
+                      description={
+                        <Rate
+                        name="size-small"
+                        allowHalf={true}
+                        style={{
+                          fontSize: "1rem",
+                          color: "rgba(252, 214, 112, 1)",
+                          marginBottom: ".6rem",
+                        }}
+                        defaultValue={product.ratings}
+                      />
+                      }
                     />{" "}
-                    {/* <Rate name="size-small" defaultValue={product.ratings} /> */}
-                    <Text style={{ color: "#f9812a" }}>
-                      ksh {product.price}
-                    </Text>
+                    <b style={{ color: "grey" }}>
+                    <NumberFormat
+                      value={product.price}
+                      thousandSeparator={true}
+                      displayType={"text"}
+                      prefix="Kshs: "
+                      suffix=" /="
+                    />
+                  </b>
                   </Card>
                 </Link>
               </Col>
