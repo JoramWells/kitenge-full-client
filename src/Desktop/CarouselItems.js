@@ -12,31 +12,32 @@ import { RedoOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;
 const { Meta } = Card;
-const posts = [1, 2, 3, 4];
-const renderSkeleton = posts.map(( index) => {
-  return (
-    <Col key={index}>
-      <Form layout="vertical">
-        <Form.Item>
-          <Skeleton.Input style={{ width: "16rem", height: "150px" }} /> <br />
-        </Form.Item>
+const renderSkeleton = [...Array(4).keys()].map((i)=>{
+  return(
+    <Col key={i}>
+    <Form layout="vertical">
+      <Form.Item>
+        <Skeleton.Input style={{ width: "16rem", height: "150px" }} /> <br />
+      </Form.Item>
 
-        <Form.Item>
-          <Skeleton.Input
-            style={{ width: "150px", height: "1rem" }}
-            active={true}
-          />
-        </Form.Item>
-        <Form.Item>
-          <Skeleton.Input
-            style={{ width: "200px", height: "1rem" }}
-            active={true}
-          />
-        </Form.Item>
-      </Form>
-    </Col>
-  );
-});
+      <Form.Item>
+        <Skeleton.Input
+          style={{ width: "150px", height: "1rem" }}
+          active={true}
+        />
+      </Form.Item>
+      <Form.Item>
+        <Skeleton.Input
+          style={{ width: "200px", height: "1rem" }}
+          active={true}
+        />
+      </Form.Item>
+    </Form>
+  </Col>
+
+  )
+})
+
 
 const responsive = {
   superLargeDesktop: {

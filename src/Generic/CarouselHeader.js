@@ -33,6 +33,21 @@ const responsive = {
   },
 };
 
+const renderSkeleton = [...Array(4).keys()].map(i=>{
+  return(
+    <Col key={i}>
+    <Skeleton.Input
+      style={{
+        width: "70px",
+        borderRadius: "50px",
+        margin: "0.5rem",
+      }}
+    ></Skeleton.Input>
+  </Col>
+    
+  )
+})
+
 export default function CarouselHeader() {
   const CategoryList = useSelector((state) => state.categoryLists);
 
@@ -56,40 +71,8 @@ export default function CarouselHeader() {
       <>
         {loading ? (
           <Row justify="space-around" align="middle" style={{marginTop:"3rem"}} span={6} >
-            <Col>
-              <Skeleton.Input
-                style={{
-                  width: "70px",
-                  borderRadius: "50px",
-                  margin: "0.5rem",
-                }}
-              ></Skeleton.Input>
-            </Col>
-            <Col>
-              <Skeleton.Input
-                style={{
-                  width: "70px",
-                  borderRadius: "50px",
-                  margin: "0.5rem",
-                }}
-              ></Skeleton.Input>
-            </Col>
 
-            <Col>
-              <Skeleton.Input
-                style={{ width: "70px", borderRadius: "50px", margin: "0.5rem" }}
-              ></Skeleton.Input>
-            </Col>
-            <Col>
-              <Skeleton.Input
-                style={{ width: "70px", borderRadius: "50px", margin: "0.5rem" }}
-              ></Skeleton.Input>
-            </Col>
-            <Col>
-              <Skeleton.Input
-                style={{ width: "70px", borderRadius: "50px", margin: "0.5rem" }}
-              ></Skeleton.Input>
-            </Col>
+{renderSkeleton}
           </Row>
         ) : error ? (
           <div>{error}</div>
@@ -135,16 +118,16 @@ export default function CarouselHeader() {
         className="carousel__header"
       >
         <Col>
-          <Image src={a2} width="200px" height="auto" alt="shoes_img" />
+          <Image src={a2} width="250px" height="auto" alt="shoes_img" />
         </Col>
         <Col>
-          <Image src={a4} width="200px" height="auto" alt="shoes_img" />
+          <Image src={a4} width="250px" height="auto" alt="shoes_img" />
         </Col>
         <Col>
-          <Image src={a3} width="200px" height="auto" alt="shoes_img" />
+          <Image src={a3} width="250px" height="auto" alt="shoes_img" />
         </Col>
         <Col>
-          <Image src={a3} width="200px" height="auto" alt="shoes_img" />
+          <Image src={a3} width="250px" height="auto" alt="shoes_img" />
         </Col>
       </Row>
       <Carousel

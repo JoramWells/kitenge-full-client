@@ -301,13 +301,13 @@ export default function ProductDetail(props) {
           <div>{error}</div>
         ) : (
           <Row
-            style={{ padding: "20px" }}
+            style={{ padding: "10px" }}
             justify="space-around"
             align="middle"
           >
             <Col xs={24} md={8}>
               <Image
-                src={product.image}
+                src={"/"+product.image}
                 alt="shoes again"
                 style={{ width: "300px", height: "auto" }}
               />
@@ -435,12 +435,12 @@ export default function ProductDetail(props) {
                           style={{ height: "350px", border: "0" }}
                           cover={
                             <LazyLoadImage
-                              src={item.image}
-                              alt="productimage"
-                              style={{
-                                width: "200px",
-                              }}
-                            />
+                            src={"/"+item.image}
+                            effect="blur"
+                            alt="productimage"
+                            style={{width:"auto", height:"auto", maxWidth: "15.8rem", maxHeight: "10.9rem", display:"flex", margin:"auto" }}
+                            // visibleByDefault={product.image}
+                          />
                           }
                         >
                           <Meta
