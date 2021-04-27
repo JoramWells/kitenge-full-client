@@ -1,7 +1,10 @@
-import { Col, Empty, Row,Form,Skeleton,Result } from "antd";
+import { CloseCircleOutlined, EllipsisOutlined } from "@ant-design/icons";
+import { Col, Empty, Row,Form,Skeleton,Result, Button, Rate, Card } from "antd";
 import React, { useEffect } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useDispatch, useSelector } from "react-redux";
 import { categoryProduct } from "../_actions/productActions";
+import {Link, useHistory} from 'react-router-dom'
 
 const posts = [1, 2, 3, 4, 5];
 
@@ -31,12 +34,15 @@ const renderSkeleton = posts.map((post) => {
 });
 
 export default function Product(props) {
+  const history = useHistory();
   const categoryDetail = useSelector((state) => state.categoryList);
   const { loadingCategory, products, errorCategory } = categoryDetail;
 
   const dispatch = useDispatch();
 
-  console.log(props.match.params.category);
+  const closeHandler = () => {
+    history.goBack();
+  };
   useEffect(() => {
     dispatch(categoryProduct(props.match.params.category));
     return () => {};
@@ -61,11 +67,78 @@ export default function Product(props) {
               </Col>
             </Row>
           ) : (
-            <div>
-              {products.map((item) => (
-                <h1>{item.product_name}</h1>
-              ))}
-            </div>
+            <>
+            <Row justify="end" style={{ width:"22rem", marginBottom:"1rem"}}>
+            <Col>
+            <CloseCircleOutlined
+              className="close"
+              style={{ fontSize: "1.5rem", marginBottom: "0.3rem", position:"fixed" }}
+              onClick={closeHandler}
+            />
+          </Col>
+            </Row>
+            <Row justify="space-around" align="middle" gutter={[0,16]} style={{backgroundColor:"whitesmoke"}}>
+                
+                {products.map((item) => (
+                  
+                  <Col key={item.id}>
+                  <Card
+                    style={{
+                      width: "17rem",
+                      height: "auto",
+                    }}
+                    cover={
+                      <LazyLoadImage
+                        src={item.image}
+                        effect="blur"
+                        alt="product-Image"
+                        style={{
+                          maxHeight: "16.86rem",
+                          maxWidth: "17rem",
+                          width: "17rem",
+                          height: "auto",
+                          display: "flex",
+                          margin: "auto",
+                        }}
+                      />
+                    }
+                  >
+                    <Link
+                      to={`/product-detail/${item.id}/?category=${item.category}`}
+                    >
+                    <h2 
+                      style={{color:"#0080ff"}}
+  
+                    >{item.product_name}</h2>
+  
+                    </Link>
+                    <Rate
+                      name="size-small"
+                      style={{ fontSize: "1rem", color: "#f9812a" }}
+                      defaultValue={item.ratings}
+                    />
+                    <br />
+                    <h3 style={{ color: "grey" }}>
+                      <b>ksh {item.price}</b>
+                    </h3>
+                    <Row justify="space-between" align="middle">
+                      <Col>
+                      <Button style={{borderRadius:"7px"}}>BUY</Button>
+  
+                      </Col>
+                      <Col>
+                        <EllipsisOutlined
+                          key="ellipsis"
+                          style={{ transform: "rotate(90deg)", fontSize:"1.5rem"}}
+                        />
+                      </Col>
+                    </Row>
+                  </Card>
+                </Col>
+                ))}
+              </Row>
+                
+            </>
           )}
         </div>
       )}
