@@ -10,6 +10,7 @@ import {
   message,
   Skeleton,
   Empty,
+  Result,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,7 +18,7 @@ import {
   listProducts,
   updateProduct,
 } from "../_actions/productActions";
-import { CaretRightOutlined, UploadOutlined } from "@ant-design/icons";
+import { CaretRightOutlined, ReloadOutlined, UploadOutlined } from "@ant-design/icons";
 
 export default function ManageProducts() {
   const ProductList = useSelector((state) => state.productList);
@@ -84,6 +85,9 @@ export default function ManageProducts() {
     setCategory(item.category);
     setDescription(item.description);
   };
+  const handleReload = () =>{
+    window.location.reload()
+  }
 
 
 
@@ -196,7 +200,7 @@ export default function ManageProducts() {
           size="large"
         >
           <img
-            src={image}
+            src={"/"+image}
             style={{ width: "70px", marginBottom: ".3rem" }}
             alt={name}
           />
@@ -444,14 +448,13 @@ export default function ManageProducts() {
           align="middle"
         >
           <Col>
-            <Empty
-            style={{marginBottom:"2rem"}}
-              image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-              imageStyle={{
-                height: 60,
-              }}
-              description={error}
-            ></Empty>
+          <Result
+          status="500"
+          subTitle={error}
+          extra={<Button icon={<ReloadOutlined/>} onClick={handleReload} >RETRY</Button>}
+
+          />
+
           </Col>
         </Row>
       ) : (
@@ -478,7 +481,7 @@ export default function ManageProducts() {
                     <td>{item.price}</td>
                     <td>
                       <img
-                        src={item.image}
+                        src={"/"+item.image}
                         style={{ width: "100px" }}
                         alt={item.product_name}
                       />

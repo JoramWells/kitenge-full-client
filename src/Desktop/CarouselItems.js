@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../_actions/productActions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Row, Col, Typography, Card, Skeleton, Form, Empty } from "antd";
+import { Row, Col, Typography, Card, Skeleton, Form, Result,Button } from "antd";
 import CarouselHeader from "../Generic/CarouselHeader";
 import RecentItemsBar from '../Generic/RecentItemsBar'
+import { RedoOutlined } from "@ant-design/icons";
 
 
 const { Text } = Typography;
@@ -61,6 +62,9 @@ export default function CarouselItems() {
   const dispatch = useDispatch();
   const ProductList = useSelector((state) => state.productList);
   const { posts, loading, error } = ProductList;
+  const reloadHandler = () =>{
+    window.location.reload()
+  }
 
   useEffect(() => {
     dispatch(listProducts());
@@ -75,13 +79,12 @@ export default function CarouselItems() {
           {renderSkeleton}
         </Row>
       ) : error ? (
-        <Empty
-          image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-          imageStyle={{
-            height: 60,
-          }}
-          description={error}
-        ></Empty>
+        <Result
+        status="500"
+        subTitle={error}
+        extra={<Button onClick={reloadHandler} icon={<RedoOutlined/>}>RETRY</Button>}
+        />
+
       ) : (
         <Carousel
           swipeable={true}
