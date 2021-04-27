@@ -70,7 +70,7 @@ export default function NavMobile(props) {
       >
         <div className="menu__logo" style={{ marginTop: "0.4rem" }}>
           <Link to="/" style={{ color: "#484848" }}>
-            <b>Kitenge</b>
+            <b>J&j</b>
           </Link>
         </div>
 
@@ -105,7 +105,7 @@ export default function NavMobile(props) {
         >
           <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
             <a href="/" style={{ color: "#484848" }}>
-              <b> Kitenge</b>
+              <b> J&j</b>
             </a>
           </div>
           <Menu
@@ -188,7 +188,7 @@ export default function NavMobile(props) {
           >
             <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
               <a href="/" style={{ color: "#484848" }}>
-                <b>Kitenge</b>
+                <b>J&j</b>
               </a>
             </div>
             <Menu

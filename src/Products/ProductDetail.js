@@ -23,6 +23,7 @@ import {
   Modal,
   Input,
   message,
+  Result,
 } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import Carousel from "react-multi-carousel";
@@ -32,6 +33,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 // import RecentItemsBar from "../RecentItemsBar";
 import { signin } from "../_actions/userActions";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
+import NumberFormat from "react-number-format";
 
 const { Meta } = Card;
 const Cookie = require("js-cookie");
@@ -56,6 +58,8 @@ const responsive = {
   },
 };
 
+
+
 const { Title, Text } = Typography;
 
 export default function ProductDetail(props) {
@@ -72,6 +76,31 @@ export default function ProductDetail(props) {
   const search = props.location.search;
   const params = new URLSearchParams(search);
   const category = params.getAll("category");
+
+  const renderSkeleton = [...Array(4).keys()].map((i) => {
+    return (
+      <Col key={i}>
+        <Form layout="vertical">
+          <Form.Item>
+            <Skeleton.Input style={{ width: "16rem", height: "150px" }} /> <br />
+          </Form.Item>
+  
+          <Form.Item>
+            <Skeleton.Input
+              style={{ width: "150px", height: "1rem" }}
+              active={true}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Skeleton.Input
+              style={{ width: "200px", height: "1rem" }}
+              active={true}
+            />
+          </Form.Item>
+        </Form>
+      </Col>
+    );
+  });
 
 
 
@@ -283,13 +312,13 @@ export default function ProductDetail(props) {
             <Col>
               <Form>
                 <Form.Item>
-                  <Skeleton.Input style={{ width: "400px" }} />
-                </Form.Item>
-                <Form.Item>
                   <Skeleton.Input style={{ width: "200px" }} />
                 </Form.Item>
                 <Form.Item>
-                  <Skeleton.Input style={{ width: "350px" }} />
+                  <Skeleton.Input style={{ width: "150px" }} />
+                </Form.Item>
+                <Form.Item>
+                  <Skeleton.Input style={{ width: "250px" }} />
                 </Form.Item>
               </Form>
             </Col>
@@ -298,7 +327,11 @@ export default function ProductDetail(props) {
             </Col>
           </Row>
         ) : error ? (
-          <div>{error}</div>
+          
+          <Result
+          status="500"
+          subTitle={error}
+          />
         ) : (
           <Row
             style={{ padding: "10px" }}
@@ -314,19 +347,22 @@ export default function ProductDetail(props) {
             </Col>
 
             <Col xs={24} md={8} style={{ padding: "20px" }}>
-              <Title level={3}>{product.product_name}</Title>
-              <Rate disabled allowHalf defaultValue={product.ratings} />
+              <h2 level={3}>{product.product_name}</h2>
+              <h3>Reviews: </h3> <Rate de disabled allowHalf defaultValue={product.ratings} />
 
-              <Title level={5}>
                 <Divider plain></Divider>
-                Price: ksh{" "}
-                <span style={{ color: "#CD5C5C" }}>{product.price}</span>
-              </Title>
-              <Title level={5}>
-                Sold By:
-                <span style={{ color: "#588BAE" }}> {product.shop}</span>
-              </Title>
-              <Title level={5}>Categorys': {product.category}</Title>
+                <b style={{  color: "#CD5C5C"  }}>
+                    <NumberFormat
+                      value={product.price}
+                      thousandSeparator={true}
+                      displayType={"text"}
+                      prefix="Kshs: "
+                      suffix=" /="
+                    />
+                  </b>
+
+
+              <h3 level={5}>Categorys': {product.category}</h3>
               <Title level={5}>Shipping': {product.category}</Title>
 
               <Title level={5}>Qty: </Title>
@@ -359,7 +395,7 @@ export default function ProductDetail(props) {
                     className="cart"
                     onClick={handleAddToCart}
                   >
-                    ADD PRODUCT
+                   <b style={{color:"white"}}>Add cart</b>
                   </Button>
                 </Row>
               ) : (
@@ -405,9 +441,12 @@ export default function ProductDetail(props) {
         )}
         {/* <RecentItemsBar title="Related Items" /> */}
         {loadingCategory ? (
-          <div>Loading..</div>
+          
+          <Row justify="space-around" align="middle">
+          {renderSkeleton}
+        </Row>
         ) : errorCategory ? (
-          <div>{errorCategory}</div>
+          <div></div>
         ) : (
           <div>
             <Carousel

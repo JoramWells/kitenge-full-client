@@ -48,7 +48,7 @@ export default function Product(props) {
     return () => {};
   }, []);
   return (
-    <div style={{ marginTop: "5rem" }}>
+    <main style={{ marginTop: "5rem" }}>
       {loadingCategory ? (
         <Row justify="space-around" align="middle">
             {renderSkeleton}
@@ -68,7 +68,7 @@ export default function Product(props) {
             </Row>
           ) : (
             <>
-            <Row justify="end" style={{ width:"22rem", marginBottom:"1rem"}}>
+            {/* <Row justify="end" style={{ width:"22rem", marginBottom:"1rem"}}>
             <Col>
             <CloseCircleOutlined
               className="close"
@@ -76,7 +76,7 @@ export default function Product(props) {
               onClick={closeHandler}
             />
           </Col>
-            </Row>
+            </Row> */}
             <Row justify="space-around" align="middle" gutter={[0,16]} style={{backgroundColor:"whitesmoke"}}>
                 
                 {products.map((item) => (
@@ -89,7 +89,7 @@ export default function Product(props) {
                     }}
                     cover={
                       <LazyLoadImage
-                        src={item.image}
+                        src={"/"+item.image}
                         effect="blur"
                         alt="product-Image"
                         style={{
@@ -142,6 +142,6 @@ export default function Product(props) {
           )}
         </div>
       )}
-    </div>
+    </main>
   );
 }
