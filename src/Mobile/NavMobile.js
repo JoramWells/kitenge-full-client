@@ -7,7 +7,7 @@ import {
   QuestionCircleOutlined,
   SettingOutlined,
   ShoppingCartOutlined,
-  UserAddOutlined,
+  UserAddOutlined
 } from "@ant-design/icons";
 import { Menu, Badge, Col, Image, Row, Modal, Table, Button } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
@@ -70,7 +70,10 @@ export default function NavMobile(props) {
       >
         <div className="menu__logo" style={{ marginTop: "0.4rem" }}>
           <Link to="/" style={{ color: "#484848" }}>
-            <b>J&j</b>
+            <div style={{backgroundColor:"grey", color:"white", padding:".1rem", borderRadius:"10px"}}>
+              <b>J&j</b>
+            </div>
+            
           </Link>
         </div>
 
@@ -105,7 +108,10 @@ export default function NavMobile(props) {
         >
           <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
             <a href="/" style={{ color: "#484848" }}>
-              <b> J&j</b>
+              <div style={{backgroundColor:"grey", color:"white", padding:".1rem", borderRadius:"10px"}}>
+                <b> J&j</b>
+              </div>
+              
             </a>
           </div>
           <Menu
@@ -115,13 +121,8 @@ export default function NavMobile(props) {
               border: "0",
             }}
           >
-            <Menu.Item>
-              <Badge dot count={0}>
-                <ShoppingCartOutlined style={{ fontSize: "1.5rem" }} />
-              </Badge>
-            </Menu.Item>
             <SubMenu
-              title={<QuestionCircleOutlined style={{ fontSize: "1.3rem" }} />}
+              title={<QuestionCircleOutlined style={{ fontSize: "1.3rem", color:"grey" }} />}
             >
               <Menu.Item style={{ margin: "0px" }}>Contact supplier</Menu.Item>
               <Menu.Item style={{ margin: "0px" }}>
@@ -130,7 +131,7 @@ export default function NavMobile(props) {
               <Menu.Item>Creating account</Menu.Item>
               <Menu.Item>Tracking your order</Menu.Item>
             </SubMenu>
-            <SubMenu title={<SettingOutlined style={{ fontSize: "1.3rem" }} />}>
+            <SubMenu title={<SettingOutlined style={{ fontSize: "1.3rem", color:"grey" }} />}>
               <Menu.Item icon={<PlusOutlined />}>
                 <Link to="/products/add">Add Product</Link>
               </Menu.Item>
@@ -188,7 +189,10 @@ export default function NavMobile(props) {
           >
             <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
               <a href="/" style={{ color: "#484848" }}>
-                <b>J&j</b>
+                <div style={{backgroundColor:"grey", color:"white", padding:".1rem", borderRadius:"10px"}}>
+                  <b>J&j</b>
+                </div>
+                
               </a>
             </div>
             <Menu
@@ -221,7 +225,7 @@ export default function NavMobile(props) {
                   borderRadius: "10px",
                   marginLeft: "0",
                 }}
-                title={<SettingOutlined style={{ fontSize: "1.3rem" }} />}
+                title={<SettingOutlined style={{ fontSize: "1.3rem", color:"grey" }} />}
               >
                 <Menu.Item icon={<PlusOutlined />}>
                   <Link to="/products/add">Add Product</Link>

@@ -6,32 +6,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { categoryProduct } from "../_actions/productActions";
 import {Link, useHistory} from 'react-router-dom'
 
-const posts = [1, 2, 3, 4, 5];
 
-const renderSkeleton = posts.map((post) => {
-  return (
-    <Col key={post}>
-      <Form layout="vertical">
-        <Form.Item>
-          <Skeleton.Input style={{ width: "18rem", height: "150px" }} /> <br />
-        </Form.Item>
+const renderSkeleton = [...Array(5).keys()].map(i=>{
+  return(
+    <Col key={i}>
+    <Form layout="vertical">
+      <Form.Item>
+        <Skeleton.Input style={{ width: "18rem", height: "150px" }} /> <br />
+      </Form.Item>
 
-        <Form.Item>
-          <Skeleton.Input
-            style={{ width: "200px", height: "1rem" }}
-            active={true}
-          />
-        </Form.Item>
-        <Form.Item>
-          <Skeleton.Input
-            style={{ width: "250px", height: "1rem" }}
-            active={true}
-          />
-        </Form.Item>
-      </Form>
-    </Col>
-  );
-});
+      <Form.Item>
+        <Skeleton.Input
+          style={{ width: "200px", height: "1rem" }}
+          active={true}
+        />
+      </Form.Item>
+      <Form.Item>
+        <Skeleton.Input
+          style={{ width: "250px", height: "1rem" }}
+          active={true}
+        />
+      </Form.Item>
+    </Form>
+  </Col>
+
+  )
+})
+
+
 
 export default function Product(props) {
   const history = useHistory();

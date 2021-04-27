@@ -117,8 +117,7 @@ function CarouselItem(props) {
           content: {
             marginTop: "3rem",
             height: "450px",
-            // boxShadow: "2px 2px 10px 2px #D3D3D3",
-            // width:"20rem",
+
             margin: "auto",
             transition: "2s",
             transitionTimingFunction: "ease-in",
