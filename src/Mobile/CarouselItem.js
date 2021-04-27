@@ -73,8 +73,6 @@ function CarouselItem(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const [visible, setVisible] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState("Content of the modal");
 
   const showModal = (item) => {
     setVisible(true);
@@ -86,16 +84,7 @@ function CarouselItem(props) {
     setPrice(item.price);
     setCategory(item.category);
     setDescription(item.description);
-    setRate(item.rate)
-  };
-
-  const handleOk = () => {
-    setModalText("The modal will be closed after two seconds");
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setVisible(false);
-      setConfirmLoading(false);
-    }, 2000);
+    setRate(item.rate);
   };
 
   const handleCancel = () => {
@@ -124,6 +113,7 @@ function CarouselItem(props) {
         style={{
           overlay: {
             background: "rgba(0, 0, 0, 0.5)",
+            transitionDuration: "3s",
           },
           content: {
             marginTop: "3rem",
@@ -131,6 +121,8 @@ function CarouselItem(props) {
             // boxShadow: "2px 2px 10px 2px #D3D3D3",
             // width:"20rem",
             margin: "auto",
+            transition: "2s",
+            transitionTimingFunction: "ease-in",
           },
         }}
       >
@@ -152,12 +144,9 @@ function CarouselItem(props) {
           </Col>
         </Row>
         <div>
-          <Link
-                        
-                        to={`/product-detail/${id}/?category=${category}`}
-                      >
-                        <h3 style={{ color: "rgba(89, 171, 227, 1)" }}> {name}</h3>
-                      </Link>
+          <Link to={`/product-detail/${id}/?category=${category}`}>
+            <h3 style={{ color: "rgba(89, 171, 227, 1)" }}> {name}</h3>
+          </Link>
           <NumberFormat
             value={price}
             thousandSeparator={true}
@@ -166,15 +155,18 @@ function CarouselItem(props) {
             suffix=" /="
           />
 
-          <Rate
-                        name="size-small"
-                        allowHalf={true}
-                        style={{
-                          fontSize: "1rem",
-                          color: "#f9812a",
-                        }}
-                        defaultValue={rate}
-                      />
+          <Row>
+            <Rate
+              name="size-small"
+              allowHalf={true}
+              style={{
+                fontSize: "1rem",
+                color: "rgba(249, 180, 45,1)",
+              }}
+              defaultValue={rate}
+            />
+          </Row>
+
           <Divider />
 
           <address style={{ color: "grey", textAlign: "center" }}>
@@ -188,7 +180,7 @@ function CarouselItem(props) {
               icon={<ShoppingOutlined style={{ fontSize: "1rem" }} />}
               style={{
                 border: "0",
-                backgroundColor: "rgba(249, 180, 45,1",
+                backgroundColor: "rgba(252, 214, 112, 1)",
                 color: "white",
               }}
             >
@@ -201,7 +193,7 @@ function CarouselItem(props) {
       <CarouselHeader />
 
       {loading ? (
-        <Row justify="space-around" align="middle">
+        <Row justify="space-around" align="middle" gutter={[0,16]}>
           {renderSkeleton}
         </Row>
       ) : error ? (
@@ -263,38 +255,22 @@ function CarouselItem(props) {
                       />
                     }
                   />
-                            <Row>
-            <Col style={{ color: "rgba(129, 207, 224, 1)" }}>
-              <span style={{ color: "grey" }}> Updated :</span>{" "}
-              {moment(item.updatedAt, "hh").fromNow()}
-            </Col>
-          </Row>
-                      <b style={{color:"grey"}}>
-                                          <NumberFormat
-                    value={item.price}
-                    thousandSeparator={true}
-                    displayType={"text"}
-                    prefix="Kshs: "
-                    suffix=" /="
-                  />
-                      </b>
-
+                  <Row>
+                    <Col style={{ color: "rgba(129, 207, 224, 1)" }}>
+                      <span style={{ color: "grey" }}> Updated :</span>{" "}
+                      {moment(item.updatedAt, "hh").fromNow()}
+                    </Col>
+                  </Row>
+                  <b style={{ color: "grey" }}>
+                    <NumberFormat
+                      value={item.price}
+                      thousandSeparator={true}
+                      displayType={"text"}
+                      prefix="Kshs: "
+                      suffix=" /="
+                    />
+                  </b>
                 </Card>
-                {/* <Modal
-                                title="Product details"
-                                visible={visible}
-                                onOk={handleOk}
-                                confirmLoading={confirmLoading}
-                                onCancel={handleCancel}
-                              >
-                                <Row justify="space-around" align="middle">
-                                </Row>
-                                <Row justify="space-around" align="middle">
-                                <Button icon={<ShoppingCartOutlined />}  style={{marginTop:"0.5rem"}}>Add to cart</Button>
-              
-                                </Row>
-                                
-                              </Modal> */}
               </Col>
             ))}
           </Row>
