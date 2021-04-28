@@ -11,16 +11,18 @@ import {
   Button,
   Image,
   Divider,
+  Result,
 } from "antd";
-import moment from "moment";
 import NumberFormat from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
+import Ripples,{createRipples} from 'react-ripples'
 // import { listProducts } from "../../_actions/productActions";
 import {
   CloseCircleOutlined,
   EllipsisOutlined,
+  ReloadOutlined,
   ShoppingOutlined,
 } from "@ant-design/icons";
 import { addToCart } from "../_actions/cartActions";
@@ -33,24 +35,11 @@ const { Meta } = Card;
 const renderSkeleton = [...Array(5).keys()].map((i) => {
   return (
     <Col key={i}>
-      <Form layout="vertical">
-        <Form.Item>
-          <Skeleton.Input style={{ width: "18rem", height: "150px" }} /> <br />
-        </Form.Item>
+      <Card loading style={{width:"18rem", height:"17rem"}}>
 
-        <Form.Item>
-          <Skeleton.Input
-            style={{ width: "200px", height: "1rem" }}
-            active={true}
-          />
-        </Form.Item>
-        <Form.Item>
-          <Skeleton.Input
-            style={{ width: "250px", height: "1rem" }}
-            active={true}
-          />
-        </Form.Item>
-      </Form>
+
+      </Card>
+
     </Col>
   );
 });
@@ -72,9 +61,16 @@ function CarouselItem(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const [visible, setVisible] = useState(false);
+  const myRipples = createRipples({
+    color:"rgba(255, 203, 5, 1)",
+    during:"500"
+  })
 
   const showModal = (item) => {
+    setTimeout(()=>{
     setVisible(true);
+    },500)
+    
     setId(item.id);
     setImage(item.image);
     setDate(item.updatedAt);
@@ -87,8 +83,14 @@ function CarouselItem(props) {
   };
 
   const handleCancel = () => {
-    setVisible(false);
+    setTimeout(()=>{
+setVisible(false);
+    },1000)
+    
   };
+  const handleReload = () =>{
+    window.location.reload()
+  }
 
   const productAddToCart = (productId, product_name) => {
     if (!userInfo) {
@@ -126,11 +128,14 @@ function CarouselItem(props) {
       >
         <Row justify="end">
           <Col>
-            <CloseCircleOutlined
+          <Ripples>
+          <CloseCircleOutlined
               className="close"
               style={{ fontSize: "1.5rem", marginBottom: "0.3rem" }}
               onClick={handleCancel}
             />
+          </Ripples>
+
           </Col>
         </Row>
         <Row justify="space-around" align="middle">
@@ -195,7 +200,11 @@ function CarouselItem(props) {
           {renderSkeleton}
         </Row>
       ) : error ? (
-        <div>{error}</div>
+        <Result
+        status="500"
+        subTitle={error}
+        extra={<Button onClick={handleReload} icon={<ReloadOutlined/>}>RETRY</Button>}
+        />
       ) : (
         <>
           <Row justify="space-around" align="middle" gutter={[0, 16]}>
@@ -207,13 +216,16 @@ function CarouselItem(props) {
                     height: "auto",
                   }}
                   extra={
-                    <EllipsisOutlined
+                    <Ripples>
+                      <EllipsisOutlined
                       onClick={() => showModal(item)}
                       key="ellipsis"
                       style={{
                         fontSize: "1.3rem",
                       }}
                     />
+                    </Ripples>
+
                   }
                   cover={
                     <LazyLoadImage

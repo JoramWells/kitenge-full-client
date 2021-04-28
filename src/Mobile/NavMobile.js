@@ -14,6 +14,7 @@ import Avatar from "antd/lib/avatar/avatar";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import Cookie from "js-cookie";
+import Ripples from 'react-ripples'
 
 const columns = [
   {
@@ -108,9 +109,12 @@ export default function NavMobile(props) {
         >
           <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
             <a href="/" style={{ color: "#484848" }}>
+              <Ripples>
               <div style={{backgroundColor:"grey", color:"white", padding:".1rem", borderRadius:"10px"}}>
                 <b> J&j</b>
               </div>
+              </Ripples>
+
               
             </a>
           </div>
@@ -122,7 +126,9 @@ export default function NavMobile(props) {
             }}
           >
             <SubMenu
-              title={<QuestionCircleOutlined style={{ fontSize: "1.3rem", color:"grey" }} />}
+              title={
+                <QuestionCircleOutlined style={{ fontSize: "1.3rem", color:"grey" }} />
+              }
             >
               <Menu.Item style={{ margin: "0px" }}>Contact supplier</Menu.Item>
               <Menu.Item style={{ margin: "0px" }}>
