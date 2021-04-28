@@ -17,22 +17,30 @@ import {
   listProducts,
   updateProduct,
 } from "../_actions/productActions";
-import { CaretRightOutlined, ReloadOutlined, UploadOutlined } from "@ant-design/icons";
+import {
+  CaretRightOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  ReloadOutlined,
+  UploadOutlined,
+} from "@ant-design/icons";
 
-const renderTable = [...Array(3).keys()].map(i=>{
-  return(
-<>
-<td key={i}>
-    <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-  </td>
-</>
-  )
-})
+const renderTH = [...Array(4).keys()].map((i) => {
+  return (
+    <Fragment key={i}>
+          <th >
+      <Skeleton.Input style={{ width: "3.5rem", height: "1.5rem" }} />
+    </th>
+    </Fragment>
+
+  );
+});
+
 
 export default function ManageProducts() {
   const ProductList = useSelector((state) => state.productList);
-  const ProductUpdate = useSelector((state)=>state.productUpdate)
-  const { product, loadingUpdate, errorUpdate } = ProductUpdate
+  const ProductUpdate = useSelector((state) => state.productUpdate);
+  const { product, loadingUpdate, errorUpdate } = ProductUpdate;
   const { posts, loading, error } = ProductList;
 
   const ProductDelete = useSelector((state) => state.productDelete);
@@ -41,6 +49,16 @@ export default function ManageProducts() {
     success: successSave,
     error: errorSave,
   } = ProductList;
+  const renderTB = [...Array(product.length).keys()].map((i) => {
+    return (
+      <Fragment key={i}>
+              <td>
+        <Skeleton.Input style={{ width: "3.5rem", height: "1.5rem" }} />
+      </td>
+      </Fragment>
+
+    );
+  });
 
   const dispatch = useDispatch();
   const [category, setCategory] = useState("");
@@ -54,21 +72,19 @@ export default function ManageProducts() {
   const [showButton, setShowButton] = useState(true);
   const [showLoading, setShowLoading] = useState(false);
 
-
   useEffect(() => {
     dispatch(listProducts());
   }, []);
 
-  const productEdit = async() => {
+  const productEdit = async () => {
     dispatch(
       await updateProduct(id, name, shop, price, image, category, description)
     );
-    setTimeout(()=>{
-      dispatch(listProducts())
-      setIsModalVisible(false)
-      if(product)message.success('Product update successfully')
-
-    },1000)
+    setTimeout(() => {
+      dispatch(listProducts());
+      setIsModalVisible(false);
+      if (product) message.success("Product update successfully");
+    }, 1000);
   };
   const deleteHandler = () => {
     dispatch(deleteProduct(id));
@@ -94,11 +110,9 @@ export default function ManageProducts() {
     setCategory(item.category);
     setDescription(item.description);
   };
-  const handleReload = () =>{
-    window.location.reload()
-  }
-
-
+  const handleReload = () => {
+    window.location.reload();
+  };
 
   const handleOk = () => {
     setIsModalVisible(false);
@@ -107,51 +121,6 @@ export default function ManageProducts() {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
-  // const columns = [
-  //   {
-  //     title: "id ",
-  //     dataIndex: "id",
-  //     key: "id",
-  //   },
-  //   {
-  //     title: "product_name",
-  //     dataIndex: "product_name",
-  //     key: "product_name",
-  //   },
-  //   {
-  //     title: "price",
-  //     dataIndex: "price",
-  //     key: "price",
-  //   },
-  //   {
-  //     title: "category",
-  //     dataIndex: "category",
-  //     key: "category",
-  //   },
-  //   {
-  //     title: "image",
-  //     dataIndex: "image",
-  //     key: "image",
-  //     render: (img) => (
-  //       <Image src={img} alt="image file" style={{ width: "50px" }} />
-  //     ),
-  //   },
-  //   {
-  //     title: 'Action',
-  //     dataIndex: 'operation',
-  //     key: 'operation',
-  //     render: () => (
-  //       <Space size="middle">
-
-  //             <Button onClick={() => showModal(...posts)}>Edit</Button>
-
-  //         <Button>Delete</Button>
-
-  //       </Space>
-  //     ),
-  //   },
-  // ];
 
   const prop = {
     name: "file",
@@ -179,19 +148,17 @@ export default function ManageProducts() {
       if (info.file.status !== "uploading") {
         console.log(info.file, info.fileList);
         // dispatch(saveProduct(name, shop, price, image, description));
-        setShowLoading(false)
-
-
+        setShowLoading(false);
       }
       if (info.file.status === "done") {
-        setShowButton(false)
+        setShowButton(false);
         // const regex = /.jpeg/;
         // var mapObjs = {
         //   svg
         // }
         // const filename = info.file.name.replace(regex, ".webp");
         // setImage('/'+filename);
-        setImage(info.file.name)
+        setImage(info.file.name);
         message.success(`${info.file.name}`);
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed`);
@@ -209,7 +176,7 @@ export default function ManageProducts() {
           size="large"
         >
           <img
-            src={"/"+image}
+            src={"/" + image}
             style={{ width: "70px", marginBottom: ".3rem" }}
             alt={name}
           />
@@ -226,7 +193,6 @@ export default function ManageProducts() {
             <input hidden type="text" />
           </Form.Item>
           <Form.Item
-            name="price"
             name="price"
             onChange={(e) => setPrice(e.target.value)}
           >
@@ -315,11 +281,11 @@ export default function ManageProducts() {
             <Col>
               <Form.Item>
                 <Button
-                loading={showLoading}
+                  loading={showLoading}
                   disabled={showButton}
                   htmlType="submit"
                   type="primary"
-                  onClick={()=>productEdit()}
+                  onClick={() => productEdit()}
                   style={{ backgroundColor: "#fdba45", border: "0" }}
                 >
                   COMPLETE
@@ -329,185 +295,96 @@ export default function ManageProducts() {
           </Row>
         </Form>
       </Modal>
-      {loading ? (
-        <Row justify="space-around" align="middle">
-          <Col>
-          <table style={{ marginTop: "5rem" }}>
-          <thead>
-            <th>
+      <main>
+        {loading ? (
+          <Row justify="space-around" align="middle">
+            <Col>
+              <table style={{ marginTop: "5rem" }}>
+                <thead>
+                  <tr>{renderTH}</tr>
+                </thead>
+                <tbody>
+                  <tr>{renderTB}</tr>
+                  <tr>{renderTB}</tr>
+                  <tr>{renderTB}</tr>
+                </tbody>
+              </table>
+            </Col>
+          </Row>
+        ) : error ? (
+          <Row
+            style={{ marginTop: "5rem" }}
+            justify="space-around"
+            align="middle"
+          >
+            <Col>
+              <Result
+                status="500"
+                subTitle={error}
+                extra={
+                  <Button icon={<ReloadOutlined />} onClick={handleReload}>
+                    RETRY
+                  </Button>
+                }
+              />
+            </Col>
+          </Row>
+        ) : (
+          // <Table dataSource={posts} columns={columns}/>
+          <Row
+            style={{ marginTop: "3rem", marginBottom: "3rem" }}
+            justify="space-around"
+            align="middle"
+          >
+            <Col>
+              <table className="tableClass" style={{ width: "100%" }}>
+                <thead>
+                  <th>name</th>
+                  <th>price</th>
+                  <th>image</th>
+                  <th>action</th>
+                </thead>
+                <tbody>
+                  {posts.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.product_name}</td>
+                      <td>{item.price}</td>
+                      <td>
+                        <img
+                          src={"/" + item.image}
+                          style={{ width: "50px", height: "auto" }}
+                          alt={item.product_name}
+                        />
+                      </td>
+                      <td>
+                        <Row justify="space-around">
+                          <Col>
+                            <Button
+                              onClick={() => showModal(item)}
+                              icon={<EditOutlined style={{color:"green"}}/>}
+                              style={{margin:".2rem", borderRadius:"5px"}}
+                            ></Button>
+                          </Col>
+                          <Col>
+                            <Button
+                              icon={<DeleteOutlined style={{color:"rgba(207, 0, 15, 0.6)"}} />}
+                              onClick={() => deleteHandler(item.id)}
+                              style={{margin:".2rem", backgroundColor:"rgba(0, 0, 0,0.6)", borderRadius:"5px"}}
 
-{renderTable}
+                              
 
-            </th>
-
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-              <td>
-                <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-          </Col>
-        </Row>
-      ) : error ? (
-        <Row
-          style={{ marginTop: "5rem" }}
-          justify="space-around"
-          align="middle"
-        >
-          <Col>
-          <Result
-          status="500"
-          subTitle={error}
-          extra={<Button icon={<ReloadOutlined/>} onClick={handleReload} >RETRY</Button>}
-
-          />
-
-          </Col>
-        </Row>
-      ) : (
-        // <Table dataSource={posts} columns={columns}/>
-        <Row
-          style={{ marginTop: "3rem", marginBottom: "3rem" }}
-          justify="space-around"
-          align="middle"
-        >
-          <Col>
-            <table className="tableClass">
-              <thead>
-                <th>id</th>
-                <th>name</th>
-                <th>price</th>
-                <th>image</th>
-                <th>action</th>
-              </thead>
-              <tbody>
-                {posts.map((item) => (
-                  <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{item.product_name}</td>
-                    <td>{item.price}</td>
-                    <td>
-                      <img
-                        src={"/"+item.image}
-                        style={{ width: "100px" }}
-                        alt={item.product_name}
-                      />
-                    </td>
-                    <td>
-                      <Row justify="space-around">
-                        <Col>
-                          <Button onClick={() => showModal(item)}>Edit</Button>
-                        </Col>
-                        <Col>
-                          <Button onClick={() => deleteHandler(item.id)}>
-                            Delete
-                          </Button>
-                        </Col>
-                      </Row>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </Col>
-        </Row>
-      )}
+                            ></Button>
+                          </Col>
+                        </Row>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Col>
+          </Row>
+        )}
+      </main>
     </Fragment>
   );
 }

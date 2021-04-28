@@ -26,19 +26,13 @@ const columns = [
     dataIndex: "image",
     key: "image",
     render: (img) => (
-      <Image src={img} alt="image file" style={{ width: "50px" }} />
+      <Image src={"/"+img} alt="image file" style={{ width: "50px" }} />
     ),
   },
   {
     title: "qty",
     dataIndex: "qty",
     key: "qty",
-  },
-
-  {
-    title: "Address",
-    dataIndex: "phone",
-    key: "phone",
   },
   {
     title: "price",
@@ -80,7 +74,7 @@ export default function CartScreen(props) {
     return () => {};
   }, []);
   return (
-    <div style={{ padding: "1rem" }}>
+    <main style={{ padding: "1rem" }}>
 
       {cartItems.length === 0 ? (
         <Row justify="space-around" align="middle" style={{ padding: "2rem" }}>
@@ -89,50 +83,55 @@ export default function CartScreen(props) {
           </Col>
         </Row>
       ) : (
-        <Table dataSource={cartItems} columns={columns}></Table>
-      )}
-      <div>
         <Row justify="space-around" align="middle">
           <Col>
-            <Title level={5}>
-              {" "}
+        <Table dataSource={cartItems} columns={columns}/>
+
+          </Col>
+        </Row>
+      )}
+        <Row justify="space-around" align="middle">
+          <Col>
+            <h3>
               Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items): ksh{" "}
               <NumberFormat
                 value={cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
                 thousandSeparator={true}
                 displayType={"text"}
               />
-            </Title>
+            </h3>
           </Col>
         </Row>
-        <Row justify="space-around" align="middle">
+        <Row justify="space-around" align="middle" style={{marginBottom:".5rem"}}>
           <Col>
             <Button
               block
               type="primary"
-              size="large"
-              style={{ borderRadius: "50px" }}
+              style={{ borderRadius: "5px" }}
+              
             >
-              CONTINUE SHOPPING
+              Continue
             </Button>
           </Col>
-          <Col>
+
+        </Row>
+        <Row justify="space-around" align="middle">
+        <Col>
             <Button
               className="cart"
-              size="large"
               type="primary"
               block
-              style={{ border: "0", borderRadius: "50px" }}
+              style={{ border: "0", borderRadius: "5px" }}
             >
               <Text disabled={cartItems.length === 0}>
                 <Link to="/shipping" style={{ color: "black" }}>
-                  PROCEED TO CHECKOUT
+                  Checkout
                 </Link>
               </Text>
             </Button>
           </Col>
+
         </Row>
-      </div>
-    </div>
+    </main>
   );
 }

@@ -71,9 +71,7 @@ export default function NavMobile(props) {
       >
         <div className="menu__logo" style={{ marginTop: "0.4rem" }}>
           <Link to="/" style={{ color: "#484848" }}>
-            <div style={{backgroundColor:"grey", color:"white", padding:".1rem", borderRadius:"10px"}}>
-              <b>J&j</b>
-            </div>
+              <b>JandJ</b>
             
           </Link>
         </div>
@@ -110,9 +108,7 @@ export default function NavMobile(props) {
           <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
             <a href="/" style={{ color: "#484848" }}>
               <Ripples>
-              <div style={{backgroundColor:"grey", color:"white", padding:".1rem", borderRadius:"10px"}}>
-                <b> J&j</b>
-              </div>
+                <b> JandJ</b>
               </Ripples>
 
               
@@ -195,9 +191,7 @@ export default function NavMobile(props) {
           >
             <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
               <a href="/" style={{ color: "#484848" }}>
-                <div style={{backgroundColor:"grey", color:"white", padding:".1rem", borderRadius:"10px"}}>
-                  <b>J&j</b>
-                </div>
+                  <b>JandJ</b>
                 
               </a>
             </div>
