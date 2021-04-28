@@ -148,7 +148,7 @@ setVisible(false);
         </Row>
         <div>
           <Link to={`/product-detail/${id}/?category=${category}`}>
-            <h3 style={{ color: "rgba(232, 126, 4, 1)" }}> {name}</h3>
+            <h3 style={{ color: "rgba(211, 84, 0, 1)" }}> {name}</h3>
           </Link>
           <NumberFormat
             value={price}
@@ -164,7 +164,7 @@ setVisible(false);
               allowHalf={true}
               style={{
                 fontSize: "1rem",
-                color: "rgba(249, 180, 45,1)",
+                color: "rgba(248, 148, 6, 1)",
               }}
               defaultValue={rate}
             />

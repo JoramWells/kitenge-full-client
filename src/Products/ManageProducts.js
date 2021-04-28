@@ -19,7 +19,7 @@ import {
 } from "../_actions/productActions";
 import { CaretRightOutlined, ReloadOutlined, UploadOutlined } from "@ant-design/icons";
 
-const renderTable = [...Array(2).keys()].map(i=>{
+const renderTable = [...Array(3).keys()].map(i=>{
   return(
 <>
 <td key={i}>
