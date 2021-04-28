@@ -325,6 +325,7 @@ export default function ManageProducts() {
           <Col>
           <table style={{ marginTop: "5rem" }}>
           <thead>
+            <tr>
             <th>
               <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
             </th>
@@ -337,6 +338,8 @@ export default function ManageProducts() {
             <th>
               <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
             </th>
+            </tr>
+
           </thead>
           <tbody>
             <tr>
