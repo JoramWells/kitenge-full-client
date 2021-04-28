@@ -9,7 +9,6 @@ import {
   Col,
   message,
   Skeleton,
-  Empty,
   Result,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +18,16 @@ import {
   updateProduct,
 } from "../_actions/productActions";
 import { CaretRightOutlined, ReloadOutlined, UploadOutlined } from "@ant-design/icons";
+
+const renderTable = [...Array(2).keys()].map(i=>{
+  return(
+<>
+<td key={i}>
+    <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+  </td>
+</>
+  )
+})
 
 export default function ManageProducts() {
   const ProductList = useSelector((state) => state.productList);
@@ -325,20 +334,11 @@ export default function ManageProducts() {
           <Col>
           <table style={{ marginTop: "5rem" }}>
           <thead>
-            <tr>
             <th>
-              <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
+
+{renderTable}
+
             </th>
-            <th>
-              <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-            </th>
-            <th>
-              <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-            </th>
-            <th>
-              <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-            </th>
-            </tr>
 
           </thead>
           <tbody>
@@ -348,10 +348,10 @@ export default function ManageProducts() {
               </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>{" "}
+              </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>{" "}
+              </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
               </td>
@@ -362,10 +362,10 @@ export default function ManageProducts() {
               </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>{" "}
+              </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>{" "}
+              </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
               </td>
@@ -376,10 +376,10 @@ export default function ManageProducts() {
               </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>{" "}
+              </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>{" "}
+              </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
               </td>
@@ -390,10 +390,10 @@ export default function ManageProducts() {
               </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>{" "}
+              </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>{" "}
+              </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
               </td>
@@ -404,10 +404,10 @@ export default function ManageProducts() {
               </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>{" "}
+              </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>{" "}
+              </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
               </td>
@@ -418,10 +418,10 @@ export default function ManageProducts() {
               </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>{" "}
+              </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>{" "}
+              </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
               </td>
@@ -432,10 +432,10 @@ export default function ManageProducts() {
               </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>{" "}
+              </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
-              </td>{" "}
+              </td>
               <td>
                 <Skeleton.Input style={{ width: "4.5rem", height: "1.5rem" }} />
               </td>

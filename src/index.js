@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store'
 import {Provider } from 'react-redux'
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import "./NavBar.css";
 import "react-multi-carousel/lib/styles.css";
 import "react-phone-input-2/lib/style.css";
@@ -20,6 +21,7 @@ renderMethod(
   </React.StrictMode>,
   document.getElementById('root')
 );
+serviceWorkerRegistration.register();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
