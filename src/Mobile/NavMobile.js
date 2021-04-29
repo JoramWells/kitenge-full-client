@@ -15,7 +15,7 @@ import NotCartItems from "./NotCartItems";
 
 const columns = [
   {
-    title: "Product Name",
+    title: "Product",
     dataIndex: "product_name",
     key: "product_name",
   },
@@ -27,11 +27,7 @@ const columns = [
       <Image src={img} alt="image file" style={{ width: "50px" }} />
     ),
   },
-  {
-    title: "Qty",
-    dataIndex: "qty",
-    key: "qty",
-  },
+
   {
     title: "Price",
     dataIndex: "price",

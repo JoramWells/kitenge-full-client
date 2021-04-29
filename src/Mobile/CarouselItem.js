@@ -58,6 +58,14 @@ function CarouselItem(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+
+
+  const showModal2 = () => {
+    setTimeout(() => {
+      setVisible2(true);
+    }, 500);
+  }
 
   const showModal = (item) => {
     setTimeout(() => {
@@ -78,6 +86,8 @@ function CarouselItem(props) {
   const handleCancel = () => {
     setTimeout(() => {
       setVisible(false);
+      setVisible2(false);
+
     }, 1000);
   };
   const handleReload = () => {
@@ -187,6 +197,7 @@ function CarouselItem(props) {
         <Row justify="space-around" align="middle">
           <Col>
             <Button
+            onClick={showModal2}
               icon={<ShoppingOutlined style={{ fontSize: "1.3rem" }} />}
               style={{
                 border: "0",
@@ -200,6 +211,32 @@ function CarouselItem(props) {
             </Button>
           </Col>
         </Row>
+      </Modal>
+
+      {/* _________________________________Payment Modal2_______________________________ */}
+      <Modal
+        isOpen={visible2}
+        onRequestClose={handleCancel}
+        ariaHideApp={false}
+        style={{
+          overlay: {
+            background: "rgba(0, 0, 0, 0.5)",
+            transitionDuration: "3s",
+          },
+          content: {
+            marginTop: "3rem",
+            height: "450px",
+
+            margin: "auto",
+            transition: "2s",
+            transitionTimingFunction: "ease-in",
+          },
+        }}
+      >
+        <Row >
+          <h2 style={{color:"green"}}> Lipa Na mpesa</h2>
+        </Row>
+
       </Modal>
       <CarouselHeader />
 
