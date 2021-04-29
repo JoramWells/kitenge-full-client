@@ -247,7 +247,7 @@ function CarouselItem(props) {
                         maxHeight: "14.86rem",
                         maxWidth: "15rem",
                         width: "15rem",
-                        height: "auto",
+                        height: "50%",
                         display: "flex",
                         margin: "auto",
                       }}

@@ -54,7 +54,7 @@ const responsive = {
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 4,
+    items: 5,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
@@ -114,7 +114,7 @@ export default function CarouselItems() {
                   <Card
                     style={{
                       border: "0",
-                      width: "17rem",
+                      width: "15rem",
                       height: "340px",
                     }}
                     cover={
@@ -125,7 +125,7 @@ export default function CarouselItems() {
                         style={{
                           width: "auto",
                           height: "auto",
-                          maxWidth: "16.8rem",
+                          maxWidth: "14.8rem",
                           maxHeight: "13.9rem",
                           display: "flex",
                           margin: "auto",

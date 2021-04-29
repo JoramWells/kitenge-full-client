@@ -77,8 +77,8 @@ export default function CarouselHeader() {
         ) : error ? (
           <div>{error}</div>
         ) : (
-          <Row justify="space-around" align="middle">
-            <Col md={12} sm={12} xs={18} style={{ padding: "1rem", margin: "1rem" }}>
+          <Row justify="center" align="middle">
+            <Col    md={12} xs={12} xs={24} style={{ padding: "1rem"}}>
             <Carousel
               swipeable={false}
               draggable={false}
@@ -93,12 +93,12 @@ export default function CarouselHeader() {
                   key={post.id}
                   style={{
                     borderRadius: "50px",
-                    backgroundColor: "whitesmoke",
+                    backgroundColor: "rgba(232, 126, 4, 0.7)",
                     border: "none",
                   }}
                   // onClick={() => fetchData(post.category)}
                 >
-                  <Link to={`/product-info/${post.category}`}> {post.category}</Link>
+                  <Link style={{color:"white"}} to={`/product-info/${post.category}`}> {post.category}</Link>
                   
                   
                 </Button>
