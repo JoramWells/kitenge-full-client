@@ -77,7 +77,7 @@ export default function CartScreen(props) {
     <main style={{ padding: "1rem" }}>
 
       {cartItems.length === 0 ? (
-        <Row justify="space-around" align="middle" style={{ padding: "2rem" }}>
+        <Row justify="space-around" align="middle" style={{ marginTop: "5rem",marginBottom:"5rem" }}>
           <Col>
             <Empty description="Cart is empty"></Empty>
           </Col>
@@ -93,7 +93,7 @@ export default function CartScreen(props) {
         <Row justify="space-around" align="middle">
           <Col>
             <h3>
-              Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items): ksh{" "}
+              Total ({cartItems.reduce((a, c) => a + c.qty, 0)} items): ksh{" "}
               <NumberFormat
                 value={cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
                 thousandSeparator={true}
@@ -122,12 +122,13 @@ export default function CartScreen(props) {
               type="primary"
               block
               style={{ border: "0", borderRadius: "5px" }}
+              disabled={cartItems.length === 0}
             >
-              <Text disabled={cartItems.length === 0}>
+              <h4 >
                 <Link to="/shipping" style={{ color: "black" }}>
                   Checkout
                 </Link>
-              </Text>
+              </h4>
             </Button>
           </Col>
 
