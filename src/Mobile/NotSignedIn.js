@@ -16,8 +16,9 @@ export default function NotSignedIn() {
         }}
       >
         <div className="menu__logo" style={{ marginTop: "0.4rem" }}>
-          <Link to="/" style={{ color: "#484848" }}>
-              <b>JandJ</b>
+          <Link to="/" >
+            {navigator.onLine?<span style={{ color: "green" }}><b>JandJ</b> </span>:<span style={{ color: "#484848" }}> <b>JandJ</b></span>}
+              
             
           </Link>
         </div>

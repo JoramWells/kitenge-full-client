@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Register from "./Login/Register";
 import Login from "./Login/Login";
-import CarouselItems from "./Desktop/CarouselItems";
 import AddProduct from "./Products/AddProduct";
 import ManageProducts from "./Products/ManageProducts";
 import ProductDetail from "./Products/ProductDetail";
