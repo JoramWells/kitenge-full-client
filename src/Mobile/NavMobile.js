@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import {
   EditOutlined,
-  LoginOutlined,
   MailOutlined,
   PlusOutlined,
-  QuestionCircleOutlined,
   SettingOutlined,
   ShoppingCartOutlined,
-  UserAddOutlined
 } from "@ant-design/icons";
 import { Menu, Badge, Col, Image, Row, Modal, Table, Button } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import { Link } from "react-router-dom";
-import moment from "moment";
 import Cookie from "js-cookie";
-import Ripples from 'react-ripples'
+import NotSignedIn from "./NotSignedIn";
+import NotCartItems from "./NotCartItems";
 
 const columns = [
   {
@@ -59,126 +56,14 @@ export default function NavMobile(props) {
   };
   if (!userInfo) {
     return (
-      <nav
-        className="menu"
-        style={{
-          position: "fixed",
-          display: "block",
-          width: "100%",
-          zIndex: "1",
-          top: "0",
-        }}
-      >
-        <div className="menu__logo" style={{ marginTop: "0.4rem" }}>
-          <Link to="/" style={{ color: "#484848" }}>
-            <div style={{backgroundColor:"grey", color:"white", padding:".1rem", borderRadius:"10px"}}>
-              <b>J&j</b>
-            </div>
-            
-          </Link>
-        </div>
+      <NotSignedIn />
 
-        <Menu mode="horizontal" style={{ float: "right", border: "0" }}>
-          <Menu.Item
-            icon={<LoginOutlined style={{ fontSize: "1rem", margin: "0px" }} />}
-          >
-            <Link to="/login">{"  "}Login</Link>
-          </Menu.Item>
-          <Menu.Item
-            icon={
-              <UserAddOutlined style={{ fontSize: "1rem", margin: "0px" }} />
-            }
-          >
-            <Link to="/register">{"  "}Register</Link>
-          </Menu.Item>
-        </Menu>
-      </nav>
     );
   } else {
     if (!cartItems) {
       return (
-        <nav
-          className="menu"
-          style={{
-            position: "fixed",
-            display: "block",
-            width: "100%",
-            zIndex: "1",
-            top: "0",
-          }}
-        >
-          <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
-            <a href="/" style={{ color: "#484848" }}>
-              <Ripples>
-              <div style={{backgroundColor:"grey", color:"white", padding:".1rem", borderRadius:"10px"}}>
-                <b> J&j</b>
-              </div>
-              </Ripples>
+        <NotCartItems/>
 
-              
-            </a>
-          </div>
-          <Menu
-            mode="horizontal"
-            style={{
-              float: "right",
-              border: "0",
-            }}
-          >
-            <SubMenu
-              title={
-                <QuestionCircleOutlined style={{ fontSize: "1.3rem", color:"grey" }} />
-              }
-            >
-              <Menu.Item style={{ margin: "0px" }}>Contact supplier</Menu.Item>
-              <Menu.Item style={{ margin: "0px" }}>
-                How to add product
-              </Menu.Item>
-              <Menu.Item>Creating account</Menu.Item>
-              <Menu.Item>Tracking your order</Menu.Item>
-            </SubMenu>
-            <SubMenu title={<SettingOutlined style={{ fontSize: "1.3rem", color:"grey" }} />}>
-              <Menu.Item icon={<PlusOutlined />}>
-                <Link to="/products/add">Add Product</Link>
-              </Menu.Item>
-              <Menu.Item icon={<EditOutlined />}>
-                <Link to="/produc/manage">Edit Product</Link>
-              </Menu.Item>
-            </SubMenu>
-
-            <SubMenu
-              style={{ marginBottom: "0.4rem" }}
-              title={
-                <Avatar
-                  src={
-                    userInfo.avatar
-                      ? userInfo.avatar
-                      : `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
-                  }
-                  style={{ width: "1.5rem", height: "auto", margin: "0px" }}
-                />
-              }
-            >
-              <Menu.Item>{userInfo.email}</Menu.Item>
-              <Menu.Item
-                style={{ justifyContent: "space-around", display: "flex" }}
-              >
-                <Button style={{ borderRadius: "50px" }}>
-                  <Link to="/register">Manage account</Link>
-                </Button>
-              </Menu.Item>
-              <Menu.Item
-                style={{
-                  justifyContent: "space-around",
-                  display: "flex",
-                  margin: "0",
-                }}
-              >
-                Logout
-              </Menu.Item>
-            </SubMenu>
-          </Menu>
-        </nav>
       );
     } else {
       return (
@@ -195,9 +80,7 @@ export default function NavMobile(props) {
           >
             <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
               <a href="/" style={{ color: "#484848" }}>
-                <div style={{backgroundColor:"grey", color:"white", padding:".1rem", borderRadius:"10px"}}>
-                  <b>J&j</b>
-                </div>
+                  <b>JandJ</b>
                 
               </a>
             </div>

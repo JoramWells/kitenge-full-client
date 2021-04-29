@@ -17,9 +17,10 @@ import NumberFormat from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
-import Ripples,{createRipples} from 'react-ripples'
+import Ripples, { createRipples } from "react-ripples";
 // import { listProducts } from "../../_actions/productActions";
 import {
+  ClockCircleOutlined,
   CloseCircleOutlined,
   EllipsisOutlined,
   ReloadOutlined,
@@ -35,11 +36,7 @@ const { Meta } = Card;
 const renderSkeleton = [...Array(5).keys()].map((i) => {
   return (
     <Col key={i}>
-      <Card loading style={{width:"18rem", height:"17rem"}}>
-
-
-      </Card>
-
+      <Card loading style={{ width: "18rem", height: "17rem" }}></Card>
     </Col>
   );
 });
@@ -61,16 +58,12 @@ function CarouselItem(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const [visible, setVisible] = useState(false);
-  const myRipples = createRipples({
-    color:"rgba(255, 203, 5, 1)",
-    during:"500"
-  })
 
   const showModal = (item) => {
-    setTimeout(()=>{
-    setVisible(true);
-    },500)
-    
+    setTimeout(() => {
+      setVisible(true);
+    }, 500);
+
     setId(item.id);
     setImage(item.image);
     setDate(item.updatedAt);
@@ -79,18 +72,17 @@ function CarouselItem(props) {
     setPrice(item.price);
     setCategory(item.category);
     setDescription(item.description);
-    setRate(item.rate);
+    setRate(item.ratings);
   };
 
   const handleCancel = () => {
-    setTimeout(()=>{
-setVisible(false);
-    },1000)
-    
+    setTimeout(() => {
+      setVisible(false);
+    }, 1000);
   };
-  const handleReload = () =>{
-    window.location.reload()
-  }
+  const handleReload = () => {
+    window.location.reload();
+  };
 
   const productAddToCart = (productId, product_name) => {
     if (!userInfo) {
@@ -128,14 +120,13 @@ setVisible(false);
       >
         <Row justify="end">
           <Col>
-          <Ripples>
-          <CloseCircleOutlined
-              className="close"
-              style={{ fontSize: "1.5rem", marginBottom: "0.3rem" }}
-              onClick={handleCancel}
-            />
-          </Ripples>
-
+            <Ripples>
+              <CloseCircleOutlined
+                className="close"
+                style={{ fontSize: "1.5rem", marginBottom: "0.3rem" }}
+                onClick={handleCancel}
+              />
+            </Ripples>
           </Col>
         </Row>
         <Row justify="space-around" align="middle">
@@ -146,10 +137,33 @@ setVisible(false);
             />
           </Col>
         </Row>
-        <div>
-          <Link to={`/product-detail/${id}/?category=${category}`}>
-            <h3 style={{ color: "rgba(232, 126, 4, 1)" }}> {name}</h3>
-          </Link>
+        <Link to={`/product-detail/${id}/?category=${category}`}>
+          <h3 style={{ color: "rgba(211, 84, 0, 1)" }}> {name}</h3>
+        </Link>
+
+        <Row>
+          <Rate
+            name="size-small"
+            allowHalf={true}
+            style={{
+              fontSize: "1rem",
+              color: "#282c35",
+            }}
+            defaultValue={rate}
+          />
+        </Row>
+        <div
+          style={{
+            width: "7rem",
+            paddingTop: ".2rem",
+            paddingBottom: ".2rem",
+            marginTop: ".5rem",
+            display: "block",
+            paddingLeft: ".5rem",
+            borderRadius: "5px",
+            backgroundColor:"rgba(211, 84, 0, 0.1)"
+          }}
+        >
           <NumberFormat
             value={price}
             thousandSeparator={true}
@@ -157,38 +171,32 @@ setVisible(false);
             prefix="Kshs: "
             suffix=" /="
           />
-
-          <Row>
-            <Rate
-              name="size-small"
-              allowHalf={true}
-              style={{
-                fontSize: "1rem",
-                color: "rgba(249, 180, 45,1)",
-              }}
-              defaultValue={rate}
-            />
-          </Row>
-
-          <Divider />
-
-          <address style={{ color: "grey", textAlign: "center" }}>
-            {description}
-          </address>
         </div>
+        <p style={{ marginTop: ".4rem" }}>
+          {" "}
+          Delivery in 24
+          <ClockCircleOutlined style={{ color: "green" }} />{" "}
+        </p>
+
+        <Divider />
+
+        <address style={{ color: "grey", textAlign: "center" }}>
+          {description}
+        </address>
 
         <Row justify="space-around" align="middle">
           <Col>
             <Button
-              icon={<ShoppingOutlined style={{ fontSize: "1rem" }} />}
+              icon={<ShoppingOutlined style={{ fontSize: "1.3rem" }} />}
               style={{
                 border: "0",
-                backgroundColor: "rgba(252, 214, 112, 1)",
+                backgroundColor: "rgba(211, 84, 0, 0.8)",
                 color: "white",
+                borderRadius: "5px",
               }}
             >
               {" "}
-              <b>Purchase</b>{" "}
+              <b>Purchase</b>
             </Button>
           </Col>
         </Row>
@@ -201,9 +209,13 @@ setVisible(false);
         </Row>
       ) : error ? (
         <Result
-        status="500"
-        subTitle={error}
-        extra={<Button onClick={handleReload} icon={<ReloadOutlined/>}>RETRY</Button>}
+          status="500"
+          subTitle={error}
+          extra={
+            <Button onClick={handleReload} icon={<ReloadOutlined />}>
+              RETRY
+            </Button>
+          }
         />
       ) : (
         <>
@@ -212,20 +224,19 @@ setVisible(false);
               <Col key={item.id}>
                 <Card
                   style={{
-                    width: "17rem",
+                    width: "15rem",
                     height: "auto",
                   }}
                   extra={
                     <Ripples>
                       <EllipsisOutlined
-                      onClick={() => showModal(item)}
-                      key="ellipsis"
-                      style={{
-                        fontSize: "1.3rem",
-                      }}
-                    />
+                        onClick={() => showModal(item)}
+                        key="ellipsis"
+                        style={{
+                          fontSize: "1.3rem",
+                        }}
+                      />
                     </Ripples>
-
                   }
                   cover={
                     <LazyLoadImage
@@ -233,9 +244,9 @@ setVisible(false);
                       effect="blur"
                       alt="product-Image"
                       style={{
-                        maxHeight: "16.86rem",
-                        maxWidth: "17rem",
-                        width: "17rem",
+                        maxHeight: "14.86rem",
+                        maxWidth: "15rem",
+                        width: "15rem",
                         height: "auto",
                         display: "flex",
                         margin: "auto",
@@ -246,10 +257,14 @@ setVisible(false);
                   <Meta
                     title={
                       <Link
-                        
                         to={`/product-detail/${item.id}/?category=${item.category}`}
                       >
-                        <h3 style={{ color: "rgba(232, 126, 4, 1)",margin:"0" }}> {item.product_name}</h3>
+                        <h3
+                          style={{ color: "rgba(211, 84, 0, 1)", margin: "0" }}
+                        >
+                          {" "}
+                          {item.product_name}
+                        </h3>
                       </Link>
                     }
                     description={
@@ -258,7 +273,7 @@ setVisible(false);
                         allowHalf={true}
                         style={{
                           fontSize: "1rem",
-                          color: "rgba(255, 203, 5, 1)",
+                          color: "#282c35",
                           marginBottom: ".6rem",
                         }}
                         defaultValue={item.ratings}
@@ -266,7 +281,13 @@ setVisible(false);
                     }
                   />
 
-                  <h3 style={{ color: "grey" }}>
+                  <p
+                    style={{
+                      color: "grey",
+                      fontSize: "1rem",
+                      marginBottom: ".3rem",
+                    }}
+                  >
                     <NumberFormat
                       value={item.price}
                       thousandSeparator={true}
@@ -274,7 +295,22 @@ setVisible(false);
                       prefix="Kshs: "
                       suffix=" /="
                     />
-                  </h3>
+                  </p>
+                  <div
+                    style={{
+                      backgroundColor: "rgba(240, 52, 52, 0.3)",
+                      borderRadius: "5px",
+                      width: "2.4rem",
+                      textAlign: "center",
+                    }}
+                  >
+                    <NumberFormat
+                      value={25}
+                      displayType="text"
+                      prefix="-"
+                      suffix="%"
+                    />
+                  </div>
                 </Card>
               </Col>
             ))}
