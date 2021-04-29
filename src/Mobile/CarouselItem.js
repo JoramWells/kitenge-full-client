@@ -244,10 +244,10 @@ function CarouselItem(props) {
                       effect="blur"
                       alt="product-Image"
                       style={{
-                        maxHeight: "14.86rem",
+                        maxHeight: "13.86rem",
                         maxWidth: "15rem",
-                        width: "15rem",
-                        height: "50%",
+                        width: "auto",
+                        height: "auto",
                         display: "flex",
                         margin: "auto",
                       }}

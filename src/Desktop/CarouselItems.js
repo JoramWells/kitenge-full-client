@@ -115,7 +115,7 @@ export default function CarouselItems() {
                     style={{
                       border: "0",
                       width: "15rem",
-                      height: "340px",
+                      height: "370px",
                     }}
                     cover={
                       <LazyLoadImage
@@ -123,10 +123,10 @@ export default function CarouselItems() {
                         effect="blur"
                         alt="productimage"
                         style={{
-                          width: "auto",
-                          height: "auto",
+                          width: "75%",
+                          height: "75%",
                           maxWidth: "14.8rem",
-                          maxHeight: "13.9rem",
+                          maxHeight: "9.9rem",
                           display: "flex",
                           margin: "auto",
                         }}
@@ -137,10 +137,12 @@ export default function CarouselItems() {
                     <Meta
                       title={
                         <Link
-                        style={{ color: "rgba(89, 171, 227, 1)" }}
+                        
                         to={`/product-detail/${product.id}/?category=${product.category}`}
                       >
-                        {product.product_name}
+                        <h3
+                        style={{ color: "rgba(211, 84, 0, 1)", margin: "0" }}
+                        >{product.product_name}</h3>
                       </Link>
                       }
                       description={
@@ -149,14 +151,20 @@ export default function CarouselItems() {
                         allowHalf={true}
                         style={{
                           fontSize: "1rem",
-                          color: "rgba(252, 214, 112, 1)",
+                          color: "#282c35",
                           marginBottom: ".6rem",
                         }}
                         defaultValue={product.ratings}
                       />
                       }
-                    />{" "}
-                    <b style={{ color: "grey" }}>
+                    />
+                  <p
+                    style={{
+                      color: "grey",
+                      fontSize: "1rem",
+                      marginBottom: ".3rem",
+                    }}
+                  >
                     <NumberFormat
                       value={product.price}
                       thousandSeparator={true}
@@ -164,7 +172,22 @@ export default function CarouselItems() {
                       prefix="Kshs: "
                       suffix=" /="
                     />
-                  </b>
+                  </p>
+                  <div
+                    style={{
+                      backgroundColor: "rgba(240, 52, 52, 0.3)",
+                      borderRadius: "5px",
+                      width: "2.4rem",
+                      textAlign: "center",
+                    }}
+                  >
+                    <NumberFormat
+                      value={25}
+                      displayType="text"
+                      prefix="-"
+                      suffix="%"
+                    />
+                  </div>
                   </Card>
                 </Link>
               </Col>
