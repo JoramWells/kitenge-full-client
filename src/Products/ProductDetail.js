@@ -26,6 +26,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 // import RecentItemsBar from "../RecentItemsBar";
 
 import NumberFormat from "react-number-format";
+import RecentItemsBar from "../Generic/RecentItemsBar";
 
 const { Meta } = Card;
 
@@ -49,12 +50,9 @@ const responsive = {
   },
 };
 
-
-
 const { Title, Text } = Typography;
 
 export default function ProductDetail(props) {
-
   const productDetail = useSelector((state) => state.productDetail);
   const categoryDetail = useSelector((state) => state.categoryList);
   const userSignin = useSelector((state) => state.userSignin);
@@ -72,9 +70,10 @@ export default function ProductDetail(props) {
       <Col key={i}>
         <Form layout="vertical">
           <Form.Item>
-            <Skeleton.Input style={{ width: "16rem", height: "150px" }} /> <br />
+            <Skeleton.Input style={{ width: "16rem", height: "150px" }} />{" "}
+            <br />
           </Form.Item>
-  
+
           <Form.Item>
             <Skeleton.Input
               style={{ width: "150px", height: "1rem" }}
@@ -92,8 +91,6 @@ export default function ProductDetail(props) {
     );
   });
 
-
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(detailsProduct(props.match.params.id));
@@ -101,23 +98,17 @@ export default function ProductDetail(props) {
     return () => {};
   }, []);
 
-
-
-
-  function loginHandler(){
-    return props.history.push('/login')
+  function loginHandler() {
+    return props.history.push("/login");
   }
 
-
-
-
-  function  handleAddToCart (){
+  function handleAddToCart() {
     props.history.push("/cart/" + props.match.params.id + "?qty=" + qty);
-  };
+  }
 
   return (
     <>
-      <main style={{ padding: "20px" }}>
+      <main style={{ padding: "5px" }}>
         {loading ? (
           <Row
             justify="space-around"
@@ -145,45 +136,43 @@ export default function ProductDetail(props) {
             </Col>
           </Row>
         ) : error ? (
-          
-          <Result
-          status="500"
-          subTitle={error}
-          />
+          <Result status="500" subTitle={error} />
         ) : (
           <Row
             style={{ padding: "10px" }}
             justify="space-around"
             align="middle"
           >
-            <Col xs={24} md={8}>
+            <Col md={6} sm={6}>
               <Image
-                src={"/"+product.image}
+                src={"/" + product.image}
                 alt="shoes again"
-                style={{ width: "300px", height: "auto" }}
+                style={{ width: "250px", height: "250px", objectFit:"contain" }}
               />
             </Col>
 
-            <Col xs={24} md={8} style={{ padding: "20px" }}>
+            <Col style={{ padding: "20px" }} md={6} sm={6}>
               <h2 level={3}>{product.product_name}</h2>
-              <h3>Reviews: </h3> <Rate de disabled allowHalf defaultValue={product.ratings} />
-
-                <Divider plain></Divider>
-                <b style={{  color: "#CD5C5C"  }}>
-                    <NumberFormat
-                      value={product.price}
-                      thousandSeparator={true}
-                      displayType={"text"}
-                      prefix="Kshs: "
-                      suffix=" /="
-                    />
-                  </b>
-
-
+              <h3>Reviews: </h3>{" "}
+              <Rate
+                style={{ color: "#282c35" }}
+                disabled
+                allowHalf
+                defaultValue={product.ratings}
+              />
+              <Divider plain></Divider>
+              <h3 style={{ color: "#CD5C5C" }}>
+                <NumberFormat
+                  value={product.price}
+                  thousandSeparator={true}
+                  displayType={"text"}
+                  prefix="Kshs: "
+                  suffix=" /="
+                />
+              </h3>
               <h3 level={5}>Categorys': {product.category}</h3>
-              <Title level={5}>Shipping': {product.category}</Title>
-
-              <Title level={5}>Qty: </Title>
+              <h3>Shipping: {product.category}</h3>
+              <h3>Qty: </h3>
               <select
                 defaultValue={qty}
                 style={{ width: 120 }}
@@ -197,7 +186,6 @@ export default function ProductDetail(props) {
                   </option>
                 ))}
               </select>
-
               <Divider plain></Divider>
               {userInfo ? (
                 <Row justify="space-around" style={{ margin: "2rem" }}>
@@ -213,7 +201,7 @@ export default function ProductDetail(props) {
                     className="cart"
                     onClick={handleAddToCart}
                   >
-                   <b style={{color:"white"}}>Add cart</b>
+                    <b style={{ color: "white" }}>Add cart</b>
                   </Button>
                 </Row>
               ) : (
@@ -246,10 +234,9 @@ export default function ProductDetail(props) {
                   </Button>
                 </aside>
               )}
-
               <Divider plain></Divider>
             </Col>
-            <Col xs={24} md={8}>
+            <Col sm={6} md={6}>
               <Card style={{ overflowY: "scroll" }}>
                 <Title level={3}>Description</Title>
                 <Text>{product.description}</Text>
@@ -257,14 +244,13 @@ export default function ProductDetail(props) {
             </Col>
           </Row>
         )}
-        {/* <RecentItemsBar title="Related Items" /> */}
+        <RecentItemsBar title="Related Items" />
         {loadingCategory ? (
-          
           <Row justify="space-around" align="middle">
-          {renderSkeleton}
-        </Row>
+            {renderSkeleton}
+          </Row>
         ) : errorCategory ? (
-          <div></div>
+          <></>
         ) : (
           <div>
             <Carousel
@@ -292,12 +278,19 @@ export default function ProductDetail(props) {
                           style={{ height: "350px", border: "0" }}
                           cover={
                             <LazyLoadImage
-                            src={"/"+item.image}
-                            effect="blur"
-                            alt="productimage"
-                            style={{width:"auto", height:"auto", maxWidth: "15.8rem", maxHeight: "10.9rem", display:"flex", margin:"auto" }}
-                            // visibleByDefault={product.image}
-                          />
+                              src={"/" + item.image}
+                              effect="blur"
+                              alt="productimage"
+                              style={{
+                                width: "auto",
+                                height: "auto",
+                                maxWidth: "15.8rem",
+                                maxHeight: "10.9rem",
+                                display: "flex",
+                                margin: "auto",
+                              }}
+                              // visibleByDefault={product.image}
+                            />
                           }
                         >
                           <Meta

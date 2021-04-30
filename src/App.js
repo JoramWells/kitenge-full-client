@@ -15,7 +15,7 @@ import Product from "./Products/Product";
 
 function App() {
   return (
-    <div>
+    <Fragment>
       <Router>
         <DesktopNavbarMobile/>
 
@@ -33,7 +33,7 @@ function App() {
         </Switch>
       </Router>
       <Footer />
-    </div>
+    </Fragment>
   );
 }
 
