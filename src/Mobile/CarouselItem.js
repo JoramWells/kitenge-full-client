@@ -12,12 +12,15 @@ import {
   Image,
   Divider,
   Result,
+  Input,
 } from "antd";
 import NumberFormat from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
-import Ripples, { createRipples } from "react-ripples";
+import Ripples from "react-ripples";
+import mpesa from '../img/mpesa.png'
+
 // import { listProducts } from "../../_actions/productActions";
 import {
   ClockCircleOutlined,
@@ -59,11 +62,20 @@ function CarouselItem(props) {
   const { userInfo } = userSignin;
   const [visible, setVisible] = useState(false);
   const [visible2, setVisible2] = useState(false);
+  const [visible3, setVisible3] = useState(false);
+
 
 
   const showModal2 = () => {
     setTimeout(() => {
       setVisible2(true);
+    }, 500);
+  }
+
+  
+  const showModal3 = () => {
+    setTimeout(() => {
+      setVisible3(true);
     }, 500);
   }
 
@@ -89,6 +101,18 @@ function CarouselItem(props) {
       setVisible2(false);
 
     }, 1000);
+  };
+  const handleCancel2 = () => {
+    setTimeout(() => {
+      setVisible2(false);
+
+    }, 500);
+  };
+  const handleCancel3 = () => {
+    setTimeout(() => {
+      setVisible3(false);
+
+    }, 500);
   };
   const handleReload = () => {
     window.location.reload();
@@ -120,7 +144,7 @@ function CarouselItem(props) {
           },
           content: {
             marginTop: "3rem",
-            height: "450px",
+            height: "400px",
 
             margin: "auto",
             transition: "2s",
@@ -225,7 +249,7 @@ function CarouselItem(props) {
           },
           content: {
             marginTop: "3rem",
-            height: "450px",
+            height: "300px",
 
             margin: "auto",
             transition: "2s",
@@ -233,8 +257,60 @@ function CarouselItem(props) {
           },
         }}
       >
+                <Row justify="end">
+          <Col>
+            <Ripples>
+              <CloseCircleOutlined
+                className="close"
+                style={{ fontSize: "1.5rem", marginBottom: "0.3rem" }}
+                onClick={handleCancel2}
+              />
+            </Ripples>
+          </Col>
+        </Row>
         <Row >
-          <h2 style={{color:"green"}}> Lipa Na mpesa</h2>
+          <img src={mpesa} style={{width:"100px"}} alt="mpesa_logo" />
+          <Form>
+            <Form.Item required label="Phone Number">
+              <Input placeholder="+254 799 980 846" />
+            </Form.Item>
+            <Form.Item>
+              <Button onClick={showModal3} block type="primary" style={{borderRadius:"5px"}}>BUY</Button>
+            </Form.Item>
+          </Form>
+        </Row>
+
+      </Modal>
+
+
+      {/* ______________________________________________Payment Modal_________________________________________ */}
+      <Modal
+        isOpen={visible3}
+        onRequestClose={handleCancel3}
+        ariaHideApp={false}
+        style={{
+          overlay: {
+            background: "rgba(0, 0, 0, 0.5)",
+            transitionDuration: "3s",
+          },
+          content: {
+            marginTop: "3rem",
+            height: "300px",
+
+            margin: "auto",
+            transition: "2s",
+            transitionTimingFunction: "ease-in",
+          },
+        }}
+      >
+
+        <Row >
+          <Result
+          status="success"
+          title="Successfully"
+          subTitle={"Purchased " + name}
+           />
+
         </Row>
 
       </Modal>
