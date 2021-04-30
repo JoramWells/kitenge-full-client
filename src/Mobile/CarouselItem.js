@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import Ripples from "react-ripples";
-import mpesa from '../img/mpesa.png'
+import mpesa from "../img/mpesa.png";
 
 // import { listProducts } from "../../_actions/productActions";
 import {
@@ -64,22 +64,19 @@ function CarouselItem(props) {
   const [visible2, setVisible2] = useState(false);
   const [visible3, setVisible3] = useState(false);
 
-
-
-  const showModal2 = () => {
+  function showModal2() {
     setTimeout(() => {
       setVisible2(true);
     }, 500);
   }
 
-  
-  const showModal3 = () => {
+  function showModal3() {
     setTimeout(() => {
       setVisible3(true);
     }, 500);
   }
 
-  const showModal = (item) => {
+  function showModal(item) {
     setTimeout(() => {
       setVisible(true);
     }, 500);
@@ -93,25 +90,22 @@ function CarouselItem(props) {
     setCategory(item.category);
     setDescription(item.description);
     setRate(item.ratings);
-  };
+  }
 
-  const handleCancel = () => {
+  function handleCancel() {
     setTimeout(() => {
       setVisible(false);
       setVisible2(false);
-
     }, 1000);
-  };
+  }
   const handleCancel2 = () => {
     setTimeout(() => {
       setVisible2(false);
-
     }, 500);
   };
   const handleCancel3 = () => {
     setTimeout(() => {
       setVisible3(false);
-
     }, 500);
   };
   const handleReload = () => {
@@ -195,7 +189,7 @@ function CarouselItem(props) {
             display: "block",
             paddingLeft: ".5rem",
             borderRadius: "5px",
-            backgroundColor:"rgba(211, 84, 0, 0.1)"
+            backgroundColor: "rgba(211, 84, 0, 0.1)",
           }}
         >
           <NumberFormat
@@ -221,7 +215,7 @@ function CarouselItem(props) {
         <Row justify="space-around" align="middle">
           <Col>
             <Button
-            onClick={showModal2}
+              onClick={showModal2}
               icon={<ShoppingOutlined style={{ fontSize: "1.3rem" }} />}
               style={{
                 border: "0",
@@ -257,7 +251,7 @@ function CarouselItem(props) {
           },
         }}
       >
-                <Row justify="end">
+        <Row justify="end">
           <Col>
             <Ripples>
               <CloseCircleOutlined
@@ -268,20 +262,25 @@ function CarouselItem(props) {
             </Ripples>
           </Col>
         </Row>
-        <Row >
-          <img src={mpesa} style={{width:"100px"}} alt="mpesa_logo" />
+        <Row>
+          <img src={mpesa} style={{ width: "100px" }} alt="mpesa_logo" />
           <Form>
             <Form.Item required label="Phone Number">
               <Input placeholder="+254 799 980 846" />
             </Form.Item>
             <Form.Item>
-              <Button onClick={showModal3} block type="primary" style={{borderRadius:"5px"}}>BUY</Button>
+              <Button
+                onClick={showModal3}
+                block
+                type="primary"
+                style={{ borderRadius: "5px" }}
+              >
+                BUY
+              </Button>
             </Form.Item>
           </Form>
         </Row>
-
       </Modal>
-
 
       {/* ______________________________________________Payment Modal_________________________________________ */}
       <Modal
@@ -303,16 +302,13 @@ function CarouselItem(props) {
           },
         }}
       >
-
-        <Row >
+        <Row>
           <Result
-          status="success"
-          title="Successfully"
-          subTitle={"Purchased " + name}
-           />
-
+            status="success"
+            title="Successfully"
+            subTitle={"Purchased " + name}
+          />
         </Row>
-
       </Modal>
       <CarouselHeader />
 
