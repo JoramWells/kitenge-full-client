@@ -41,15 +41,16 @@ export default function NavMobile(props) {
   const userInfo = Cookie.getJSON("userInfo");
 
   const [visible, setVisible] = useState(false);
-  const handleOk = () => {
-    setVisible(false);
-  };
-  const handleCancel = () => {
-    setVisible(false);
-  };
-  const showModal = () => {
-    setVisible(true);
-  };
+  function handleOk(){
+    setVisible(false)
+  }
+  function handleCancel(){
+    setVisible(false)
+  }
+  function showModal(){
+    setVisible(true)
+  }
+
   if (!userInfo) {
     return (
       <NotSignedIn />

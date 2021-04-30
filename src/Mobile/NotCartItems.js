@@ -23,7 +23,7 @@ export default function NotCartItems() {
           <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
             <a href="/" style={{ color: "#484848" }}>
               <Ripples>
-                <b> JandJ</b>
+                <b> Kitenge</b>
               </Ripples>
 
               

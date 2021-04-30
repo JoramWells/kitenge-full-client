@@ -12,6 +12,9 @@ import {
 } from "@ant-design/icons";
 
 const Cookie = require("js-cookie");
+const userFailure = Cookie.getJSON("userFailure");
+const userSuccess = Cookie.getJSON("userInfo");
+
 
 export default function SignIn(props) {
   const history = useHistory();
@@ -21,8 +24,8 @@ export default function SignIn(props) {
 
   const dispatch = useDispatch();
 
-  const closeHandler = () => {
-    history.goBack();
+  function closeHandler (){
+    return history.goBack();
   };
 
   useEffect(() => {
@@ -37,13 +40,11 @@ export default function SignIn(props) {
       <Card style={{ width: "25rem" }}>
         <Row justify="end">
 
-          <Col>
             <CloseCircleOutlined
               className="close"
               style={{ fontSize: "1.5rem", marginBottom: "0.3rem" }}
               onClick={closeHandler}
             />
-          </Col>
         </Row>
         <Divider>
           <h3>LOGIN</h3>
@@ -69,7 +70,6 @@ export default function SignIn(props) {
                 password: values.password,
               };
               await dispatch(signin(dataToSubmit));
-              const userFailure = Cookie.getJSON("userFailure");
 
               if (!userFailure) {
                 console.log();
@@ -77,7 +77,6 @@ export default function SignIn(props) {
                 setFormErrorMessage(userFailure.message);
               }
 
-              const userSuccess = Cookie.getJSON("userInfo");
               if (!userSuccess) console.log();
               else {
                 message.success("Successfully login");
