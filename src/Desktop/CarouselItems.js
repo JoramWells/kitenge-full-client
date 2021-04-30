@@ -7,7 +7,6 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import {
   Row,
   Col,
-  Typography,
   Card,
   Skeleton,
   Form,
@@ -70,7 +69,7 @@ export default function CarouselItems() {
   const dispatch = useDispatch();
   const ProductList = useSelector((state) => state.productList);
   const { posts, loading, error } = ProductList;
-  const reloadHandler = () => {
+  function reloadHandler () {
     window.location.reload();
   };
 
@@ -106,7 +105,6 @@ export default function CarouselItems() {
         >
           {posts.map((product) => (
             <Row key={product.id} justify="space-around" align="middle">
-              <Col>
                 <Link
                   to={`/product-detail/${product.id}/?category=${product.category}`}
                   style={{ textDecoration: "none" }}
@@ -123,12 +121,11 @@ export default function CarouselItems() {
                         effect="blur"
                         alt="productimage"
                         style={{
-                          width: "75%",
-                          height: "75%",
-                          maxWidth: "14.8rem",
-                          maxHeight: "9.9rem",
+                          width: "14.8rem",
+                          height: "9.9rem",
                           display: "flex",
                           margin: "auto",
+                          objectFit:"contain"
                         }}
                         // visibleByDefault={product.image}
                       />
@@ -190,7 +187,6 @@ export default function CarouselItems() {
                   </div>
                   </Card>
                 </Link>
-              </Col>
             </Row>
           ))}
         </Carousel>

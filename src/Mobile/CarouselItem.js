@@ -353,12 +353,11 @@ function CarouselItem(props) {
                       effect="blur"
                       alt="product-Image"
                       style={{
-                        maxHeight: "13.86rem",
-                        maxWidth: "15rem",
-                        width: "auto",
-                        height: "auto",
+                        width: "14.8rem",
+                        height: "13.86rem",
                         display: "flex",
                         margin: "auto",
+                        objectFit:"contain"
                       }}
                     />
                   }

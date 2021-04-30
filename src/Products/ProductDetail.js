@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-// import startsWith from "lodash.startswith";
 
 // import PlacesAutocomplete, {
 //   geocodeByAddress,
@@ -56,7 +54,6 @@ const responsive = {
 const { Title, Text } = Typography;
 
 export default function ProductDetail(props) {
-  const history = useHistory();
 
   const productDetail = useSelector((state) => state.productDetail);
   const categoryDetail = useSelector((state) => state.categoryList);
