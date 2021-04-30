@@ -35,18 +35,13 @@ const columns = [
   },
 
   {
-    title: "Address",
-    dataIndex: "phone",
-    key: "phone",
-  },
-  {
     title: "price",
     dataIndex: "price",
     key: "price",
   },
 ];
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 const Cookie = require("js-cookie");
 
 export default function ShippingScreen() {
@@ -149,16 +144,14 @@ export default function ShippingScreen() {
         </Col>
       </Row>
       <Row justify="space-around" align="middle" style={{ padding: "1rem" }}>
-        <Col span={6}>
+        <Col >
           <Button
-            className="cart"
+          type="primary"
             style={{ border: "0" }}
-            type="ghost"
             block
-            size="large"
             onClick={paymentHandler}
           >
-            <Text>BUY NOW!!</Text>
+           BUY NOW!!
           </Button>
         </Col>
       </Row>

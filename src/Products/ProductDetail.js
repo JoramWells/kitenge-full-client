@@ -27,6 +27,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import NumberFormat from "react-number-format";
 import RecentItemsBar from "../Generic/RecentItemsBar";
+import { RedoOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
 
@@ -105,6 +106,9 @@ export default function ProductDetail(props) {
   function handleAddToCart() {
     props.history.push("/cart/" + props.match.params.id + "?qty=" + qty);
   }
+  function reloadHandler () {
+    window.location.reload();
+  };
 
   return (
     <>
@@ -113,21 +117,21 @@ export default function ProductDetail(props) {
           <Row
             justify="space-around"
             align="middle"
-            style={{ padding: "2rem" }}
+            style={{ padding: "10px", marginTop:"2rem" }}
           >
-            <Col>
-              <Skeleton.Image style={{ width: "300px", height: "300px" }} />
+            <Col md={6} sm={6}>
+              <Skeleton.Image style={{ width: "250px", height: "250px", objectFit:"contain" }} />
             </Col>
-            <Col>
+            <Col md={6} sm={6} style={{marginTop:"2rem"}}>
               <Form>
                 <Form.Item>
-                  <Skeleton.Input style={{ width: "200px" }} />
+                  <Skeleton.Input style={{ width: "250px", height:"1rem" }} />
                 </Form.Item>
                 <Form.Item>
-                  <Skeleton.Input style={{ width: "150px" }} />
+                  <Skeleton.Input style={{ width: "150px", height:"1rem" }} />
                 </Form.Item>
                 <Form.Item>
-                  <Skeleton.Input style={{ width: "250px" }} />
+                  <Skeleton.Input style={{ width: "200px", height:"1rem" }} />
                 </Form.Item>
               </Form>
             </Col>
@@ -136,7 +140,11 @@ export default function ProductDetail(props) {
             </Col>
           </Row>
         ) : error ? (
-          <Result status="500" subTitle={error} />
+          <Result status="500" subTitle={error}           extra={
+            <Button onClick={reloadHandler} icon={<RedoOutlined />}>
+              RETRY
+            </Button>
+          } />
         ) : (
           <Row
             style={{ padding: "10px" }}
