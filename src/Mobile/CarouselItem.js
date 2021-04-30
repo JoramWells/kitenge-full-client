@@ -98,17 +98,17 @@ function CarouselItem(props) {
       setVisible2(false);
     }, 1000);
   }
-  const handleCancel2 = () => {
+  function  handleCancel2() {
     setTimeout(() => {
       setVisible2(false);
     }, 500);
   };
-  const handleCancel3 = () => {
+  function  handleCancel3 () {
     setTimeout(() => {
       setVisible3(false);
     }, 500);
   };
-  const handleReload = () => {
+  function  handleReload () {
     window.location.reload();
   };
 
