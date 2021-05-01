@@ -28,8 +28,8 @@ function NavigationBar() {
       className="desktop__navbar"
     >
       <nav className="menu">
-        <div className="menu__logo skip-link">
-        <Link to="/" style={{ padding: "1rem",color:"#484848" }} className="skip-link">
+        <div className="menu__logo">
+        <Link to="/" style={{ padding: "1rem",color:"#484848" }} >
                 <b>OnlineShop</b>
               </Link>
         </div>

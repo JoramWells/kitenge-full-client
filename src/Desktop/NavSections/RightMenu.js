@@ -17,12 +17,14 @@ import Avatar from "antd/lib/avatar/avatar";
 
 const { Text, Title } = Typography;
 const { SubMenu } = Menu;
-const cartItems = Cookie.getJSON("cartItems");
+// const cartItems = Cookie.getJSON("cartItems");
 
 
-function RightMenu(props) {
+function RightMenu() {
   const history = useHistory()
   const userSignin = useSelector((state) => state.userSignin);
+  const CartItems = useSelector((state)=>state.cart)
+  const {cartItems} = CartItems
   const { userInfo } = userSignin;
   const [visible, setVisible] = useState(false);
 //   const PaymentList = useSelector((state) => state.paymentList);
@@ -31,11 +33,11 @@ function RightMenu(props) {
   function showModal (){
     setVisible(true);
   };
-  async function logout(){
+   function logout(){
     if(!userInfo){
       console.log()
     }
-    await Cookie.remove('userInfo')
+    Cookie.remove('userInfo')
     setTimeout((
       message.success('Logged out successfully')
     ),1000)
@@ -66,15 +68,16 @@ function RightMenu(props) {
       </Menu>
     );
   } else {
-    if (!cartItems) {
+    if (cartItems.length === 0) {
       return (
         <Space>
           <Menu mode="horizontal">
+
             <SubMenu title={
               <ShoppingCartOutlined
                   onClick={showModal}
 
-                  style={{ fontSize: "1.3rem", margin:"0"}}
+                  style={{ fontSize: "1.5rem", margin:"0", color:"grey"}}
 
               />
             }>
@@ -118,12 +121,7 @@ function RightMenu(props) {
               <Menu.Item onClick={()=>logout()}>Logout</Menu.Item>
             </SubMenu>
           </Menu>
-          <Modal
-            title="Basic Modal"
-            visible={visible}
-            onOk={handleOk}
-            onCancel={handleCancel}
-          ></Modal>
+
         </Space>
       );
     } else {
@@ -196,12 +194,12 @@ function RightMenu(props) {
             onCancel={handleCancel}
           >
             {cartItems.map((product) => (
-              <Row justify="space-around" align="middle" key={product.id}>
+              <Row justify="space-around" align="middle" key={product.image}>
                 <Col>
                   <Image
-                    src={product.image}
+                    src={"/"+product.image}
                     alt="profile_pic"
-                    style={{ width: "50px" }}
+                    style={{ width: "50px", height:"50px", objectFit:"contain" }}
                   />
                 </Col>
                 <Col>

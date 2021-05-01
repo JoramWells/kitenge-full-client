@@ -22,13 +22,13 @@ export default function NotCartItems() {
           }}
         >
           <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
-            <a href="/" style={{ color: "#484848" }}>
+            <Link to="/" style={{ color: "#484848" }}>
               <Ripples>
                 <b> Kitenge</b>
               </Ripples>
 
               
-            </a>
+            </Link>
           </div>
           <Menu
             mode="horizontal"

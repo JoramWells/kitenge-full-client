@@ -353,6 +353,7 @@ function CarouselItem(props) {
                       effect="blur"
                       alt="product-Image"
                       style={{
+                        marginTop:"0",
                         width: "14.8rem",
                         height: "13.86rem",
                         display: "flex",

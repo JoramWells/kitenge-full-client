@@ -9,7 +9,6 @@ import {
 import { Menu, Badge, Col, Image, Row, Modal, Table, Button } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import { Link } from "react-router-dom";
-import Cookie from "js-cookie";
 import NotSignedIn from "./NotSignedIn";
 import NotCartItems from "./NotCartItems";
 import { useSelector } from "react-redux";
@@ -25,7 +24,7 @@ const columns = [
     dataIndex: "image",
     key: "image",
     render: (img) => (
-      <Image src={img} alt="image file" style={{ width: "50px" }} />
+      <Image src={"/" + img} alt="image file" style={{ width: "50px", height:"50px", objectFit:"contain" }} />
     ),
   },
 
@@ -40,7 +39,8 @@ const { SubMenu } = Menu;
 export default function NavMobile(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
-  const cartItems = Cookie.getJSON("cartItems");
+  const CartItems = useSelector(state=>state.cart)
+  const {cartItems} = CartItems
 
   const [visible, setVisible] = useState(false);
   function handleOk() {
@@ -53,9 +53,9 @@ export default function NavMobile(props) {
     setVisible(true);
   }
 
-  if (!userInfo) return <NotSignedIn />;
+  if (userInfo.length === 0) return <NotSignedIn />;
   else {
-    if (!cartItems) return <NotCartItems />;
+    if (cartItems.length === 0) return <NotCartItems />;
     else {
       return (
         <>
@@ -70,9 +70,11 @@ export default function NavMobile(props) {
             }}
           >
             <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
-              <a href="/" style={{ color: "#484848" }}>
-                <b>Kitenge</b>
-              </a>
+              <b>
+              <Link to="/" style={{ color: "#484848" }}>
+              Kitenge
+              </Link>
+              </b>
             </div>
             <Menu
               mode="horizontal"
