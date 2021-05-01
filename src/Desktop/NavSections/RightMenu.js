@@ -28,24 +28,24 @@ function RightMenu(props) {
 //   const PaymentList = useSelector((state) => state.paymentList);
 //   const { payments } = PaymentList;
 
-  const showModal = () => {
+  function showModal (){
     setVisible(true);
   };
-  const logout = async() =>{
+  async function logout(){
     if(!userInfo){
       console.log()
     }
     await Cookie.remove('userInfo')
     setTimeout((
       message.success('Logged out successfully')
-    ),2000)
-    history.goBack()
+    ),1000)
+    return history.goBack()
   }
 
-  const handleOk = () => {
+  function  handleOk (){
     setVisible(false);
   };
-  const handleCancel = () => {
+  function handleCancel (){
     setVisible(false);
   };
 

@@ -3,12 +3,13 @@ import { Menu, Button } from 'antd'
 import {Link} from 'react-router-dom'
 import Avatar from 'antd/lib/avatar/avatar';
 import React from 'react'
-import Cookie from "js-cookie";
 import Ripples from 'react-ripples'
 import moment from 'moment'
+import { useSelector } from 'react-redux';
 const { SubMenu } = Menu;
 export default function NotCartItems() {
-    const userInfo = Cookie.getJSON("userInfo");
+    const userSignin = useSelector((state) => state.userSignin);
+    const {userInfo} = userSignin
     return (
         <nav
           className="menu"
