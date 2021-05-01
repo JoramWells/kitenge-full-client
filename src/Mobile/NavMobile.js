@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import Cookie from "js-cookie";
 import NotSignedIn from "./NotSignedIn";
 import NotCartItems from "./NotCartItems";
+import { useSelector } from "react-redux";
 
 const columns = [
   {
@@ -37,8 +38,10 @@ const columns = [
 
 const { SubMenu } = Menu;
 export default function NavMobile(props) {
+  const userSignin = useSelector((state) => state.userSignin);
+  const {userInfo} =userSignin
   const cartItems = Cookie.getJSON("cartItems");
-  const userInfo = Cookie.getJSON("userInfo");
+  
 
   const [visible, setVisible] = useState(false);
   function handleOk(){
