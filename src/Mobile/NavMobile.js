@@ -39,33 +39,24 @@ const columns = [
 const { SubMenu } = Menu;
 export default function NavMobile(props) {
   const userSignin = useSelector((state) => state.userSignin);
-  const {userInfo} =userSignin
+  const { userInfo } = userSignin;
   const cartItems = Cookie.getJSON("cartItems");
-  
 
   const [visible, setVisible] = useState(false);
-  function handleOk(){
-    setVisible(false)
+  function handleOk() {
+    setVisible(false);
   }
-  function handleCancel(){
-    setVisible(false)
+  function handleCancel() {
+    setVisible(false);
   }
-  function showModal(){
-    setVisible(true)
+  function showModal() {
+    setVisible(true);
   }
 
-  if (!userInfo) {
-    return (
-      <NotSignedIn />
-
-    );
-  } else {
-    if (!cartItems) {
-      return (
-        <NotCartItems/>
-
-      );
-    } else {
+  if (!userInfo) return <NotSignedIn />;
+  else {
+    if (!cartItems) return <NotCartItems />;
+    else {
       return (
         <>
           <nav
@@ -80,8 +71,7 @@ export default function NavMobile(props) {
           >
             <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
               <a href="/" style={{ color: "#484848" }}>
-                  <b>JandJ</b>
-                
+                <b>Kitenge</b>
               </a>
             </div>
             <Menu
@@ -114,14 +104,18 @@ export default function NavMobile(props) {
                   borderRadius: "10px",
                   marginLeft: "0",
                 }}
-                title={<SettingOutlined style={{ fontSize: "1.3rem", color:"grey" }} />}
+                title={
+                  <SettingOutlined
+                    style={{ fontSize: "1.3rem", color: "grey" }}
+                  />
+                }
               >
                 <Menu.Item icon={<PlusOutlined />}>
                   <Link to="/products/add">Add Product</Link>
                 </Menu.Item>
                 <Menu.Item icon={<EditOutlined />}>
-                <Link to="/produc/manage">Edit Product</Link>
-              </Menu.Item>
+                  <Link to="/produc/manage">Edit Product</Link>
+                </Menu.Item>
               </SubMenu>
 
               <SubMenu
