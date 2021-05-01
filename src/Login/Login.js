@@ -12,8 +12,6 @@ import {
 } from "@ant-design/icons";
 
 const Cookie = require("js-cookie");
-const userFailure = Cookie.getJSON("userFailure");
-const userSuccess = Cookie.getJSON("userInfo");
 
 
 export default function SignIn(props) {
@@ -70,6 +68,8 @@ export default function SignIn(props) {
                 password: values.password,
               };
               await dispatch(signin(dataToSubmit));
+              const userFailure = Cookie.getJSON("userFailure");
+
 
               if (!userFailure) {
                 console.log();
@@ -77,6 +77,7 @@ export default function SignIn(props) {
                 setFormErrorMessage(userFailure.message);
               }
 
+              const userSuccess = Cookie.getJSON("userInfo");
               if (!userSuccess) console.log();
               else {
                 message.success("Successfully login");

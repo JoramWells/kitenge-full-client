@@ -9,7 +9,7 @@ import {
   message,
   Space,
   Table,
-  Image
+  Image,
 } from "antd";
 import { confirmPayment, makePayment } from "../_actions/paymentActions";
 import { useEffect } from "react";
@@ -25,7 +25,11 @@ const columns = [
     dataIndex: "image",
     key: "image",
     render: (img) => (
-      <Image src={img} alt="image file" style={{ width: "50px" }} />
+      <Image
+        src={img}
+        alt="image file"
+        style={{ width: "50px", height: "50px", objectFit: "contain" }}
+      />
     ),
   },
   {
@@ -48,7 +52,7 @@ export default function ShippingScreen() {
   const userSignin = useSelector((state) => state.userSignin);
   const paymentDetail = useSelector((state) => state.payment);
   let qt = "";
-  const[payment,setPayment] = useState([])
+  const [payment, setPayment] = useState([]);
   const { loading, paymentDetails, error } = paymentDetail;
   const confirmDetails = useSelector((state) => state.confirmDetails);
   const {
@@ -56,32 +60,33 @@ export default function ShippingScreen() {
     confirmPaymentDetails,
     errorDetails,
   } = confirmDetails;
-  
-  const payDetail = Cookie.getJSON("paymentDetails");  
+
+  const payDetail = Cookie.getJSON("paymentDetails");
   // const {} = confirmPayment;
   const { userInfo } = userSignin;
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   const dispatch = useDispatch();
 
-  const confirmPay =  () => {
-    {loading ?(message.info('loading...')): error?(message.warn('error')):(
-      // await dispatch(confirmPayment(paymentDetails.CheckoutrequestID))
-      console.log("pays " + paymentDetails)
-      
-    )}
-
-  };
-  console.log(payment)
-  const paymentHandler =async(e) => {
-    e.preventDefault()
-     await dispatch(makePayment("+254799980846", 1)); 
+  function confirmPay() {
+    {
+      loading
+        ? message.info("loading...")
+        : error
+        ? message.warn("error")
+        : // await dispatch(confirmPayment(paymentDetails.CheckoutrequestID))
+          console.log("pays " + paymentDetails);
+    }
+  }
+  // console.log(payment)
+  async function paymentHandler(e) {
+    e.preventDefault();
+    await dispatch(makePayment("+254799980846", 1));
     //  setTimeout( ()=>{
     //    dispatch(confirmPayment(paymentDetails.CheckoutRequestID))
 
-    // },2000)   
-
-  };
+    // },2000)
+  }
   // if(!payDetail){
   // }else{
   //   setTimeout( async()=>{
@@ -93,15 +98,11 @@ export default function ShippingScreen() {
 
   // }
   useEffect(() => {
-          confirmPay()
+    confirmPay();
 
-    console.log(payDetail)
-    return () => {
-      
-    }
-  }, [])
-
-
+    console.log(payDetail);
+    return () => {};
+  }, []);
 
   // if (payDetail) {
   //   message.info(payDetail.ResponseDescription);
@@ -111,11 +112,8 @@ export default function ShippingScreen() {
   // }
   // const confirmPaid = Cookie.getJSON("confirmPaid");
   // if(confirmPaid){
-    
+
   // }
-
-
-
 
   return (
     <>
@@ -144,14 +142,14 @@ export default function ShippingScreen() {
         </Col>
       </Row>
       <Row justify="space-around" align="middle" style={{ padding: "1rem" }}>
-        <Col >
+        <Col>
           <Button
-          type="primary"
+            type="primary"
             style={{ border: "0" }}
             block
             onClick={paymentHandler}
           >
-           BUY NOW!!
+            BUY NOW!!
           </Button>
         </Col>
       </Row>
