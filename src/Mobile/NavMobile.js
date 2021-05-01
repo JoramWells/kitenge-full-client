@@ -53,9 +53,9 @@ export default function NavMobile(props) {
     setVisible(true);
   }
 
-  if (userInfo.length === 0) return <NotSignedIn />;
+  if (!userInfo) return <NotSignedIn />;
   else {
-    if (cartItems.length === 0) return <NotCartItems />;
+    if (!cartItems) return <NotCartItems />;
     else {
       return (
         <>

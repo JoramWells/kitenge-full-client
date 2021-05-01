@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { saveProduct } from "../_actions/productActions";
 import { CaretRightOutlined, CloseCircleOutlined, UploadOutlined } from "@ant-design/icons";
@@ -30,8 +30,8 @@ export default function AddProduct(props) {
 
   const dispatch = useDispatch();
   const { Title } = Typography;
-  const closeHandler = () => {
-    history.goBack();
+  function closeHandler (){
+    return history.goBack();
   };
   const prop = {
     name: "file",
@@ -77,14 +77,14 @@ export default function AddProduct(props) {
   };
 
 
-  const productAdd = async (e) => {
+  const productAdd = useCallback((e)  => {
     e.preventDefault();
-    await dispatch(saveProduct(name,price, shop,  image, category, description));
+     dispatch(saveProduct(name,price, shop,  image, category, description));
     setTimeout(() => {
       message.success("Product added succefully");
       history.go("/produc/manage");
     }, 2000);
-  };
+  })
 
   return (
     <Row justify="space-around" align="middle" style={{ marginTop: "4rem", marginBottom:"3rem" }}>
@@ -156,6 +156,7 @@ export default function AddProduct(props) {
               <Button icon={<UploadOutlined style={{backgroundColor:"whitesmoke"}} />}>Select image</Button>
             </Upload>
           </Form.Item>
+
           <Form.Item>
             <Button block htmlType="submit" type="primary" onClick={productAdd}>
               Add

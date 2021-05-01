@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Row,
@@ -12,7 +12,6 @@ import {
   Image,
 } from "antd";
 import { confirmPayment, makePayment } from "../_actions/paymentActions";
-import { useEffect } from "react";
 
 const columns = [
   {
@@ -125,12 +124,14 @@ export default function ShippingScreen() {
         <Col>
           <Descriptions title="Your Details">
             <Descriptions.Item>
-              {userInfo.name}, {userInfo.email}, {userInfo.phone},{" "}
+              {userInfo.name}, {userInfo.email},<br /> {userInfo.phone},
               {userInfo.address}
             </Descriptions.Item>
           </Descriptions>
-          <Table columns={columns} dataSource={cartItems} />
         </Col>
+      </Row>
+      <Row justify="space-around" align="middle">
+        <Table columns={columns} dataSource={cartItems} />
       </Row>
       <Row justify="space-around" align="middle">
         <Col>
@@ -155,9 +156,9 @@ export default function ShippingScreen() {
       </Row>
       <Row>
         {loading ? (
-          <div>{message.info("loading..")}</div>
+          <>{message.info("loading..")}</>
         ) : error ? (
-          <div>{message.warn(error)}</div>
+          <> {message.warn(error)} </>
         ) : (
           <div>
             {!paymentDetails ? (

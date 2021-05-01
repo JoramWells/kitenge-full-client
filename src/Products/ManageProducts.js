@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, Fragment, useRef, useCallback } from "react";
 import {
   Button,
   Modal,
@@ -49,7 +49,7 @@ export default function ManageProducts() {
     success: successSave,
     error: errorSave,
   } = ProductList;
-  const renderTB = [...Array(product.length).keys()].map((i) => {
+  const renderTB = [...Array(4).keys()].map((i) => {
     return (
       <Fragment key={i}>
               <td>
@@ -71,21 +71,22 @@ export default function ManageProducts() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showButton, setShowButton] = useState(true);
   const [showLoading, setShowLoading] = useState(false);
-
+  const mountedRef = useRef(true)
   useEffect(() => {
     dispatch(listProducts());
+    return ()=>{mountedRef.current=false}
   }, []);
 
-  const productEdit = async () => {
+  const productEdit = useCallback( () => {
     dispatch(
-      await updateProduct(id, name, shop, price, image, category, description)
+       updateProduct(id, name, shop, price, image, category, description)
     );
     setTimeout(() => {
       dispatch(listProducts());
       setIsModalVisible(false);
       if (product) message.success("Product update successfully");
     }, 1000);
-  };
+  })
   const deleteHandler = () => {
     dispatch(deleteProduct(id));
   };
@@ -110,15 +111,15 @@ export default function ManageProducts() {
     setCategory(item.category);
     setDescription(item.description);
   };
-  const handleReload = () => {
+  function handleReload () {
     window.location.reload();
   };
 
-  const handleOk = () => {
+  function handleOk(){
     setIsModalVisible(false);
   };
 
-  const handleCancel = () => {
+  function handleCancel (){
     setIsModalVisible(false);
   };
 

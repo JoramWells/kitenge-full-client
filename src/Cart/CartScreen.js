@@ -5,6 +5,7 @@ import { Button, Row, Col, Empty, Image, Table } from "antd";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import NumberFormat from "react-number-format";
+import { ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
 
 const columns = [
   {
@@ -100,7 +101,7 @@ export default function CartScreen(props) {
         style={{ marginBottom: ".5rem" }}
       >
         <Col>
-          <Button block type="primary" style={{ borderRadius: "5px" }}>
+          <Button size="large" icon={<ArrowLeftOutlined />} block type="primary" style={{ borderRadius: "5px"}}>
             Continue
           </Button>
         </Col>
@@ -108,17 +109,17 @@ export default function CartScreen(props) {
       <Row justify="space-around" align="middle">
         <Col>
           <Button
+          size="large"
+          icon={<ArrowRightOutlined/>}
             className="cart"
             type="primary"
             block
             style={{ border: "0", borderRadius: "5px" }}
             disabled={cartItems.length === 0}
-          >
-            <h4>
+          >{" "}
               <Link to="/shipping" style={{ color: "black" }}>
                 Checkout
               </Link>
-            </h4>
           </Button>
         </Col>
       </Row>

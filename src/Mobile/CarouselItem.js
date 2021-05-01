@@ -328,13 +328,14 @@ function CarouselItem(props) {
         />
       ) : (
         <>
-          <Row justify="space-around" align="middle" gutter={[0, 16]}>
+          <Row justify="space-around" align="middle" gutter={[0, 16]} style={{backgroundColor:"black"}}>
             {posts.map((item) => (
               <Col key={item.id}>
                 <Card
                   style={{
-                    width: "15rem",
+                    width: "17rem",
                     height: "auto",
+                    padding:"0rem"
                   }}
                   extra={
                     <Ripples>
@@ -354,8 +355,8 @@ function CarouselItem(props) {
                       alt="product-Image"
                       style={{
                         marginTop:"0",
-                        width: "14.8rem",
-                        height: "13.86rem",
+                        width: "17rem",
+                        height: "15.86rem",
                         display: "flex",
                         margin: "auto",
                         objectFit:"contain"
@@ -364,6 +365,7 @@ function CarouselItem(props) {
                   }
                 >
                   <Meta
+                  style={{padding:"0"}}
                     title={
                       <Link
                         to={`/product-detail/${item.id}/?category=${item.category}`}
@@ -405,7 +407,7 @@ function CarouselItem(props) {
                       suffix=" /="
                     />
                   </p>
-                  <div
+                  {/* <div
                     style={{
                       backgroundColor: "rgba(240, 52, 52, 0.3)",
                       borderRadius: "5px",
@@ -419,7 +421,7 @@ function CarouselItem(props) {
                       prefix="-"
                       suffix="%"
                     />
-                  </div>
+                  </div> */}
                 </Card>
               </Col>
             ))}
