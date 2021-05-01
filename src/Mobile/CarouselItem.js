@@ -1,4 +1,4 @@
-import React, { lazy, useState } from "react";
+import React, { lazy, useCallback, useState } from "react";
 import { withRouter } from "react-router-dom";
 import {
   Row,
@@ -56,13 +56,13 @@ function CarouselItem(props) {
   const [image, setImage] = useState("");
   const [date, setDate] = useState("");
   const [rate, setRate] = useState("");
-
   const [description, setDescription] = useState("");
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const [visible, setVisible] = useState(false);
   const [visible2, setVisible2] = useState(false);
   const [visible3, setVisible3] = useState(false);
+  
 
   function showModal2() {
     setTimeout(() => {
@@ -76,7 +76,7 @@ function CarouselItem(props) {
     }, 500);
   }
 
-  function showModal(item) {
+  const  showModal = useCallback((item) => {
     setTimeout(() => {
       setVisible(true);
     }, 500);
@@ -90,7 +90,7 @@ function CarouselItem(props) {
     setCategory(item.category);
     setDescription(item.description);
     setRate(item.ratings);
-  }
+  })
 
   function handleCancel() {
     setTimeout(() => {
