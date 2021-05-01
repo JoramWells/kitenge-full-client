@@ -364,7 +364,28 @@ function CarouselItem(props) {
                     />
                   }
                 >
-                  <Meta
+                  <Link
+                        to={`/product-detail/${item.id}/?category=${item.category}`}
+                      >
+                        <h3
+                          style={{ color: "rgba(211, 84, 0, 1)", margin: "0" }}
+                        >
+                          {" "}
+                          {item.product_name}
+                        </h3>
+                      </Link>
+
+                  <Rate
+                        name="size-small"
+                        allowHalf={true}
+                        style={{
+                          fontSize: "1rem",
+                          color: "#282c35",
+                          marginBottom: ".6rem",
+                        }}
+                        defaultValue={item.ratings}
+                      />
+                  {/* <Meta
                   style={{padding:"0"}}
                     title={
                       <Link
@@ -390,13 +411,13 @@ function CarouselItem(props) {
                         defaultValue={item.ratings}
                       />
                     }
-                  />
+                  /> */}
 
                   <p
                     style={{
                       color: "grey",
-                      fontSize: "1rem",
-                      marginBottom: ".3rem",
+                      fontSize: ".9rem",
+                      marginBottom: "0rem",
                     }}
                   >
                     <NumberFormat
