@@ -1,4 +1,4 @@
-import React, { lazy, useCallback, useState } from "react";
+import React, {  useCallback, useState } from "react";
 import { withRouter } from "react-router-dom";
 import {
   Row,
