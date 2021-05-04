@@ -6,7 +6,6 @@ import {
   Card,
   Rate,
   Form,
-  Skeleton,
   message,
   Button,
   Image,
