@@ -20,12 +20,13 @@ import {
 } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import Carousel from "react-multi-carousel";
-import { categoryProduct, detailsProduct } from "../_actions/productActions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import NumberFormat from "react-number-format";
+
+import { categoryProduct, detailsProduct } from "../_actions/productActions";
 
 // import RecentItemsBar from "../RecentItemsBar";
 
-import NumberFormat from "react-number-format";
 import RecentItemsBar from "../Generic/RecentItemsBar";
 import { RedoOutlined } from "@ant-design/icons";
 
@@ -100,7 +101,7 @@ export default function ProductDetail(props) {
   }, []);
 
   function loginHandler() {
-    return props.history.push("/login");
+   props.history.push("/login");
   }
 
   function handleAddToCart() {
@@ -161,7 +162,7 @@ export default function ProductDetail(props) {
 
             <Col style={{ padding: "20px" }} md={6} sm={6}>
               <h2 level={3}>{product.product_name}</h2>
-              <h3>Reviews: </h3>{" "}
+              <h3 style={{color:"grey"}}>Reviews: (123) </h3>{" "}
               <Rate
                 style={{ color: "#282c35" }}
                 disabled
@@ -179,8 +180,8 @@ export default function ProductDetail(props) {
                 />
               </h3>
               <h3 level={5}>Categorys': {product.category}</h3>
-              <h3>Shipping: {product.category}</h3>
-              <h3>Qty: </h3>
+              <h3 style={{color:"grey"}}>Shipping: 350/=</h3>
+              <h3>Qty: {product.stock}</h3>
               <select
                 defaultValue={qty}
                 style={{ width: 120 }}
@@ -196,20 +197,20 @@ export default function ProductDetail(props) {
               </select>
               <Divider plain></Divider>
               {userInfo ? (
-                <Row justify="space-around" style={{ margin: "2rem" }}>
+                <Row justify="space-around" style={{ margin: "1rem" }}>
                   <Button
                     style={{
                       display: "inline-block",
                       border: "0",
                       textDecoration: "none",
-                      color: "black",
+                      color: "white",
                     }}
                     block
                     size="large"
                     className="cart"
                     onClick={handleAddToCart}
                   >
-                    <b style={{ color: "white" }}>Add cart</b>
+                    ADD TO CART
                   </Button>
                 </Row>
               ) : (
