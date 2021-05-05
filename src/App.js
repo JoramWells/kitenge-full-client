@@ -12,6 +12,10 @@ import HomeRoutes from "./HomeRoutes";
 import DesktopNavbarMobile from "./DesktopNavbarMobile";
 import Footer from "./Desktop/Footer";
 import Product from "./Products/Product";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
+
 
 function App() {
   return (

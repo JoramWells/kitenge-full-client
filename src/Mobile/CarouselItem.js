@@ -32,8 +32,6 @@ import { addToCart } from "../_actions/cartActions";
 import CarouselHeader from "../Generic/CarouselHeader";
 import Modal from "react-modal";
 
-Modal.setAppElement("#root");
-const { Meta } = Card;
 
 const renderSkeleton = [...Array(5).keys()].map((i) => {
   return (
