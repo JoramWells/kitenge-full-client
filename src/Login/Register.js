@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { GoogleLogin } from "react-google-login";
 import PhoneInput from "react-phone-input-2";
-import axios from "axios";
+// import axios from "axios";
 import {
   Row,
   Col,
@@ -72,7 +72,7 @@ export default function SignUp() {
     }
   };
 
-  const responseSuccess = async (response) => {
+  function responseSuccess(response){
     setName(response.profileObj.name);
     setEmail(response.profileObj.email);
     setAvatar(response.profileObj.imageUrl);
@@ -80,9 +80,9 @@ export default function SignUp() {
     setPassword("JoramWells18.");
     // props.history.push('/')
     console.log(response.tokenObj);
-    await axios.post("/getToken", response.tokenObj.id_token);
+    // await axios.post("/getToken", response.tokenObj.id_token);
   };
-  const responseFailure = (response) => {
+  function responseFailure(response){
     console.log(response);
     // props.history.push('/')
   };
