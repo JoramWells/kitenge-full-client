@@ -43,30 +43,26 @@ export default function SignUp() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
-  const [load,setLoad] = useState(false)
   const dispatch = useDispatch();
 
   const closeHandler = () => {
     history.goBack();
   };
 
-  const submitHandler = async (e) => {
-    setLoad(true)
-    e.preventDefault();
+  async function submitHandler (){
+    // e.preventDefault();
     await dispatch(register(name, email, password, avatar, phone, address));
     const userFailure = Cookie.getJSON("userFailure");
     if (!userFailure) {
       
       console.log();
     } else {
-      setLoad(false)
       message.warn(userFailure.message);
     }
 
     const userSuccess = Cookie.getJSON("userInfo");
     if (!userSuccess) console.log();
     else {
-      setLoad(false)
       message.success("Successfully registered");
       history.goBack();
     }
@@ -78,6 +74,7 @@ export default function SignUp() {
     setAvatar(response.profileObj.imageUrl);
 
     setPassword("JoramWells18.");
+    submitHandler()
     // props.history.push('/')
     console.log(response.tokenObj);
     // await axios.post("/getToken", response.tokenObj.id_token);
@@ -107,7 +104,7 @@ export default function SignUp() {
               />
             </Col>
           </Row>
-          <Divider/>
+          <Divider>SIGN UP</Divider>
           <Form layout="vertical" size="large" onSubmit={submitHandler}>
             <Form.Item required>
               <Input
@@ -210,6 +207,7 @@ export default function SignUp() {
               />
             </Form.Item>
             <Form.Item>
+              <Row justify="space-around" align="middle">
               <GoogleLogin
                 clientId={CLIENT_ID}
                 buttonText="Sign in with Google"
@@ -217,8 +215,10 @@ export default function SignUp() {
                 onFailure={responseFailure}
                 style={{ display: "block" }}
               />
+              </Row>
+
             </Form.Item>
-            <Form.Item>
+            {/* <Form.Item>
               <Button
                 htmlType="submit"
                 type="primary"
@@ -230,7 +230,7 @@ export default function SignUp() {
               >
                 SIGN UP
               </Button>
-            </Form.Item>
+            </Form.Item> */}
 
             <Row
               justify="space-around"
