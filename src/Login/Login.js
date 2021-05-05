@@ -30,7 +30,7 @@ export default function SignIn(props) {
   const dispatch = useDispatch();
 
   function closeHandler (){
-    return history.goBack();
+    history.goBack();
   };
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export default function SignIn(props) {
 
   return (
     <Row justify="space-around" align="middle" style={{ marginTop: "5rem", marginBottom:"2rem" }}>
-      <Card style={{ width: "25rem" }}>
+      <Card style={{ width: "23rem" }}>
         <Row justify="end">
 
             <CloseCircleOutlined

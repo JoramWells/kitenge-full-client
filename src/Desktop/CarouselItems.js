@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,memo } from "react";
 import Carousel from "react-multi-carousel";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -65,7 +65,7 @@ const responsive = {
   },
 };
 
-export default function CarouselItems() {
+export function CarouselItem() {
   const dispatch = useDispatch();
   const ProductList = useSelector((state) => state.productList);
   const { posts, loading, error } = ProductList;
@@ -194,3 +194,5 @@ export default function CarouselItems() {
     </main>
   );
 }
+
+export  const CarouselItems = memo(CarouselItem)

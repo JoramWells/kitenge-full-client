@@ -91,7 +91,7 @@ export default function SignUp() {
         align="middle"
         style={{ marginBottom: "1rem" }}
       >
-        <Card style={{ width: "25rem", marginTop: "4rem" }}>
+        <Card style={{ width: "23rem", marginTop: "4rem" }}>
           <Row justify="space-between" align="middle">
             <Col>
               <Avatar src={avatar} style={{ margin: "0.3rem" }} />
@@ -195,6 +195,7 @@ export default function SignUp() {
               />
             </Form.Item> */}
 
+
             <Form.Item >
               <Input.Password
                 prefix={<LockOutlined style={iconStyles} />}
@@ -207,7 +208,10 @@ export default function SignUp() {
               />
             </Form.Item>
             <Form.Item>
-              <Row justify="space-around" align="middle">
+            <Link to="/login">Already have an account? Sign in</Link>
+              
+              </Form.Item>
+            <Form.Item>
               <GoogleLogin
                 clientId={CLIENT_ID}
                 buttonText="Sign in with Google"
@@ -215,7 +219,6 @@ export default function SignUp() {
                 onFailure={responseFailure}
                 style={{ display: "block" }}
               />
-              </Row>
 
             </Form.Item>
             {/* <Form.Item>
@@ -232,16 +235,7 @@ export default function SignUp() {
               </Button>
             </Form.Item> */}
 
-            <Row
-              justify="space-around"
-              align="middle"
-              style={{ padding: "1rem" }}
-            >
-              <Col>
-                <Link to="/login">Already have an account? Sign in</Link>
-              </Col>
-              <Col></Col>
-            </Row>
+
           </Form>
         </Card>
       </Row>
