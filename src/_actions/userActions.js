@@ -7,8 +7,8 @@ import {
     USER_REGISTER_FAIL,
     GOOGLE_AUTH,
   } from "../_constants/userConstants";
-  const axios = require("axios");
-  const Cookie = require("js-cookie");
+  import axios from 'axios'
+import Cookie from 'js-cookie'
   
   const signin = (dataToSubmit) => async (dispatch) => {
     dispatch({ type: USER_SIGNIN_REQUEST, payload: dataToSubmit });
