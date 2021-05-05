@@ -13,7 +13,6 @@ import {
   Avatar,
   Card,
   message,
-  Divider,
 } from "antd";
 import {
   CloseCircleOutlined,
@@ -25,7 +24,14 @@ import {
 import Cookie from "js-cookie";
 import { register } from "../_actions/userActions";
 
-
+const iconStyles={
+  color:"grey",
+}
+const inputStyles={
+  borderTop:"0",
+  borderLeft:"0",
+  borderRight:"0"
+}
 
 export default function SignUp() {
   const CLIENT_ID =
@@ -101,16 +107,15 @@ export default function SignUp() {
               />
             </Col>
           </Row>
-          <Divider></Divider>
-
           <Form layout="vertical" size="large" onSubmit={submitHandler}>
             <Form.Item required>
               <Input
-                prefix={<UserOutlined />}
+                prefix={<UserOutlined style={iconStyles} />}
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Enter name"
+                style={inputStyles}
               />
             </Form.Item>
             <Form.Item
@@ -124,11 +129,14 @@ export default function SignUp() {
             </Form.Item>
             <Form.Item required>
               <Input
-                prefix={<MailOutlined />}
+                prefix={<MailOutlined style={iconStyles} />}
                 value={email}
                 id="email"
                 name="email"
+                
+                placeholder="jorammanoah1@gmail.com"
                 onChange={(e) => setEmail(e.target.value)}
+                style={inputStyles}
               />
             </Form.Item>
 
@@ -137,9 +145,10 @@ export default function SignUp() {
                 id="address"
                 name="address"
                 placeholder="Enter your location"
-                prefix={<StopOutlined />}
+                prefix={<StopOutlined style={iconStyles} />}
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
+                style={inputStyles}
               />
             </Form.Item>
             {/* <Form.Item label="Location" required>
@@ -188,13 +197,15 @@ export default function SignUp() {
               />
             </Form.Item>
 
-            <Form.Item label="Password" required>
+            <Form.Item >
               <Input.Password
-                prefix={<LockOutlined />}
+                prefix={<LockOutlined style={iconStyles} />}
                 id="password"
+                required
                 name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                style={inputStyles}
               />
             </Form.Item>
             <Form.Item>
@@ -213,8 +224,10 @@ export default function SignUp() {
                 onClick={submitHandler}
                 block
                 loading={load}
+                className="cart"
+                style={{borderRadius:"5px", border:"0" }}
               >
-                Sign Up
+                SIGN UP
               </Button>
             </Form.Item>
 
