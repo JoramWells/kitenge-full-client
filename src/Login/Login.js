@@ -10,8 +10,7 @@ import {
   LockOutlined,
   MailOutlined,
 } from "@ant-design/icons";
-
-const Cookie = require("js-cookie");
+import Cookie from 'js-cookie'
 
 
 export default function SignIn(props) {

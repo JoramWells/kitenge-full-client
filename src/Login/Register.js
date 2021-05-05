@@ -1,12 +1,20 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch} from "react-redux";
-import { register } from "../_actions/userActions";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { GoogleLogin } from "react-google-login";
 import PhoneInput from "react-phone-input-2";
-import { useHistory } from "react-router-dom";
-import axios from 'axios'
-import { Row, Col, Form, Input, Button, Avatar, Card, message,Divider } from "antd";
+import axios from "axios";
+import {
+  Row,
+  Col,
+  Form,
+  Input,
+  Button,
+  Avatar,
+  Card,
+  message,
+  Divider,
+} from "antd";
 import {
   CloseCircleOutlined,
   LockOutlined,
@@ -14,7 +22,8 @@ import {
   StopOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-const Cookie = require("js-cookie");
+import Cookie from "js-cookie";
+import { register } from "../_actions/userActions";
 
 export default function SignUp() {
   const CLIENT_ID =
@@ -56,7 +65,7 @@ export default function SignUp() {
     setPassword("JoramWells18.");
     // props.history.push('/')
     console.log(response.tokenObj);
-     await axios.post('/getToken', response.tokenObj.id_token)
+    await axios.post("/getToken", response.tokenObj.id_token);
   };
   const responseFailure = (response) => {
     console.log(response);
@@ -70,8 +79,7 @@ export default function SignUp() {
         align="middle"
         style={{ marginBottom: "1rem" }}
       >
-        <Card style={{ width: "25rem", marginTop:"4rem" }}>
-
+        <Card style={{ width: "25rem", marginTop: "4rem" }}>
           <Row justify="space-between" align="middle">
             <Col>
               <Avatar src={avatar} style={{ margin: "0.3rem" }} />
@@ -84,11 +92,10 @@ export default function SignUp() {
               />
             </Col>
           </Row>
-          <Divider>
-          </Divider>
+          <Divider></Divider>
 
           <Form layout="vertical" size="large" onSubmit={submitHandler}>
-            <Form.Item required >
+            <Form.Item required>
               <Input
                 prefix={<UserOutlined />}
                 id="name"
@@ -106,9 +113,7 @@ export default function SignUp() {
             >
               <Input />
             </Form.Item>
-            <Form.Item 
-            required
-            >
+            <Form.Item required>
               <Input
                 prefix={<MailOutlined />}
                 value={email}
@@ -118,9 +123,7 @@ export default function SignUp() {
               />
             </Form.Item>
 
-            <Form.Item
-
-             required>
+            <Form.Item required>
               <Input
                 id="address"
                 name="address"
