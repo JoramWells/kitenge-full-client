@@ -25,6 +25,8 @@ import {
 import Cookie from "js-cookie";
 import { register } from "../_actions/userActions";
 
+
+
 export default function SignUp() {
   const CLIENT_ID =
     "266388441735-5a4sfpj0lpk8nvjkf52ppoqqul0139st.apps.googleusercontent.com";
@@ -35,6 +37,7 @@ export default function SignUp() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
+  const [load,setLoad] = useState(false)
   const dispatch = useDispatch();
 
   const closeHandler = () => {
@@ -42,16 +45,22 @@ export default function SignUp() {
   };
 
   const submitHandler = async (e) => {
+    setLoad(true)
     e.preventDefault();
     await dispatch(register(name, email, password, avatar, phone, address));
     const userFailure = Cookie.getJSON("userFailure");
     if (!userFailure) {
+      
       console.log();
-    } else message.warn(userFailure.message);
+    } else {
+      setLoad(false)
+      message.warn(userFailure.message);
+    }
 
     const userSuccess = Cookie.getJSON("userInfo");
     if (!userSuccess) console.log();
     else {
+      setLoad(false)
       message.success("Successfully registered");
       history.goBack();
     }
@@ -203,6 +212,7 @@ export default function SignUp() {
                 type="primary"
                 onClick={submitHandler}
                 block
+                loading={load}
               >
                 Sign Up
               </Button>
