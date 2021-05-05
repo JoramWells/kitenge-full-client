@@ -12,6 +12,14 @@ import {
 } from "@ant-design/icons";
 import Cookie from 'js-cookie'
 
+const iconStyles={
+  color:"grey",
+}
+const inputStyles={
+  borderTop:"0",
+  borderLeft:"0",
+  borderRight:"0"
+}
 
 export default function SignIn(props) {
   const history = useHistory();
@@ -44,7 +52,7 @@ export default function SignIn(props) {
             />
         </Row>
         <Divider>
-          <h3>LOGIN</h3>
+          SIGN IN
         </Divider>
 
         <Formik
@@ -102,9 +110,9 @@ export default function SignIn(props) {
                 <Form.Item
                  required>
                   <Input
-                    prefix={<MailOutlined style={{color:"#423F3B", fontSize:"1.5rem"}} />}
+                    prefix={<MailOutlined style={iconStyles} />}
                     id="email"
-                    placeholder="Enter email addrress"
+                    placeholder=" johndoe123@gmail.com"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.email}
@@ -113,6 +121,7 @@ export default function SignIn(props) {
                         ? "text-input error"
                         : "text-input"
                     }
+                    style={inputStyles}
                   />
                   {errors.email && touched.email && (
                     <div className="input-feedback">{errors.email}</div>
@@ -123,7 +132,7 @@ export default function SignIn(props) {
                 required>
                   <Input.Password
                     id="password"
-                    prefix={<LockOutlined style={{color:"#423F3B", fontSize:"1.5rem"}}/>}
+                    prefix={<LockOutlined style={iconStyles}/>}
                     placeholder="Enter password"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -133,6 +142,7 @@ export default function SignIn(props) {
                         ? "text-input error"
                         : "text-input"
                     }
+                    style={inputStyles}
                   />
                   {errors.password && touched.password && (
                     <div className="input-password">{errors.password}</div>
