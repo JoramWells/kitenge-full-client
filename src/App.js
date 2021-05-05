@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, Fragment } from "react";
+import React, {  Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Register from "./Login/Register";
@@ -12,10 +12,6 @@ import HomeRoutes from "./HomeRoutes";
 import DesktopNavbarMobile from "./DesktopNavbarMobile";
 import Footer from "./Desktop/Footer";
 import Product from "./Products/Product";
-import Modal from "react-modal";
-
-Modal.setAppElement("#root");
-
 
 function App() {
   return (

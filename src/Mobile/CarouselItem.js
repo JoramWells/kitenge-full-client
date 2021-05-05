@@ -32,6 +32,7 @@ import { addToCart } from "../_actions/cartActions";
 import CarouselHeader from "../Generic/CarouselHeader";
 import Modal from "react-modal";
 
+if (process.env.NODE_ENV !== 'test') Modal.setAppElement('#root');
 
 const renderSkeleton = [...Array(5).keys()].map((i) => {
   return (
