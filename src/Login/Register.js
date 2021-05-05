@@ -13,12 +13,12 @@ import {
   Avatar,
   Card,
   message,
+  Divider
 } from "antd";
 import {
   CloseCircleOutlined,
   LockOutlined,
   MailOutlined,
-  StopOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import Cookie from "js-cookie";
@@ -107,6 +107,7 @@ export default function SignUp() {
               />
             </Col>
           </Row>
+          <Divider/>
           <Form layout="vertical" size="large" onSubmit={submitHandler}>
             <Form.Item required>
               <Input
@@ -114,7 +115,7 @@ export default function SignUp() {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Enter name"
+                placeholder="John Doe"
                 style={inputStyles}
               />
             </Form.Item>
@@ -140,7 +141,7 @@ export default function SignUp() {
               />
             </Form.Item>
 
-            <Form.Item required>
+            {/* <Form.Item required>
               <Input
                 id="address"
                 name="address"
@@ -150,7 +151,7 @@ export default function SignUp() {
                 onChange={(e) => setAddress(e.target.value)}
                 style={inputStyles}
               />
-            </Form.Item>
+            </Form.Item> */}
             {/* <Form.Item label="Location" required>
                 <PlacesAutocomplete
                   value={address}
@@ -183,7 +184,7 @@ export default function SignUp() {
                   )}
                 </PlacesAutocomplete>
               </Form.Item> */}
-            <Form.Item
+            {/* <Form.Item
               required
               id="phone"
               name="phone"
@@ -195,7 +196,7 @@ export default function SignUp() {
                 preferredCountries={["ke", "ug", "tz"]}
                 placeholder="254799980846"
               />
-            </Form.Item>
+            </Form.Item> */}
 
             <Form.Item >
               <Input.Password
