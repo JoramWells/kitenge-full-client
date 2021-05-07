@@ -137,14 +137,13 @@ export function CarouselItem() {
                         
                         to={`/product-detail/${product.id}/?category=${product.category}`}
                       >
-                        <h3
+                        <p
                         style={{ color: "rgba(211, 84, 0, 1)", margin: "0" }}
-                        >{product.product_name}</h3>
+                        >{product.product_name}</p>
                       </Link>
                       }
                       description={
                         <Rate
-                        name="size-small"
                         allowHalf={true}
                         style={{
                           fontSize: "1rem",
@@ -158,7 +157,7 @@ export function CarouselItem() {
                   <p
                     style={{
                       color: "grey",
-                      fontSize: "1rem",
+                      fontSize: ".8rem",
                       marginBottom: ".3rem",
                     }}
                   >
