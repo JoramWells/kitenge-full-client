@@ -37,6 +37,7 @@ export default function AddProduct(props) {
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
+  const [ratings, setRatings] = useState("");
 
   const dispatch = useDispatch();
   const { Title } = Typography;
@@ -86,7 +87,7 @@ export default function AddProduct(props) {
 
   const productAdd = useCallback((e) => {
     e.preventDefault();
-    dispatch(saveProduct(name, price, shop, image, category, description));
+    dispatch(saveProduct(name, price, shop, image, ratings, category, description));
     setTimeout(() => {
       message.success("Product added succefully");
       history.go("/produc/manage");
@@ -102,7 +103,7 @@ export default function AddProduct(props) {
       <Card style={{ width: "25rem" }}>
         <Row justify="space-between" align="middle">
           <Col>
-            <p style={{ fontSize: "1.3rem", margin: "0" }}>Add product</p>
+            <p style={{ fontSize: "1.1rem", margin: "0" }}>ADD PRODUCT</p>
           </Col>
           <Col>
             <CloseCircleOutlined
@@ -162,6 +163,18 @@ export default function AddProduct(props) {
               prefix={<CaretRightOutlined style={iconStyles} />}
               style={inputStyles}
               placeholder="shoes, shirt, kitchen"
+            />
+          </Form.Item>
+          <Form.Item
+            name="ratings"
+            id="ratings"
+            value={ratings}
+            onChange={(e) => setRatings(e.target.value)}
+          >
+            <Input
+              prefix={<CaretRightOutlined style={iconStyles} />}
+              style={inputStyles}
+              placeholder="Ratings 4.3"
             />
           </Form.Item>
           <Form.Item
