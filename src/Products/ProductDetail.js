@@ -160,16 +160,16 @@ export default function ProductDetail(props) {
             </Col>
 
             <Col style={{ padding: "20px" }} md={6} sm={6}>
-              <h2 level={3}>{product.product_name}</h2>
-              <h3 style={{color:"grey"}}>Reviews: (123) </h3>{" "}
+              <p style={{fontSize:"1rem"}}>{product.product_name}</p>
+              <p style={{color:"grey"}}>Reviews: (123) </p>{" "}
               <Rate
-                style={{ color: "#282c35" }}
+                style={{ color: "#282c35", fontSize:"1rem", margin:"0" }}
                 disabled
                 allowHalf
                 defaultValue={product.ratings}
               />
-              <Divider plain></Divider>
-              <h3 style={{ color: "#CD5C5C" }}>
+              <Divider plain style={{margin:".5rem"}}></Divider>
+              <p style={{ color: "#CD5C5C",margin:"0" }}>
                 <NumberFormat
                   value={product.price}
                   thousandSeparator={true}
@@ -177,9 +177,9 @@ export default function ProductDetail(props) {
                   prefix="Kshs: "
                   suffix=" /="
                 />
-              </h3>
-              <h3 level={5}>Categorys': {product.category}</h3>
-              <h3 style={{color:"grey"}}>Shipping: 350/=</h3>
+              </p>
+              <p style={{margin:"0"}}>Categorys': {product.category}</p>
+              <i style={{color:"grey",margin:"0"}}>Shipping: 350/=</i>
               <h3>Qty: {product.stock}</h3>
               <select
                 defaultValue={qty}
