@@ -113,7 +113,6 @@ export default function ProductDetail(props) {
 
   return (
     <>
-      <main style={{ padding: "5px" }}>
         {loading ? (
           <Row
             justify="space-around"
@@ -317,7 +316,6 @@ export default function ProductDetail(props) {
             </Carousel>
           </div>
         )}
-      </main>
     </>
   );
 }

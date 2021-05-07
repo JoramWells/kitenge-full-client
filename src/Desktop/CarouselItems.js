@@ -169,7 +169,7 @@ export function CarouselItem() {
                       suffix=" /="
                     />
                   </p>
-                  <div
+                  {/* <div
                     style={{
                       backgroundColor: "rgba(240, 52, 52, 0.3)",
                       borderRadius: "5px",
@@ -183,7 +183,7 @@ export function CarouselItem() {
                       prefix="-"
                       suffix="%"
                     />
-                  </div>
+                  </div> */}
                   </Card>
                 </Link>
             </Row>
