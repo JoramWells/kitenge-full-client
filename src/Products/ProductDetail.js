@@ -239,11 +239,11 @@ export default function ProductDetail(props) {
                 </Button>
               </>
             )}
-            <Divider style={{marginBottom:"0"}}></Divider>
+            <Divider style={{ marginBottom: "0" }}></Divider>
           </Col>
           <Col sm={6} md={6}>
             <Card style={{ overflowY: "scroll" }}>
-              <Title level={3}>Description</Title>
+              <h3>Description</h3>
               <Text>{product.description}</Text>
             </Card>
           </Col>

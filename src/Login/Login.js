@@ -42,7 +42,7 @@ export default function SignIn(props) {
 
   return (
     <Row justify="space-around" align="middle" style={{ marginTop: "5rem", marginBottom:"2rem" }}>
-      <Card style={{ width: "23rem" }}>
+      <Card style={{ width: "20rem" }}>
         <Row justify="end">
 
             <CloseCircleOutlined
