@@ -10,7 +10,6 @@ import { useHistory } from "react-router-dom";
 
 import {
   Row,
-  Typography,
   Form,
   Input,
   Button,
@@ -42,7 +41,6 @@ export default function AddProduct(props) {
 
 
   const dispatch = useDispatch();
-  const { Title } = Typography;
   function closeHandler() {
     return history.goBack();
   }
@@ -89,7 +87,7 @@ export default function AddProduct(props) {
 
   const productAdd = useCallback((e) => {
     e.preventDefault();
-    dispatch(saveProduct(name, price, shop, image, ratings, category, description));
+    dispatch(saveProduct(name, price, stock, shop, image, ratings, category, description));
     setTimeout(() => {
       message.success("Product added succefully");
       history.go("/produc/manage");

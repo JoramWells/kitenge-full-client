@@ -79,21 +79,21 @@ const deleteProduct = (id) => async (dispatch, getState) => {
   }
 };
 
-const saveProduct = (name,  price,shop,  image,category, description) => async (
+const saveProduct = (name,  price,stock,shop,  image,ratings,category, description) => async (
   dispatch,
   getState
 ) => {
   try {
     dispatch({
       type: PRODUCT_SAVE_REQUEST,
-      payload: { name, price, shop,  image,category, description },
+      payload: { name, price,stock, shop,  image,ratings,category, description },
     });
     const {
       userSignin: { userInfo},
     } = getState();
     await axios.post(
       `/productz/add`,
-      { name,  price,shop,  image,category, description },
+      { name,  price,stock,shop,  image,ratings,category, description },
       {
         headers: {
           Authorization: "Bearer" + userInfo.token,
