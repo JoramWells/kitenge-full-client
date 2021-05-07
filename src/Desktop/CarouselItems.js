@@ -78,7 +78,7 @@ export function CarouselItem() {
     return () => {};
   }, []);
   return (
-    <main style={{ padding: "20px" }}>
+    <>
       <CarouselHeader />
       <RecentItemsBar title="Available Now!!" />
       {loading ? (
@@ -191,7 +191,7 @@ export function CarouselItem() {
           ))}
         </Carousel>
       )}
-    </main>
+    </>
   );
 }
 
