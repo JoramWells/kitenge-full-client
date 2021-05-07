@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
-import { Image, Row, Col, Skeleton,Button,Card,Typography } from "antd";
-import {Link} from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { Image, Row, Col, Skeleton, Button, Card, Typography } from "antd";
+import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
-import axios from 'axios'
+import axios from "axios";
 
 import a4 from "../img/a4.jpeg";
 import a2 from "../img/a2.jpeg";
@@ -33,20 +33,19 @@ const responsive = {
   },
 };
 
-const renderSkeleton = [...Array(4).keys()].map(i=>{
-  return(
+const renderSkeleton = [...Array(4).keys()].map((i) => {
+  return (
     <Col key={i}>
-    <Skeleton.Input
-      style={{
-        width: "70px",
-        borderRadius: "50px",
-        margin: "0.5rem",
-      }}
-    ></Skeleton.Input>
-  </Col>
-    
-  )
-})
+      <Skeleton.Input
+        style={{
+          width: "70px",
+          borderRadius: "50px",
+          margin: "0.5rem",
+        }}
+      ></Skeleton.Input>
+    </Col>
+  );
+});
 
 export default function CarouselHeader() {
   const CategoryList = useSelector((state) => state.categoryLists);
@@ -70,43 +69,49 @@ export default function CarouselHeader() {
     <>
       <>
         {loading ? (
-          <Row justify="space-around" align="middle" style={{marginTop:"3rem"}} span={6} >
-
-{renderSkeleton}
+          <Row
+            justify="space-around"
+            align="middle"
+            style={{ marginTop: "3rem" }}
+            span={6}
+          >
+            {renderSkeleton}
           </Row>
         ) : error ? (
           <div>{error}</div>
         ) : (
           <Row justify="center" align="middle">
-            <Col    md={12} xs={12} xs={24} style={{ padding: "1rem"}}>
-            <Carousel
-              swipeable={false}
-              draggable={false}
-              responsive={responsive}
-              infinite={true}
-              autoPlay={true}
-              renderButtonGroupOutside={true}
-              arrows={false}
-            >
-              {posts.map((post) => (
-                <Button
-                  key={post.id}
-                  style={{
-                    borderRadius: "50px",
-                    backgroundColor: "rgba(232, 126, 4, 0.7)",
-                    border: "none",
-                  }}
-                  // onClick={() => fetchData(post.category)}
-                >
-                  <Link style={{color:"white"}} to={`/product-info/${post.category}`}> {post.category}</Link>
-                  
-                  
-                </Button>
-              ))}
-            </Carousel>
-          </Col>
+            <Col md={12} xs={12} xs={24} style={{ padding: "1rem" }}>
+              <Carousel
+                swipeable={false}
+                draggable={false}
+                responsive={responsive}
+                infinite={true}
+                autoPlay={true}
+                renderButtonGroupOutside={true}
+                arrows={false}
+              >
+                {posts.map((post) => (
+                  <Button
+                    key={post.id}
+                    style={{
+                      borderRadius: "50px",
+                      backgroundColor: "rgba(232, 126, 4, 0.7)",
+                    }}
+                    // onClick={() => fetchData(post.category)}
+                  >
+                    <Link
+                      style={{ color: "white" }}
+                      to={`/product-info/${post.category}`}
+                    >
+                      {" "}
+                      {post.category}
+                    </Link>
+                  </Button>
+                ))}
+              </Carousel>
+            </Col>
           </Row>
-
         )}
       </>
 
@@ -138,14 +143,24 @@ export default function CarouselHeader() {
         autoPlay={true}
         renderButtonGroupOutside={true}
         arrows={false}
-        
-      > 
+      >
         {cats.map((product) => (
           <Row justify="space-around" align="middle" key={product.id}>
             <Col>
               <Card
                 style={{ width: "18rem" }}
-                cover={<img alt={product.image}  src={product.image} style={{width:"auto", height:"auto",maxWidth:"18rem", maxHeight:"12rem"}} />}
+                cover={
+                  <img
+                    alt={product.image}
+                    src={product.image}
+                    style={{
+                      width: "auto",
+                      height: "auto",
+                      maxWidth: "18rem",
+                      maxHeight: "12rem",
+                    }}
+                  />
+                }
               >
                 <Meta title={product.product_name} description={product.shop} />
                 <Title level={5}>{product.price}</Title>
