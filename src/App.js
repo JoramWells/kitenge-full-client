@@ -1,4 +1,4 @@
-import React, {  Fragment } from "react";
+import React, { Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Register from "./Login/Register";
@@ -12,14 +12,15 @@ import HomeRoutes from "./HomeRoutes";
 import DesktopNavbarMobile from "./DesktopNavbarMobile";
 import Footer from "./Desktop/Footer";
 import Product from "./Products/Product";
+import ScrollTop from "./Generic/ScrollTop";
 
 function App() {
   return (
     <Fragment>
       <Router>
-        <DesktopNavbarMobile/>
+        <ScrollTop />
+        <DesktopNavbarMobile />
 
-        
         <Switch>
           <Route path="/" exact component={HomeRoutes} />
           <Route path="/login" exact component={Login} />
