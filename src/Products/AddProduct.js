@@ -1,8 +1,12 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { saveProduct } from "../_actions/productActions";
-import { CaretRightOutlined, CloseCircleOutlined, UploadOutlined } from "@ant-design/icons";
-import {useHistory} from 'react-router-dom'
+import {
+  CaretRightOutlined,
+  CloseCircleOutlined,
+  UploadOutlined,
+} from "@ant-design/icons";
+import { useHistory } from "react-router-dom";
 
 import {
   Row,
@@ -13,14 +17,20 @@ import {
   message,
   Upload,
   Card,
-  Col
+  Col,
 } from "antd";
 
-
-
+const iconStyles = {
+  color: "#fdba45",
+};
+const inputStyles = {
+  borderTop: "0",
+  borderLeft: "0",
+  borderRight: "0",
+};
 
 export default function AddProduct(props) {
-  const history = useHistory()
+  const history = useHistory();
   const [name, setName] = useState("");
   const [shop, setShop] = useState("");
   const [price, setPrice] = useState("");
@@ -30,9 +40,9 @@ export default function AddProduct(props) {
 
   const dispatch = useDispatch();
   const { Title } = Typography;
-  function closeHandler (){
+  function closeHandler() {
     return history.goBack();
-  };
+  }
   const prop = {
     name: "file",
     listType: "picture",
@@ -45,7 +55,6 @@ export default function AddProduct(props) {
           const img = document.createElement("img");
           img.src = reader.result;
           img.onload = () => {
-
             const canvas = document.createElement("canvas");
             canvas.width = img.naturalWidth;
             canvas.height = img.naturalHeight;
@@ -59,7 +68,6 @@ export default function AddProduct(props) {
     onChange(info) {
       if (info.file.status !== "uploading") {
         console.log(info.file, info.fileList);
-        // dispatch(saveProduct(name, shop, price, image, description));
       }
       if (info.file.status === "done") {
         // const regex = /.jpeg/
@@ -68,7 +76,7 @@ export default function AddProduct(props) {
         // }
         // const filename = info.file.name.replace(regex, '.webp')
         // setImage("/" + filename);
-        setImage(info.file.name)
+        setImage(info.file.name);
         message.success(`${info.file.name}`);
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed`);
@@ -76,62 +84,72 @@ export default function AddProduct(props) {
     },
   };
 
-
-  const productAdd = useCallback((e)  => {
+  const productAdd = useCallback((e) => {
     e.preventDefault();
-     dispatch(saveProduct(name,price, shop,  image, category, description));
+    dispatch(saveProduct(name, price, shop, image, category, description));
     setTimeout(() => {
       message.success("Product added succefully");
       history.go("/produc/manage");
     }, 2000);
-  })
+  });
 
   return (
-    <Row justify="space-around" align="middle" style={{ marginTop: "4rem", marginBottom:"3rem" }}>
-       <Card style={{width:"25rem"}}>
-          <Row justify="space-between" align="middle">
-            <Col>
-            <Title level={3}>
-              Add product
-            </Title>
-            </Col>
-            <Col>
-              <CloseCircleOutlined
-                className="close"
-                style={{ fontSize: "1.5rem" }}
-                onClick={closeHandler}
-              />
-            </Col>
-          </Row>
- 
+    <Row
+      justify="space-around"
+      align="middle"
+      style={{ marginTop: "4rem", marginBottom: "3rem" }}
+    >
+      <Card style={{ width: "25rem" }}>
+        <Row justify="space-between" align="middle">
+          <Col>
+            <p style={{ fontSize: "1.3rem", margin: "0" }}>Add product</p>
+          </Col>
+          <Col>
+            <CloseCircleOutlined
+              className="close"
+              style={{ fontSize: "1.5rem" }}
+              onClick={closeHandler}
+            />
+          </Col>
+        </Row>
+
         <Form layout="vertical" size="large" encType="multipart/form-data">
           <Form.Item
             required
             id="name"
             name="name"
             value={name}
-            rules={[{ message: "Enter item name", value: { name } }]}
             onChange={(e) => setName(e.target.value)}
           >
-            <Input prefix={<CaretRightOutlined style={{color:"#fdba45"}} />} placeholder="Item name" />
+            <Input
+              prefix={<CaretRightOutlined style={iconStyles} />}
+              style={inputStyles}
+              placeholder="Item name"
+            />
           </Form.Item>
           <Form.Item
             name="Price"
             name="price"
             value={price}
-            rules={[{ message: "Enter Item price" }]}
             onChange={(e) => setPrice(e.target.value)}
           >
-            <Input prefix={<CaretRightOutlined style={{color:"#fdba45"}} />} placeholder="Enter price e.g 2030" />
+            <Input
+              prefix={<CaretRightOutlined style={iconStyles} />}
+              style={inputStyles}
+              placeholder="Enter price e.g 2030"
+            />
           </Form.Item>
           <Form.Item
             id="shop"
             name="shop"
             value={shop}
-            rules={[{ message: "Enter shop" }]}
             onChange={(e) => setShop(e.target.value)}
           >
-            <Input prefix={<CaretRightOutlined style={{color:"#fdba45"}} />} placeholder="Shop name" />
+            <Input
+              prefix={<CaretRightOutlined style={iconStyles} />}
+              style={inputStyles}
+              placeholder="Shop name"
+            />
           </Form.Item>
 
           <Form.Item
@@ -140,20 +158,29 @@ export default function AddProduct(props) {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-            <Input prefix={<CaretRightOutlined style={{color:"#fdba45"}} />} placeholder="shoes, shirt, kitchen" />
+            <Input
+              prefix={<CaretRightOutlined style={iconStyles} />}
+              style={inputStyles}
+              placeholder="shoes, shirt, kitchen"
+            />
           </Form.Item>
           <Form.Item
             name="description"
             id="description"
             value={description}
-            rules={[{ message: "Enter description" }]}
             onChange={(e) => setDescription(e.target.value)}
           >
             <Input.TextArea placeholder="Description" />
           </Form.Item>
           <Form.Item>
             <Upload {...prop}>
-              <Button icon={<UploadOutlined style={{backgroundColor:"whitesmoke"}} />}>Select image</Button>
+              <Button
+                icon={
+                  <UploadOutlined style={{ backgroundColor: "whitesmoke" }} />
+                }
+              >
+                Select image
+              </Button>
             </Upload>
           </Form.Item>
 
@@ -162,11 +189,8 @@ export default function AddProduct(props) {
               Add
             </Button>
           </Form.Item>
-
-
         </Form>
-
-       </Card>
+      </Card>
     </Row>
   );
 }
