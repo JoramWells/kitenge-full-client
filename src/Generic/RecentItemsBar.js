@@ -6,14 +6,14 @@ export default function RecentItemsBar(props) {
     <Row
       style={{
         backgroundColor: "#d9d9d9",
-        margin: "2rem",
+        margin: "1rem",
         paddingTop: "0.3rem",
       }}
       justify="space-around"
       align="middle"
     >
       <Col>
-        <h2>{props.title}</h2>
+        <h3>{props.title}</h3>
       </Col>
     </Row>
   );
