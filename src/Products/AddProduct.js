@@ -38,6 +38,8 @@ export default function AddProduct(props) {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [ratings, setRatings] = useState("");
+  const [stock, setStock] = useState("");
+
 
   const dispatch = useDispatch();
   const { Title } = Typography;
@@ -114,7 +116,7 @@ export default function AddProduct(props) {
           </Col>
         </Row>
 
-        <Form layout="vertical" size="large" encType="multipart/form-data">
+        <Form layout="vertical"  encType="multipart/form-data">
           <Form.Item
             required
             id="name"
@@ -175,6 +177,18 @@ export default function AddProduct(props) {
               prefix={<CaretRightOutlined style={iconStyles} />}
               style={inputStyles}
               placeholder="Ratings 4.3"
+            />
+          </Form.Item>
+          <Form.Item
+            name="stock"
+            id="stock"
+            value={stock}
+            onChange={(e) => setStock(e.target.value)}
+          >
+            <Input
+              prefix={<CaretRightOutlined style={iconStyles} />}
+              style={inputStyles}
+              placeholder="Add stock"
             />
           </Form.Item>
           <Form.Item
