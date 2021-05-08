@@ -128,15 +128,16 @@ const saveProduct = (
 const updateProduct = (
   id,
   name,
-  shop,
   price,
+  stock,
+  shop,
   image,
-  description,
-  category
+  category,
+  description
 ) => async (dispatch, getState) => {
   dispatch({
     type: PRODUCT_UPDATE_REQUEST,
-    payload: { id, name, shop, price, image, description, category },
+    payload: {id, name, price, stock, shop, image, category, description },
   });
   const {
     userSignin: { userInfo },
@@ -145,7 +146,7 @@ const updateProduct = (
     await axios
       .put(
         `/product/add/${id}`,
-        { id, name, shop, price, image, description, category },
+        { id,name, price, stock, shop, image, category, description },
         {
           headers: {
             Authorization: "Bearer " + userInfo.token,

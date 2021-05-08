@@ -36,7 +36,11 @@ const renderTH = [...Array(4).keys()].map((i) => {
   );
 });
 
-
+const inputStyles = {
+  borderTop: "0",
+  borderLeft: "0",
+  borderRight: "0",
+};
 export default function ManageProducts() {
   const ProductList = useSelector((state) => state.productList);
   const ProductUpdate = useSelector((state) => state.productUpdate);
@@ -67,6 +71,7 @@ export default function ManageProducts() {
   const [price, setPrice] = useState("");
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
+  const [stock, setStock] = useState("");
   const [description, setDescription] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showButton, setShowButton] = useState(true);
@@ -79,7 +84,7 @@ export default function ManageProducts() {
 
   const productEdit = useCallback( () => {
     dispatch(
-       updateProduct(id, name, shop, price, image, category, description)
+       updateProduct(name,  price,stock, shop,image, category, description)
     );
     setTimeout(() => {
       dispatch(listProducts());
@@ -104,7 +109,7 @@ export default function ManageProducts() {
     setIsModalVisible(true);
     setId(item.id);
     setImage(item.image);
-
+    setStock(item.stock)
     setName(item.product_name);
     setShop(item.shop);
     setPrice(item.price);
@@ -165,12 +170,14 @@ export default function ManageProducts() {
 
   return (
     <Fragment>
-      <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} 
+          style={{width:"20rem"}}
+
+      >
         <Form
           layout="vertical"
           name="basic"
           encType="multipart/form-data"
-          size="large"
         >
           <img
             src={"/" + image}
@@ -184,6 +191,7 @@ export default function ManageProducts() {
             onChange={(e) => setName(e.target.value)}
           >
             <Input
+            style={inputStyles}
               value={name}
               prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
             />
@@ -252,6 +260,21 @@ export default function ManageProducts() {
               hidden
               type="text"
               onChange={(e) => setCategory(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item
+            name="stock"
+            id="stock"
+            onChange={(e) => setStock(e.target.value)}
+          >
+            <Input
+              value={stock}
+              prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
+            />
+            <input
+              hidden
+              type="text"
+              onChange={(e) => setStock(e.target.value)}
             />
           </Form.Item>
           <Form.Item
