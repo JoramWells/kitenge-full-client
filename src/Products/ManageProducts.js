@@ -148,17 +148,13 @@ export default function ManageProducts() {
     onChange(info) {
       if (info.file.status !== "uploading") {
         console.log(info.file, info.fileList);
-        // dispatch(saveProduct(name, shop, price, image, description));
         setShowLoading(false);
       }
       if (info.file.status === "done") {
         setShowButton(false);
-        // const regex = /.jpeg/;
-        // var mapObjs = {
-        //   svg
-        // }
-        // const filename = info.file.name.replace(regex, ".webp");
-        // setImage('/'+filename);
+        const ext = info.file.name.slice(0, info.file.name.lastIndexOf("."));
+        const filename = ext + ".webp";
+        setImage(filename);
         setImage(info.file.name);
         message.success(`${info.file.name}`);
       } else if (info.file.status === "error") {

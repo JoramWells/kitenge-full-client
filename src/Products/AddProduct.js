@@ -71,13 +71,9 @@ export default function AddProduct(props) {
         console.log(info.file, info.fileList);
       }
       if (info.file.status === "done") {
-        // const regex = /.jpeg/
-        // var mapObjs = {
-        //   svg
-        // }
-        // const filename = info.file.name.replace(regex, '.webp')
-        // setImage("/" + filename);
-        setImage(info.file.name);
+        const ext = info.file.name.slice(0, info.file.name.lastIndexOf("."));
+        const filename = ext + ".webp";
+        setImage(filename);
         message.success(`${info.file.name}`);
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed`);

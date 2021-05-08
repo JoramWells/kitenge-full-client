@@ -79,31 +79,47 @@ const deleteProduct = (id) => async (dispatch, getState) => {
   }
 };
 
-const saveProduct = (name,  price,stock,shop,  image,ratings,category, description) => async (
-  dispatch,
-  getState
-) => {
+const saveProduct = (
+  name,
+  price,
+  stock,
+  shop,
+  image,
+  ratings,
+  category,
+  description
+) => async (dispatch, getState) => {
   try {
     dispatch({
       type: PRODUCT_SAVE_REQUEST,
-      payload: { name, price,stock, shop,  image,ratings,category, description },
+      payload: {
+        name,
+        price,
+        stock,
+        shop,
+        image,
+        ratings,
+        category,
+        description,
+      },
     });
     const {
-      userSignin: { userInfo},
+      userSignin: { userInfo },
     } = getState();
-    await axios.post(
-      `/productz/add`,
-      { name,  price,stock,shop,  image,ratings,category, description },
-      {
-        headers: {
-          Authorization: "Bearer" + userInfo.token,
-        },
-      }
-    ).then(response=>{
-    dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: response.data });
-
-
-    }).catch(err=>console.log(err))
+    await axios
+      .post(
+        `/productz/add`,
+        { name, price, stock, shop, image, ratings, category, description },
+        {
+          headers: {
+            Authorization: "Bearer" + userInfo.token,
+          },
+        }
+      )
+      .then((response) => {
+        dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: response.data });
+      })
+      .catch((err) => console.log(err));
   } catch (error) {
     dispatch({ type: PRODUCT_SAVE_FAIL });
   }
@@ -118,26 +134,29 @@ const updateProduct = (
   description,
   category
 ) => async (dispatch, getState) => {
-  dispatch({ type: PRODUCT_UPDATE_REQUEST, payload:{id,name,shop,price,image,description,category} });
+  dispatch({
+    type: PRODUCT_UPDATE_REQUEST,
+    payload: { id, name, shop, price, image, description, category },
+  });
   const {
     userSignin: { userInfo },
   } = getState();
   try {
-    await axios.put(
-      `/product/add/${id}`,
-      { id, name, shop, price, image, description, category },
-      {
-        headers: {
-          Authorization: "Bearer " + userInfo.token,
-        },
-      }
-    ).then(response=>{
-      console.log(response)
-    dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: response.data })
-
-    }
-
-      ).catch(err=>console.log(err))
+    await axios
+      .put(
+        `/product/add/${id}`,
+        { id, name, shop, price, image, description, category },
+        {
+          headers: {
+            Authorization: "Bearer " + userInfo.token,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: response.data });
+      })
+      .catch((err) => console.log(err));
   } catch (error) {
     dispatch({ type: PRODUCT_UPDATE_FAIL, payload: error.message });
   }
