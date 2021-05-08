@@ -354,10 +354,9 @@ function CarouselItem(props) {
                       style={{
                         marginTop:"0",
                         width: "17rem",
-                        height: "15.86rem",
+                        height: "11.4rem",
                         display: "flex",
                         margin: "auto",
-                        objectFit:"contain"
                       }}
                     />
                   }

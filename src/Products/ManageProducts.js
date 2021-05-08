@@ -84,7 +84,7 @@ export default function ManageProducts() {
 
   const productEdit = useCallback( () => {
     dispatch(
-       updateProduct(name,  price,stock, shop,image, category, description)
+       updateProduct(id,name,  price,stock, shop,image, category, description)
     );
     setTimeout(() => {
       dispatch(listProducts());
@@ -160,7 +160,6 @@ export default function ManageProducts() {
         const ext = info.file.name.slice(0, info.file.name.lastIndexOf("."));
         const filename = ext + ".webp";
         setImage(filename);
-        setImage(info.file.name);
         message.success(`${info.file.name}`);
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed`);
@@ -171,10 +170,13 @@ export default function ManageProducts() {
   return (
     <Fragment>
       <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} 
-          style={{width:"20rem"}}
+          
 
       >
-        <Form
+       <Row justify="center">
+         <Col style={{width:"20rem"}}>
+         
+         <Form
           layout="vertical"
           name="basic"
           encType="multipart/form-data"
@@ -202,6 +204,7 @@ export default function ManageProducts() {
             onChange={(e) => setPrice(e.target.value)}
           >
             <Input
+            style={inputStyles}
               value={price}
               prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
             />
@@ -236,6 +239,7 @@ export default function ManageProducts() {
             onChange={(e) => setShop(e.target.value)}
           >
             <Input
+            style={inputStyles}
               value={shop}
               prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
             />
@@ -253,6 +257,7 @@ export default function ManageProducts() {
             onChange={(e) => setCategory(e.target.value)}
           >
             <Input
+            style={inputStyles}
               value={category}
               prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
             />
@@ -268,6 +273,7 @@ export default function ManageProducts() {
             onChange={(e) => setStock(e.target.value)}
           >
             <Input
+            style={inputStyles}
               value={stock}
               prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
             />
@@ -314,6 +320,8 @@ export default function ManageProducts() {
             </Col>
           </Row>
         </Form>
+         </Col>
+       </Row>
       </Modal>
       <main>
         {loading ? (

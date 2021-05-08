@@ -1,19 +1,10 @@
-import React, { useEffect,memo } from "react";
+import React, { useEffect, memo } from "react";
 import Carousel from "react-multi-carousel";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../_actions/productActions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import {
-  Row,
-  Col,
-  Card,
-  Skeleton,
-  Form,
-  Result,
-  Button,
-  Rate
-} from "antd";
+import { Row, Col, Card, Skeleton, Form, Result, Button, Rate } from "antd";
 import CarouselHeader from "../Generic/CarouselHeader";
 import RecentItemsBar from "../Generic/RecentItemsBar";
 import { RedoOutlined } from "@ant-design/icons";
@@ -69,9 +60,9 @@ export function CarouselItem() {
   const dispatch = useDispatch();
   const ProductList = useSelector((state) => state.productList);
   const { posts, loading, error } = ProductList;
-  function reloadHandler () {
+  function reloadHandler() {
     window.location.reload();
-  };
+  }
 
   useEffect(() => {
     dispatch(listProducts());
@@ -105,60 +96,59 @@ export function CarouselItem() {
         >
           {posts.map((product) => (
             <Row key={product.id} justify="space-around" align="middle">
-                <Link
-                  to={`/product-detail/${product.id}/?category=${product.category}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Card
-                    style={{
-                      border: "0",
-                      width: "15rem",
-                      height: "370px",
-                    }}
-                    cover={
-                      <LazyLoadImage
-                        src={product.image}
-                        effect="blur"
-                        alt="productimage"
-                        style={{
-                          width: "14.8rem",
-                          height: "9.9rem",
-                          display: "flex",
-                          margin: "auto",
-                          objectFit:"contain"
-                        }}
-                        // visibleByDefault={product.image}
-                      />
-                    }
-                  >
-                    <Meta
-                      title={
-                        <Link
-                        
-                        to={`/product-detail/${product.id}/?category=${product.category}`}
-                      >
-                        <p
-                        style={{ color: "rgba(211, 84, 0, 1)", margin: "0" }}
-                        >{product.product_name}</p>
-                      </Link>
-                      }
-                      description={
-                        <Rate
-                        allowHalf={true}
-                        style={{
-                          fontSize: "1rem",
-                          color: "#282c35",
-                          marginBottom: ".6rem",
-                        }}
-                        defaultValue={product.ratings}
-                      />
-                      }
+              <Link
+                to={`/product-detail/${product.id}/?category=${product.category}`}
+                style={{ textDecoration: "none" }}
+              >
+                <Card
+                  style={{
+                    border: "0",
+                    width: "15rem",
+                    height: "370px",
+                  }}
+                  cover={
+                    <LazyLoadImage
+                      src={product.image}
+                      effect="blur"
+                      alt="productimage"
+                      style={{
+                        width: "14.8rem",
+                        height: "9.9rem",
+                        display: "flex",
+                        margin: "auto",
+                        objectFit: "contain",
+                      }}
                     />
+                  }
+                >
+                  <Link
+                    to={`/product-detail/${product.id}/?category=${product.category}`}
+                  >
+                    <p
+                      style={{
+                        color: "#282c35",
+                        margin: "0",
+                        fontSize: "0.9rem",
+                      }}
+                    >
+                      {product.product_name}
+                    </p>
+                  </Link>
+                  <Rate
+                    allowHalf={true}
+                    style={{
+                      fontSize: "1rem",
+                      color: "rgba(211, 84, 0, 1)",
+
+                      marginBottom: ".6rem",
+                    }}
+                    defaultValue={product.ratings}
+                  />
                   <p
                     style={{
                       color: "grey",
                       fontSize: ".8rem",
-                      marginBottom: ".3rem",
+                      margin: "0",
                     }}
                   >
                     <NumberFormat
@@ -169,23 +159,9 @@ export function CarouselItem() {
                       suffix=" /="
                     />
                   </p>
-                  {/* <div
-                    style={{
-                      backgroundColor: "rgba(240, 52, 52, 0.3)",
-                      borderRadius: "5px",
-                      width: "2.4rem",
-                      textAlign: "center",
-                    }}
-                  >
-                    <NumberFormat
-                      value={25}
-                      displayType="text"
-                      prefix="-"
-                      suffix="%"
-                    />
-                  </div> */}
-                  </Card>
-                </Link>
+
+                </Card>
+              </Link>
             </Row>
           ))}
         </Carousel>
@@ -194,4 +170,4 @@ export function CarouselItem() {
   );
 }
 
-export  const CarouselItems = memo(CarouselItem)
+export const CarouselItems = memo(CarouselItem);
