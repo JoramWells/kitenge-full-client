@@ -31,6 +31,8 @@ import {
 import { addToCart } from "../_actions/cartActions";
 import CarouselHeader from "../Generic/CarouselHeader";
 import Modal from "react-modal";
+import ReactMarkdown from 'react-markdown'
+import gfm from 'remark-gfm'
 
 if (process.env.NODE_ENV !== 'test') Modal.setAppElement('#root');
 
@@ -207,7 +209,7 @@ function CarouselItem(props) {
         <Divider />
 
         <address style={{ color: "grey", textAlign: "center" }}>
-          {description}
+          <ReactMarkdown children={description} />
         </address>
 
         <Row justify="space-around" align="middle">

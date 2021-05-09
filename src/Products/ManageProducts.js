@@ -1,4 +1,10 @@
-import React, { useEffect, useState, Fragment, useRef, useCallback } from "react";
+import React, {
+  useEffect,
+  useState,
+  Fragment,
+  useRef,
+  useCallback,
+} from "react";
 import {
   Button,
   Modal,
@@ -19,20 +25,20 @@ import {
 } from "../_actions/productActions";
 import {
   CaretRightOutlined,
-  DeleteOutlined,
+  DeleteFilled,
   EditOutlined,
   ReloadOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
 
+
 const renderTH = [...Array(4).keys()].map((i) => {
   return (
     <Fragment key={i}>
-          <th >
-      <Skeleton.Input style={{ width: "3.5rem", height: "1.5rem" }} />
-    </th>
+      <th>
+        <Skeleton.Input style={{ width: "3.5rem", height: "1.5rem" }} />
+      </th>
     </Fragment>
-
   );
 });
 
@@ -56,11 +62,10 @@ export default function ManageProducts() {
   const renderTB = [...Array(4).keys()].map((i) => {
     return (
       <Fragment key={i}>
-              <td>
-        <Skeleton.Input style={{ width: "3.5rem", height: "1.5rem" }} />
-      </td>
+        <td>
+          <Skeleton.Input style={{ width: "3.5rem", height: "1.5rem" }} />
+        </td>
       </Fragment>
-
     );
   });
 
@@ -76,22 +81,24 @@ export default function ManageProducts() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showButton, setShowButton] = useState(true);
   const [showLoading, setShowLoading] = useState(false);
-  const mountedRef = useRef(true)
+  const mountedRef = useRef(true);
   useEffect(() => {
     dispatch(listProducts());
-    return ()=>{mountedRef.current=false}
+    return () => {
+      mountedRef.current = false;
+    };
   }, []);
 
-  const productEdit = useCallback( () => {
+  const productEdit = useCallback(() => {
     dispatch(
-       updateProduct(id,name,  price,stock, shop,image, category, description)
+      updateProduct(id, name, price, stock, shop, image, category, description)
     );
     setTimeout(() => {
       dispatch(listProducts());
       setIsModalVisible(false);
       if (product) message.success("Product update successfully");
     }, 1000);
-  })
+  });
   const deleteHandler = () => {
     dispatch(deleteProduct(id));
   };
@@ -109,24 +116,24 @@ export default function ManageProducts() {
     setIsModalVisible(true);
     setId(item.id);
     setImage(item.image);
-    setStock(item.stock)
+    setStock(item.stock);
     setName(item.product_name);
     setShop(item.shop);
     setPrice(item.price);
     setCategory(item.category);
     setDescription(item.description);
   };
-  function handleReload () {
+  function handleReload() {
     window.location.reload();
-  };
+  }
 
-  function handleOk(){
+  function handleOk() {
     setIsModalVisible(false);
-  };
+  }
 
-  function handleCancel (){
+  function handleCancel() {
     setIsModalVisible(false);
-  };
+  }
 
   const prop = {
     name: "file",
@@ -169,159 +176,151 @@ export default function ManageProducts() {
 
   return (
     <Fragment>
-      <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} 
-          
-
-      >
-       <Row justify="center">
-         <Col style={{width:"20rem"}}>
-         
-         <Form
-          layout="vertical"
-          name="basic"
-          encType="multipart/form-data"
-        >
-          <img
-            src={"/" + image}
-            style={{ width: "70px", marginBottom: ".3rem" }}
-            alt={name}
-          />
-          <Form.Item
-            required
-            id="name"
-            name="name"
-            onChange={(e) => setName(e.target.value)}
-          >
-            <Input
-            style={inputStyles}
-              value={name}
-              prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
-            />
-            <input hidden type="text" />
-          </Form.Item>
-          <Form.Item
-            name="price"
-            onChange={(e) => setPrice(e.target.value)}
-          >
-            <Input
-            style={inputStyles}
-              value={price}
-              prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
-            />
-
-            <input
-              hidden
-              type="text"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-          </Form.Item>
-
-          <Form.Item
-            hidden
-            name="image"
-            name="image"
-            onChange={(e) => setImage(e.target.value)}
-          >
-            <Input value={image} />
-
-            <input
-              hidden
-              type="text"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-            />
-          </Form.Item>
-
-          <Form.Item
-            id="shop"
-            name="shop"
-            onChange={(e) => setShop(e.target.value)}
-          >
-            <Input
-            style={inputStyles}
-              value={shop}
-              prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
-            />
-            <input
-              hidden
-              type="text"
-              value={shop}
-              onChange={(e) => setShop(e.target.value)}
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="category"
-            id="category"
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <Input
-            style={inputStyles}
-              value={category}
-              prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
-            />
-            <input
-              hidden
-              type="text"
-              onChange={(e) => setCategory(e.target.value)}
-            />
-          </Form.Item>
-          <Form.Item
-            name="stock"
-            id="stock"
-            onChange={(e) => setStock(e.target.value)}
-          >
-            <Input
-            style={inputStyles}
-              value={stock}
-              prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
-            />
-            <input
-              hidden
-              type="text"
-              onChange={(e) => setStock(e.target.value)}
-            />
-          </Form.Item>
-          <Form.Item
-            name="description"
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          >
-            <Input.TextArea value={description} />
-            <input
-              hidden
-              type="text"
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </Form.Item>
-          <Row justify="space-around" align="middle">
-            <Col>
-              <Form.Item>
-                <Upload {...prop}>
-                  <Button icon={<UploadOutlined />}>UPLOAD IMAGE</Button>
-                </Upload>
+      <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <Row justify="center">
+          <Col style={{ width: "20rem" }}>
+            <Form layout="vertical" name="basic" encType="multipart/form-data">
+              <img
+                src={"/" + image}
+                style={{ width: "70px", marginBottom: ".3rem" }}
+                alt={name}
+              />
+              <Form.Item
+                required
+                id="name"
+                name="name"
+                onChange={(e) => setName(e.target.value)}
+              >
+                <Input
+                  style={inputStyles}
+                  value={name}
+                  prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
+                />
+                <input hidden type="text" />
               </Form.Item>
-            </Col>
-            <Col>
-              <Form.Item>
-                <Button
-                  loading={showLoading}
-                  disabled={showButton}
-                  htmlType="submit"
-                  type="primary"
-                  onClick={() => productEdit()}
-                  style={{ backgroundColor: "#fdba45", border: "0" }}
-                >
-                  COMPLETE
-                </Button>
+              <Form.Item
+                name="price"
+                onChange={(e) => setPrice(e.target.value)}
+              >
+                <Input
+                  style={inputStyles}
+                  value={price}
+                  prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
+                />
+
+                <input
+                  hidden
+                  type="text"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                />
               </Form.Item>
-            </Col>
-          </Row>
-        </Form>
-         </Col>
-       </Row>
+
+              <Form.Item
+                hidden
+                name="image"
+                name="image"
+                onChange={(e) => setImage(e.target.value)}
+              >
+                <Input value={image} />
+
+                <input
+                  hidden
+                  type="text"
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                />
+              </Form.Item>
+
+              <Form.Item
+                id="shop"
+                name="shop"
+                onChange={(e) => setShop(e.target.value)}
+              >
+                <Input
+                  style={inputStyles}
+                  value={shop}
+                  prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
+                />
+                <input
+                  hidden
+                  type="text"
+                  value={shop}
+                  onChange={(e) => setShop(e.target.value)}
+                />
+              </Form.Item>
+
+              <Form.Item
+                name="category"
+                id="category"
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <Input
+                  style={inputStyles}
+                  value={category}
+                  prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
+                />
+                <input
+                  hidden
+                  type="text"
+                  onChange={(e) => setCategory(e.target.value)}
+                />
+              </Form.Item>
+              <Form.Item
+                name="stock"
+                id="stock"
+                onChange={(e) => setStock(e.target.value)}
+              >
+                <Input
+                  style={inputStyles}
+                  value={stock}
+                  prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
+                />
+                <input
+                  hidden
+                  type="text"
+                  onChange={(e) => setStock(e.target.value)}
+                />
+              </Form.Item>
+              <Form.Item
+                name="description"
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              >
+                <Input.TextArea value={description} />
+                <input
+                  hidden
+                  type="text"
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </Form.Item>
+              <Row justify="space-around" align="middle">
+                <Col>
+                  <Form.Item>
+                    <Upload {...prop}>
+                      <Button icon={<UploadOutlined />}>UPLOAD IMAGE</Button>
+                    </Upload>
+                  </Form.Item>
+                </Col>
+                <Col>
+                  <Form.Item>
+                    <Button
+                      loading={showLoading}
+                      disabled={showButton}
+                      htmlType="submit"
+                      type="primary"
+                      onClick={() => productEdit()}
+                      style={{ backgroundColor: "#fdba45", border: "0" }}
+                    >
+                      COMPLETE
+                    </Button>
+                  </Form.Item>
+                </Col>
+              </Row>
+            </Form>
+          </Col>
+        </Row>
       </Modal>
       <main>
         {loading ? (
@@ -387,21 +386,16 @@ export default function ManageProducts() {
                       <td>
                         <Row justify="space-around">
                           <Col>
-                            <Button
+                            <EditOutlined
+                              style={{ color: "green" }}
                               onClick={() => showModal(item)}
-                              icon={<EditOutlined style={{color:"green"}}/>}
-                              style={{margin:".2rem", borderRadius:"5px"}}
-                            ></Button>
+                            />
                           </Col>
                           <Col>
-                            <Button
-                              icon={<DeleteOutlined style={{color:"rgba(207, 0, 15, 0.6)"}} />}
+                            <DeleteFilled
+                              style={{ color: "rgba(207, 0, 15, 0.6)" }}
                               onClick={() => deleteHandler(item.id)}
-                              style={{margin:".2rem", backgroundColor:"rgba(0, 0, 0,0.6)", borderRadius:"5px"}}
-
-                              
-
-                            ></Button>
+                            />
                           </Col>
                         </Row>
                       </td>

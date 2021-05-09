@@ -8,6 +8,7 @@ import {
 } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 
+
 import {
   Row,
   Form,
@@ -27,6 +28,7 @@ const inputStyles = {
   borderLeft: "0",
   borderRight: "0",
 };
+
 
 export default function AddProduct(props) {
   const history = useHistory();
@@ -80,6 +82,7 @@ export default function AddProduct(props) {
       }
     },
   };
+
 
   const productAdd = useCallback((e) => {
     e.preventDefault();
@@ -173,6 +176,8 @@ export default function AddProduct(props) {
               placeholder="Ratings 4.3"
             />
           </Form.Item>
+      
+
           <Form.Item
             name="stock"
             id="stock"
@@ -204,12 +209,14 @@ export default function AddProduct(props) {
               </Button>
             </Upload>
           </Form.Item>
+          
 
           <Form.Item>
             <Button block htmlType="submit" type="primary" onClick={productAdd}>
               Add
             </Button>
           </Form.Item>
+
         </Form>
       </Card>
     </Row>

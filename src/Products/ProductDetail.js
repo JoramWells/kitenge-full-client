@@ -29,6 +29,7 @@ import { categoryProduct, detailsProduct } from "../_actions/productActions";
 
 import RecentItemsBar from "../Generic/RecentItemsBar";
 import { RedoOutlined } from "@ant-design/icons";
+import ReactMarkdown from "react-markdown";
 
 const { Meta } = Card;
 
@@ -244,7 +245,11 @@ export default function ProductDetail(props) {
           <Col sm={6} md={6}>
             <Card style={{ overflowY: "scroll" }}>
               <h3>Description</h3>
-              <Text>{product.description}</Text>
+          <ReactMarkdown>
+          {product.description}
+          </ReactMarkdown>
+          <div dangerouslySetInnerHTML={{ __html: product.description }} />
+
             </Card>
           </Col>
         </Row>
