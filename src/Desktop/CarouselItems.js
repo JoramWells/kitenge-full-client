@@ -10,7 +10,6 @@ import RecentItemsBar from "../Generic/RecentItemsBar";
 import { RedoOutlined } from "@ant-design/icons";
 import NumberFormat from "react-number-format";
 
-const { Meta } = Card;
 const renderSkeleton = [...Array(4).keys()].map((i) => {
   return (
     <Col key={i}>

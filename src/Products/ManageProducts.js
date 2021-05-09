@@ -30,7 +30,7 @@ import {
   ReloadOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
-
+import ReactMarkdown from 'react-markdown'
 
 const renderTH = [...Array(4).keys()].map((i) => {
   return (
@@ -282,13 +282,15 @@ export default function ManageProducts() {
                   onChange={(e) => setStock(e.target.value)}
                 />
               </Form.Item>
+              <ReactMarkdown>{description}</ReactMarkdown>
+
               <Form.Item
                 name="description"
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               >
-                <Input.TextArea value={description} />
+                <Input.TextArea rows={10} value={description} />
                 <input
                   hidden
                   type="text"

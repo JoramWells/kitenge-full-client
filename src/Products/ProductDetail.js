@@ -53,7 +53,7 @@ const responsive = {
   },
 };
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 export default function ProductDetail(props) {
   const productDetail = useSelector((state) => state.productDetail);
@@ -244,12 +244,7 @@ export default function ProductDetail(props) {
           </Col>
           <Col sm={6} md={6}>
             <Card style={{ overflowY: "scroll" }}>
-              <h3>Description</h3>
-          <ReactMarkdown>
-          {product.description}
-          </ReactMarkdown>
-          <div dangerouslySetInnerHTML={{ __html: product.description }} />
-
+              <div dangerouslySetInnerHTML={{ __html: product.description }} />
             </Card>
           </Col>
         </Row>
