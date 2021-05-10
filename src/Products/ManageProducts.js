@@ -16,6 +16,7 @@ import {
   message,
   Skeleton,
   Result,
+  Card, Image
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -47,6 +48,28 @@ const inputStyles = {
   borderLeft: "0",
   borderRight: "0",
 };
+
+const columns = [
+  {
+    title: "Product",
+    dataIndex: "product_name",
+    key: "product_name",
+  },
+  {
+    title: "Image",
+    dataIndex: "image",
+    key: "image",
+    render: (img) => (
+      <Image src={"/" + img} alt="image file" style={{ width: "50px", height:"50px", objectFit:"contain" }} />
+    ),
+  },
+
+  {
+    title: "Price",
+    dataIndex: "price",
+    key: "price",
+  },
+];
 export default function ManageProducts() {
   const ProductList = useSelector((state) => state.productList);
   const ProductUpdate = useSelector((state) => state.productUpdate);
@@ -195,6 +218,7 @@ export default function ManageProducts() {
                   style={inputStyles}
                   value={name}
                   prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
+                  placeholder="Fendi"
                 />
                 <input hidden type="text" />
               </Form.Item>
@@ -213,6 +237,7 @@ export default function ManageProducts() {
                   type="text"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
+                  placeholder="2999 /="
                 />
               </Form.Item>
 
@@ -240,6 +265,7 @@ export default function ManageProducts() {
                 <Input
                   style={inputStyles}
                   value={shop}
+                  placeholder="Shop name"
                   prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
                 />
                 <input
@@ -258,6 +284,7 @@ export default function ManageProducts() {
                 <Input
                   style={inputStyles}
                   value={category}
+                  placeholder="Category"
                   prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
                 />
                 <input
@@ -274,6 +301,7 @@ export default function ManageProducts() {
                 <Input
                   style={inputStyles}
                   value={stock}
+                  placeholder="Available stock"
                   prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
                 />
                 <input
@@ -282,7 +310,12 @@ export default function ManageProducts() {
                   onChange={(e) => setStock(e.target.value)}
                 />
               </Form.Item>
-              <ReactMarkdown>{description}</ReactMarkdown>
+              <Card style={{ height: 150, overflowY: 'scroll', margin:".3rem" }}>
+              <ReactMarkdown >
+                
+                {description}</ReactMarkdown>
+
+              </Card>
 
               <Form.Item
                 name="description"
@@ -366,6 +399,7 @@ export default function ManageProducts() {
             align="middle"
           >
             <Col>
+
               <table className="tableClass" style={{ width: "100%" }}>
                 <thead>
                   <th>name</th>

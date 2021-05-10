@@ -1,4 +1,4 @@
-import React, {  useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { withRouter } from "react-router-dom";
 import {
   Row,
@@ -18,6 +18,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import Ripples from "react-ripples";
+import Cookie from "js-cookie";
+import RequestIp from "@supercharge/request-ip";
+import ReactTouchEvents from "react-touch-events";
 import mpesa from "../img/mpesa.png";
 
 // import { listProducts } from "../../_actions/productActions";
@@ -25,14 +28,16 @@ import {
   ClockCircleOutlined,
   CloseCircleOutlined,
   EllipsisOutlined,
+  EyeOutlined,
+  HeartOutlined,
+  LikeOutlined,
   ReloadOutlined,
   ShoppingOutlined,
 } from "@ant-design/icons";
 import { addToCart } from "../_actions/cartActions";
-import CarouselHeader from "../Generic/CarouselHeader";
 import Modal from "react-modal";
 
-if (process.env.NODE_ENV !== 'test') Modal.setAppElement('#root');
+if (process.env.NODE_ENV !== "test") Modal.setAppElement("#root");
 
 const renderSkeleton = [...Array(5).keys()].map((i) => {
   return (
@@ -55,12 +60,12 @@ function CarouselItem(props) {
   const [date, setDate] = useState("");
   const [rate, setRate] = useState("");
   const [description, setDescription] = useState("");
+  let [liked, setLiked] = useState(false);
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const [visible, setVisible] = useState(false);
   const [visible2, setVisible2] = useState(false);
   const [visible3, setVisible3] = useState(false);
-  
 
   function showModal2() {
     setTimeout(() => {
@@ -74,7 +79,7 @@ function CarouselItem(props) {
     }, 500);
   }
 
-  const  showModal = useCallback((item) => {
+  const showModal = useCallback((item) => {
     setTimeout(() => {
       setVisible(true);
     }, 500);
@@ -88,7 +93,7 @@ function CarouselItem(props) {
     setCategory(item.category);
     setDescription(item.description);
     setRate(item.ratings);
-  })
+  });
 
   function handleCancel() {
     setTimeout(() => {
@@ -96,19 +101,46 @@ function CarouselItem(props) {
       setVisible2(false);
     }, 1000);
   }
-  function  handleCancel2() {
+  function handleCancel2() {
     setTimeout(() => {
       setVisible2(false);
     }, 500);
-  };
-  function  handleCancel3 () {
+  }
+  function handleCancel3() {
     setTimeout(() => {
       setVisible3(false);
     }, 500);
-  };
-  function  handleReload () {
+  }
+  function handleReload() {
     window.location.reload();
-  };
+  }
+
+  function handleTap(id) {
+    liked = !liked;
+    setLiked(liked);
+    console.log("You tapped me");
+    const stateLiked = {
+      username: userInfo.name,
+      liked: liked,
+      id:id
+    };
+    Cookie.set("likedCookie", JSON.stringify(stateLiked));
+    const ifLiked = Cookie.getJSON("likedCookie");
+    if (ifLiked.liked == true) {
+      message.info("Product liked");
+    } else message.info("Product unliked");
+
+    console.log(liked);
+  }
+  function handleSwipe(direction) {
+    switch (direction) {
+      case "top":
+      case "bottom":
+      case "left":
+      case "right":
+        console.log("You swipped");
+    }
+  }
 
   const productAddToCart = (productId, product_name) => {
     if (!userInfo) {
@@ -122,6 +154,7 @@ function CarouselItem(props) {
       message.success(`${product_name} added to cart`);
     }
   };
+  // console.log(RequestIp.getClientIp)
 
   return (
     <main style={{ backgroundColor: "#F8F8F8", marginTop: "5rem" }}>
@@ -207,7 +240,6 @@ function CarouselItem(props) {
         <Divider />
 
         <div dangerouslySetInnerHTML={{ __html: description }} />
-
 
         <Row justify="space-around" align="middle">
           <Col>
@@ -307,7 +339,6 @@ function CarouselItem(props) {
           />
         </Row>
       </Modal>
-      <CarouselHeader />
 
       {loading ? (
         <Row justify="space-around" align="middle" gutter={[0, 16]}>
@@ -325,121 +356,77 @@ function CarouselItem(props) {
         />
       ) : (
         <>
-          <Row justify="space-around" align="middle" gutter={[0, 16]} style={{backgroundColor:"black"}}>
+          <Row
+            justify="space-around"
+            align="middle"
+            gutter={[0, 16]}
+            style={{ backgroundColor: "black" }}
+          >
             {posts.map((item) => (
               <Col key={item.id}>
-                <Card
-                  style={{
-                    width: "17rem",
-                    height: "auto",
-                    padding:"0rem"
-                  }}
-                  extra={
-                    <Ripples>
-                      <EllipsisOutlined
-                        onClick={() => showModal(item)}
-                        key="ellipsis"
+                <ReactTouchEvents onTap={()=>handleTap(item.product_name)} onSwipe={handleSwipe}>
+                  <Card
+                    style={{
+                      width: "17rem",
+                      height: "auto",
+                      padding: "0rem",
+                    }}
+                    extra={
+                      <Ripples>
+                        <EllipsisOutlined
+                          onClick={() => showModal(item)}
+                          key="ellipsis"
+                          style={{
+                            fontSize: "1.3rem",
+                          }}
+                        />
+                      </Ripples>
+                    }
+                    cover={
+                      <LazyLoadImage
+                        src={item.image}
+                        effect="blur"
+                        alt="product-Image"
                         style={{
-                          fontSize: "1.3rem",
+                          marginTop: "0",
+                          width: "17rem",
+                          height: "11.4rem",
+                          display: "flex",
+                          margin: "auto",
                         }}
                       />
-                    </Ripples>
-                  }
-                  cover={
-                    <LazyLoadImage
-                      src={item.image}
-                      effect="blur"
-                      alt="product-Image"
+                    }
+                  >
+                    <Link
+                      to={`/product-detail/${item.id}/?category=${item.category}`}
+                    >
+                      <h3 style={{ color: "rgba(211, 84, 0, 1)", margin: "0" }}>
+                        {" "}
+                        {item.product_name}
+                      </h3>
+                    </Link>
+
+                    <Rate
+                      name="size-small"
+                      allowHalf={true}
                       style={{
-                        marginTop:"0",
-                        width: "17rem",
-                        height: "11.4rem",
-                        display: "flex",
-                        margin: "auto",
+                        fontSize: "1rem",
+                        color: "#282c35",
+                        marginBottom: ".6rem",
                       }}
+                      defaultValue={item.ratings}
                     />
-                  }
-                >
-                  <Link
-                        to={`/product-detail/${item.id}/?category=${item.category}`}
-                      >
-                        <h3
-                          style={{ color: "rgba(211, 84, 0, 1)", margin: "0" }}
-                        >
-                          {" "}
-                          {item.product_name}
-                        </h3>
-                      </Link>
 
-                  <Rate
-                        name="size-small"
-                        allowHalf={true}
-                        style={{
-                          fontSize: "1rem",
-                          color: "#282c35",
-                          marginBottom: ".6rem",
-                        }}
-                        defaultValue={item.ratings}
-                      />
-                  {/* <Meta
-                  style={{padding:"0"}}
-                    title={
-                      <Link
-                        to={`/product-detail/${item.id}/?category=${item.category}`}
-                      >
-                        <h3
-                          style={{ color: "rgba(211, 84, 0, 1)", margin: "0" }}
-                        >
-                          {" "}
-                          {item.product_name}
-                        </h3>
-                      </Link>
-                    }
-                    description={
-                      <Rate
-                        name="size-small"
-                        allowHalf={true}
-                        style={{
-                          fontSize: "1rem",
-                          color: "#282c35",
-                          marginBottom: ".6rem",
-                        }}
-                        defaultValue={item.ratings}
-                      />
-                    }
-                  /> */}
-
-                  <p
-                    style={{
-                      color: "grey",
-                      fontSize: ".9rem",
-                      marginBottom: "0rem",
-                    }}
-                  >
-                    <NumberFormat
-                      value={item.price}
-                      thousandSeparator={true}
-                      displayType={"text"}
-                      prefix="Kshs: "
-                      suffix=" /="
-                    />
-                  </p>
-                  {/* <div
-                    style={{
-                      backgroundColor: "rgba(240, 52, 52, 0.3)",
-                      borderRadius: "5px",
-                      width: "2.4rem",
-                      textAlign: "center",
-                    }}
-                  >
-                    <NumberFormat
-                      value={25}
-                      displayType="text"
-                      prefix="-"
-                      suffix="%"
-                    />
-                  </div> */}
-                </Card>
+                    <Row justify="space-between">
+                      <Col>
+                        <EyeOutlined style={{ color: "grey" }} />{" "}
+                        <LikeOutlined style={{ color: "grey" }} />{" "}
+                        <HeartOutlined style={{ color: "grey" }} /> 131
+                      </Col>
+                      <Col style={{ color: "grey" }}>Sold 93</Col>
+                    </Row>
+                  </Card>
+                </ReactTouchEvents>
               </Col>
             ))}
           </Row>

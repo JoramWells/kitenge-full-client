@@ -13,24 +13,7 @@ import NumberFormat from "react-number-format";
 const renderSkeleton = [...Array(4).keys()].map((i) => {
   return (
     <Col key={i}>
-      <Form layout="vertical">
-        <Form.Item>
-          <Skeleton.Input style={{ width: "16rem", height: "150px" }} /> <br />
-        </Form.Item>
-
-        <Form.Item>
-          <Skeleton.Input
-            style={{ width: "150px", height: "1rem" }}
-            active={true}
-          />
-        </Form.Item>
-        <Form.Item>
-          <Skeleton.Input
-            style={{ width: "200px", height: "1rem" }}
-            active={true}
-          />
-        </Form.Item>
-      </Form>
+      <Card loading style={{ height: "290px", width: "14rem" }} />
     </Col>
   );
 });
@@ -92,18 +75,22 @@ export function CarouselItem() {
           responsive={responsive}
           infinite={true}
           autoPlay={true}
+          containerClass="carousel-container"
+          itemClass="carousel-item-padding-40-px"
+          dotListClass="custom-dot-list-style"
+          // arrows={false} 
+          renderButtonGroupOutside={true}
         >
           {posts.map((product) => (
-            <Row key={product.id} justify="space-around" align="middle">
+            <Row key={product.id} justify="center" style={{ margin: "1rem" }}>
               <Link
                 to={`/product-detail/${product.id}/?category=${product.category}`}
                 style={{ textDecoration: "none" }}
               >
                 <Card
                   style={{
-                    border: "0",
-                    width: "15rem",
-                    height: "370px",
+                    width: "13rem",
+                    height: "290px",
                   }}
                   cover={
                     <LazyLoadImage
@@ -111,11 +98,10 @@ export function CarouselItem() {
                       effect="blur"
                       alt="productimage"
                       style={{
-                        width: "14.8rem",
+                        width: "12.8rem",
                         height: "9.9rem",
                         display: "flex",
                         margin: "auto",
-                        objectFit: "contain",
                       }}
                     />
                   }
@@ -158,7 +144,6 @@ export function CarouselItem() {
                       suffix=" /="
                     />
                   </p>
-
                 </Card>
               </Link>
             </Row>
