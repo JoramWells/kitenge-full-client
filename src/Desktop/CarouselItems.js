@@ -93,10 +93,10 @@ export function CarouselItem() {
                 style={{
                   marginTop: "1rem",
                   marginBottom: "1rem",
-                  height: "300px",
                   alignItems: "center",
                   backgroundColor:"white",
-                  borderRadius:"5px"
+                  borderRadius:"5px",
+                  padding:"1rem"
                 }}
               >
                 <Link
@@ -105,9 +105,9 @@ export function CarouselItem() {
                 >
                   <Card
                     style={{
-                      width: "13rem",
-                      height: "270px",
-                      border: "1px solid #dee3e3",
+                      width: "15rem",
+                      height: "290px",
+                      border: "none",
                     }}
                     cover={
                       <LazyLoadImage
@@ -115,8 +115,8 @@ export function CarouselItem() {
                         effect="blur"
                         alt="productimage"
                         style={{
-                          width: "12.8rem",
-                          height: "8.5rem",
+                          width: "14.8rem",
+                          height: "10.5rem",
                           display: "flex",
                           margin: "auto",
                         }}
@@ -220,21 +220,21 @@ export function CarouselItem() {
                 style={{
                   marginTop: "1rem",
                   marginBottom: "1rem",
-                  height: "400px",
                   alignItems: "center",
                   backgroundColor:"white",
-                  borderRadius:"5px"
+                  borderRadius:"5px",
+                  padding: "1rem"
                 }}
               >
                 <Link
                   to={`/product-detail/${product.id}/?category=${product.category}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <Card
+                 <Card
                     style={{
-                      width: "13rem",
-                      height: "270px",
-                      border: "1px solid #dee3e3",
+                      width: "15rem",
+                      height: "290px",
+                      border: "none",
                     }}
                     cover={
                       <LazyLoadImage
@@ -242,8 +242,8 @@ export function CarouselItem() {
                         effect="blur"
                         alt="productimage"
                         style={{
-                          width: "12.8rem",
-                          height: "8.5rem",
+                          width: "14.8rem",
+                          height: "10.5rem",
                           display: "flex",
                           margin: "auto",
                         }}

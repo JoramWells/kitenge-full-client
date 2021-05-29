@@ -390,7 +390,7 @@ export default function ProductDetail(props) {
                         {item.product_name}
                       </p>
                     </Link>
-                    <Rate
+                    {/* <Rate
                       allowHalf={true}
                       style={{
                         fontSize: "1rem",
@@ -399,7 +399,7 @@ export default function ProductDetail(props) {
                         marginBottom: ".6rem",
                       }}
                       defaultValue={item.ratings}
-                    />
+                    /> */}
                     <p
                       style={{
                         color: "grey",
