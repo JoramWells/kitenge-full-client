@@ -4,9 +4,14 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../_actions/productActions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Row, Col, Card, Result, Button, Rate } from "antd";
+import { Row, Col, Card, Result, Button, Rate, Divider } from "antd";
 import RecentItemsBar from "../Generic/RecentItemsBar";
-import { RedoOutlined } from "@ant-design/icons";
+import {
+  EyeOutlined,
+  HeartFilled,
+  LikeFilled,
+  RedoOutlined,
+} from "@ant-design/icons";
 import NumberFormat from "react-number-format";
 
 const renderSkeleton = [...Array(5).keys()].map((i) => {
@@ -87,8 +92,10 @@ export function CarouselItem() {
                 style={{
                   marginTop: "1rem",
                   marginBottom: "1rem",
-                  height: "400px",
+                  height: "300px",
                   alignItems: "center",
+                  backgroundColor:"white",
+                  borderRadius:"5px"
                 }}
               >
                 <Link
@@ -99,8 +106,7 @@ export function CarouselItem() {
                     style={{
                       width: "13rem",
                       height: "270px",
-                      boxShadow:
-                        "0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 4px 10px 0 rgba(0, 0, 0, 0.1)",
+                      border: "1px solid #dee3e3",
                     }}
                     cover={
                       <LazyLoadImage
@@ -121,7 +127,7 @@ export function CarouselItem() {
                     >
                       <p
                         style={{
-                          color: "#1890ff",
+                          color: "grey",
                           margin: "0",
                           fontSize: "0.9rem",
                         }}
@@ -129,7 +135,7 @@ export function CarouselItem() {
                         {product.product_name}
                       </p>
                     </Link>
-                    <Rate
+                    {/* <Rate
                       allowHalf={true}
                       style={{
                         fontSize: "1rem",
@@ -138,11 +144,11 @@ export function CarouselItem() {
                         marginBottom: ".6rem",
                       }}
                       defaultValue={product.ratings}
-                    />
-                    <p
+                    /> */}
+                    <b
                       style={{
-                        color: "grey",
-                        fontSize: ".8rem",
+                        color: "#595a5c",
+                        fontSize: ".9rem",
                         margin: "0",
                       }}
                     >
@@ -153,7 +159,21 @@ export function CarouselItem() {
                         prefix="Kshs: "
                         suffix=" /="
                       />
-                    </p>
+                    </b>
+                    <Divider style={{ margin: "0.7rem" }} />
+
+                    <Row
+                      justify="space-between"
+                      style={{ marginTop: "0.4rem" }}
+                    >
+                      <Col>
+                        <EyeOutlined style={{ color: "grey" }} />{" "}
+                        <LikeFilled style={{ color: "#bfbfbf" }} />{" "}
+                        <HeartFilled style={{ color: "#ff7875" }} />{" "}
+                        <span style={{ color: "grey" }}>{product.likes}</span>
+                      </Col>
+                      <Col style={{ color: "grey" }}>Sold 93</Col>
+                    </Row>
                   </Card>
                 </Link>
               </Row>
@@ -201,6 +221,8 @@ export function CarouselItem() {
                   marginBottom: "1rem",
                   height: "400px",
                   alignItems: "center",
+                  backgroundColor:"white",
+                  borderRadius:"5px"
                 }}
               >
                 <Link
@@ -211,8 +233,7 @@ export function CarouselItem() {
                     style={{
                       width: "13rem",
                       height: "270px",
-                      boxShadow:
-                        "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)",
+                      border: "1px solid #dee3e3",
                     }}
                     cover={
                       <LazyLoadImage
@@ -233,7 +254,7 @@ export function CarouselItem() {
                     >
                       <p
                         style={{
-                          color: "#1890ff",
+                          color: "grey",
                           margin: "0",
                           fontSize: "0.9rem",
                         }}
@@ -241,7 +262,7 @@ export function CarouselItem() {
                         {product.product_name}
                       </p>
                     </Link>
-                    <Rate
+                    {/* <Rate
                       allowHalf={true}
                       style={{
                         fontSize: "1rem",
@@ -250,11 +271,11 @@ export function CarouselItem() {
                         marginBottom: ".6rem",
                       }}
                       defaultValue={product.ratings}
-                    />
-                    <p
+                    /> */}
+                    <b
                       style={{
-                        color: "grey",
-                        fontSize: ".8rem",
+                        color: "#595a5c",
+                        fontSize: ".9rem",
                         margin: "0",
                       }}
                     >
@@ -265,7 +286,21 @@ export function CarouselItem() {
                         prefix="Kshs: "
                         suffix=" /="
                       />
-                    </p>
+                    </b>
+                    <Divider style={{ margin: "0.7rem" }} />
+
+                    <Row
+                      justify="space-between"
+                      style={{ marginTop: "0.4rem" }}
+                    >
+                      <Col>
+                        <EyeOutlined style={{ color: "grey" }} />{" "}
+                        <LikeFilled style={{ color: "#bfbfbf" }} />{" "}
+                        <HeartFilled style={{ color: "#ff7875" }} />{" "}
+                        <span style={{ color: "grey" }}>{product.likes}</span>
+                      </Col>
+                      <Col style={{ color: "grey" }}>Sold 93</Col>
+                    </Row>
                   </Card>
                 </Link>
               </Row>
