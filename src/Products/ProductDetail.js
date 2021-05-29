@@ -341,93 +341,85 @@ export default function ProductDetail(props) {
             maxWidth: "85%",
             margin: "auto",
             display: "block",
-            height: "400px",
             alignItems: "center",
           }}
         >
-          <Carousel
-            swipeable={false}
-            draggable={false}
-            responsive={responsive}
-            infinite={true}
-          >
-            {products.length === 0 ? (
-              <Row justify="space-around" align="middle">
-                <Col>
-                  <Empty description="No category"></Empty>
-                </Col>
-              </Row>
-            ) : (
-              products.map((item) => (
-                <Row key={item.id} justify="center" style={{ margin: "1rem" }}>
-                  <Col>
-                    <Card
-                      style={{
-                        width: "13rem",
-                        height: "270px",
-                        border: "0",
-                        boxShadow:
-                          "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)",
-                      }}
-                      cover={
-                        <LazyLoadImage
-                          src={"/" + item.image}
-                          effect="blur"
-                          alt="productimage"
-                          style={{
-                            width: "12.8rem",
-                            height: "8.5rem",
-                            display: "flex",
-                            margin: "auto",
-                          }}
-                          // visibleByDefault={product.image}
-                        />
-                      }
-                    >
-                      <Link
-                        to={`/product-detail/${item.id}/?category=${item.category}`}
-                      >
-                        <p
-                          style={{
-                            color: "#1890ff",
-                            margin: "0",
-                            fontSize: "0.9rem",
-                          }}
-                        >
-                          {item.product_name}
-                        </p>
-                      </Link>
-                      <Rate
-                        allowHalf={true}
-                        style={{
-                          fontSize: "1rem",
-                          color: "#434343",
+          {products.length === 0 ? (
+            <Row justify="space-around" align="middle">
+              <Col>
+                <Empty description="No category"></Empty>
+              </Col>
+            </Row>
+          ) : (
+            <Row justify="space-around" gutter={[0,16]} style={{ marginTop: "2rem", paddingBottom:"2rem" }}>
+              {products.map((item) => (
+                <Col key={item.id}>
+                  <Card
+                    style={{
+                      width: "15rem",
+                      height: "290px",
+                      border: "1px solid #dee3e3",
 
-                          marginBottom: ".6rem",
+
+                    }}
+                    cover={
+                      <LazyLoadImage
+                        src={"/" + item.image}
+                        effect="blur"
+                        alt="productimage"
+                        style={{
+                          width: "14.8rem",
+                          height: "10.5rem",
+                          display: "flex",
+                          margin: "auto",
                         }}
-                        defaultValue={item.ratings}
+                        // visibleByDefault={product.image}
                       />
+                    }
+                  >
+                    <Link
+                      to={`/product-detail/${item.id}/?category=${item.category}`}
+                    >
                       <p
                         style={{
-                          color: "grey",
-                          fontSize: ".8rem",
+                          color: "#1890ff",
                           margin: "0",
+                          fontSize: "0.9rem",
                         }}
                       >
-                        <NumberFormat
-                          value={item.price}
-                          thousandSeparator={true}
-                          displayType={"text"}
-                          prefix="Kshs: "
-                          suffix=" /="
-                        />
+                        {item.product_name}
                       </p>
-                    </Card>
-                  </Col>
-                </Row>
-              ))
-            )}
-          </Carousel>
+                    </Link>
+                    <Rate
+                      allowHalf={true}
+                      style={{
+                        fontSize: "1rem",
+                        color: "#434343",
+
+                        marginBottom: ".6rem",
+                      }}
+                      defaultValue={item.ratings}
+                    />
+                    <p
+                      style={{
+                        color: "grey",
+                        fontSize: ".8rem",
+                        margin: "0",
+                      }}
+                    >
+                      <NumberFormat
+                        value={item.price}
+                        thousandSeparator={true}
+                        displayType={"text"}
+                        prefix="Kshs: "
+                        suffix=" /="
+                      />
+                    </p>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          )}
         </div>
       )}
     </>
