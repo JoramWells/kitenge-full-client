@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 // import LeftMenu from "./NavSections/LeftMenu";
 import RightMenu from "./RightMenu";
-import { Drawer, Button } from "antd";
+import { Drawer, Button, Input, Row, Col, message } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import { Link, withRouter } from "react-router-dom";
+import { searchItems } from "../../_actions/searchActions";
+import { useDispatch } from "react-redux";
 
-function NavigationBar() {
+const { Search } = Input;
+
+function NavigationBar(props) {
+  const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
     setVisible(true);
@@ -15,6 +20,18 @@ function NavigationBar() {
     setVisible(false);
   };
 
+  async function onSearch() {
+    dispatch(searchItems({ keyword: "amazing", min_videos: "1" }));
+    message.info("Waaaaaaat!!!");
+    // await axios.post('/andeyo',{keyword:"amazing",min_videos:1}).then(response=>{
+    //   setPosts(response.data)
+    //   console.log(posts)
+    // }).catch(err=>console.log(err))
+    setTimeout(() => {
+      props.history.push("/searched");
+    }, 1000);
+  }
+
   return (
     <div
       style={{
@@ -22,7 +39,7 @@ function NavigationBar() {
         width: "100%",
         position: "static",
         top: "0px",
-        display: "block",
+        // marginBottom: "5rem",
       }}
       className="desktop__navbar"
     >
@@ -31,6 +48,11 @@ function NavigationBar() {
           <Link to="/" style={{ padding: "1rem", color: "#484848" }}>
             <b>OnlineShop</b>
           </Link>
+          {/* <Row justify="center">
+          <Col span={6}>
+            <Search placeholder="Search.." onSearch={onSearch} />
+          </Col>
+        </Row> */}
         </div>
 
         <div className="menu__container">

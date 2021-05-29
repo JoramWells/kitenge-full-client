@@ -68,12 +68,12 @@ function RightMenu(props) {
     return (
       <Menu mode="horizontal" style={{ paddingTop: "0.4rem" }}>
         <Menu.Item key="mail" style={{ style: "none" }}>
-          <Button style={{ borderRadius: "100px" }} onClick={login}>
+          <Button style={{ borderRadius: "5px" }} onClick={login}>
             Sign In
           </Button>
         </Menu.Item>
         <Menu.Item key="app">
-          <Button style={{ borderRadius: "100px" }} onClick={register}>
+          <Button style={{ borderRadius: "5px" }} onClick={register}>
             Sign Up
           </Button>
         </Menu.Item>

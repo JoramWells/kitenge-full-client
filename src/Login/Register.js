@@ -87,11 +87,10 @@ export default function SignUp(props) {
   }
 
   return (
-    <>
+    <div >
       <Row
         justify="space-around"
         align="middle"
-        style={{ marginBottom: "1rem" }}
       >
         <Card
           style={{
@@ -247,6 +246,8 @@ export default function SignUp(props) {
           </Form>
         </Card>
       </Row>
-    </>
+
+
+    </div>
   );
 }

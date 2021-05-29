@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../_actions/productActions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Row, Col, Card, Result, Button, Rate } from "antd";
-import CarouselHeader from "../Generic/CarouselHeader";
 import RecentItemsBar from "../Generic/RecentItemsBar";
 import { RedoOutlined } from "@ant-design/icons";
 import NumberFormat from "react-number-format";
@@ -52,7 +51,6 @@ export function CarouselItem() {
   }, [dispatch]);
   return (
     <>
-      <CarouselHeader />
       <RecentItemsBar title="Most popular" />
       {loading ? (
         <Row
