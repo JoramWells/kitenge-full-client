@@ -56,6 +56,7 @@ export function CarouselItem() {
   }, [dispatch]);
   return (
     <>
+
       <RecentItemsBar title="Most popular" />
       {loading ? (
         <Row

@@ -110,177 +110,224 @@ export default function ProductDetail(props) {
 
   return (
     <>
-      {loading ? (
-        <Row
-          justify="space-around"
-          align="middle"
-          style={{ padding: "10px", marginTop: "2rem" }}
+      <div style={{ width: "85%", margin: "auto", display: "block" }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+            alignItems: "center",
+          }}
         >
-          <Col md={6} sm={6}>
-            <Skeleton.Image
-              style={{ width: "250px", height: "250px", objectFit: "contain" }}
-            />
-          </Col>
-          <Col md={6} sm={6} style={{ marginTop: "2rem" }}>
-            <Form>
-              <Form.Item>
-                <Skeleton.Input style={{ width: "250px", height: "1rem" }} />
-              </Form.Item>
-              <Form.Item>
-                <Skeleton.Input style={{ width: "150px", height: "1rem" }} />
-              </Form.Item>
-              <Form.Item>
-                <Skeleton.Input style={{ width: "200px", height: "1rem" }} />
-              </Form.Item>
-            </Form>
-          </Col>
-          <Col>
-            <Skeleton.Input style={{ width: "300px", height: "300px" }} />
-          </Col>
-        </Row>
-      ) : error ? (
-        <Result
-          status="500"
-          subTitle={error}
-          extra={
-            <Button onClick={reloadHandler} icon={<RedoOutlined />}>
-              RETRY
-            </Button>
-          }
-        />
-      ) : (
-        <div style={{ margin: "1rem" }}>
+          <div>
+            {loading ? (
+              <Row
+                justify="space-around"
+                align="middle"
+                style={{ padding: "10px", marginTop: "2rem" }}
+              >
+                <Col md={6} sm={6}>
+                  <Skeleton.Image
+                    style={{
+                      width: "250px",
+                      height: "250px",
+                      objectFit: "contain",
+                    }}
+                  />
+                </Col>
+                <Col md={6} sm={6} style={{ marginTop: "2rem" }}>
+                  <Form>
+                    <Form.Item>
+                      <Skeleton.Input
+                        style={{ width: "250px", height: "1rem" }}
+                      />
+                    </Form.Item>
+                    <Form.Item>
+                      <Skeleton.Input
+                        style={{ width: "150px", height: "1rem" }}
+                      />
+                    </Form.Item>
+                    <Form.Item>
+                      <Skeleton.Input
+                        style={{ width: "200px", height: "1rem" }}
+                      />
+                    </Form.Item>
+                  </Form>
+                </Col>
+                <Col>
+                  <Skeleton.Input style={{ width: "300px", height: "300px" }} />
+                </Col>
+              </Row>
+            ) : error ? (
+              <Result
+                status="500"
+                subTitle={error}
+                extra={
+                  <Button onClick={reloadHandler} icon={<RedoOutlined />}>
+                    RETRY
+                  </Button>
+                }
+              />
+            ) : (
+              <div style={{ margin: "1rem" }}>
+                <div
+                  style={{
+                    margin: "auto",
+                    display: "block",
+                    backgroundColor: "white",
+                    padding: "1rem",
+                    borderRadius: "5px",
+                  }}
+                >
+                  <Row justify="space-around" style={{ marginTop: "3rem" }}>
+                    <Col>
+                      <h3
+                        style={{
+                          fontSize: "1.3rem",
+                          color: "#434343",
+                          margin: "0",
+                        }}
+                      >
+                        {product.product_name}
+                      </h3>
+                      <Image
+                        src={"/" + product.image}
+                        alt="shoes again"
+                        style={{
+                          width: "250px",
+                          height: "250px",
+                          objectFit: "contain",
+                        }}
+                      />
+                    </Col>
+
+                    <Col style={{ paddingLeft: "20px" }}>
+                      <p style={{ color: "#CD5C5C", margin: "0" }}>
+                        <NumberFormat
+                          value={product.price}
+                          thousandSeparator={true}
+                          displayType={"text"}
+                          prefix="Kshs: "
+                          suffix=" /="
+                        />
+                      </p>
+                      <p style={{ color: "grey", marginBottom: "0" }}>
+                        Reviews: (123){" "}
+                      </p>
+                      <Rate
+                        style={{ color: "#434343", fontSize: "1rem" }}
+                        disabled
+                        allowHalf
+                        defaultValue={product.ratings}
+                      />
+                      <Divider plain style={{ margin: ".5rem" }}></Divider>
+
+                      <p style={{ margin: "0" }}>
+                        Categorys': {product.category}
+                      </p>
+                      <span style={{ color: "grey", margin: "0" }}>
+                        Shipping: 350/=
+                      </span>
+                      <p>Qty: {product.stock}</p>
+                      <select
+                        defaultValue={qty}
+                        style={{ width: 120 }}
+                        onChange={(e) => {
+                          setQty(e.target.value);
+                        }}
+                      >
+                        {[...Array(product.stock).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </select>
+                      <Divider style={{ marginTop: ".5rem" }} />
+                      {userInfo ? (
+                        <Row justify="space-around" style={{ margin: "1rem" }}>
+                          <Button
+                            style={{
+                              border: "0",
+                              textDecoration: "none",
+                              color: "white",
+                            }}
+                            block
+                            size="large"
+                            className="cart"
+                            onClick={handleAddToCart}
+                          >
+                            ADD TO CART
+                          </Button>
+                        </Row>
+                      ) : (
+                        <>
+                          <Row>
+                            <Col>
+                              <Button
+                                className="cart"
+                                size="large"
+                                onClick={loginHandler}
+                                style={{
+                                  margin: ".5rem",
+                                  border: "none",
+                                }}
+                                block
+                              >
+                                <p style={{ color: "white" }}>
+                                  <b>SignIn to checkout </b>
+                                </p>
+                              </Button>
+                            </Col>
+                            <Col>
+                              <Button
+                                size="large"
+                                className="cart"
+                                style={{
+                                  margin: ".5rem",
+                                  boreder: "none",
+                                }}
+                                block
+                              >
+                                <p style={{ color: "white" }}>
+                                  <b>Continue Shoppini </b>
+                                </p>
+                              </Button>
+                            </Col>
+                          </Row>
+                        </>
+                      )}
+                      <Divider />
+                    </Col>
+                    {/* <Col>
+                    <Card
+                      style={{
+                        width: "18rem",
+                      }}
+                    >
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: product.description,
+                        }}
+                      />
+                    </Card>
+                  </Col> */}
+                  </Row>
+                </div>
+              </div>
+            )}
+          </div>
           <div
             style={{
-              margin: "auto",
-              display: "block",
               backgroundColor: "white",
-              padding: ".1rem",
+              height: "200px",
+              width: "15rem",
             }}
           >
-            <Row justify="space-around" style={{ marginTop: "3rem" }}>
-              <Col md={6} sm={6}>
-                <h3
-                  style={{ fontSize: "1.3rem", color: "#434343", margin: "0" }}
-                >
-                  {product.product_name}
-                </h3>
-                <Image
-                  src={"/" + product.image}
-                  alt="shoes again"
-                  style={{
-                    width: "250px",
-                    height: "250px",
-                    objectFit: "contain",
-                  }}
-                />
-              </Col>
-
-              <Col style={{ paddingLeft: "20px" }} md={6} sm={6}>
-                <p style={{ color: "#CD5C5C", margin: "0" }}>
-                  <NumberFormat
-                    value={product.price}
-                    thousandSeparator={true}
-                    displayType={"text"}
-                    prefix="Kshs: "
-                    suffix=" /="
-                  />
-                </p>
-                <p style={{ color: "grey", marginBottom: "0" }}>
-                  Reviews: (123){" "}
-                </p>
-                <Rate
-                  style={{ color: "#434343", fontSize: "1rem" }}
-                  disabled
-                  allowHalf
-                  defaultValue={product.ratings}
-                />
-                <Divider plain style={{ margin: ".5rem" }}></Divider>
-
-                <p style={{ margin: "0" }}>Categorys': {product.category}</p>
-                <span style={{ color: "grey", margin: "0" }}>
-                  Shipping: 350/=
-                </span>
-                <p>Qty: {product.stock}</p>
-                <select
-                  defaultValue={qty}
-                  style={{ width: 120 }}
-                  onChange={(e) => {
-                    setQty(e.target.value);
-                  }}
-                >
-                  {[...Array(product.stock).keys()].map((x) => (
-                    <option key={x + 1} value={x + 1}>
-                      {x + 1}
-                    </option>
-                  ))}
-                </select>
-                <Divider style={{ marginTop: ".5rem" }} />
-                {userInfo ? (
-                  <Row justify="space-around" style={{ margin: "1rem" }}>
-                    <Button
-                      style={{
-                        border: "0",
-                        textDecoration: "none",
-                        color: "white",
-                      }}
-                      block
-                      size="large"
-                      className="cart"
-                      onClick={handleAddToCart}
-                    >
-                      ADD TO CART
-                    </Button>
-                  </Row>
-                ) : (
-                  <>
-                    <Button
-                      className="cart"
-                      size="large"
-                      onClick={loginHandler}
-                      style={{
-                        margin: ".5rem",
-                        border: "none",
-                      }}
-                      block
-                    >
-                      <p style={{ color: "white" }}>
-                        <b>SignIn to checkout </b>
-                      </p>
-                    </Button>
-                    <Button
-                      size="large"
-                      className="cart"
-                      style={{
-                        margin: ".5rem",
-                        boreder: "none",
-                      }}
-                      block
-                    >
-                      <p style={{ color: "white" }}>
-                        <b>Continue Shopping </b>
-                      </p>
-                    </Button>
-                  </>
-                )}
-                <Divider></Divider>
-              </Col>
-              <Col
-              >
-                <Card
-                  style={{
-                    width: "18rem",
-                  }}
-                >
-                  <div
-                    dangerouslySetInnerHTML={{ __html: product.description }}
-                  />
-                </Card>
-              </Col>
-            </Row>
+            Fulex
           </div>
         </div>
-      )}
+      </div>
+
       <RecentItemsBar title="Related Items" />
       {loadingCategory ? (
         <Row justify="space-around" align="middle">
