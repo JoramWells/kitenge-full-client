@@ -1,5 +1,4 @@
-import React, { useCallback, useState } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useCallback, useState, memo } from "react";
 import {
   Row,
   Col,
@@ -18,9 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import Ripples from "react-ripples";
-import Cookie from "js-cookie";
-import RequestIp from "@supercharge/request-ip";
-import ReactTouchEvents from "react-touch-events";
+import axios from "axios";
 import mpesa from "../img/mpesa.png";
 
 // import { listProducts } from "../../_actions/productActions";
@@ -29,13 +26,14 @@ import {
   CloseCircleOutlined,
   EllipsisOutlined,
   EyeOutlined,
-  HeartOutlined,
-  LikeOutlined,
+  HeartFilled,
+  LikeFilled,
   ReloadOutlined,
   ShoppingOutlined,
 } from "@ant-design/icons";
 import { addToCart } from "../_actions/cartActions";
 import Modal from "react-modal";
+import { likedItem } from "../_actions/likedActions";
 
 if (process.env.NODE_ENV !== "test") Modal.setAppElement("#root");
 
@@ -47,10 +45,12 @@ const renderSkeleton = [...Array(5).keys()].map((i) => {
   );
 });
 
-function CarouselItem(props) {
+function CarouselIte(props) {
   const dispatch = useDispatch();
   const ProductList = useSelector((state) => state.productList);
   const { posts, loading, error } = ProductList;
+  const ProductLiked = useSelector((state) => state.liked);
+  const { like, loadingLike, errorLike } = ProductLiked;
   const [category, setCategory] = useState("");
   const [shop, setShop] = useState("");
   const [id, setId] = useState("");
@@ -60,7 +60,7 @@ function CarouselItem(props) {
   const [date, setDate] = useState("");
   const [rate, setRate] = useState("");
   const [description, setDescription] = useState("");
-  let [liked, setLiked] = useState(false);
+  let [likes, setLikes] = useState(false);
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const [visible, setVisible] = useState(false);
@@ -115,32 +115,28 @@ function CarouselItem(props) {
     window.location.reload();
   }
 
-  function handleTap(id) {
-    liked = !liked;
-    setLiked(liked);
-    console.log("You tapped me");
-    const stateLiked = {
-      username: userInfo.name,
-      liked: liked,
-      id:id
-    };
-    Cookie.set("likedCookie", JSON.stringify(stateLiked));
-    const ifLiked = Cookie.getJSON("likedCookie");
-    if (ifLiked.liked == true) {
-      message.info("Product liked");
-    } else message.info("Product unliked");
+  const likePost = async (id,likes) => {
+    await axios.put(`product/likes/${id}`, { likes: likes });
+  };
 
-    console.log(liked);
-  }
-  function handleSwipe(direction) {
-    switch (direction) {
-      case "top":
-      case "bottom":
-      case "left":
-      case "right":
-        console.log("You swipped");
-    }
-  }
+  // function handleTap(id) {
+  //   liked = !liked;
+  //   setLiked(liked);
+  //   console.log("You tapped me");
+  //   const stateLiked = {
+  //     username: userInfo.name,
+  //     liked: liked,
+  //     id: id,
+  //   };
+
+  //   // Cookie.set("likedCookie", JSON.stringify(stateLiked));
+  //   // const ifLiked = Cookie.getJSON("likedCookie");
+  //   // if (ifLiked.liked == true) {
+  //   //   message.info("Product liked");
+  //   // } else message.info("Product unliked");
+  //   dispatch(likedItem(id));
+  //   // console.log(liked);
+  // }
 
   const productAddToCart = (productId, product_name) => {
     if (!userInfo) {
@@ -356,77 +352,116 @@ function CarouselItem(props) {
         />
       ) : (
         <>
-          <Row
-            justify="space-around"
-            align="middle"
-            gutter={[0, 16]}
-            style={{ backgroundColor: "black" }}
-          >
+          <Row justify="space-around" align="middle" gutter={[0, 16]}>
             {posts.map((item) => (
               <Col key={item.id}>
-                <ReactTouchEvents onTap={()=>handleTap(item.product_name)} onSwipe={handleSwipe}>
-                  <Card
-                    style={{
-                      width: "17rem",
-                      height: "auto",
-                      padding: "0rem",
-                    }}
-                    extra={
-                      <Ripples>
-                        <EllipsisOutlined
-                          onClick={() => showModal(item)}
-                          key="ellipsis"
-                          style={{
-                            fontSize: "1.3rem",
-                          }}
-                        />
-                      </Ripples>
-                    }
-                    cover={
-                      <LazyLoadImage
-                        src={item.image}
-                        effect="blur"
-                        alt="product-Image"
+                <Card
+                  style={{
+                    width: "17rem",
+                    height: "auto",
+                    padding: "0rem",
+                    boxShadow:
+                      "0 3px 7px 0 rgba(0, 0, 0, 0.1), 0 5px 20px 0 rgba(0, 0, 0, 0.1)",
+                  }}
+                  extra={
+                    <Ripples>
+                      <EllipsisOutlined
+                        onClick={() => showModal(item)}
+                        key="ellipsis"
                         style={{
-                          marginTop: "0",
-                          width: "17rem",
-                          height: "11.4rem",
-                          display: "flex",
-                          margin: "auto",
+                          fontSize: "1.3rem",
+                          backgroundColor: "rgba(0,0,0,0.1)",
+                          borderRadius: "100px",
+                          padding: "0.2rem",
                         }}
                       />
-                    }
+                    </Ripples>
+                  }
+                  cover={
+                    <LazyLoadImage
+                      src={item.image}
+                      effect="blur"
+                      alt="product-Image"
+                      style={{
+                        marginTop: "0",
+                        width: "17rem",
+                        height: "11.4rem",
+                        display: "flex",
+                        margin: "auto",
+                      }}
+                    />
+                  }
+                >
+                  <Link
+                    to={`/product-detail/${item.id}/?category=${item.category}`}
                   >
-                    <Link
-                      to={`/product-detail/${item.id}/?category=${item.category}`}
+                    <h3
+                      style={{
+                        color: "#595a5c",
+                        margin: "0",
+                        fontWeight: "400",
+                      }}
                     >
-                      <h3 style={{ color: "rgba(211, 84, 0, 1)", margin: "0" }}>
-                        {" "}
-                        {item.product_name}
-                      </h3>
-                    </Link>
+                      {item.product_name}
+                    </h3>
+                  </Link>
 
-                    <Rate
+                  {/* <Rate
                       name="size-small"
                       allowHalf={true}
                       style={{
                         fontSize: "1rem",
-                        color: "#282c35",
+                        color: "#434343",
                         marginBottom: ".6rem",
                       }}
                       defaultValue={item.ratings}
+                    /> */}
+                  <h3
+                    style={{
+                      color: "grey",
+                      fontSize: ".8rem",
+                      margin: "0",
+                    }}
+                  >
+                    <NumberFormat
+                      value={item.price}
+                      thousandSeparator={true}
+                      displayType={"text"}
+                      prefix="Kshs: "
+                      suffix=" /="
                     />
+                  </h3>
+                  <p
+                    style={{
+                      color: "#caccd1",
+                      fontSize: ".75rem",
+                      margin: "0",
+                      textDecoration: "line-through",
+                    }}
+                  >
+                    <NumberFormat
+                      value={item.price}
+                      thousandSeparator={true}
+                      displayType={"text"}
+                      prefix="Kshs: "
+                      suffix=" /="
+                    />
+                  </p>
+                  <Divider style={{ margin: "0.1rem" }} />
 
-                    <Row justify="space-between">
-                      <Col>
-                        <EyeOutlined style={{ color: "grey" }} />{" "}
-                        <LikeOutlined style={{ color: "grey" }} />{" "}
-                        <HeartOutlined style={{ color: "grey" }} /> 131
-                      </Col>
-                      <Col style={{ color: "grey" }}>Sold 93</Col>
-                    </Row>
-                  </Card>
-                </ReactTouchEvents>
+                  <Row justify="space-between" style={{ marginTop: "0.4rem" }}>
+                    <Col>
+                      <EyeOutlined style={{ color: "grey" }} />{" "}
+                      <LikeFilled style={{ color: "#bfbfbf" }} />{" "}
+                      <HeartFilled
+                        style={{ color: "#ff7875" }}
+                        onClick={() => likePost(item.id,item.likes+1)}
+                      />{" "}
+                      <span style={{ color: "grey" }}>{item.likes}</span>
+                    </Col>
+                    <Col style={{ color: "grey" }}>Sold 93</Col>
+                  </Row>
+                </Card>
               </Col>
             ))}
           </Row>
@@ -436,4 +471,4 @@ function CarouselItem(props) {
   );
 }
 
-export default withRouter(CarouselItem);
+export const CarouselItem = memo(CarouselIte);

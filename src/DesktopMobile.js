@@ -1,5 +1,5 @@
 import React from "react";
-import CarouselItem from "./Mobile/CarouselItem"
+import {CarouselItem} from "./Mobile/CarouselItem"
 import {CarouselItems} from "./Desktop/CarouselItems"
 
 

@@ -16,7 +16,8 @@ import {
   message,
   Skeleton,
   Result,
-  Card, Image
+  Card,
+  Image,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -31,7 +32,7 @@ import {
   ReloadOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from "react-markdown";
 
 const renderTH = [...Array(4).keys()].map((i) => {
   return (
@@ -60,7 +61,11 @@ const columns = [
     dataIndex: "image",
     key: "image",
     render: (img) => (
-      <Image src={"/" + img} alt="image file" style={{ width: "50px", height:"50px", objectFit:"contain" }} />
+      <Image
+        src={"/" + img}
+        alt="image file"
+        style={{ width: "50px", height: "50px", objectFit: "contain" }}
+      />
     ),
   },
 
@@ -310,11 +315,10 @@ export default function ManageProducts() {
                   onChange={(e) => setStock(e.target.value)}
                 />
               </Form.Item>
-              <Card style={{ height: 150, overflowY: 'scroll', margin:".3rem" }}>
-              <ReactMarkdown >
-                
-                {description}</ReactMarkdown>
-
+              <Card
+                style={{ height: 150, overflowY: "scroll", margin: ".3rem" }}
+              >
+                <ReactMarkdown>{description}</ReactMarkdown>
               </Card>
 
               <Form.Item
@@ -399,7 +403,6 @@ export default function ManageProducts() {
             align="middle"
           >
             <Col>
-
               <table className="tableClass" style={{ width: "100%" }}>
                 <thead>
                   <th>name</th>

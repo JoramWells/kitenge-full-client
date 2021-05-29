@@ -2,12 +2,11 @@ import React, { useState } from "react";
 // import LeftMenu from "./NavSections/LeftMenu";
 import RightMenu from "./RightMenu";
 import { Drawer, Button } from "antd";
-import {  MenuOutlined } from "@ant-design/icons";
-import {Link} from 'react-router-dom'
+import { MenuOutlined } from "@ant-design/icons";
+import { Link, withRouter } from "react-router-dom";
 
 function NavigationBar() {
   const [visible, setVisible] = useState(false);
-
   const showDrawer = () => {
     setVisible(true);
   };
@@ -29,15 +28,15 @@ function NavigationBar() {
     >
       <nav className="menu">
         <div className="menu__logo">
-        <Link to="/" style={{ padding: "1rem",color:"#484848" }} >
-                <b>OnlineShop</b>
-              </Link>
+          <Link to="/" style={{ padding: "1rem", color: "#484848" }}>
+            <b>OnlineShop</b>
+          </Link>
         </div>
+
         <div className="menu__container">
           {/* <div className="menu_left">
             <LeftMenu mode="horizontal" />
           </div> */}
-
           <div className="menu_rigth">
             <RightMenu mode="horizontal" />
           </div>
@@ -65,4 +64,4 @@ function NavigationBar() {
   );
 }
 
-export default NavigationBar;
+export default withRouter(NavigationBar);

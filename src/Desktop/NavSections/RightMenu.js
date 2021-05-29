@@ -15,7 +15,6 @@ import Cookie from "js-cookie";
 import { withRouter, Link, useHistory } from "react-router-dom";
 import {
   EditOutlined,
-  LoginOutlined,
   MailOutlined,
   PlusOutlined,
   QuestionCircleOutlined,
@@ -30,7 +29,7 @@ const { Text, Title } = Typography;
 const { SubMenu } = Menu;
 // const cartItems = Cookie.getJSON("cartItems");
 
-function RightMenu() {
+function RightMenu(props) {
   const history = useHistory();
   const userSignin = useSelector((state) => state.userSignin);
   const CartItems = useSelector((state) => state.cart);
@@ -39,6 +38,12 @@ function RightMenu() {
   const [visible, setVisible] = useState(false);
   //   const PaymentList = useSelector((state) => state.paymentList);
   //   const { payments } = PaymentList;
+  function login() {
+    props.history.push("/login");
+  }
+  function register() {
+    props.history.push("/register");
+  }
 
   function showModal() {
     setVisible(true);
@@ -62,29 +67,15 @@ function RightMenu() {
   if (!userInfo) {
     return (
       <Menu mode="horizontal" style={{ paddingTop: "0.4rem" }}>
-        <Menu.Item key="mail">
-          <Link to="/login">
-            <Button
-              icon={
-                <LoginOutlined style={{ margin: "0px", fontSize: "1rem" }} />
-              }
-              style={{ borderRadius: "50px" }}
-            >
-              Signin
-            </Button>
-          </Link>
+        <Menu.Item key="mail" style={{ style: "none" }}>
+          <Button style={{ borderRadius: "100px" }} onClick={login}>
+            Sign In
+          </Button>
         </Menu.Item>
         <Menu.Item key="app">
-          <Link to="/register">
-            <Button
-              style={{ borderRadius: "50px" }}
-              icon={
-                <UserAddOutlined style={{ fontSize: "1rem", margin: "0px" }} />
-              }
-            >
-              Signup
-            </Button>
-          </Link>
+          <Button style={{ borderRadius: "100px" }} onClick={register}>
+            Sign Up
+          </Button>
         </Menu.Item>
       </Menu>
     );
@@ -105,7 +96,7 @@ function RightMenu() {
             <SubMenu
               title={
                 <QuestionCircleOutlined
-                style={{ fontSize: "1.3rem",  color:"grey"}}
+                  style={{ fontSize: "1.3rem", color: "grey" }}
                 />
               }
             >
@@ -118,7 +109,11 @@ function RightMenu() {
             </SubMenu>
             <SubMenu
               style={{ borderRadius: "10px", marginLeft: "0" }}
-              title={<SettingOutlined  style={{ fontSize: "1.3rem", margin:"0", color:"grey"}} />}
+              title={
+                <SettingOutlined
+                  style={{ fontSize: "1.3rem", margin: "0", color: "grey" }}
+                />
+              }
             >
               <Menu.Item icon={<PlusOutlined />}>
                 <Link to="/products/add">Add Product</Link>
@@ -156,7 +151,7 @@ function RightMenu() {
               <Badge count={cartItems.length}>
                 <ShoppingCartOutlined
                   onClick={showModal}
-                  style={{ fontSize: "1.4rem", margin:"0", color:"grey"}}
+                  style={{ fontSize: "1.4rem", margin: "0", color: "grey" }}
                 />
               </Badge>
             </Menu.Item>
@@ -169,7 +164,11 @@ function RightMenu() {
             </Menu.Item>
 
             <SubMenu
-              title={<QuestionCircleOutlined  style={{ fontSize: "1.3rem",  color:"grey"}} />}
+              title={
+                <QuestionCircleOutlined
+                  style={{ fontSize: "1.3rem", color: "grey" }}
+                />
+              }
             >
               <Menu.Item style={{ margin: "0px" }}>Contact supplier</Menu.Item>
               <Menu.Item style={{ margin: "0px" }}>
@@ -180,7 +179,11 @@ function RightMenu() {
             </SubMenu>
             <SubMenu
               style={{ borderRadius: "10px", marginLeft: "0" }}
-              title={<SettingOutlined  style={{ fontSize: "1.3rem", color:"grey"}} />}
+              title={
+                <SettingOutlined
+                  style={{ fontSize: "1.3rem", color: "grey" }}
+                />
+              }
             >
               <Menu.Item icon={<PlusOutlined />}>
                 <Link to="/products/add">Add Product</Link>

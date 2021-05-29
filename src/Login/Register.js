@@ -13,7 +13,7 @@ import {
   Avatar,
   Card,
   message,
-  Divider
+  Divider,
 } from "antd";
 import {
   CloseCircleOutlined,
@@ -24,16 +24,16 @@ import {
 import Cookie from "js-cookie";
 import { register } from "../_actions/userActions";
 
-const iconStyles={
-  color:"grey",
-}
-const inputStyles={
-  borderTop:"0",
-  borderLeft:"0",
-  borderRight:"0"
-}
+const iconStyles = {
+  color: "grey",
+};
+const inputStyles = {
+  borderTop: "0",
+  borderLeft: "0",
+  borderRight: "0",
+};
 
-export default function SignUp() {
+export default function SignUp(props) {
   const CLIENT_ID =
     "266388441735-5a4sfpj0lpk8nvjkf52ppoqqul0139st.apps.googleusercontent.com";
   const history = useHistory();
@@ -49,12 +49,11 @@ export default function SignUp() {
     history.goBack();
   };
 
-  async function submitHandler (){
+  async function submitHandler() {
     // e.preventDefault();
     await dispatch(register(name, email, password, avatar, phone, address));
     const userFailure = Cookie.getJSON("userFailure");
     if (!userFailure) {
-      
       console.log();
     } else {
       message.warn(userFailure.message);
@@ -66,23 +65,26 @@ export default function SignUp() {
       message.success("Successfully registered");
       history.goBack();
     }
-  };
+  }
+  function login() {
+    props.history.push("/login");
+  }
 
-  function responseSuccess(response){
+  function responseSuccess(response) {
     setName(response.profileObj.name);
     setEmail(response.profileObj.email);
     setAvatar(response.profileObj.imageUrl);
 
     setPassword("JoramWells18.");
-    submitHandler()
+    submitHandler();
     // props.history.push('/')
     console.log(response.tokenObj);
     // await axios.post("/getToken", response.tokenObj.id_token);
-  };
-  function responseFailure(response){
+  }
+  function responseFailure(response) {
     console.log(response);
     // props.history.push('/')
-  };
+  }
 
   return (
     <>
@@ -91,7 +93,15 @@ export default function SignUp() {
         align="middle"
         style={{ marginBottom: "1rem" }}
       >
-        <Card style={{ width: "23rem", marginTop: "4rem" }}>
+        <Card
+          style={{
+            width: "25rem",
+            marginTop: "4rem",
+            boxShadow:
+              "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)",
+            border: "none",
+          }}
+        >
           <Row justify="space-between" align="middle">
             <Col>
               <Avatar src={avatar} style={{ margin: "0.3rem" }} />
@@ -106,7 +116,7 @@ export default function SignUp() {
           </Row>
           <Divider>SIGN UP</Divider>
           <Form layout="vertical" size="large" onSubmit={submitHandler}>
-            <Form.Item required>
+            <Form.Item required label="Full name">
               <Input
                 prefix={<UserOutlined style={iconStyles} />}
                 id="name"
@@ -120,18 +130,16 @@ export default function SignUp() {
               hidden
               name="avatar"
               value={avatar}
-              rules={[{ message: "Enter image" }]}
               onChange={(e) => setAvatar(e.target.value)}
             >
               <Input />
             </Form.Item>
-            <Form.Item required>
+            <Form.Item required label="Email">
               <Input
                 prefix={<MailOutlined style={iconStyles} />}
                 value={email}
                 id="email"
                 name="email"
-                
                 placeholder="jorammanoah1@gmail.com"
                 onChange={(e) => setEmail(e.target.value)}
                 style={inputStyles}
@@ -195,9 +203,11 @@ export default function SignUp() {
               />
             </Form.Item> */}
 
-
-            <Form.Item >
+            <Form.Item
+            label="Password"
+            >
               <Input.Password
+
                 prefix={<LockOutlined style={iconStyles} />}
                 id="password"
                 required
@@ -207,19 +217,19 @@ export default function SignUp() {
                 style={inputStyles}
               />
             </Form.Item>
+
             <Form.Item>
-            <Link to="/login">Already have an account? Sign in</Link>
-              
-              </Form.Item>
-            <Form.Item>
+              <p onClick={login} style={{ color: "grey" }} className="login">
+                Already have an account? Sign in
+              </p>
               <GoogleLogin
                 clientId={CLIENT_ID}
                 buttonText="Sign in with Google"
                 onSuccess={responseSuccess}
                 onFailure={responseFailure}
                 style={{ display: "block" }}
+                className="link"
               />
-
             </Form.Item>
             {/* <Form.Item>
               <Button
@@ -234,8 +244,6 @@ export default function SignUp() {
                 SIGN UP
               </Button>
             </Form.Item> */}
-
-
           </Form>
         </Card>
       </Row>

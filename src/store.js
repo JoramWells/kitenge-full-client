@@ -22,10 +22,13 @@ import {
   paymentListReducer,
   paymentReducer,
 } from "./_reducers/paymentReducer";
+import { likedReducer } from "./_reducers/likedReducer";
+import { searchReducer } from "./_reducers/searchReducer";
 
 const cartItems = Cookie.getJSON("cartItems") || [];
+const likedItems = Cookie.getJSON("likedItems") || [];
 const userInfo = Cookie.getJSON("userInfo") || null;
-const initialState = { cart: { cartItems }, userSignin: { userInfo } };
+const initialState = { cart: { cartItems }, userSignin: { userInfo },liked:{likedItems} };
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -34,6 +37,8 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   productSave: productSaveReducer,
   cart: cartReducer,
+  liked:likedReducer,
+  searchQuery:searchReducer,
   categoryList: categoryListReducer,
   categoryLists: categoryListsReducer,
   productUpdate: productUpdateReducer,

@@ -75,9 +75,7 @@ export default function NotCartItems() {
               <Menu.Item
                 style={{ justifyContent: "space-around", display: "flex" }}
               >
-                <Button style={{ borderRadius: "50px" }}>
                   <Link to="/register">Manage account</Link>
-                </Button>
               </Menu.Item>
               <Menu.Item
                 style={{

@@ -13,6 +13,7 @@ import DesktopNavbarMobile from "./DesktopNavbarMobile";
 import Footer from "./Desktop/Footer";
 import Product from "./Products/Product";
 import ScrollTop from "./Generic/ScrollTop";
+import SearchedItems from "./Products/SearchedItems";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/product-info/:category" exact component={Product} />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/shipping" exact component={ShippingScreen} />
+          <Route path="/searched" exact component={SearchedItems}  />
         </Switch>
       </Router>
       <Footer />

@@ -1,20 +1,18 @@
 import React from "react";
-import { Row, Col } from "antd";
 
 export default function RecentItemsBar(props) {
   return (
-    <Row
+    <div
       style={{
-        backgroundColor: "#d9d9d9",
-        margin: "1rem",
-        paddingTop: "0.3rem",
+        backgroundColor: "#dee3e3",
+        padding: " 0.4rem 0 0.09rem 1rem ",
+        width: "81%",
+        display: "block",
+        margin: "auto"
+
       }}
-      justify="space-around"
-      align="middle"
     >
-      <Col>
-        <h3>{props.title}</h3>
-      </Col>
-    </Row>
+        <h3 >{props.title}</h3>
+    </div>
   );
 }

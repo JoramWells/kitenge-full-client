@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { signin } from "../_actions/userActions";
-import { Form, Input, Button, Card, Row, Col, message,Divider } from "antd";
+import { Form, Input, Button, Card, Row, Col, message, Divider } from "antd";
 import {
   CloseCircleOutlined,
   LockOutlined,
   MailOutlined,
 } from "@ant-design/icons";
-import Cookie from 'js-cookie'
+import Cookie from "js-cookie";
 
-const iconStyles={
-  color:"grey",
-}
-const inputStyles={
-  borderTop:"0",
-  borderLeft:"0",
-  borderRight:"0"
-}
+const iconStyles = {
+  color: "grey",
+};
+const inputStyles = {
+  borderTop: "0",
+  borderLeft: "0",
+  borderRight: "0",
+};
 
 export default function SignIn(props) {
   const history = useHistory();
@@ -29,9 +29,12 @@ export default function SignIn(props) {
 
   const dispatch = useDispatch();
 
-  function closeHandler (){
+  function closeHandler() {
     history.goBack();
-  };
+  }
+  function register() {
+    props.history.push("/register");
+  }
 
   useEffect(() => {
     if (userInfo) {
@@ -41,19 +44,27 @@ export default function SignIn(props) {
   }, [userInfo]);
 
   return (
-    <Row justify="space-around" align="middle" style={{ marginTop: "5rem", marginBottom:"2rem" }}>
-      <Card style={{ width: "20rem" }}>
+    <Row
+      justify="space-around"
+      align="middle"
+      style={{ marginTop: "5rem", marginBottom: "2rem" }}
+    >
+      <Card
+        style={{
+          width: "25rem",
+          boxShadow:
+            "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)",
+          border: "none",
+        }}
+      >
         <Row justify="end">
-
-            <CloseCircleOutlined
-              className="close"
-              style={{ fontSize: "1.5rem", marginBottom: "0.3rem" }}
-              onClick={closeHandler}
-            />
+          <CloseCircleOutlined
+            className="close"
+            style={{ fontSize: "1.5rem", marginBottom: "0.3rem" }}
+            onClick={closeHandler}
+          />
         </Row>
-        <Divider>
-          SIGN IN
-        </Divider>
+        <Divider>SIGN IN</Divider>
 
         <Formik
           initialValues={{
@@ -77,7 +88,6 @@ export default function SignIn(props) {
               await dispatch(signin(dataToSubmit));
               const userFailure = Cookie.getJSON("userFailure");
 
-
               if (!userFailure) {
                 console.log();
               } else {
@@ -88,7 +98,7 @@ export default function SignIn(props) {
               if (!userSuccess) console.log();
               else {
                 message.success("Successfully login");
-                props.history.push('/')
+                props.history.push("/");
               }
 
               setSubmitting(false);
@@ -107,12 +117,11 @@ export default function SignIn(props) {
             } = props;
             return (
               <Form onSubmit={handleSubmit} layout="vertical" size="large">
-                <Form.Item
-                 required>
+                <Form.Item required label="Email">
                   <Input
                     prefix={<MailOutlined style={iconStyles} />}
                     id="email"
-                    placeholder=" johndoe123@gmail.com"
+                    placeholder=" johndoe@gmail.com"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.email}
@@ -128,11 +137,10 @@ export default function SignIn(props) {
                   )}
                 </Form.Item>
 
-                <Form.Item 
-                required>
+                <Form.Item required label="Password">
                   <Input.Password
                     id="password"
-                    prefix={<LockOutlined style={iconStyles}/>}
+                    prefix={<LockOutlined style={iconStyles} />}
                     placeholder="Enter password"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -159,24 +167,19 @@ export default function SignIn(props) {
                         borderRadius: "10px",
                       }}
                     >
-                      {formErrorMessage}{" "}
-                    </p>{" "}
+                      {formErrorMessage}
+                    </p>
                   </label>
                 )}
 
                 <Form.Item>
-                  <Row>
-                    <Col>
-                      <Button type="link">
-                        <Link to="/register">
-                          Don't have an account? Sign Up
-                        </Link>
-                      </Button>
-                    </Col>
-                  </Row>
-                </Form.Item>
-
-                <Form.Item>
+                  <p
+                    onClick={register}
+                    style={{ color: "grey" }}
+                    className="login"
+                  >
+                    Don't have an account? Sign Up
+                  </p>
                   <Button
                     className="cart"
                     htmlType="submit"
@@ -187,7 +190,7 @@ export default function SignIn(props) {
                     block
                     style={{ border: "none" }}
                   >
-                    LOGIN!
+                    <b>Sign In</b>
                   </Button>
                 </Form.Item>
               </Form>

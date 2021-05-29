@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../_actions/productActions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Row, Col, Card, Skeleton, Form, Result, Button, Rate } from "antd";
+import { Row, Col, Card, Result, Button, Rate } from "antd";
 import CarouselHeader from "../Generic/CarouselHeader";
 import RecentItemsBar from "../Generic/RecentItemsBar";
 import { RedoOutlined } from "@ant-design/icons";
 import NumberFormat from "react-number-format";
 
-const renderSkeleton = [...Array(4).keys()].map((i) => {
+const renderSkeleton = [...Array(5).keys()].map((i) => {
   return (
     <Col key={i}>
       <Card loading style={{ height: "290px", width: "14rem" }} />
@@ -26,11 +26,11 @@ const responsive = {
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 5,
+    items: 4,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2,
+    items: 3,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
@@ -49,13 +49,17 @@ export function CarouselItem() {
   useEffect(() => {
     dispatch(listProducts());
     return () => {};
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <CarouselHeader />
-      <RecentItemsBar title="Available Now!!" />
+      <RecentItemsBar title="Most popular" />
       {loading ? (
-        <Row justify="space-around" align="middle">
+        <Row
+          justify="space-around"
+          align="middle"
+          style={{ marginTop: "1rem" }}
+        >
           {renderSkeleton}
         </Row>
       ) : error ? (
@@ -69,86 +73,207 @@ export function CarouselItem() {
           }
         />
       ) : (
-        <Carousel
-          swipeable={true}
-          draggable={true}
-          responsive={responsive}
-          infinite={true}
-          autoPlay={true}
-          containerClass="carousel-container"
-          itemClass="carousel-item-padding-40-px"
-          dotListClass="custom-dot-list-style"
-          // arrows={false} 
-          renderButtonGroupOutside={true}
-        >
-          {posts.map((product) => (
-            <Row key={product.id} justify="center" style={{ margin: "1rem" }}>
-              <Link
-                to={`/product-detail/${product.id}/?category=${product.category}`}
-                style={{ textDecoration: "none" }}
+        <div style={{ maxWidth: "85%", margin: "auto", display: "block" }}>
+          <Carousel
+            swipeable={true}
+            draggable={true}
+            responsive={responsive}
+            infinite={true}
+            autoPlay={false}
+            arrows={false}
+          >
+            {posts.map((product) => (
+              <Row
+                key={product.id}
+                justify="center"
+                style={{
+                  marginTop: "1rem",
+                  marginBottom: "1rem",
+                  height: "400px",
+                  alignItems: "center",
+                }}
               >
-                <Card
-                  style={{
-                    width: "13rem",
-                    height: "290px",
-                  }}
-                  cover={
-                    <LazyLoadImage
-                      src={product.image}
-                      effect="blur"
-                      alt="productimage"
-                      style={{
-                        width: "12.8rem",
-                        height: "9.9rem",
-                        display: "flex",
-                        margin: "auto",
-                      }}
-                    />
-                  }
+                <Link
+                  to={`/product-detail/${product.id}/?category=${product.category}`}
+                  style={{ textDecoration: "none" }}
                 >
-                  <Link
-                    to={`/product-detail/${product.id}/?category=${product.category}`}
+                  <Card
+                    style={{
+                      width: "13rem",
+                      height: "270px",
+                      boxShadow:
+                        "0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 4px 10px 0 rgba(0, 0, 0, 0.1)",
+                    }}
+                    cover={
+                      <LazyLoadImage
+                        src={product.image}
+                        effect="blur"
+                        alt="productimage"
+                        style={{
+                          width: "12.8rem",
+                          height: "8.5rem",
+                          display: "flex",
+                          margin: "auto",
+                        }}
+                      />
+                    }
                   >
+                    <Link
+                      to={`/product-detail/${product.id}/?category=${product.category}`}
+                    >
+                      <p
+                        style={{
+                          color: "#1890ff",
+                          margin: "0",
+                          fontSize: "0.9rem",
+                        }}
+                      >
+                        {product.product_name}
+                      </p>
+                    </Link>
+                    <Rate
+                      allowHalf={true}
+                      style={{
+                        fontSize: "1rem",
+                        color: "#434343",
+
+                        marginBottom: ".6rem",
+                      }}
+                      defaultValue={product.ratings}
+                    />
                     <p
                       style={{
-                        color: "#282c35",
+                        color: "grey",
+                        fontSize: ".8rem",
                         margin: "0",
-                        fontSize: "0.9rem",
                       }}
                     >
-                      {product.product_name}
+                      <NumberFormat
+                        value={product.price}
+                        thousandSeparator={true}
+                        displayType={"text"}
+                        prefix="Kshs: "
+                        suffix=" /="
+                      />
                     </p>
-                  </Link>
-                  <Rate
-                    allowHalf={true}
-                    style={{
-                      fontSize: "1rem",
-                      color: "rgba(211, 84, 0, 1)",
+                  </Card>
+                </Link>
+              </Row>
+            ))}
+          </Carousel>
+        </div>
+      )}
 
-                      marginBottom: ".6rem",
-                    }}
-                    defaultValue={product.ratings}
-                  />
-                  <p
+      <RecentItemsBar title="Available Now!!" />
+      {loading ? (
+        <Row
+          justify="space-around"
+          align="middle"
+          style={{ marginTop: "1rem" }}
+        >
+          {renderSkeleton}
+        </Row>
+      ) : error ? (
+        <Result
+          status="500"
+          subTitle={error}
+          extra={
+            <Button onClick={reloadHandler} icon={<RedoOutlined />}>
+              RETRY
+            </Button>
+          }
+        />
+      ) : (
+        <div style={{ maxWidth: "85%", margin: "auto", display: "block" }}>
+          <Carousel
+            swipeable={true}
+            draggable={true}
+            responsive={responsive}
+            infinite={true}
+            autoPlay={false}
+            arrows={false}
+            renderButtonGroupOutside={true}
+          >
+            {posts.map((product) => (
+              <Row
+                key={product.id}
+                justify="center"
+                style={{
+                  marginTop: "1rem",
+                  marginBottom: "1rem",
+                  height: "400px",
+                  alignItems: "center",
+                }}
+              >
+                <Link
+                  to={`/product-detail/${product.id}/?category=${product.category}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Card
                     style={{
-                      color: "grey",
-                      fontSize: ".8rem",
-                      margin: "0",
+                      width: "13rem",
+                      height: "270px",
+                      boxShadow:
+                        "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)",
                     }}
+                    cover={
+                      <LazyLoadImage
+                        src={product.image}
+                        effect="blur"
+                        alt="productimage"
+                        style={{
+                          width: "12.8rem",
+                          height: "8.5rem",
+                          display: "flex",
+                          margin: "auto",
+                        }}
+                      />
+                    }
                   >
-                    <NumberFormat
-                      value={product.price}
-                      thousandSeparator={true}
-                      displayType={"text"}
-                      prefix="Kshs: "
-                      suffix=" /="
+                    <Link
+                      to={`/product-detail/${product.id}/?category=${product.category}`}
+                    >
+                      <p
+                        style={{
+                          color: "#1890ff",
+                          margin: "0",
+                          fontSize: "0.9rem",
+                        }}
+                      >
+                        {product.product_name}
+                      </p>
+                    </Link>
+                    <Rate
+                      allowHalf={true}
+                      style={{
+                        fontSize: "1rem",
+                        color: "#434343",
+
+                        marginBottom: ".6rem",
+                      }}
+                      defaultValue={product.ratings}
                     />
-                  </p>
-                </Card>
-              </Link>
-            </Row>
-          ))}
-        </Carousel>
+                    <p
+                      style={{
+                        color: "grey",
+                        fontSize: ".8rem",
+                        margin: "0",
+                      }}
+                    >
+                      <NumberFormat
+                        value={product.price}
+                        thousandSeparator={true}
+                        displayType={"text"}
+                        prefix="Kshs: "
+                        suffix=" /="
+                      />
+                    </p>
+                  </Card>
+                </Link>
+              </Row>
+            ))}
+          </Carousel>
+        </div>
       )}
     </>
   );

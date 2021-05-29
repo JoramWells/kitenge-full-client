@@ -32,7 +32,7 @@ const addToCart = (productId, qty, username, phone) => async (
       cart: { cartItems },
     } = getState();
     Cookie.set("cartItems", JSON.stringify(cartItems));
-  } catch (error) {}
+  } catch (error) {console.log(error)}
 };
 
 const removeFromCart = (productId) => (dispatch, getState) => {
