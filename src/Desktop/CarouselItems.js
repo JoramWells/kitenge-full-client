@@ -288,7 +288,7 @@ export function CarouselItem() {
                         suffix=" /="
                       />
                     </b>
-                    <Divider style={{ margin: "0.7rem" }} />
+                    {/* <Divider style={{ margin: "0.7rem" }} /> */}
 
                     <Row
                       justify="space-between"
