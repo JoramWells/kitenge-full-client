@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../_actions/productActions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Row, Col, Card, Result, Button, Rate, Divider } from "antd";
+import { Row, Col, Card, Result, Button } from "antd";
 import RecentItemsBar from "../Generic/RecentItemsBar";
 import {
   EyeOutlined,
@@ -155,7 +155,7 @@ export function CarouselItem() {
                     {/* <Divider style={{ margin: "0.7rem" }} /> */}
 
                     <div
-                    className="flex space-x-4 items-center content-center bg-gray-100 rounded-sm p-1"
+                    className="flex space-x-4 items-center content-center bg-gray-50 rounded-sm p-1"
                     >
                       <div className="flex items-center">
                         <EyeOutlined style={{ color: "grey" }} />{" "}
@@ -219,7 +219,7 @@ export function CarouselItem() {
                   to={`/product-detail/${product.id}/?category=${product.category}`}
                   style={{ textDecoration: "none" }}
                 >
-                 <Card
+                  <Card
                     style={{
                       width: "15rem",
                       height: "290px",
@@ -238,19 +238,13 @@ export function CarouselItem() {
                         }}
                       />
                     }
+                    className="hover:shadow-lg hover:rounded-md"
                   >
                     <Link
                       to={`/product-detail/${product.id}/?category=${product.category}`}
-                    >
-                      <p
-                        style={{
-                          color: "grey",
-                          margin: "0",
-                          fontSize: "0.9rem",
-                        }}
-                      >
-                        {product.product_name}
-                      </p>
+                      className="m-0 text-gray-700 text-sm"
+                    >{product.product_name}
+
                     </Link>
                     {/* <Rate
                       allowHalf={true}
@@ -262,12 +256,9 @@ export function CarouselItem() {
                       }}
                       defaultValue={product.ratings}
                     /> */}
-                    <b
-                      style={{
-                        color: "#595a5c",
-                        fontSize: ".9rem",
-                        margin: "0",
-                      }}
+                    <p
+                    className="text-gray-700 font-medium m-0"
+
                     >
                       <NumberFormat
                         value={product.price}
@@ -276,21 +267,19 @@ export function CarouselItem() {
                         prefix="Kshs: "
                         suffix=" /="
                       />
-                    </b>
+                    </p>
                     {/* <Divider style={{ margin: "0.7rem" }} /> */}
 
-                    <Row
-                      justify="space-between"
-                      style={{ marginTop: "0.4rem" }}
+                    <div
+                    className="flex space-x-4 items-center content-center bg-gray-50 rounded-sm p-1"
                     >
-                      <Col>
+                      <div className="flex items-center">
                         <EyeOutlined style={{ color: "grey" }} />{" "}
                         <LikeFilled style={{ color: "#bfbfbf" }} />{" "}
-                        <HeartFilled style={{ color: "#ff7875" }} />{" "}
                         <span style={{ color: "grey" }}>{product.likes}</span>
-                      </Col>
-                      <Col style={{ color: "grey" }}>Sold 93</Col>
-                    </Row>
+                      </div>
+                      <div className="text-gray-300">Sold 93</div>
+                    </div>
                   </Card>
                 </Link>
               </Row>
