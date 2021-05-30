@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Menu, Input, Row, Col } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import LoginDropdown from "./LoginDropdown";
 
 const { SubMenu } = Menu;
 const { Search } = Input;
@@ -29,17 +30,19 @@ export default function NotSignedIn() {
             </span>
           )}
         </Link>
-        <Col span={18}>
+        {/* <Col span={18}>
           <Search placeholder="Search.."/>
-        </Col>
+        </Col> */}
         
       </div>
-      <div>
-        khd
+      <div className="flex space-x-4">
+        <LoginDropdown />
+        <div>Login</div>
+        <div>Register</div>
       </div>
   
 
-      <Menu mode="horizontal" style={{ float: "right"}}>
+      {/* <Menu mode="horizontal" style={{ float: "right"}}>
         <SubMenu title={<UserOutlined style={{fontSize: "1.1rem", color: "grey" }}/>}>
           <Menu.Item style={{ margin: "0px" }}>
             <Link to="/login">{"  "}Login</Link>
@@ -48,7 +51,7 @@ export default function NotSignedIn() {
             <Link to="/register">{"  "}Register</Link>
           </Menu.Item>
         </SubMenu>
-      </Menu>
+      </Menu> */}
     </nav>
   );
 }
