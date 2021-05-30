@@ -1,19 +1,16 @@
 import React from "react";
-import { Row, Col } from "antd";
 
 export default function RecentItemsBar(props) {
   return (
-    <Row justify="center" align="middle">
-      <Col
-        span={19}
-        style={{
-          backgroundColor: "#dee3e3",
-          padding: " 0.4rem 0 0.09rem 1rem ",
-          marginTop: "2rem",
-        }}
+    <div className="mt-8">
+      <div
+        className=" bg-gray-300 max-w-5xl pt-1 px-3 pb-1 hover:bg-gray-200 hover:shadow-md rounded-sm"
+        style={{ margin: "auto", display: "block" }}
       >
-        <h3 style={{ color: "#5d5d5a" }}>{props.title}</h3>
-      </Col>
-    </Row>
+        <p className="text-gray-600  mb-1 text-lg   font-semibold">
+          {props.title}
+        </p>
+      </div>
+    </div>
   );
 }

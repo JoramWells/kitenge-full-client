@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ModalClass from "../Generic/ModalClass";
 import LoginDropdown from "./LoginDropdown";
 
 export default function NotSignedIn() {
@@ -10,6 +11,7 @@ export default function NotSignedIn() {
           Kitenge
         </Link>
       </div>
+      <ModalClass/>
       <div>
         <LoginDropdown />
       </div>

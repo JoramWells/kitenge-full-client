@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import {  SearchOutlined } from "@ant-design/icons";
-import { Col, Image, Row, Modal, Table, Input } from "antd";
+import { Col, Image, Row, Modal, Table } from "antd";
 import { Link } from "react-router-dom";
 import NotSignedIn from "./NotSignedIn";
 import NotCartItems from "./NotCartItems";
 import { useSelector } from "react-redux";
 import NotCartItemsDropdown from "./NotCartItemsDropdown";
-import { ArrowLeftIcon, SearchCircleIcon, SearchIcon, XIcon } from "@heroicons/react/solid";
+import { ArrowLeftIcon, SearchIcon, XIcon } from "@heroicons/react/solid";
 
 const columns = [
   {
@@ -34,7 +33,6 @@ const columns = [
   },
 ];
 
-const { Search } = Input;
 export default function NavMobile(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -71,41 +69,40 @@ export default function NavMobile(props) {
       return (
         <>
           <nav
-            className="flex justify-around bg-white p-2 content-center items-center shadow-md  top-0 absolute w-full"
+            className="flex justify-around bg-white p-2 content-center items-center shadow-md fixed  top-0 z-10 w-full"
             style={{
               visibility: diVisible1,
             }}
           >
             <div className="bg-gray-300 opacity-1 p-1 rounded-full">
-              <ArrowLeftIcon
-              className="h-5 text-white"
-                onClick={hideDiv}
-              />
+              <ArrowLeftIcon className="h-5 text-white" onClick={hideDiv} />
             </div>
-            <div className="bg-yellow-200 rounded-full  flex items-center justify-end -ml-4" >
-              <SearchIcon className="h-5 text-gray-500 m-2"/>
-              <input placeholder="Search.." className=" focus:outline-none rounded-full bg-yellow-200" />
-            <XIcon className="h-5 text-gray-500 m-2"/>
-
+            <div className="bg-yellow-100 rounded-full  flex items-center justify-end -ml-8">
+              <SearchIcon className="h-5 text-gray-400 m-2 cursor-pointer focus:text-gray-500" />
+              <input
+                placeholder="Search.."
+                className=" focus:outline-none rounded-full bg-yellow-100"
+              />
+              <XIcon className="h-5 text-gray-400 m-2 cursor-pointer focus:text-gray-500" />
             </div>
           </nav>
 
           <nav
-            className="flex justify-around bg-white p-2 content-center items-center shadow-md  top-0 absolute w-full"
+            className="flex justify-around bg-white p-2 items-center shadow-md  top-0 fixed z-10 w-full"
             style={{ visibility: diVisible }}
           >
-            {/* <div>
+            {/* <div className="ml-4 mr-4">
               <Link to="/" className="font-medium text-lg text-gray-700">
                 Kitenge
               </Link>
             </div> */}
             <div>
-              <SearchOutlined
+              <SearchIcon
                 onClick={showDiv}
-                // className="h-5 w-5 text-gray-500 "
+                className="h-5 w-5 text-gray-500 -mb-2 "
               />
             </div>
-            <div>
+            <div className="mr-4">
               <NotCartItemsDropdown />
             </div>
 
@@ -120,6 +117,7 @@ export default function NavMobile(props) {
               </Col>
             </Row>
           </Modal>
+          
         </>
       );
     }
