@@ -1,18 +1,12 @@
 import React, { useState } from "react";
-import {
-  ArrowLeftOutlined,
-  EditOutlined,
-  PlusOutlined,
-  SearchOutlined,
-  SettingOutlined,
-  ShoppingCartOutlined,
-} from "@ant-design/icons";
-import { Menu, Badge, Col, Image, Row, Modal, Table, Input } from "antd";
-import Avatar from "antd/lib/avatar/avatar";
+import {  SearchOutlined } from "@ant-design/icons";
+import { Col, Image, Row, Modal, Table, Input } from "antd";
 import { Link } from "react-router-dom";
 import NotSignedIn from "./NotSignedIn";
 import NotCartItems from "./NotCartItems";
 import { useSelector } from "react-redux";
+import NotCartItemsDropdown from "./NotCartItemsDropdown";
+import { ArrowLeftIcon, SearchCircleIcon, SearchIcon, XIcon } from "@heroicons/react/solid";
 
 const columns = [
   {
@@ -40,7 +34,6 @@ const columns = [
   },
 ];
 
-const { SubMenu } = Menu;
 const { Search } = Input;
 export default function NavMobile(props) {
   const userSignin = useSelector((state) => state.userSignin);
@@ -51,7 +44,7 @@ export default function NavMobile(props) {
   const [visible, setVisible] = useState(false);
   const [diVisible, setDiVisible] = useState("visible");
   const [diVisible1, setDiVisible2] = useState("hidden");
-  const {isToggleData,setToggle} = useState(false)
+  const { isToggleData, setToggle } = useState(false);
 
   function handleOk() {
     setVisible(false);
@@ -77,141 +70,45 @@ export default function NavMobile(props) {
     else {
       return (
         <>
-
-            <nav
-              className="menu"
-              style={{
-                position: "fixed",
-                display: "block",
-                width: "100%",
-                zIndex: "1",
-                top: "0",
-                visibility: diVisible1,
-              }}
-            >
-              <div
-                className="menu__logo"
-                style={{
-                  marginTop: "0.5rem",
-                  display: "flex",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                  paddingTop: ".3rem",
-                  paddingBottom: ".35rem",
-                }}
-              >
-                <div>
-                  <ArrowLeftOutlined
-                    style={{
-                      marginLeft: "2rem",
-                      marginRight: "1rem",
-                      color: "grey",
-                    }}
-                    onClick={hideDiv}
-                  />
-                </div>
-                <div>
-                  <Search
-                    placeholder="Search.."
-                    style={{ marginBottom: ".3rem" }}
-                  />
-                </div>
-              </div>
-            </nav>
-
           <nav
-            className="menu"
+            className="flex justify-around bg-white p-2 content-center items-center shadow-md  top-0 absolute w-full"
             style={{
-              position: "fixed",
-              display: "block",
-              width: "100%",
-              zIndex: "1",
-              top: "0",
-              visibility: diVisible,
+              visibility: diVisible1,
             }}
           >
-            <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
-              <b>
-                <Link to="/" style={{ color: "#484848" }}>
-                  Kitenge
-                </Link>
-              </b>
+            <div className="bg-gray-300 opacity-1 p-1 rounded-full">
+              <ArrowLeftIcon
+              className="h-5 text-white"
+                onClick={hideDiv}
+              />
             </div>
-            <Menu
-              mode="horizontal"
-              style={{
-                justifyContent: "space-between",
-                border: "0",
-                float: "right",
-              }}
-            >
-              <Menu.Item style={{ marginLeft: ".3rem", marginRight: ".3rem" }}>
-                  <SearchOutlined
-                    onClick={showDiv}
-                    style={{ fontSize: "1.4rem", margin: "0", color: "grey" }}
-                  />
-              </Menu.Item>
+            <div className="bg-yellow-200 rounded-full  flex items-center justify-end -ml-4" >
+              <SearchIcon className="h-5 text-gray-500 m-2"/>
+              <input placeholder="Search.." className=" focus:outline-none rounded-full bg-yellow-200" />
+            <XIcon className="h-5 text-gray-500 m-2"/>
 
-              <Menu.Item style={{ marginLeft: ".3rem", marginRight: ".3rem" }}>
-                <Badge count={cartItems.length}>
-                  <ShoppingCartOutlined
-                    onClick={showModal}
-                    style={{ fontSize: "1.4rem", margin: "0", color: "grey" }}
-                  />
-                </Badge>
-              </Menu.Item>
+            </div>
+          </nav>
 
-              <SubMenu
-                style={{
-                  marginBottom: "0rem",
-                  borderRadius: "10px",
-                  marginLeft: ".3rem",
-                  marginRight: ".3rem",
-                }}
-                title={
-                  <SettingOutlined
-                    style={{ fontSize: "1.2rem", color: "grey" }}
-                  />
-                }
-              >
-                <Menu.Item icon={<PlusOutlined />}>
-                  <Link to="/products/add">Add Product</Link>
-                </Menu.Item>
-                <Menu.Item icon={<EditOutlined />}>
-                  <Link to="/produc/manage">Edit Product</Link>
-                </Menu.Item>
-              </SubMenu>
+          <nav
+            className="flex justify-around bg-white p-2 content-center items-center shadow-md  top-0 absolute w-full"
+            style={{ visibility: diVisible }}
+          >
+            {/* <div>
+              <Link to="/" className="font-medium text-lg text-gray-700">
+                Kitenge
+              </Link>
+            </div> */}
+            <div>
+              <SearchOutlined
+                onClick={showDiv}
+                // className="h-5 w-5 text-gray-500 "
+              />
+            </div>
+            <div>
+              <NotCartItemsDropdown />
+            </div>
 
-              <SubMenu
-                style={{
-                  marginBottom: "0.3rem",
-                  borderRadius: "10px",
-                  marginLeft: "0",
-                }}
-                title={
-                  <Avatar
-                    src={userInfo.avatar}
-                    style={{ width: "1.4rem", height: "auto", margin: "0px" }}
-                  />
-                }
-              >
-                <Menu.Item style={{ margin: "0" }}>{userInfo.email}</Menu.Item>
-                <Menu.Item
-                  style={{
-                    margin: "0",
-                  }}
-                >
-                  <Link to="/register">Manage account</Link>
-                </Menu.Item>
-                <Menu.Item
-                  style={{
-                    margin: "0",
-                  }}
-                >
-                  Logout
-                </Menu.Item>
-              </SubMenu>
-            </Menu>
             {/* navbar */}
           </nav>
           <Modal visible={visible} onOk={handleOk} onCancel={handleCancel}>

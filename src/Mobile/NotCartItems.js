@@ -24,7 +24,7 @@ export default function NotCartItems() {
           <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
             <Link to="/" style={{ color: "#484848" }}>
               <Ripples>
-                <b> Kitenge</b>
+                <b> Kiteng</b>
               </Ripples>
 
               
