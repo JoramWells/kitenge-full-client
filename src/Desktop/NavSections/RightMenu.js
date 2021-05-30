@@ -66,18 +66,20 @@ function RightMenu(props) {
 
   if (!userInfo) {
     return (
-      <Menu mode="horizontal" style={{ paddingTop: "0.4rem" }}>
-        <Menu.Item key="mail" style={{ style: "none" }}>
-          <Button style={{ borderRadius: "5px" }} onClick={login}>
-            Sign In
-          </Button>
-        </Menu.Item>
-        <Menu.Item key="app">
-          <Button style={{ borderRadius: "5px" }} onClick={register}>
-            Sign Up
-          </Button>
-        </Menu.Item>
-      </Menu>
+      <div className="flex space-x-4 mt-4 content-center items-center ">
+        <button
+          className="hover:shadow-md py-2 px-4 border ring-offset-gray-700 focus-within:ring-1 focus:outline-none bg-yellow-300 rounded-md text-white font-bold"
+          onClick={login}
+        >
+          Sign In
+        </button>
+        <button
+          className="hover:shadow-md py-2 px-4 border ring-offset-gray-700 focus-within:ring-1 focus:outline-none bg-yellow-300 rounded-md text-white font-bold"
+          onClick={register}
+        >
+          Sign Up
+        </button>
+      </div>
     );
   } else {
     if (cartItems.length === 0) {
