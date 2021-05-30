@@ -1,4 +1,4 @@
-import { CloseCircleOutlined, EllipsisOutlined } from "@ant-design/icons";
+import { EllipsisOutlined } from "@ant-design/icons";
 import {
   Col,
   Empty,
@@ -6,7 +6,6 @@ import {
   Form,
   Skeleton,
   Result,
-  Button,
   Rate,
   Card,
 } from "antd";
@@ -14,7 +13,7 @@ import React, { useEffect } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useDispatch, useSelector } from "react-redux";
 import { categoryProduct } from "../_actions/productActions";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NumberFormat from "react-number-format";
 
 const renderSkeleton = [...Array(5).keys()].map((i) => {
@@ -43,19 +42,19 @@ const renderSkeleton = [...Array(5).keys()].map((i) => {
 });
 const { Meta } = Card;
 export default function Product(props) {
-  const history = useHistory();
+  // const history = useHistory();
   const categoryDetail = useSelector((state) => state.categoryList);
   const { loadingCategory, products, errorCategory } = categoryDetail;
 
   const dispatch = useDispatch();
 
-  const closeHandler = () => {
-    history.goBack();
-  };
+  // const closeHandler = () => {
+  //   history.goBack();
+  // };
   useEffect(() => {
     dispatch(categoryProduct(props.match.params.category));
     return () => {};
-  }, []);
+  }, [dispatch]);
   return (
     <main style={{ marginTop: "5rem" }}>
       {loadingCategory ? (

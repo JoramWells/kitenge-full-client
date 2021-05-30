@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import NotSignedIn from "./NotSignedIn";
 import NotCartItems from "./NotCartItems";
 import { useSelector } from "react-redux";
-import NotCartItemsDropdown from "./NotCartItemsDropdown";
 import { ArrowLeftIcon, SearchIcon, XIcon } from "@heroicons/react/solid";
 
 const columns = [
@@ -102,9 +101,7 @@ export default function NavMobile(props) {
                 className="h-5 w-5 text-gray-500 -mb-2 "
               />
             </div>
-            <div className="mr-4">
-              <NotCartItemsDropdown />
-            </div>
+
 
             {/* navbar */}
           </nav>

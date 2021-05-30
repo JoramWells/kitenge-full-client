@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 // import LeftMenu from "./NavSections/LeftMenu";
 import RightMenu from "./RightMenu";
-import { Drawer, Button, Input, Row, Col, message } from "antd";
-import { MenuOutlined } from "@ant-design/icons";
+import {  message } from "antd";
 import { Link, withRouter } from "react-router-dom";
 import { searchItems } from "../../_actions/searchActions";
 import { useDispatch } from "react-redux";
 
-const { Search } = Input;
 
 function NavigationBar(props) {
   const dispatch = useDispatch();
@@ -33,56 +31,22 @@ function NavigationBar(props) {
   }
 
   return (
-    <div
-      style={{
-        zIndex: 1,
-        width: "100%",
-        position: "static",
-        top: "0px",
-        // marginBottom: "5rem",
-      }}
-      className="desktop__navbar"
-    >
-      <nav className="menu">
-        <div className="menu__logo">
-          <Link to="/" style={{ padding: "1rem", color: "#484848" }}>
-            <b>OnlineShop</b>
-          </Link>
-          {/* <Row justify="center">
+    <nav className="desktop__navbar flex flex-row items-center justify-between bg-white shadow-md static top-0 w-full z-10">
+      <div className="p-2 m-2">
+        <Link to="/" className="text-gray-700 font-extrabold text-2xl">
+          <b>OnlineShop</b>
+        </Link>
+        {/* <Row justify="center">
           <Col span={6}>
             <Search placeholder="Search.." onSearch={onSearch} />
           </Col>
         </Row> */}
-        </div>
+      </div>
 
-        <div className="menu__container">
-          {/* <div className="menu_left">
-            <LeftMenu mode="horizontal" />
-          </div> */}
-          <div className="menu_rigth">
-            <RightMenu mode="horizontal" />
-          </div>
-          <Button
-            size="large"
-            type="secondary"
-            className="menu__mobile-button"
-            onClick={showDrawer}
-          >
-            <MenuOutlined style={{ fontSize: "1.5rem" }} />
-          </Button>
-          <Drawer
-            title="My Menu"
-            placement="right"
-            className="menu_drawer"
-            closable={false}
-            onClose={onClose}
-            visible={visible}
-          >
-            <RightMenu mode="inline" />
-          </Drawer>
-        </div>
-      </nav>
-    </div>
+      <div className="p-2">
+        <RightMenu mode="horizontal" />
+      </div>
+    </nav>
   );
 }
 

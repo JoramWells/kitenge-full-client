@@ -24,6 +24,7 @@ import {
 } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import Avatar from "antd/lib/avatar/avatar";
+import SignedInDropdown from './SignedInDropdown'
 
 const { Text, Title } = Typography;
 const { SubMenu } = Menu;
@@ -84,8 +85,9 @@ function RightMenu(props) {
   } else {
     if (cartItems.length === 0) {
       return (
-        <Space>
-          <Menu mode="horizontal">
+        <div className="flex">
+          <SignedInDropdown />
+          {/* <Menu mode="horizontal">
             <SubMenu
               style={{ borderRadius: "10px", marginLeft: "0" }}
               title={
@@ -119,13 +121,14 @@ function RightMenu(props) {
               <Menu.Item>{userInfo.email}</Menu.Item>
               <Menu.Item onClick={() => logout()}>Logout</Menu.Item>
             </SubMenu>
-          </Menu>
-        </Space>
+          </Menu> */}
+        </div>
       );
     } else {
       return (
-        <Space>
-          <Menu mode="horizontal">
+        <>
+        hello
+          {/* <Menu mode="horizontal">
             <Menu.Item>
               <Badge count={cartItems.length}>
                 <ShoppingCartOutlined
@@ -230,8 +233,8 @@ function RightMenu(props) {
                 </Col>
               </Row>
             ))}
-          </Modal>
-        </Space>
+          </Modal> */}
+        </>
       );
     }
   }

@@ -21,7 +21,6 @@ import {
   Result,
 } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import Carousel from "react-multi-carousel";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import { categoryProduct, detailsProduct } from "../_actions/productActions";
@@ -31,25 +30,6 @@ import { categoryProduct, detailsProduct } from "../_actions/productActions";
 import RecentItemsBar from "../Generic/RecentItemsBar";
 import { RedoOutlined } from "@ant-design/icons";
 
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5,
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 4,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-  },
-};
 
 export default function ProductDetail(props) {
   const productDetail = useSelector((state) => state.productDetail);

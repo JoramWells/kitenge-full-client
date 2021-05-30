@@ -84,20 +84,13 @@ export function CarouselItem() {
             responsive={responsive}
             infinite={true}
             autoPlay={false}
+            arrows={false}
           
           >
             {posts.map((product) => (
-              <Row
+              <div
                 key={product.id}
-                justify="center"
-                style={{
-                  marginTop: "1rem",
-                  marginBottom: "1rem",
-                  alignItems: "center",
-                  backgroundColor:"white",
-                  borderRadius:"5px",
-                  padding:"1rem"
-                }}
+                className="flex items-center p-2 content-center bg-white rounded-md mb-4 mt-4"
               >
                 <Link
                   to={`/product-detail/${product.id}/?category=${product.category}`}
@@ -166,7 +159,7 @@ export function CarouselItem() {
                     </div>
                   </Card>
                 </Link>
-              </Row>
+              </div>
             ))}
           </Carousel>
         </div>
