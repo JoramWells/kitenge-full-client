@@ -34,6 +34,7 @@ import {
 import { addToCart } from "../_actions/cartActions";
 import Modal from "react-modal";
 import { likedItem } from "../_actions/likedActions";
+import ModalClass from "../Generic/ModalClass";
 
 if (process.env.NODE_ENV !== "test") Modal.setAppElement("#root");
 
@@ -154,6 +155,7 @@ function CarouselIte(props) {
 
   return (
     <main style={{ backgroundColor: "#F8F8F8", marginTop: "5rem" }}>
+      <ModalClass/>
       <Modal
         isOpen={visible}
         onRequestClose={handleCancel}
