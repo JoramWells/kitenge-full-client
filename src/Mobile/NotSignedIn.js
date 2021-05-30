@@ -34,6 +34,9 @@ export default function NotSignedIn() {
         </Col>
         
       </div>
+      <div>
+        khd
+      </div>
   
 
       <Menu mode="horizontal" style={{ float: "right"}}>

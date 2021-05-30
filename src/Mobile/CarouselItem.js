@@ -155,7 +155,6 @@ function CarouselIte(props) {
 
   return (
     <main style={{ backgroundColor: "#F8F8F8", marginTop: "5rem" }}>
-      <ModalClass/>
       <Modal
         isOpen={visible}
         onRequestClose={handleCancel}
@@ -366,6 +365,7 @@ function CarouselIte(props) {
                       "0 3px 7px 0 rgba(0, 0, 0, 0.1), 0 5px 20px 0 rgba(0, 0, 0, 0.1)",
                   }}
                   extra={
+                    
                     <Ripples>
                       <EllipsisOutlined
                         onClick={() => showModal(item)}
