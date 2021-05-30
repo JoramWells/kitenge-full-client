@@ -87,29 +87,6 @@ function RightMenu(props) {
         <Space>
           <Menu mode="horizontal">
             <SubMenu
-              title={
-                <ShoppingCartOutlined
-                  onClick={showModal}
-                  style={{ fontSize: "1.5rem", margin: "0", color: "grey" }}
-                />
-              }
-            ></SubMenu>
-
-            <SubMenu
-              title={
-                <QuestionCircleOutlined
-                  style={{ fontSize: "1.3rem", color: "grey" }}
-                />
-              }
-            >
-              <Menu.Item style={{ margin: "0px" }}>Contact supplier</Menu.Item>
-              <Menu.Item style={{ margin: "0px" }}>
-                How to add product
-              </Menu.Item>
-              <Menu.Item>Creating account</Menu.Item>
-              <Menu.Item>Tracking your order</Menu.Item>
-            </SubMenu>
-            <SubMenu
               style={{ borderRadius: "10px", marginLeft: "0" }}
               title={
                 <SettingOutlined
