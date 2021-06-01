@@ -4,22 +4,11 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { signin } from "../_actions/userActions";
-import { Form, Input, Button, Card, Row, Col, message, Divider } from "antd";
-import {
-  CloseCircleOutlined,
-  LockOutlined,
-  MailOutlined,
-} from "@ant-design/icons";
+import { Card, Row, message, Divider } from "antd";
+import { CloseCircleOutlined } from "@ant-design/icons";
 import Cookie from "js-cookie";
-
-const iconStyles = {
-  color: "grey",
-};
-const inputStyles = {
-  borderTop: "0",
-  borderLeft: "0",
-  borderRight: "0",
-};
+import { AtSymbolIcon, LockClosedIcon } from "@heroicons/react/solid";
+import { findByDisplayValue } from "@testing-library/dom";
 
 export default function SignIn(props) {
   const history = useHistory();
@@ -44,160 +33,160 @@ export default function SignIn(props) {
   }, [userInfo]);
 
   return (
-    <Row
-      justify="space-around"
-      align="middle"
-      style={{ marginTop: "5rem", marginBottom: "2rem" }}
-    >
-      <Card
-        style={{
-          width: "25rem",
-          boxShadow:
-            "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)",
-          border: "none",
-        }}
+    <div>
+      <div
+        className="m-auto block"
+        // justify="space-around"
+        // align="middle"
+        // style={{ marginTop: "5rem", marginBottom: "2rem" }}
       >
-        <Row justify="end">
-          <CloseCircleOutlined
-            className="close"
-            style={{ fontSize: "1.5rem", marginBottom: "0.3rem" }}
-            onClick={closeHandler}
-          />
-        </Row>
-        <Divider>SIGN IN</Divider>
-
-        <Formik
-          initialValues={{
-            email: "",
-            password: "",
-          }}
-          validationSchema={Yup.object().shape({
-            email: Yup.string()
-              .email("Email is invalid")
-              .required("Email is required"),
-            password: Yup.string()
-              .min(6, "Password must be atleast 6 characters")
-              .required("Password is required"),
-          })}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(async () => {
-              let dataToSubmit = {
-                email: values.email,
-                password: values.password,
-              };
-              await dispatch(signin(dataToSubmit));
-              const userFailure = Cookie.getJSON("userFailure");
-
-              if (!userFailure) {
-                console.log();
-              } else {
-                setFormErrorMessage(userFailure.message);
-              }
-
-              const userSuccess = Cookie.getJSON("userInfo");
-              if (!userSuccess) console.log();
-              else {
-                message.success("Successfully login");
-                props.history.push("/");
-              }
-
-              setSubmitting(false);
-            }, 500);
+        <Card
+          style={{
+            width: "25rem",
+            boxShadow:
+              "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)",
+            border: "none",
           }}
         >
-          {(props) => {
-            const {
-              values,
-              touched,
-              errors,
-              isSubmitting,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-            } = props;
-            return (
-              <Form onSubmit={handleSubmit} layout="vertical" size="large">
-                <Form.Item required label="Email">
-                  <Input
-                    prefix={<MailOutlined style={iconStyles} />}
-                    id="email"
-                    placeholder=" johndoe@gmail.com"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                    className={
-                      errors.email && touched.email
-                        ? "text-input error"
-                        : "text-input"
-                    }
-                    style={inputStyles}
-                  />
-                  {errors.email && touched.email && (
-                    <div className="input-feedback">{errors.email}</div>
-                  )}
-                </Form.Item>
+          <Row justify="end">
+            <CloseCircleOutlined
+              className="close"
+              style={{ fontSize: "1.5rem", marginBottom: "0.3rem" }}
+              onClick={closeHandler}
+            />
+          </Row>
+          <Divider>SIGN IN</Divider>
 
-                <Form.Item required label="Password">
-                  <Input.Password
-                    id="password"
-                    prefix={<LockOutlined style={iconStyles} />}
-                    placeholder="Enter password"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.password}
-                    className={
-                      errors.password && touched.password
-                        ? "text-input error"
-                        : "text-input"
-                    }
-                    style={inputStyles}
-                  />
-                  {errors.password && touched.password && (
-                    <div className="input-password">{errors.password}</div>
-                  )}
-                </Form.Item>
-                {formErrorMessage && (
-                  <label>
+          <Formik
+            initialValues={{
+              email: "",
+              password: "",
+            }}
+            validationSchema={Yup.object().shape({
+              email: Yup.string()
+                .email("Email is invalid")
+                .required("Email is required"),
+              password: Yup.string()
+                .min(6, "Password must be atleast 6 characters")
+                .required("Password is required"),
+            })}
+            onSubmit={(values, { setSubmitting }) => {
+              setTimeout(async () => {
+                let dataToSubmit = {
+                  email: values.email,
+                  password: values.password,
+                };
+                await dispatch(signin(dataToSubmit));
+                const userFailure = Cookie.getJSON("userFailure");
+
+                if (!userFailure) {
+                  console.log();
+                } else {
+                  setFormErrorMessage(userFailure.message);
+                }
+
+                const userSuccess = Cookie.getJSON("userInfo");
+                if (!userSuccess) console.log();
+                else {
+                  message.success("Successfully login");
+                  props.history.push("/");
+                }
+
+                setSubmitting(false);
+              }, 500);
+            }}
+          >
+            {(props) => {
+              const {
+                values,
+                touched,
+                errors,
+                isSubmitting,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+              } = props;
+              return (
+                <form onSubmit={handleSubmit}>
+                  <div className="flex flex-col space-x-4 items-place-start mx-2 mt-8">
+                    {/* <div>Email Address</div> */}
+                    <div className="flex flex-row bg-yellow-200 p-1 items-center rounded-full text-gray-600 txt-sm">
+                      <AtSymbolIcon className="h-5 text-gray-400 " />
+                      <input
+                        id="email"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.email}
+                        placeholder="johndoe@gmail.com"
+                        className={
+                          "focus:outline-none  p-2 w-full rounded-full bg-yellow-200 focus:bg-yellow-200 "
+                        }
+                      />
+                    </div>
+                    <div>
+                      {errors.email && touched.email && (
+                        <div className="text-red-400 m-0">{errors.email}</div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="mx-2 mt-8">
+                    <div className="bg-yellow-200 p-1 rounded-full flex flex-row items-center m-1">
+                      <LockClosedIcon className="h-5 text-gray-400" />
+                      <input
+                        id="password"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.password}
+                        placeholder="Enter password"
+                        type="password"
+                        className="focus:outline-none p-2 bg-yellow-200 active:bg-yellow-200 focus-within:bg-yellow-200 w-full rounded-full"
+                      />
+                    </div>
+                    <div>
+                      {errors.password && touched.password && (
+                        <div className="input-password">{errors.password}</div>
+                      )}
+                    </div>
+                    <div>
+                      {formErrorMessage && (
+                        <label>
+                          <p
+                            style={{
+                              color: "#ff0000bf",
+                              fontSize: "0.7rem",
+                              border: "1px solid",
+                              padding: "1rem",
+                              borderRadius: "10px",
+                            }}
+                          >
+                            {formErrorMessage}
+                          </p>
+                        </label>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex flex-col m-4">
                     <p
-                      style={{
-                        color: "#ff0000bf",
-                        fontSize: "0.7rem",
-                        border: "1px solid",
-                        padding: "1rem",
-                        borderRadius: "10px",
-                      }}
+                      onClick={register}
+                      className="text-gray-500 font-medium tx-sm text-center cursor-pointer"
                     >
-                      {formErrorMessage}
+                      Don't have an account? Sign Up.
                     </p>
-                  </label>
-                )}
-
-                <Form.Item>
-                  <p
-                    onClick={register}
-                    style={{ color: "grey" }}
-                    className="login"
-                  >
-                    Don't have an account? Sign Up
-                  </p>
-                  <Button
-                    className="cart"
-                    htmlType="submit"
-                    type="primary"
-                    onClick={handleSubmit}
-                    loading={isSubmitting}
-                    // disabled={!phone}
-                    block
-                    style={{ border: "none" }}
-                  >
-                    <b>Sign In</b>
-                  </Button>
-                </Form.Item>
-              </Form>
-            );
-          }}
-        </Formik>
-      </Card>
-    </Row>
+                    <button
+                      onClick={handleSubmit}
+                      disabled={isSubmitting}
+                      className="bg-blue-400 p-2 rounded-full  focus:outline-none text-white font-medium text-lg"
+                    >
+                      Sign In
+                    </button>
+                  </div>
+                </form>
+              );
+            }}
+          </Formik>
+        </Card>
+      </div>
+    </div>
   );
 }
