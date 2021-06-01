@@ -29,7 +29,7 @@ import { categoryProduct, detailsProduct } from "../_actions/productActions";
 
 import RecentItemsBar from "../Generic/RecentItemsBar";
 import { RedoOutlined } from "@ant-design/icons";
-
+import { getByDisplayValue } from "@testing-library/dom";
 
 export default function ProductDetail(props) {
   const productDetail = useSelector((state) => state.productDetail);
@@ -75,7 +75,7 @@ export default function ProductDetail(props) {
     dispatch(detailsProduct(props.match.params.id));
     dispatch(categoryProduct(category));
     return () => {};
-  }, []);
+  }, [dispatch]);
 
   function loginHandler() {
     props.history.push("/login");
@@ -90,15 +90,8 @@ export default function ProductDetail(props) {
 
   return (
     <>
-      <div style={{ width: "85%", margin: "auto", display: "block" }}>
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-around",
-            alignItems: "center",
-          }}
-        >
+      <div className="m-auto block">
+        <div className="flex flex-row justify-center items-center content-center">
           <div>
             {loading ? (
               <Row
@@ -149,136 +142,97 @@ export default function ProductDetail(props) {
                 }
               />
             ) : (
-              <div style={{ margin: "1rem" }}>
-                <div
-                  style={{
-                    margin: "auto",
-                    display: "block",
-                    backgroundColor: "white",
-                    padding: "1rem",
-                    borderRadius: "5px",
-                  }}
-                >
-                  <Row justify="space-around" style={{ marginTop: "3rem" }}>
-                    <Col>
-                      <h3
-                        style={{
-                          fontSize: "1.3rem",
-                          color: "#434343",
-                          margin: "0",
-                        }}
-                      >
-                        {product.product_name}
-                      </h3>
-                      <Image
-                        src={"/" + product.image}
-                        alt="shoes again"
-                        style={{
-                          width: "250px",
-                          height: "250px",
-                          objectFit: "contain",
-                        }}
-                      />
-                    </Col>
+              <div className="m-4 flex flex-row space-x-4">
+                <div className="flex flex-row bg-white shadow-md p-2 rounded-md justify-around mr-auto w-full">
+                  <div>
+                    <p className="text-gray-600 m-0 font-bold text-lg">
+                      {product.product_name}
+                    </p>
+                    <Image
+                      src={"/" + product.image}
+                      alt="shoes again"
+                      style={{
+                        width: "250px",
+                        height: "250px",
+                        objectFit: "contain",
+                      }}
+                    />
+                  </div>
 
-                    <Col style={{ paddingLeft: "20px" }}>
-                      <p style={{ color: "#CD5C5C", margin: "0" }}>
-                        <NumberFormat
-                          value={product.price}
-                          thousandSeparator={true}
-                          displayType={"text"}
-                          prefix="Kshs: "
-                          suffix=" /="
-                        />
-                      </p>
-                      <p style={{ color: "grey", marginBottom: "0" }}>
-                        Reviews: (123){" "}
-                      </p>
-                      <Rate
-                        style={{ color: "#434343", fontSize: "1rem" }}
-                        disabled
-                        allowHalf
-                        defaultValue={product.ratings}
+                  <div className="flex flex-col p-4">
+                    <p className="text-blue-400 text-md m-0">
+                      <NumberFormat
+                        value={product.price}
+                        thousandSeparator={true}
+                        displayType={"text"}
+                        prefix="Kshs: "
+                        suffix=" /="
                       />
-                      <Divider plain style={{ margin: ".5rem" }}></Divider>
+                    </p>
+                    <p className="text-gray-400 m-0 text-sm">Reviews: (123) </p>
+                    <Rate
+                      style={{ color: "#434343", fontSize: "1rem" }}
+                      disabled
+                      allowHalf
+                      defaultValue={product.ratings}
+                    />
+                    <Divider plain style={{ margin: ".5rem" }}></Divider>
 
-                      <p style={{ margin: "0" }}>
-                        Categorys': {product.category}
-                      </p>
-                      <span style={{ color: "grey", margin: "0" }}>
-                        Shipping: 350/=
-                      </span>
-                      <p>Qty: {product.stock}</p>
-                      <select
-                        defaultValue={qty}
-                        style={{ width: 120 }}
-                        onChange={(e) => {
-                          setQty(e.target.value);
-                        }}
-                      >
-                        {[...Array(product.stock).keys()].map((x) => (
-                          <option key={x + 1} value={x + 1}>
-                            {x + 1}
-                          </option>
-                        ))}
-                      </select>
-                      <Divider style={{ marginTop: ".5rem" }} />
-                      {userInfo ? (
-                        <Row justify="space-around" style={{ margin: "1rem" }}>
-                          <Button
-                            style={{
-                              border: "0",
-                              textDecoration: "none",
-                              color: "white",
-                            }}
-                            block
-                            size="large"
-                            className="cart"
-                            onClick={handleAddToCart}
+                    <p style={{ margin: "0" }}>
+                      Categorys': {product.category}
+                    </p>
+                    <span style={{ color: "grey", margin: "0" }}>
+                      Shipping: 350/=
+                    </span>
+                    <p>Qty: {product.stock}</p>
+                    <select
+                      defaultValue={qty}
+                      style={{ width: 120 }}
+                      onChange={(e) => {
+                        setQty(e.target.value);
+                      }}
+                    >
+                      {[...Array(product.stock).keys()].map((x) => (
+                        <option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </option>
+                      ))}
+                    </select>
+                    <Divider style={{ marginTop: ".5rem" }} />
+                    {userInfo ? (
+                      <Row justify="space-around" style={{ margin: "1rem" }}>
+                        <Button
+                          style={{
+                            border: "0",
+                            textDecoration: "none",
+                            color: "white",
+                          }}
+                          block
+                          size="large"
+                          className="cart"
+                          onClick={handleAddToCart}
+                        >
+                          ADD TO CART
+                        </Button>
+                      </Row>
+                    ) : (
+                      <>
+                        <div className="flex flex-row space-x-4">
+                          <button
+                            // onClick={loginHandler}
+                            className="transition hover:shadow-lg focus-within:shadow-lg duration-150 ease-out-in p-2 focus:outline-none focus-within:bg-yellow-500 bg-black rounded-full bg-opacity-20 hover:bg-yellow-500 font-extrabold text-white"
                           >
-                            ADD TO CART
-                          </Button>
-                        </Row>
-                      ) : (
-                        <>
-                          <Row>
-                            <Col>
-                              <Button
-                                className="cart"
-                                size="large"
-                                onClick={loginHandler}
-                                style={{
-                                  margin: ".5rem",
-                                  border: "none",
-                                }}
-                                block
-                              >
-                                <p style={{ color: "white" }}>
-                                  <b>SignIn to checkout </b>
-                                </p>
-                              </Button>
-                            </Col>
-                            <Col>
-                              <Button
-                                size="large"
-                                className="cart"
-                                style={{
-                                  margin: ".5rem",
-                                  boreder: "none",
-                                }}
-                                block
-                              >
-                                <p style={{ color: "white" }}>
-                                  <b>Continue Shoppini </b>
-                                </p>
-                              </Button>
-                            </Col>
-                          </Row>
-                        </>
-                      )}
-                      <Divider />
-                    </Col>
-                    {/* <Col>
+                            SignIn & Checkout
+                          </button>
+                          <button className="transition hover:shadow-lg focus-within:shadow-lg duration-150 ease-out-in p-2 focus:outline-none focus-within:bg-yellow-500 bg-green-500 rounded-full hover:bg-yellow-500 font-extrabold text-white">
+                            Continue Shopping
+                          </button>
+                        </div>
+                      </>
+                    )}
+                    <Divider />
+                  </div>
+                  {/* <Col>
                     <Card
                       style={{
                         width: "18rem",
@@ -291,16 +245,16 @@ export default function ProductDetail(props) {
                       />
                     </Card>
                   </Col> */}
-                  </Row>
                 </div>
               </div>
             )}
           </div>
           <div
+            className=""
             style={{
               backgroundColor: "white",
               height: "200px",
-              width: "15rem",
+              width: "25rem",
             }}
           >
             Fulex
@@ -331,7 +285,11 @@ export default function ProductDetail(props) {
               </Col>
             </Row>
           ) : (
-            <Row justify="space-around" gutter={[0,16]} style={{ marginTop: "2rem", paddingBottom:"2rem" }}>
+            <Row
+              justify="space-around"
+              gutter={[0, 16]}
+              style={{ marginTop: "2rem", paddingBottom: "2rem" }}
+            >
               {products.map((item) => (
                 <Col key={item.id}>
                   <Card
@@ -339,8 +297,6 @@ export default function ProductDetail(props) {
                       width: "15rem",
                       height: "290px",
                       border: "1px solid #dee3e3",
-
-
                     }}
                     cover={
                       <LazyLoadImage
