@@ -24,15 +24,18 @@ import mpesa from "../img/mpesa.png";
 import {
   ClockCircleOutlined,
   CloseCircleOutlined,
-  EllipsisOutlined,
-  EyeOutlined,
-  HeartFilled,
-  LikeFilled,
   ReloadOutlined,
   ShoppingOutlined,
 } from "@ant-design/icons";
 import { addToCart } from "../_actions/cartActions";
 import Modal from "react-modal";
+import {
+  DotsHorizontalIcon,
+  ExternalLinkIcon,
+  EyeIcon,
+  HeartIcon,
+  ThumbUpIcon,
+} from "@heroicons/react/solid";
 // import { likedItem } from "../_actions/likedActions";
 // import ModalClass from "../Generic/ModalClass";
 
@@ -51,7 +54,7 @@ function CarouselIte(props) {
   const ProductList = useSelector((state) => state.productList);
   const { posts, loading, error } = ProductList;
   const ProductLiked = useSelector((state) => state.liked);
-  const { like, loadingLike, errorLike } = ProductLiked;
+  // const { like, loadingLike, errorLike } = ProductLiked;
   const [category, setCategory] = useState("");
   const [shop, setShop] = useState("");
   const [id, setId] = useState("");
@@ -116,7 +119,7 @@ function CarouselIte(props) {
     window.location.reload();
   }
 
-  const likePost = async (id,likes) => {
+  const likePost = async (id, likes) => {
     await axios.put(`product/likes/${id}`, { likes: likes });
   };
 
@@ -357,27 +360,18 @@ function CarouselIte(props) {
             {posts.map((item) => (
               <Col key={item.id}>
                 <Card
+                  className="shadow-md p-0"
                   style={{
                     width: "17rem",
                     height: "auto",
-                    padding: "0rem",
-                    boxShadow:
-                      "0 3px 7px 0 rgba(0, 0, 0, 0.1), 0 5px 20px 0 rgba(0, 0, 0, 0.1)",
                   }}
                   extra={
-                    
-                    <Ripples>
-                      <EllipsisOutlined
-                        onClick={() => showModal(item)}
-                        key="ellipsis"
-                        style={{
-                          fontSize: "1.3rem",
-                          backgroundColor: "rgba(0,0,0,0.1)",
-                          borderRadius: "100px",
-                          padding: "0.2rem",
-                        }}
+                    <div className="transition duration-150 ease-out-in m-0  rounded-full active:bg-black active:bg-opacity-5  p-1    ">
+                      <DotsHorizontalIcon
+                        className="h-5 w-5 text-gray-500"
+                        // onClick={() => showModal(item)}
                       />
-                    </Ripples>
+                    </div>
                   }
                   cover={
                     <LazyLoadImage
@@ -394,19 +388,15 @@ function CarouselIte(props) {
                     />
                   }
                 >
-                  <Link
-                    to={`/product-detail/${item.id}/?category=${item.category}`}
-                  >
-                    <h3
-                      style={{
-                        color: "#595a5c",
-                        margin: "0",
-                        fontWeight: "400",
-                      }}
+                  <div className="flex flex-row items-center">
+                    <Link
+                      to={`/product-detail/${item.id}/?category=${item.category}`}
+                      className="text-gray-500 text-md font-medium m-0"
                     >
                       {item.product_name}
-                    </h3>
-                  </Link>
+                    </Link>
+                    <ExternalLinkIcon className="h-5 w-5 m-0 text-blue-200" />
+                  </div>
 
                   {/* <Rate
                       name="size-small"
@@ -418,13 +408,7 @@ function CarouselIte(props) {
                       }}
                       defaultValue={item.ratings}
                     /> */}
-                  <h3
-                    style={{
-                      color: "grey",
-                      fontSize: ".8rem",
-                      margin: "0",
-                    }}
-                  >
+                  <h3 className="text-gray-600 font-extrabold m-0">
                     <NumberFormat
                       value={item.price}
                       thousandSeparator={true}
@@ -433,14 +417,7 @@ function CarouselIte(props) {
                       suffix=" /="
                     />
                   </h3>
-                  <p
-                    style={{
-                      color: "#caccd1",
-                      fontSize: ".75rem",
-                      margin: "0",
-                      textDecoration: "line-through",
-                    }}
-                  >
+                  <p className="text-gray-400 text-sm m-0 line-through">
                     <NumberFormat
                       value={item.price}
                       thousandSeparator={true}
@@ -450,19 +427,18 @@ function CarouselIte(props) {
                     />
                   </p>
                   <Divider style={{ margin: "0.1rem" }} />
-
-                  <Row justify="space-between" style={{ marginTop: "0.4rem" }}>
-                    <Col>
-                      <EyeOutlined style={{ color: "grey" }} />{" "}
-                      <LikeFilled style={{ color: "#bfbfbf" }} />{" "}
-                      <HeartFilled
-                        style={{ color: "#ff7875" }}
-                        onClick={() => likePost(item.id,item.likes+1)}
-                      />{" "}
+                  <div className="flex flex-row justify-between items-center content-center">
+                    <div className="flex flex-row items-center content-center">
+                      <EyeIcon className="h-5 text-gray-300" />
+                      <ThumbUpIcon
+                        className="h-5 text-gray-300"
+                        // onClick={() => likePost(item.id, item.likes + 1)}
+                      />
+                      {/* <HeartIcon className="h-10 text-red-400 p-2" /> */}
                       <span style={{ color: "grey" }}>{item.likes}</span>
-                    </Col>
-                    <Col style={{ color: "grey" }}>Sold 93</Col>
-                  </Row>
+                    </div>
+                    <div className="text-gray-500">Sold 93</div>
+                  </div>
                 </Card>
               </Col>
             ))}
