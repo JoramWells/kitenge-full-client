@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Col, Image, Row, Modal, Table } from "antd";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import NotSignedIn from "./NotSignedIn";
 import NotCartItems from "./NotCartItems";
 import { useSelector } from "react-redux";

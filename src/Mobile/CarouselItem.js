@@ -33,8 +33,8 @@ import {
 } from "@ant-design/icons";
 import { addToCart } from "../_actions/cartActions";
 import Modal from "react-modal";
-import { likedItem } from "../_actions/likedActions";
-import ModalClass from "../Generic/ModalClass";
+// import { likedItem } from "../_actions/likedActions";
+// import ModalClass from "../Generic/ModalClass";
 
 if (process.env.NODE_ENV !== "test") Modal.setAppElement("#root");
 
