@@ -4,7 +4,8 @@ import { Col, Image, Row, Modal, Table } from "antd";
 import NotSignedIn from "./NotSignedIn";
 import NotCartItems from "./NotCartItems";
 import { useSelector } from "react-redux";
-import { ArrowLeftIcon, SearchIcon, XIcon } from "@heroicons/react/solid";
+import {Link} from 'react-router-dom'
+import { ArrowLeftIcon, SearchIcon, UserIcon, XIcon } from "@heroicons/react/solid";
 
 const columns = [
   {
@@ -68,7 +69,7 @@ export default function NavMobile(props) {
       return (
         <>
           <nav
-            className="flex justify-around bg-white p-2 content-center items-center shadow-md fixed  top-0 z-10 w-full"
+            className="flex justify-around bg-white p-1 content-center items-center shadow-md fixed  top-0 z-10 w-full"
             style={{
               visibility: diVisible1,
             }}
@@ -87,19 +88,22 @@ export default function NavMobile(props) {
           </nav>
 
           <nav
-            className="flex justify-around bg-white p-2 items-center shadow-md  top-0 fixed z-10 w-full"
+            className="flex justify-between p-2 bg-white items-center shadow-md  top-0 fixed z-10 w-full"
             style={{ visibility: diVisible }}
           >
-            {/* <div className="ml-4 mr-4">
-              <Link to="/" className="font-medium text-lg text-gray-700">
+            <div className="">
+              <Link to="/" className="font-bold text-lg text-gray-700">
                 Kitenge
               </Link>
-            </div> */}
-            <div>
+            </div>
+            <div className="p-2">
               <SearchIcon
                 onClick={showDiv}
                 className="h-5 w-5 text-gray-500 -mb-2 "
               />
+            </div>
+            <div className="bg-gray-500 rounded-full">
+              <UserIcon className="h-5 text-gray-400" />
             </div>
 
 

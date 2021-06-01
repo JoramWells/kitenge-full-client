@@ -8,7 +8,6 @@ import { Card, Row, message, Divider } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import Cookie from "js-cookie";
 import { AtSymbolIcon, LockClosedIcon } from "@heroicons/react/solid";
-import { findByDisplayValue } from "@testing-library/dom";
 
 export default function SignIn(props) {
   const history = useHistory();
@@ -33,19 +32,15 @@ export default function SignIn(props) {
   }, [userInfo]);
 
   return (
-    <div>
       <div
-        className="m-auto block"
-        // justify="space-around"
-        // align="middle"
-        // style={{ marginTop: "5rem", marginBottom: "2rem" }}
+      className="my-24"
       >
-        <Card
+        <div
+        className="shadow-md bg-white p-1 rounded-md"
           style={{
-            width: "25rem",
-            boxShadow:
-              "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)",
-            border: "none",
+            width: "19rem",
+            margin: "auto",
+            display: "block",
           }}
         >
           <Row justify="end">
@@ -108,9 +103,8 @@ export default function SignIn(props) {
               } = props;
               return (
                 <form onSubmit={handleSubmit}>
-                  <div className="flex flex-col space-x-4 items-place-start mx-2 mt-8">
-                    {/* <div>Email Address</div> */}
-                    <div className="flex flex-row bg-yellow-200 p-1 items-center rounded-full text-gray-600 txt-sm">
+                  <div className="flex flex-col space-x-4 items-place-start mx-2 ">
+                    <div className="flex flex-row bg-yellow-200 p-1 items-center rounded-full text-gray-600 txt-sm cursor-pointer hover:shadow-md">
                       <AtSymbolIcon className="h-5 text-gray-400 " />
                       <input
                         id="email"
@@ -119,7 +113,7 @@ export default function SignIn(props) {
                         value={values.email}
                         placeholder="johndoe@gmail.com"
                         className={
-                          "focus:outline-none  p-2 w-full rounded-full bg-yellow-200 focus:bg-yellow-200 "
+                          "focus:outline-none  p-1 w-full rounded-full bg-yellow-200 focus:bg-yellow-200  "
                         }
                       />
                     </div>
@@ -131,7 +125,7 @@ export default function SignIn(props) {
                   </div>
 
                   <div className="mx-2 mt-8">
-                    <div className="bg-yellow-200 p-1 rounded-full flex flex-row items-center m-1">
+                    <div className="bg-yellow-200 p-1 rounded-full flex flex-row items-center m-1 cursor-pointer hover:shadow-md">
                       <LockClosedIcon className="h-5 text-gray-400" />
                       <input
                         id="password"
@@ -140,7 +134,7 @@ export default function SignIn(props) {
                         value={values.password}
                         placeholder="Enter password"
                         type="password"
-                        className="focus:outline-none p-2 bg-yellow-200 active:bg-yellow-200 focus-within:bg-yellow-200 w-full rounded-full"
+                        className="focus:outline-none p-1 bg-yellow-200 active:bg-yellow-200 focus:bg-yellow-200 w-full rounded-full "
                       />
                     </div>
                     <div>
@@ -176,7 +170,7 @@ export default function SignIn(props) {
                     <button
                       onClick={handleSubmit}
                       disabled={isSubmitting}
-                      className="bg-blue-400 p-2 rounded-full  focus:outline-none text-white font-medium text-lg"
+                      className="bg-blue-400 hover:bg-blue-500 hover:shadow-md p-1 rounded-full  focus:outline-none text-white font-medium text-lg"
                     >
                       Sign In
                     </button>
@@ -185,8 +179,7 @@ export default function SignIn(props) {
               );
             }}
           </Formik>
-        </Card>
+        </div>
       </div>
-    </div>
   );
 }
