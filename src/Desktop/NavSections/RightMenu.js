@@ -69,17 +69,17 @@ function RightMenu(props) {
     return (
       <div className="flex space-x-4 mt-4 content-center items-center ">
         <button
-          className="hover:shadow-md py-2 px-4 border ring-offset-gray-700 focus-within:ring-1 focus:outline-none bg-yellow-300 rounded-md text-white font-bold"
+          className="hover:shadow-md py-2 px-4 border ring-offset-gray-700 focus-within:ring-1 focus:outline-none rounded-md text-gray-600 font-bold"
           onClick={login}
         >
-          Sign In
+          Login
         </button>
-        <button
+        {/* <button
           className="hover:shadow-md py-2 px-4 border ring-offset-gray-700 focus-within:ring-1 focus:outline-none bg-yellow-300 rounded-md text-white font-bold"
           onClick={register}
         >
           Sign Up
-        </button>
+        </button> */}
       </div>
     );
   } else {

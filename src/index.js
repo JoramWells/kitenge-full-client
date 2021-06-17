@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store'
 import {Provider } from 'react-redux'
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import "./NavBar.css";
 import "react-multi-carousel/lib/styles.css";
 import "react-phone-input-2/lib/style.css";

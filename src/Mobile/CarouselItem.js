@@ -34,6 +34,7 @@ import {
   ExternalLinkIcon,
   EyeIcon,
   HeartIcon,
+  PlusIcon,
   ThumbUpIcon,
 } from "@heroicons/react/solid";
 // import { likedItem } from "../_actions/likedActions";
@@ -359,87 +360,53 @@ function CarouselIte(props) {
           <Row justify="space-around" align="middle" gutter={[0, 16]}>
             {posts.map((item) => (
               <Col key={item.id}>
-                <Card
-                  className="shadow-md p-0"
-                  style={{
-                    width: "17rem",
-                    height: "auto",
-                  }}
-                  extra={
-                    <div className="transition duration-150 ease-out-in m-0  rounded-full active:bg-black active:bg-opacity-5  p-1    ">
-                      <DotsHorizontalIcon
-                        className="h-5 w-5 text-gray-500"
-                        // onClick={() => showModal(item)}
-                      />
-                    </div>
-                  }
-                  cover={
-                    <LazyLoadImage
-                      src={item.image}
-                      effect="blur"
-                      alt="product-Image"
-                      style={{
-                        marginTop: "0",
-                        width: "17rem",
-                        height: "11.4rem",
-                        display: "flex",
-                        margin: "auto",
-                      }}
-                    />
-                  }
-                >
-                  <div className="flex flex-row items-center">
-                    <Link
-                      to={`/product-detail/${item.id}/?category=${item.category}`}
-                      className="text-gray-500 text-md font-medium m-0"
-                    >
+                <div className="shadow-md">
+                  {/* <div className="absolute bg-yellow-500 px-2 bg-opacity-40 rounded-br-md font-bold text-gray-300">
+                    20
+                  </div> */}
+                  <div className="absolute mx-auto bg-black p-2 top-0 right-0 bg-opacity-20 rounded-bl-2xl">
+                    <HeartIcon className="h-5 text-gray-200 active:text-red-400" />
+                  </div>
+                  <img
+                    alt={item.src}
+                    src={item.image}
+                    style={{ width: "18rem",height:"12rem" }}
+                  />
+                  <div className="p-2">
+                    <div className="text-gray-500 font-medium">
                       {item.product_name}
-                    </Link>
-                    <ExternalLinkIcon className="h-5 w-5 m-0 text-blue-200" />
-                  </div>
-
-                  {/* <Rate
-                      name="size-small"
-                      allowHalf={true}
-                      style={{
-                        fontSize: "1rem",
-                        color: "#434343",
-                        marginBottom: ".6rem",
-                      }}
-                      defaultValue={item.ratings}
-                    /> */}
-                  <h3 className="text-gray-600 font-extrabold m-0">
-                    <NumberFormat
-                      value={item.price}
-                      thousandSeparator={true}
-                      displayType={"text"}
-                      prefix="Kshs: "
-                      suffix=" /="
-                    />
-                  </h3>
-                  <p className="text-gray-400 text-sm m-0 line-through">
-                    <NumberFormat
-                      value={item.price}
-                      thousandSeparator={true}
-                      displayType={"text"}
-                      prefix="Kshs: "
-                      suffix=" /="
-                    />
-                  </p>
-                  <Divider style={{ margin: "0.1rem" }} />
-                  <div className="flex flex-row justify-between items-center content-center">
-                    <div className="flex flex-row items-center content-center">
-                      <EyeIcon className="h-5 text-gray-300" />
-                      <ThumbUpIcon
-                        className="h-5 text-gray-300"
-                        // onClick={() => likePost(item.id, item.likes + 1)}
-                      />
-                      {/* <HeartIcon className="h-10 text-red-400 p-2" /> */}
-                      <span style={{ color: "grey" }}>{item.likes}</span>
                     </div>
-                    <div className="text-gray-500">Sold 93</div>
+                    <div>
+                      <p className="text-gray-700 font-medium  m-0">
+                        <NumberFormat
+                          value={item.price}
+                          thousandSeparator={true}
+                          displayType={"text"}
+                          prefix="Kshs: "
+                          suffix=" /="
+                        />
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-gray-400 text-xs  m-0 line-through">
+                        <NumberFormat
+                          value={item.price}
+                          thousandSeparator={true}
+                          displayType={"text"}
+                          prefix="Kshs: "
+                          suffix=" /="
+                        />
+                      </p>
+                    </div>
+                    <Divider style={{margin:".5rem"}} />
+                    <div className="text-gray-400 justify-between flex">
+                      <div className="flex flex-row">
+                        <ThumbUpIcon className="h-5" />
+                        {item.like}</div>
+                      <p className="m-0">Sold 93</p>
+                    </div>
                   </div>
-                </Card>
+                </div>
               </Col>
             ))}
           </Row>
