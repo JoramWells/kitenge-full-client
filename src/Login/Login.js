@@ -4,8 +4,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { signin } from "../_actions/userActions";
-import {  Row, message, Divider } from "antd";
-import { CloseCircleOutlined } from "@ant-design/icons";
+import {   message, Divider } from "antd";
 import Cookie from "js-cookie";
 import {LockClosedIcon, MailIcon } from "@heroicons/react/solid";
 
@@ -16,10 +15,6 @@ export default function SignIn(props) {
   const { userInfo } = userSignin;
 
   const dispatch = useDispatch();
-
-  function closeHandler() {
-    history.goBack();
-  }
   function register() {
     props.history.push("/register");
   }
