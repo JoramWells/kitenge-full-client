@@ -35,7 +35,7 @@ function NavigationBar({ props, activateOption }) {
 
   return (
     <>
-      <Navbar className="desktop__navbar shadow-md ">
+      <Navbar className="desktop__navbar ">
         <div className="p-2 flex flex-row space-x-2 items-center">
           <MenuIcon
             className="h-5 text-gray-800"
@@ -130,12 +130,13 @@ export default withRouter(NavigationBar);
 const Navbar = styled.nav`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   /* position: fixed; */
   width: 100%;
   top: 0%;
   z-index: 1;
   padding: 0.3rem;
+  background-color:white;
 `;
 
 const Sidenav = styled.nav`

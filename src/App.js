@@ -10,7 +10,6 @@ import CartScreen from "./Cart/CartScreen";
 import ShippingScreen from "./Cart/ShippingScreen";
 import HomeRoutes from "./HomeRoutes";
 import DesktopNavbarMobile from "./DesktopNavbarMobile";
-import Footer from "./Desktop/Footer";
 import Product from "./Products/Product";
 import ScrollTop from "./Generic/ScrollTop";
 import SearchedItems from "./Products/SearchedItems";
@@ -35,7 +34,6 @@ function App() {
           <Route path="/searched" exact component={SearchedItems}  />
         </Switch>
       </Router>
-      <Footer />
     </Fragment>
   );
 }
