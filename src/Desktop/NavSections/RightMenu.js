@@ -1,33 +1,10 @@
 import React, { useState } from "react";
-import {
-  Menu,
-  Space,
-  Badge,
-  Modal,
-  Col,
-  Row,
-  Typography,
-  Image,
-  message,
-  Button,
-} from "antd";
+import { message } from "antd";
 import Cookie from "js-cookie";
-import { withRouter, Link, useHistory } from "react-router-dom";
-import {
-  EditOutlined,
-  MailOutlined,
-  PlusOutlined,
-  QuestionCircleOutlined,
-  SettingOutlined,
-  ShoppingCartOutlined,
-  UserAddOutlined,
-} from "@ant-design/icons";
+import { withRouter, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Avatar from "antd/lib/avatar/avatar";
-import SignedInDropdown from './SignedInDropdown'
+import SignedInDropdown from "./SignedInDropdown";
 
-const { Text, Title } = Typography;
-const { SubMenu } = Menu;
 // const cartItems = Cookie.getJSON("cartItems");
 
 function RightMenu(props) {
@@ -67,20 +44,12 @@ function RightMenu(props) {
 
   if (!userInfo) {
     return (
-      <div className="flex space-x-4 mt-4 content-center items-center ">
-        <button
-          className="hover:shadow-md py-2 px-4 border ring-offset-gray-700 focus-within:ring-1 focus:outline-none rounded-md text-gray-600 font-bold"
-          onClick={login}
-        >
-          Login
-        </button>
-        {/* <button
-          className="hover:shadow-md py-2 px-4 border ring-offset-gray-700 focus-within:ring-1 focus:outline-none bg-yellow-300 rounded-md text-white font-bold"
-          onClick={register}
-        >
-          Sign Up
-        </button> */}
-      </div>
+      <button
+        className="hover:shadow-md py-2 px-4 border ring-offset-gray-700 focus-within:ring-1 focus:outline-none rounded-md text-gray-600 font-bold"
+        onClick={login}
+      >
+        Login
+      </button>
     );
   } else {
     if (cartItems.length === 0) {
@@ -127,7 +96,7 @@ function RightMenu(props) {
     } else {
       return (
         <>
-        hello
+          hello
           {/* <Menu mode="horizontal">
             <Menu.Item>
               <Badge count={cartItems.length}>
