@@ -4,10 +4,10 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { signin } from "../_actions/userActions";
-import { Card, Row, message, Divider } from "antd";
+import {  Row, message, Divider } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import Cookie from "js-cookie";
-import { AtSymbolIcon, LockClosedIcon } from "@heroicons/react/solid";
+import {LockClosedIcon, MailIcon } from "@heroicons/react/solid";
 
 export default function SignIn(props) {
   const history = useHistory();
@@ -33,23 +33,18 @@ export default function SignIn(props) {
 
   return (
       <div
-      className="my-24"
+      className="my-14"
       >
         <div
-        className="shadow-md bg-white p-1 rounded-md"
+        className=" bg-white p-1 rounded-md flex flex-col content-center justify-center items-center"
           style={{
-            width: "19rem",
+            width: "25rem",
+            height:"25rem" ,
             margin: "auto",
             display: "block",
           }}
         >
-          <Row justify="end">
-            <CloseCircleOutlined
-              className="close"
-              style={{ fontSize: "1.5rem", marginBottom: "0.3rem" }}
-              onClick={closeHandler}
-            />
-          </Row>
+
           <Divider>SIGN IN</Divider>
 
           <Formik
@@ -103,9 +98,9 @@ export default function SignIn(props) {
               } = props;
               return (
                 <form onSubmit={handleSubmit}>
-                  <div className="flex flex-col space-x-4 items-place-start mx-2 ">
-                    <div className="flex flex-row bg-yellow-200 p-1 items-center rounded-full text-gray-600 txt-sm cursor-pointer hover:shadow-md">
-                      <AtSymbolIcon className="h-5 text-gray-400 " />
+                  <div className="flex flex-col space-x-4 items-place-start mx-2 " >
+                    <div className="flex flex-row ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+                      <MailIcon className="h-5 text-gray-400 " />
                       <input
                         id="email"
                         onChange={handleChange}
@@ -113,7 +108,7 @@ export default function SignIn(props) {
                         value={values.email}
                         placeholder="johndoe@gmail.com"
                         className={
-                          "focus:outline-none  p-1 w-full rounded-full bg-yellow-200 focus:bg-yellow-200  "
+                          "focus:outline-none  p-1 w-full bg-transparent  "
                         }
                       />
                     </div>
@@ -125,7 +120,7 @@ export default function SignIn(props) {
                   </div>
 
                   <div className="mx-2 mt-8">
-                    <div className="bg-yellow-200 p-1 rounded-full flex flex-row items-center m-1 cursor-pointer hover:shadow-md">
+                    <div className="ring-1 ring-gray-300 p-1 rounded-md flex flex-row items-center m-1 cursor-pointer">
                       <LockClosedIcon className="h-5 text-gray-400" />
                       <input
                         id="password"
@@ -134,7 +129,7 @@ export default function SignIn(props) {
                         value={values.password}
                         placeholder="Enter password"
                         type="password"
-                        className="focus:outline-none p-1 bg-yellow-200 active:bg-yellow-200 focus:bg-yellow-200 w-full rounded-full "
+                        className="focus:outline-none p-1  w-full"
                       />
                     </div>
                     <div>
@@ -163,14 +158,14 @@ export default function SignIn(props) {
                   <div className="flex flex-col m-4">
                     <p
                       onClick={register}
-                      className="text-gray-500 font-medium tx-sm text-center cursor-pointer"
+                      className="text-gray-500  tx-sm text-center cursor-pointer"
                     >
                       Don't have an account? Sign Up.
                     </p>
                     <button
                       onClick={handleSubmit}
                       disabled={isSubmitting}
-                      className="bg-blue-400 hover:bg-blue-500 hover:shadow-md p-1 rounded-full  focus:outline-none text-white font-medium text-lg"
+                      className="bg-blue-400 hover:bg-blue-500 hover:shadow-md p-1 rounded-md  focus:outline-none text-white  text-lg"
                     >
                       Sign In
                     </button>
