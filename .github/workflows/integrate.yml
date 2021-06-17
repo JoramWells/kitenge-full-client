@@ -10,6 +10,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v16
         with:
-          node-version: 14
+          node-version: 16
       - run: yarn add --silent --ignore-optional
       - run: yarn run build
