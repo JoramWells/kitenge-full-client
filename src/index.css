@@ -24,3 +24,17 @@ Input{
   cursor: pointer;
   text-decoration: underline;
 }
+
+
+  .nav-menu{
+    background-color: black;
+    position: fixed;
+    left: -100%;
+    transition: 850ms;
+    height: 100vh;
+  }
+
+.nav-menu.active{
+  left: 0;
+  transition: 350ms;
+}

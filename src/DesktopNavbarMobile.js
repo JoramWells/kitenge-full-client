@@ -10,7 +10,7 @@ export default function DesktopNavbarMobile() {
         <NavMobile />
       </div>
       <div className="desktop__navbar">
-        <NavigationBar />
+        <NavigationBar activateOption />
       </div>
     </>
   );
