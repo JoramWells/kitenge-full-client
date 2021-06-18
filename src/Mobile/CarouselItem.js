@@ -16,7 +16,6 @@ import NumberFormat from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
-import Ripples from "react-ripples";
 import axios from "axios";
 import mpesa from "../img/mpesa.png";
 
@@ -180,13 +179,11 @@ function CarouselIte(props) {
       >
         <Row justify="end">
           <Col>
-            <Ripples>
               <CloseCircleOutlined
                 className="close"
                 style={{ fontSize: "1.5rem", marginBottom: "0.3rem" }}
                 onClick={handleCancel}
               />
-            </Ripples>
           </Col>
         </Row>
         <Row justify="space-around" align="middle">
@@ -283,13 +280,11 @@ function CarouselIte(props) {
       >
         <Row justify="end">
           <Col>
-            <Ripples>
               <CloseCircleOutlined
                 className="close"
                 style={{ fontSize: "1.5rem", marginBottom: "0.3rem" }}
                 onClick={handleCancel2}
               />
-            </Ripples>
           </Col>
         </Row>
         <Row>

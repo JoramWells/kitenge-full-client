@@ -62,7 +62,7 @@ export function CarouselItem() {
           className="flex flex-row flex-wrap justify-between items-center "
         >
           {posts.map((product) => (
-            <>
+            <div>
               <figure
                 style={{ width: "14rem", border: "1px solid #F0F0F0 " }}
                 className="rounded-md bg-white"
@@ -100,7 +100,7 @@ export function CarouselItem() {
               <Modal isOpen={isOpen} close={() => setOpen(false)}>
                 jay
               </Modal>
-            </>
+            </div>
           ))}
         </div>
       )}

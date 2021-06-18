@@ -8,7 +8,6 @@ import { Menu } from "antd";
 import { Link } from "react-router-dom";
 import Avatar from "antd/lib/avatar/avatar";
 import React from "react";
-import Ripples from "react-ripples";
 import moment from "moment";
 import { useSelector } from "react-redux";
 const { SubMenu } = Menu;
@@ -28,9 +27,7 @@ export default function NotCartItems() {
     >
       <div className="menu__logo" style={{ marginTop: "0.5rem" }}>
         <Link to="/" style={{ color: "#484848" }}>
-          <Ripples>
-            <b> Kiteng</b>
-          </Ripples>
+            <b> Do3ens</b>
         </Link>
       </div>
       <Menu

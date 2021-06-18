@@ -16,6 +16,7 @@ const Background = styled.div`
   justify-content: space-between;
   align-items: center;
   transition-duration: 500ms;
+  z-index: 50;
 
 `;
 
@@ -35,7 +36,7 @@ const ModalHeader = styled.div`
 const Modal = ({ isOpen, close, children }) => {
   const contentRef = useRef();
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) return null;
     function listener(e) {
       if (contentRef.current.contains(e.target)) return null;
       close();
@@ -49,7 +50,7 @@ const Modal = ({ isOpen, close, children }) => {
     <Background data-testid="modal_div">
       <Content  className="shadow-lg" ref={contentRef}>
         <ModalHeader className="flex flex-row justify-end" >
-          <XIcon className="h-5 text-gray-600" onClick={close} />
+          <XIcon className="h-5 text-gray-600" onClick={()=>close()} />
         </ModalHeader>
         {children}
       </Content>
