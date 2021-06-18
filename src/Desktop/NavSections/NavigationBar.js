@@ -18,6 +18,7 @@ import {
 import styled from "styled-components";
 
 function NavigationBar({ props, activateOption }) {
+  const [visible, setVisible] = useState("hidden");
   const [sidebar, setSidebar] = useState(false);
   const activate = () => setSidebar(!sidebar);
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ function NavigationBar({ props, activateOption }) {
           <input
             placeholder="Search..."
             className=" text-sm w-full focus:outline-none bg-transparent"
+            onClick={() => setVisible("visible")}
           />
           <XIcon className="h-10 text-gray-400 p-1.5" />
         </div>
@@ -67,16 +69,18 @@ function NavigationBar({ props, activateOption }) {
             position: "fixed",
             width: "50%",
             height: "200px",
-            top: "60px",
-            backgroundColor: "gray",
-            zIndex: "1",
+            top: "53px",
+            backgroundColor: "white",
+            zIndex: "4",
             left: "50%",
             right: "50%",
             transform: " translate(-50%, 0%)",
-            visibility: "hidden",
+            visibility: visible,
           }}
+          className="rounded-md shadow-md p-2"
         >
           hdsjhdsjd
+          <XIcon className="h-5" onClick={()=>setVisible("hidden")} />
         </div>
 
         <div>
@@ -84,7 +88,11 @@ function NavigationBar({ props, activateOption }) {
         </div>
       </Navbar>
       <Sidenav
-        className={sidebar ? "nav-menu active flex flex-row items-center content-center" : "nav-menu"}
+        className={
+          sidebar
+            ? "nav-menu active flex flex-row items-center content-center"
+            : "nav-menu"
+        }
       >
         <ul className="leading-8 ">
           <Li>
@@ -95,29 +103,21 @@ function NavigationBar({ props, activateOption }) {
           <hr className="text-white p-2" />
           <Li>
             <CreditCardIcon className="h-5 ml-3 -mt-4 text-gray-400 mr-4" />
-            <p className="text-sm text-gray-600 ">
-              Purchases{" "}
-            </p>
+            <p className="text-sm text-gray-600 ">Purchases </p>
           </Li>
 
           <Li>
             <ClockIcon className="h-5 ml-3 -mt-3 text-gray-400 mr-4" />
-            <p className="text-sm text-gray-500 ">
-              Recent purchases{" "}
-            </p>
+            <p className="text-sm text-gray-500 ">Recent purchases </p>
           </Li>
           <hr className="text-white py-2" />
           <Li>
             <ThumbUpIcon className="h-5 ml-3 -mt-4 text-gray-400 mr-4" />
-            <p className="text-sm text-gray-600 ">
-              Liked Items
-            </p>
+            <p className="text-sm text-gray-600 ">Liked Items</p>
           </Li>
           <Li>
             <DotsCircleHorizontalIcon className="h-5 ml-3 -mt-3 text-gray-400 mr-4" />
-            <p className="text-sm text-gray-600 ">
-              More Items
-            </p>
+            <p className="text-sm text-gray-600 ">More Items</p>
           </Li>
         </ul>
       </Sidenav>
@@ -131,12 +131,12 @@ const Navbar = styled.nav`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* position: fixed; */
+  position: fixed;
   width: 100%;
   top: 0%;
-  z-index: 1;
+  z-index: 20;
   padding: 0.3rem;
-  background-color:white;
+  background-color: white;
 `;
 
 const Sidenav = styled.nav`

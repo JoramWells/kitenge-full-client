@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from "react";
+import React, { useEffect, useState, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../_actions/productActions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -7,6 +7,7 @@ import RecentItemsBar from "../Generic/RecentItemsBar";
 import { RedoOutlined } from "@ant-design/icons";
 // import NumberFormat from "react-number-format";
 import { DotsVerticalIcon, ThumbUpIcon } from "@heroicons/react/solid";
+import Modal from "./modalComponent/Modal";
 
 const renderSkeleton = [...Array(5).keys()].map((i) => {
   return (
@@ -15,30 +16,11 @@ const renderSkeleton = [...Array(5).keys()].map((i) => {
     </Col>
   );
 });
-
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5,
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 4,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 3,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-  },
-};
-
 export function CarouselItem() {
   const dispatch = useDispatch();
   const ProductList = useSelector((state) => state.productList);
+  const [isOpen, setOpen] = useState(false);
+
   const { posts, loading, error } = ProductList;
   function reloadHandler() {
     window.location.reload();
@@ -50,7 +32,6 @@ export function CarouselItem() {
   }, [dispatch]);
   return (
     <>
-      <RecentItemsBar title="Most popular" />
       {loading ? (
         <Row
           justify="space-around"
@@ -71,45 +52,55 @@ export function CarouselItem() {
         />
       ) : (
         <div
-          style={{ width: "85%", float: "right", padding: "1.55rem" }}
+          style={{
+            width: "85%",
+            float: "right",
+            padding: "1.55rem",
+            marginTop: "5rem",
+            backgroundColor: "rgb(248,248,248,0.2)",
+          }}
           className="flex flex-row flex-wrap justify-between items-center "
         >
           {posts.map((product) => (
-            <figure
-              style={{ width: "14rem", border: "1px solid #F0F0F0 " }}
-              className="rounded-md bg-white"
-            >
-              <div className="absolute bg-black bg-opacity-20  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20 ">
-                <DotsVerticalIcon
-                  className="h-5"
-                  //  onClick={() => setOpen(true)}
+            <>
+              <figure
+                style={{ width: "14rem", border: "1px solid #F0F0F0 " }}
+                className="rounded-md bg-white"
+              >
+                <div className="absolute bg-white bg-opacity-30  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20 z-10">
+                  <DotsVerticalIcon
+                    className="h-5"
+                    onClick={() => setOpen(true)}
+                  />
+                </div>
+                <LazyLoadImage
+                  src={product.image}
+                  effect="blur"
+                  alt="productimage"
+                  style={{
+                    width: "14rem",
+                    height: "135px",
+                    display: "block",
+                    margin: "auto",
+                  }}
+                  className="rounded-t-sm -z-10"
                 />
-              </div>
-              <LazyLoadImage
-                src={product.image}
-                effect="blur"
-                alt="productimage"
-                style={{
-                  width: "14rem",
-                  height: "135px",
-                  display: "block",
-                  margin: "auto",
-                }}
-                className="rounded-t-sm"
-              />
-              <div className="p-2">
-                {product.product_name}
-                <figcaption>
-                  <div className="font-semibold text-gray-600">
+                <div className="p-2">
+                  {product.product_name}
+                  <figcaption>
+                    <div className="font-semibold text-gray-600">
                       Kshs {product.price} /=
-                  </div>
-                  <div className="line-through text-sm text-gray-300">
-                    Kshs 4,321/=
-                  </div>
-
-                </figcaption>
-              </div>
-            </figure>
+                    </div>
+                    <div className="line-through text-sm text-gray-300">
+                      Kshs 4,321/=
+                    </div>
+                  </figcaption>
+                </div>
+              </figure>
+              <Modal isOpen={isOpen} close={() => setOpen(false)}>
+                jay
+              </Modal>
+            </>
           ))}
         </div>
       )}
