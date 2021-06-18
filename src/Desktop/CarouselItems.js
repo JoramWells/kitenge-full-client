@@ -19,7 +19,10 @@ const renderSkeleton = [...Array(5).keys()].map((i) => {
 export function CarouselItem() {
   const dispatch = useDispatch();
   const ProductList = useSelector((state) => state.productList);
-  const [isOpen, setOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  function openModal() {
+    setShowModal((prev) => !prev);
+  }
 
   const { posts, loading, error } = ProductList;
   function reloadHandler() {
@@ -68,10 +71,7 @@ export function CarouselItem() {
                 className="rounded-md bg-white"
               >
                 <div className="absolute bg-white bg-opacity-30  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20 z-10">
-                  <DotsVerticalIcon
-                    className="h-5"
-                    onClick={() => setOpen(true)}
-                  />
+                  <DotsVerticalIcon className="h-5" onClick={openModal} />
                 </div>
                 <LazyLoadImage
                   src={product.image}
@@ -97,7 +97,7 @@ export function CarouselItem() {
                   </figcaption>
                 </div>
               </figure>
-              <Modal isOpen={isOpen} close={() => setOpen(false)}>
+              <Modal showModal={showModal} setShowModal={setShowModal}>
                 jay
               </Modal>
             </div>
