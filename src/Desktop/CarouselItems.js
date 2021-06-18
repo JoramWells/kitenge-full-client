@@ -1,14 +1,15 @@
-import React, { useEffect, useState, memo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { listProducts } from "../_actions/productActions";
+import React, {  useState, memo } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Row, Col, Card, Result, Button } from "antd";
 // import NumberFormat from "react-number-format";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
+import {
+  ClockIcon,
+  DotsVerticalIcon,
+  LocationMarkerIcon,
+} from "@heroicons/react/solid";
 import Modal from "./modalComponent/Modal";
 
 export function CarouselItem({ product }) {
-  const { id, product_name, image, price } = product;
+  const { id, product_name, image, price,description } = product;
   const [showModal, setShowModal] = useState(false);
   function openModal() {
     setShowModal((prev) => !prev);
@@ -16,9 +17,7 @@ export function CarouselItem({ product }) {
 
   return (
     <>
-      <div
-        key={id}
-      >
+      <div key={id}>
         <figure
           style={{ width: "14rem", border: "1px solid #F0F0F0 " }}
           className="rounded-md bg-white"
@@ -50,8 +49,67 @@ export function CarouselItem({ product }) {
         </figure>
       </div>
       <Modal showModal={showModal} setShowModal={setShowModal}>
-        <div>{product_name}</div>
-        <div>{price}</div>
+        <div className="p-2">
+          <div className="flex flex-row justify-between content-center items-center">
+            <img
+              src={image}
+              alt=""
+              style={{
+                width: "150px",
+                height: "150px",
+                objectFit: "contain",
+                paddingTop: "0",
+                borderRadius: "10px",
+              }}
+              loading="lazy"
+            />
+            <div>
+                <div className="text-lg font-semibold">{product_name}</div>
+              <div className="text-gray-700 font-semibold">Kshs {price}/=</div>
+              <div className="text-gray-400 text-sm line-through">Kshs {price}/=</div>
+
+            </div>
+
+            <div>
+              <div
+                style={{ textAlign: "center" }}
+                className="text-gray-600 font-semibold text-lg"
+              >
+                Delivery details
+              </div>
+              <div className="flex flex-row">
+                <LocationMarkerIcon className="h-5 text-gray-300" />
+                <div>Umoja, Egessa Villa</div>
+              </div>
+              <div className="flex flex-row">
+                <ClockIcon className="h-5 text-gray-300" />
+                <div className="text-gray-500">5 mins</div>
+              </div>
+            </div>
+          </div>
+          <div>
+          <h3 style={{textAlign:"center"}}>description</h3>
+          <div className="flex justify-center" style={{ height: 100, overflowY: 'scroll', marginTop: 10 }}>
+          <div dangerouslySetInnerHTML={{ __html: description }}/>
+          </div>
+
+          </div>
+          <hr />
+          <div className="flex justify-around p-2 content-center space-x-2">
+            <button
+              style={{ backgroundColor: "#47817F" }}
+              className=" w-full rounded-md p-2 text-gray-100"
+            >
+              buy
+            </button>
+            <button
+              className="w-full p-2 rounded-md text-gray-700"
+              style={{ backgroundColor: "rgba(0,0,0,0.2)" }}
+            >
+              add to cart
+            </button>
+          </div>
+        </div>
       </Modal>
     </>
   );

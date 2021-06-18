@@ -79,7 +79,7 @@ function NavigationBar({ props, activateOption }) {
           }}
           className="rounded-md shadow-md p-2"
         >
-          <XIcon className="h-5" onClick={()=>setVisible("hidden")} />
+          <XIcon className="h-5" onClick={() => setVisible("hidden")} />
           Searchin...
         </div>
 

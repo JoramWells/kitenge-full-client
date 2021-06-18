@@ -19,14 +19,10 @@ const Background = styled.div`
 
 const Content = styled.div`
   background-color: #fff;
-  padding: 10px;
   border-radius: 5px;
   margin: 15px;
   transition-duration: 500ms;
-  width: 19rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  width: 27rem;
 `;
 
 // const ModalImg = styled.img`
@@ -60,9 +56,8 @@ const Modal = ({ showModal, setShowModal, children }) => {
     <>
       {showModal ? (
         <Background data-testid="modal_div" ref={modalRef} onClick={closeModal}>
-          {/* <animated.div style={animation}></animated.div> */}
           <Content showModal={showModal}>
-            <ModalHeader className="flex flex-row justify-end">
+            <ModalHeader className="flex flex-row justify-end p-1">
               <XIcon
                 className="h-5 text-gray-600"
                 onClick={() => setShowModal((prev) => !prev)}
