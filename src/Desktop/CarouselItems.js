@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../_actions/productActions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Row, Col, Card, Result, Button } from "antd";
-import RecentItemsBar from "../Generic/RecentItemsBar";
 import { RedoOutlined } from "@ant-design/icons";
 // import NumberFormat from "react-number-format";
 import { DotsVerticalIcon, ThumbUpIcon } from "@heroicons/react/solid";
@@ -65,42 +64,45 @@ export function CarouselItem() {
           className="flex flex-row flex-wrap justify-between items-center "
         >
           {posts.map((product) => (
-            <div>
-              <figure
-                style={{ width: "14rem", border: "1px solid #F0F0F0 " }}
-                className="rounded-md bg-white"
-              >
-                <div className="absolute bg-white bg-opacity-30  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20 z-10">
-                  <DotsVerticalIcon className="h-5" onClick={openModal} />
-                </div>
-                <LazyLoadImage
-                  src={product.image}
-                  effect="blur"
-                  alt="productimage"
-                  style={{
-                    width: "14rem",
-                    height: "135px",
-                    display: "block",
-                    margin: "auto",
-                  }}
-                  className="rounded-t-sm -z-10"
-                />
-                <div className="p-2">
-                  {product.product_name}
-                  <figcaption>
-                    <div className="font-semibold text-gray-600">
-                      Kshs {product.price} /=
-                    </div>
-                    <div className="line-through text-sm text-gray-300">
-                      Kshs 4,321/=
-                    </div>
-                  </figcaption>
-                </div>
-              </figure>
+            <>
+              <div>
+                <figure
+                  style={{ width: "14rem", border: "1px solid #F0F0F0 " }}
+                  className="rounded-md bg-white"
+                >
+                  <div className="absolute bg-white bg-opacity-30  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20 z-10">
+                    <DotsVerticalIcon className="h-5" onClick={openModal} />
+                  </div>
+                  <LazyLoadImage
+                    src={product.image}
+                    effect="blur"
+                    alt="productimage"
+                    style={{
+                      width: "14rem",
+                      height: "135px",
+                      display: "block",
+                      margin: "auto",
+                    }}
+                    className="rounded-t-sm -z-10"
+                  />
+                  <div className="p-2">
+                    {product.product_name}
+                    <figcaption>
+                      <div className="font-semibold text-gray-600">
+                        Kshs {product.price} /=
+                      </div>
+                      <div className="line-through text-sm text-gray-300">
+                        Kshs 4,321/=
+                      </div>
+                    </figcaption>
+                  </div>
+                </figure>
+              </div>
               <Modal showModal={showModal} setShowModal={setShowModal}>
-                jay
+                <div>{product.product_name}</div>
+                <div>{product.price}</div>
               </Modal>
-            </div>
+            </>
           ))}
         </div>
       )}
