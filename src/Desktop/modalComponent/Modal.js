@@ -5,7 +5,7 @@ import { XIcon } from "@heroicons/react/outline";
 const Background = styled.div`
   height: 100vh;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: rgba(0, 0, 0, 0.2);
   position: fixed;
   top: 0;
   left: 0;

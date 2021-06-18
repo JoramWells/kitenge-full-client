@@ -68,7 +68,7 @@ function NavigationBar({ props, activateOption }) {
           style={{
             position: "fixed",
             width: "50%",
-            height: "200px",
+            height: "100px",
             top: "53px",
             backgroundColor: "white",
             zIndex: "4",
@@ -79,8 +79,8 @@ function NavigationBar({ props, activateOption }) {
           }}
           className="rounded-md shadow-md p-2"
         >
-          hdsjhdsjd
           <XIcon className="h-5" onClick={()=>setVisible("hidden")} />
+          Searchin...
         </div>
 
         <div>
