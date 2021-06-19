@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Row,
-  Col,
-  Typography,
-  Button,
-  Descriptions,
-  message,
-  Space,
-  Table,
-  Image,
-} from "antd";
+import { Row, Col, Button, message, Space, Table, Image } from "antd";
 import { confirmPayment, makePayment } from "../_actions/paymentActions";
+import NumberFormat from "react-number-format";
 
 const columns = [
   {
@@ -44,7 +35,6 @@ const columns = [
   },
 ];
 
-const { Title } = Typography;
 const Cookie = require("js-cookie");
 
 export default function ShippingScreen() {
@@ -54,11 +44,8 @@ export default function ShippingScreen() {
   const [payment, setPayment] = useState([]);
   const { loading, paymentDetails, error } = paymentDetail;
   const confirmDetails = useSelector((state) => state.confirmDetails);
-  const {
-    loadingDetails,
-    confirmPaymentDetails,
-    errorDetails,
-  } = confirmDetails;
+  const { loadingDetails, confirmPaymentDetails, errorDetails } =
+    confirmDetails;
 
   const payDetail = Cookie.getJSON("paymentDetails");
   // const {} = confirmPayment;
@@ -116,44 +103,64 @@ export default function ShippingScreen() {
 
   return (
     <>
-      <Row
-        justify="space-around"
-        align="middle"
-        style={{ marginTop: "40px", padding: "2rem" }}
+      <div
+        className="flex flex-row justify-around"
+        style={{ paddingTop: "5rem", height: "100%" }}
       >
-        <Col>
-          <Descriptions title="Your Details">
-            <Descriptions.Item>
-              {userInfo.name}, {userInfo.email},<br /> {userInfo.phone},
-              {userInfo.address}
-            </Descriptions.Item>
-          </Descriptions>
-        </Col>
-      </Row>
-      <Row justify="space-around" align="middle">
-        <Table columns={columns} dataSource={cartItems} />
-      </Row>
-      <Row justify="space-around" align="middle">
-        <Col>
-          <Title level={5}>
-            {" "}
-            Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items): ${" "}
-            {(qt = cartItems.reduce((a, c) => a + c.price * c.qty, 0))}
-          </Title>
-        </Col>
-      </Row>
-      <Row justify="space-around" align="middle" style={{ padding: "1rem" }}>
-        <Col>
-          <Button
-            type="primary"
-            style={{ border: "0" }}
-            block
-            onClick={paymentHandler}
-          >
-            BUY NOW!!
-          </Button>
-        </Col>
-      </Row>
+        <div>
+          <Table columns={columns} dataSource={cartItems} />
+        </div>
+        <div className="bg-white p-4 shadow-md" style={{ width: "25rem" }}>
+          <div className="text-gray-700 text-lg font-semibold flex flex-row space-x-8">
+            <p>Name :{" "} </p>
+            <p>{userInfo.name} </p>
+            
+          </div>
+          <div className="text-gray-500 font-semibold flex flex-row space-x-8">
+            <p>Email :</p>
+            <p>{userInfo.email}</p>
+            </div>
+          <div className="text-gray-500 flex flex-row space-x-4">
+            <p>Phon No. </p>
+            <p>{userInfo.phone}</p>
+            </div>
+          <div className="text-gray-500 text-xs flex flex-row space-x-2">
+            <p>Location: </p>
+            <p>{userInfo.address}</p>
+            </div>
+
+          <div className="flex flex-row space-x-2">
+            <p className="text-gray-500">Total items: </p>
+            <div>
+            {cartItems.reduce((a, c) => a + c.qty, 0)}
+            </div>
+             </div>
+          <div className="flex flex-row space-x-2">
+            <p className="text-gray-500">Total amount:</p>
+            <NumberFormat
+              value={(qt = cartItems.reduce((a, c) => a + c.price * c.qty, 0))}
+              thousandSeparator={true}
+              displayType={"text"}
+              prefix="Kshs: "
+              suffix=" /="
+              className="text-red-400 font-semibold"
+            />
+          </div>
+          <div>
+            <button
+              onClick={paymentHandler}
+              className="p-1 rounded-md"
+              style={{
+                backgroundColor: "#47817F",
+                border: "0",
+                display: "block",
+              }}
+            >
+              BUY NOW!!
+            </button>
+          </div>
+        </div>
+      </div>
       <Row>
         {loading ? (
           <>{message.info("loading..")}</>
