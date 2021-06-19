@@ -36,7 +36,7 @@ function NavigationBar({ props, activateOption }) {
 
   return (
     <>
-      <Navbar className="desktop__navbar ">
+      <Navbar className="desktop__navbar shadow-lg">
         <div className="p-2 flex flex-row space-x-2 items-center">
           <MenuIcon
             className="h-5 text-gray-800"
@@ -64,7 +64,7 @@ function NavigationBar({ props, activateOption }) {
           />
           <XIcon className="h-10 text-gray-400 p-1.5" />
         </div>
-        <div
+        {/* <div
           style={{
             position: "fixed",
             width: "50%",
@@ -81,7 +81,7 @@ function NavigationBar({ props, activateOption }) {
         >
           <XIcon className="h-5" onClick={() => setVisible("hidden")} />
           Searchin...
-        </div>
+        </div> */}
 
         <div>
           <RightMenu mode="horizontal" />
@@ -96,28 +96,28 @@ function NavigationBar({ props, activateOption }) {
       >
         <ul className="leading-8 ">
           <Li>
-            <HomeIcon className="h-5 ml-3 -mt-4 text-gray-400 mr-4" />
-            <p className=" text-sm text-gray-600">Home</p>
+            <HomeIcon className="h-5 ml-3 text-gray-500 mr-4" />
+            <div className=" text-sm text-gray-900">Home</div>
           </Li>
 
           <hr className="text-white p-2" />
           <Li>
-            <CreditCardIcon className="h-5 ml-3 -mt-4 text-gray-400 mr-4" />
-            <p className="text-sm text-gray-600 ">Purchases </p>
+            <CreditCardIcon className="h-5 ml-3  text-gray-500 mr-4" />
+            <div className="text-sm text-gray-900">Purchases </div>
           </Li>
 
           <Li>
-            <ClockIcon className="h-5 ml-3 -mt-3 text-gray-400 mr-4" />
-            <p className="text-sm text-gray-500 ">Recent purchases </p>
+            <ClockIcon className="h-5 ml-3 text-gray-500 mr-4" />
+            <div className="text-sm text-gray-900">Recent purchases </div>
           </Li>
           <hr className="text-white py-2" />
           <Li>
-            <ThumbUpIcon className="h-5 ml-3 -mt-4 text-gray-400 mr-4" />
-            <p className="text-sm text-gray-600 ">Liked Items</p>
+            <ThumbUpIcon className="h-5 ml-3  text-gray-500 mr-4" />
+            <div className="text-sm  text-gray-900">Liked Items</div>
           </Li>
           <Li>
-            <DotsCircleHorizontalIcon className="h-5 ml-3 -mt-3 text-gray-400 mr-4" />
-            <p className="text-sm text-gray-600 ">More Items</p>
+            <DotsCircleHorizontalIcon className="h-5 ml-3 text-gray-500 mr-4" />
+            <div className="text-sm  text-gray-900">More Items</div>
           </Li>
         </ul>
       </Sidenav>

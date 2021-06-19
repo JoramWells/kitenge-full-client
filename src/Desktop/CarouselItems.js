@@ -1,4 +1,5 @@
-import React, {  useState, memo } from "react";
+import React, { useState, memo } from "react";
+import {Link} from 'react-router-dom'
 import { LazyLoadImage } from "react-lazy-load-image-component";
 // import NumberFormat from "react-number-format";
 import {
@@ -9,7 +10,7 @@ import {
 import Modal from "./modalComponent/Modal";
 
 export function CarouselItem({ product }) {
-  const { id, product_name, image, price,description } = product;
+  const { id, product_name, image, price, description } = product;
   const [showModal, setShowModal] = useState(false);
   function openModal() {
     setShowModal((prev) => !prev);
@@ -20,9 +21,9 @@ export function CarouselItem({ product }) {
       <div key={id}>
         <figure
           style={{ width: "14rem", border: "1px solid #F0F0F0 " }}
-          className="rounded-md bg-white"
+          className="rounded-md bg-white mb-4"
         >
-          <div className="absolute bg-white bg-opacity-30  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20 z-10">
+          <div className="absolute bg-black bg-opacity-10  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20 z-10">
             <DotsVerticalIcon className="h-5" onClick={openModal} />
           </div>
           <LazyLoadImage
@@ -38,7 +39,10 @@ export function CarouselItem({ product }) {
             className="rounded-t-sm -z-10"
           />
           <div className="p-2">
+            <Link to={`/product-detail/${id}`}>
             {product_name}
+            </Link>
+            
             <figcaption>
               <div className="font-semibold text-gray-600">Kshs {price} /=</div>
               <div className="line-through text-sm text-gray-300">
@@ -64,10 +68,11 @@ export function CarouselItem({ product }) {
               loading="lazy"
             />
             <div>
-                <div className="text-lg font-semibold">{product_name}</div>
+              <div className="text-lg font-semibold">{product_name}</div>
               <div className="text-gray-700 font-semibold">Kshs {price}/=</div>
-              <div className="text-gray-400 text-sm line-through">Kshs {price}/=</div>
-
+              <div className="text-gray-400 text-sm line-through">
+                Kshs {price}/=
+              </div>
             </div>
 
             <div>
@@ -88,11 +93,13 @@ export function CarouselItem({ product }) {
             </div>
           </div>
           <div>
-          <h3 style={{textAlign:"center"}}>description</h3>
-          <div className="flex justify-center" style={{ height: 100, overflowY: 'scroll', marginTop: 10 }}>
-          <div dangerouslySetInnerHTML={{ __html: description }}/>
-          </div>
-
+            <h3 style={{ textAlign: "center" }}>description</h3>
+            <div
+              className="flex justify-center"
+              style={{ height: 100, overflowY: "scroll", marginTop: 10 }}
+            >
+              <div dangerouslySetInnerHTML={{ __html: description }} />
+            </div>
           </div>
           <hr />
           <div className="flex justify-around p-2 content-center space-x-2">

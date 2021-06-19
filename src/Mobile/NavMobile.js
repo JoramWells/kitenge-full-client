@@ -5,7 +5,6 @@ import NotSignedIn from "./NotSignedIn";
 import NotCartItems from "./NotCartItems";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { CSSTransition } from "react-transition-group";
 import {
   ArrowLeftIcon,
   SearchIcon,
@@ -47,10 +46,6 @@ export default function NavMobile(props) {
 
   const [visible, setVisible] = useState(false);
   const [diVisible, setDiVisible] = useState("visible");
-  const [transition, setTransition] = useState(false);
-
-  const [diVisible1, setDiVisible2] = useState("hidden");
-  const { isToggleData, setToggle } = useState(false);
 
   function handleOk() {
     setVisible(false);
@@ -58,21 +53,14 @@ export default function NavMobile(props) {
   function handleCancel() {
     setVisible(false);
   }
-  function showModal() {
-    setVisible(true);
-  }
 
   const showDiv = useCallback(() => {
     setDiVisible("hidden");
-    setDiVisible2("visible");
-    setTransition(true);
-  }, [setDiVisible, setDiVisible2, setTransition]);
+  }, [setDiVisible]);
 
   const hideDiv = useCallback(() => {
     setDiVisible("visible");
-    setDiVisible2("hidden");
-    setTransition(false);
-  }, [setDiVisible2, setDiVisible, setTransition]);
+  }, [setDiVisible]);
 
   if (!userInfo) return <NotSignedIn />;
   else {
@@ -80,29 +68,25 @@ export default function NavMobile(props) {
     else {
       return (
         <>
-          <CSSTransition
-            in={transition}
-            timeout={500}
-            classNames="display"
-            unmountOnExit
+          <nav
+            className="flex justify-around bg-white p-1 content-center items-center shadow-md fixed  top-0 z-10 w-full"
+            style={{}}
           >
-            <nav
-              className="flex justify-around bg-white p-1 content-center items-center shadow-md fixed  top-0 z-10 w-full"
-              style={{}}
-            >
-              <div className="focus:bg-gray-300 opacity-1 p-1 rounded-full">
-                <ArrowLeftIcon className="h-5 active:bg-gray-300 text-gray-500" onClick={hideDiv} />
-              </div>
-              <div className="bg-yellow-100 rounded-full  flex items-center justify-end -ml-8">
-                <SearchIcon className="h-5 text-gray-400 m-2 cursor-pointer focus:text-gray-500" />
-                <input
-                  placeholder="Search.."
-                  className=" focus:outline-none rounded-full bg-yellow-100"
-                />
-                <XIcon className="h-5 text-gray-400 m-2 cursor-pointer focus:text-gray-500" />
-              </div>
-            </nav>
-          </CSSTransition>
+            <div className="focus:bg-gray-300 opacity-1 p-1 rounded-full">
+              <ArrowLeftIcon
+                className="h-5 active:bg-gray-300 text-gray-500"
+                onClick={hideDiv}
+              />
+            </div>
+            <div className="bg-yellow-100 rounded-full  flex items-center justify-end -ml-8">
+              <SearchIcon className="h-5 text-gray-400 m-2 cursor-pointer focus:text-gray-500" />
+              <input
+                placeholder="Search.."
+                className=" focus:outline-none rounded-full bg-yellow-100"
+              />
+              <XIcon className="h-5 text-gray-400 m-2 cursor-pointer focus:text-gray-500" />
+            </div>
+          </nav>
 
           <nav
             className="flex justify-between p-2 bg-white items-center shadow-md  top-0 fixed z-10 w-full"
@@ -114,14 +98,13 @@ export default function NavMobile(props) {
               </Link>
             </div>
             <div className="flex flex-row space-x-2">
-            <SearchIcon
+              <SearchIcon
                 onClick={showDiv}
                 className="h-5 w-5 text-gray-500 font-bold -mb-2 rounded-full "
               />
               <div className="bg-gray-500 rounded-full">
                 <UserIcon className="h-5 text-gray-400" />
               </div>
-              
             </div>
 
             {/* navbar */}

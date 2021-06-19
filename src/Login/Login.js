@@ -28,7 +28,7 @@ export default function SignIn(props) {
 
   return (
       <div
-      className="my-14"
+      style={{paddingTop:"5rem"}}
       >
         <div
         className=" bg-white p-1 rounded-md flex flex-col content-center justify-center items-center"
@@ -40,7 +40,7 @@ export default function SignIn(props) {
           }}
         >
 
-          <Divider>SIGN IN</Divider>
+          <Divider>LOGIN</Divider>
 
           <Formik
             initialValues={{

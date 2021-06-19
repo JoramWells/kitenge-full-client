@@ -90,7 +90,7 @@ export default function ProductDetail(props) {
 
   return (
     <>
-      <div className="m-auto block">
+      <div className="m-auto block" style={{paddingTop:"5rem"}}>
         <div className="flex flex-row justify-center items-center content-center">
           <div>
             {loading ? (
@@ -206,10 +206,10 @@ export default function ProductDetail(props) {
                             border: "0",
                             textDecoration: "none",
                             color: "white",
+                            backgroundColor: "#47817F"
                           }}
                           block
                           size="large"
-                          className="cart"
                           onClick={handleAddToCart}
                         >
                           ADD TO CART
@@ -220,11 +220,13 @@ export default function ProductDetail(props) {
                         <div className="flex lg:flex-row md:flex-col space-x-4">
                           <button
                             onClick={loginHandler}
-                            className="transition hover:shadow-lg focus-within:shadow-lg duration-150 ease-out-in p-2 focus:outline-none focus-within:bg-yellow-500 bg-black rounded-full bg-opacity-20 hover:bg-yellow-500 font-extrabold text-white"
+                            
+                            style={{backgroundColor: "#47817F"}}
+                            className="transition hover:shadow-lg focus-within:shadow-lg duration-150 ease-out-in p-2 focus:outline-none  rounded-md  text-white"
                           >
                             SignIn & Checkout
                           </button>
-                          <button className="transition hover:shadow-lg focus-within:shadow-lg duration-150 ease-out-in p-2 focus:outline-none focus-within:bg-yellow-500 bg-green-500 rounded-full hover:bg-yellow-500 font-extrabold text-white">
+                          <button className="transition hover:shadow-lg focus-within:shadow-lg duration-150 ease-out-in p-2 focus:outline-none bg-black bg-opacity-50 rounded-md text-white">
                             Continue Shopping
                           </button>
                         </div>
@@ -286,7 +288,7 @@ export default function ProductDetail(props) {
             </Row>
           ) : (
             <Row
-            className=" p-2 rounded-md "
+              className=" p-2 rounded-md "
               justify="space-around"
               gutter={[0, 16]}
               style={{ marginTop: "2rem", paddingBottom: "2rem" }}
@@ -295,7 +297,6 @@ export default function ProductDetail(props) {
                 <Col key={item.id}>
                   <Card
                     className="hover:shadow-lg cursor-pointer hover:rounded-md"
-
                     style={{
                       width: "15rem",
                       height: "290px",
@@ -319,9 +320,8 @@ export default function ProductDetail(props) {
                     <Link
                       to={`/product-detail/${item.id}/?category=${item.category}`}
                       className="m-0 text-gray-700 text-sm"
-
                     >
-                        {item.product_name}
+                      {item.product_name}
                     </Link>
                     {/* <Rate
                       allowHalf={true}
@@ -333,10 +333,7 @@ export default function ProductDetail(props) {
                       }}
                       defaultValue={item.ratings}
                     /> */}
-                    <p
-                    className="text-gray-700 font-medium m-0"
-
-                    >
+                    <p className="text-gray-700 font-medium m-0">
                       <NumberFormat
                         value={item.price}
                         thousandSeparator={true}
@@ -345,9 +342,7 @@ export default function ProductDetail(props) {
                         suffix=" /="
                       />
                     </p>
-                    <div
-                    className="flex space-x-4 items-center content-center bg-gray-50 rounded-sm p-1"
-                    >
+                    <div className="flex space-x-4 items-center content-center bg-gray-50 rounded-sm p-1">
                       <div className="flex items-center">
                         <EyeOutlined style={{ color: "grey" }} />{" "}
                         <LikeFilled style={{ color: "#bfbfbf" }} />{" "}
