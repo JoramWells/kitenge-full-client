@@ -5,7 +5,7 @@ import {  CogIcon, LoginIcon, UserCircleIcon } from "@heroicons/react/solid";
 export default function SignedInDropdown() {
   return (
     <div className="w-56 text-right">
-      <Menu as="div" className="relative inline-block text-left">
+      {/* <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button className="inline-flex justify-center w-full p-2 text-sm font-medium text-white bg-black rounded-full bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
             <UserCircleIcon
@@ -23,8 +23,8 @@ export default function SignedInDropdown() {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className=" right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <div className="px-1 py-1 ">
+          <Menu.Items className=" right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 z-10 ring-black ring-opacity-5 focus:outline-none">
+            <div className="px-1 py-1 z-50">
               <Menu.Item>
                 {({ active }) => (
                   <button
@@ -118,7 +118,8 @@ export default function SignedInDropdown() {
             </div>
           </Menu.Items>
         </Transition>
-      </Menu>
+      </Menu> */}
+      Logged in
     </div>
   );
 }

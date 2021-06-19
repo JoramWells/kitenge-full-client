@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { addToCart, removeFromCart } from "../_actions/cartActions";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Row, Col, Empty, Image, Table } from "antd";
+import { Empty, Image, Table } from "antd";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import NumberFormat from "react-number-format";
-import { ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
+import {
+  ArrowNarrowLeftIcon,
+  ArrowNarrowRightIcon,
+} from "@heroicons/react/outline";
 
 const columns = [
   {
@@ -65,64 +68,58 @@ export default function CartScreen(props) {
     return () => {};
   }, []);
   return (
-    <main style={{ padding: "1rem" }}>
+    <div
+      style={{
+        paddingTop: "5rem",
+        backgroundColor: "white",
+      }}
+    >
       {cartItems.length === 0 ? (
-        <Row
-          justify="space-around"
-          align="middle"
+        <div
+          className="flex flex-row justify-center items-center content-center"
           style={{ marginTop: "5rem", marginBottom: "5rem" }}
         >
-          <Col>
-            <Empty description="Cart is empty"></Empty>
-          </Col>
-        </Row>
+          <Empty description="Cart is empty"></Empty>
+        </div>
       ) : (
-        <Row justify="space-around" align="middle">
-          <Col>
-            <Table dataSource={cartItems} columns={columns} />
-          </Col>
-        </Row>
+        <div className="flex flex-row justify-center content-center items-center">
+          <Table dataSource={cartItems} columns={columns} />
+        </div>
       )}
-      <Row justify="space-around" align="middle">
-        <Col>
-          <h3>
-            Total ({cartItems.reduce((a, c) => a + c.qty, 0)} items): ksh{" "}
-            <NumberFormat
-              value={cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
-              thousandSeparator={true}
-              displayType={"text"}
-            />
-          </h3>
-        </Col>
-      </Row>
-      <Row
-        justify="space-around"
-        align="middle"
-        style={{ marginBottom: ".5rem" }}
-      >
-        <Col>
-          <Button size="large" icon={<ArrowLeftOutlined />} block type="primary" style={{ borderRadius: "5px"}}>
-            Continue
-          </Button>
-        </Col>
-      </Row>
-      <Row justify="space-around" align="middle">
-        <Col>
-          <Button
-          size="large"
-          icon={<ArrowRightOutlined/>}
-            className="cart"
-            type="primary"
-            block
-            style={{ border: "0", borderRadius: "5px" }}
+      <div className="flex flex-row justify-center items-center content-center m-4">
+        <div className="text-gray-700 text-sm">
+          Total ({cartItems.reduce((a, c) => a + c.qty, 0)} items):
+          <NumberFormat
+            value={cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+            thousandSeparator={true}
+            displayType={"text"}
+            prefix={" Ksh "}
+            suffix={"/="}
+            className="font-semibold text-red-400"
+          />
+        </div>
+      </div>
+      <div className="flex flex-row justify-center content-center items-center space-x-4">
+        <div
+          className="flex flex-row content-center items-center justify-center rounded-md"
+          style={{ backgroundColor: "#47817F" }}
+        >
+          <ArrowNarrowLeftIcon className="h-5 m-1" />
+          <button className="p-2 focus:outline-none rounded-md">Continue</button>
+        </div>
+        <div className="bg-black bg-opacity-20 flex flex-row justify-center items-center content-center rounded-md">
+          <button
+            className=" p-2 focus:outline-none"
             disabled={cartItems.length === 0}
-          >{" "}
-              <Link to="/shipping" style={{ color: "black" }}>
-                Checkout
-              </Link>
-          </Button>
-        </Col>
-      </Row>
-    </main>
+          >
+            <Link to="/shipping" className="text-gray-900">
+              Checkout
+            </Link>
+          </button>
+          <ArrowNarrowRightIcon className="h-5 m-1 text-gray-500" />
+
+        </div>
+      </div>
+    </div>
   );
 }

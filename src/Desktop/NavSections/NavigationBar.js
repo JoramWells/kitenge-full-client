@@ -42,8 +42,8 @@ function NavigationBar({ props, activateOption }) {
             className="h-5 text-gray-800"
             onClick={activateOption ? activate : null}
           />
-          <Link to="/" className="text-gray-500 font-semibold text-xl">
-            Do3ens
+          <Link to="/" className="text-gray-700 font-semibold text-xl">
+            Do3ensKE
           </Link>
           {/* <Row justify="center">
           <Col span={6}>
