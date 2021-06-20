@@ -22,7 +22,7 @@ const Content = styled.div`
   border-radius: 5px;
   margin: 15px;
   transition-duration: 500ms;
-  width: 30rem;
+  width: 35rem;
 `;
 
 // const ModalImg = styled.img`

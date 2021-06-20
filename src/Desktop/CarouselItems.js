@@ -1,11 +1,14 @@
 import React, { useState, memo } from "react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 // import NumberFormat from "react-number-format";
+import mpesa from '../img/mpesa.svg'
 import {
   ClockIcon,
+  CreditCardIcon,
   DotsVerticalIcon,
   LocationMarkerIcon,
+  ShoppingCartIcon,
 } from "@heroicons/react/solid";
 import Modal from "./modalComponent/Modal";
 
@@ -18,42 +21,39 @@ export function CarouselItem({ product }) {
 
   return (
     <>
-      <div key={id}>
-        <figure
-          style={{ width: "14rem", border: "1px solid #F0F0F0 " }}
-          className="rounded-md bg-white mb-4"
-        >
-          <div className="absolute bg-black bg-opacity-10  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20 z-10">
-            <DotsVerticalIcon className="h-5" onClick={openModal} />
-          </div>
-          <LazyLoadImage
-            src={image}
-            effect="blur"
-            alt="productimage"
-            style={{
-              width: "14rem",
-              height: "135px",
-              display: "block",
-              margin: "auto",
-            }}
-            className="rounded-t-sm -z-10"
-          />
-          <div className="p-2">
-            <Link to={`/product-detail/${id}`}>
-            {product_name}
-            </Link>
-            
-            <figcaption>
-              <div className="font-semibold text-gray-600">Kshs {price} /=</div>
-              <div className="line-through text-sm text-gray-300">
-                Kshs 4,321/=
-              </div>
-            </figcaption>
-          </div>
-        </figure>
-      </div>
-      <Modal showModal={showModal} setShowModal={setShowModal}>
+      <figure
+        style={{ width: "14rem", border: "1px solid #F0F0F0 " }}
+        className="rounded-md bg-white mb-4"
+        key={id}
+      >
+        <div className="absolute bg-black bg-opacity-10  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20 z-10">
+          <DotsVerticalIcon className="h-5" onClick={openModal} />
+        </div>
+        <LazyLoadImage
+          src={image}
+          effect="blur"
+          alt="productimage"
+          style={{
+            width: "14rem",
+            height: "135px",
+            display: "block",
+            margin: "auto",
+          }}
+          className="rounded-t-sm -z-10"
+        />
         <div className="p-2">
+          <Link to={`/product-detail/${id}`}>{product_name}</Link>
+
+          <figcaption>
+            <div className="font-semibold text-gray-600">Kshs {price} /=</div>
+            <div className="line-through text-sm text-gray-300">
+              Kshs 4,321/=
+            </div>
+          </figcaption>
+        </div>
+      </figure>
+      <Modal showModal={showModal} setShowModal={setShowModal}>
+        <div className="p-4">
           <div className="flex flex-row justify-between content-center items-center">
             <img
               src={image}
@@ -63,9 +63,9 @@ export function CarouselItem({ product }) {
                 height: "150px",
                 objectFit: "contain",
                 paddingTop: "0",
-                borderRadius: "10px",
               }}
               loading="lazy"
+              className="rounded-md"
             />
             <div>
               <div className="text-lg font-semibold">{product_name}</div>
@@ -82,11 +82,11 @@ export function CarouselItem({ product }) {
               >
                 Delivery details
               </div>
-              <div className="flex flex-row">
+              <div className="flex flex-row space-x-2">
                 <LocationMarkerIcon className="h-5 text-gray-300" />
-                <div>Umoja, Egessa Villa</div>
+                <div className="text-gray-500">Umoja, Egessa Villa</div>
               </div>
-              <div className="flex flex-row">
+              <div className="flex flex-row space-x-2">
                 <ClockIcon className="h-5 text-gray-300" />
                 <div className="text-gray-500">5 mins</div>
               </div>
@@ -102,19 +102,28 @@ export function CarouselItem({ product }) {
             </div>
           </div>
           <hr />
-          <div className="flex justify-around p-2 content-center space-x-2">
-            <button
-              style={{ backgroundColor: "#47817F" }}
-              className=" w-full rounded-md p-2 text-gray-100"
+          <div className="justify-center content-center items-center flex flex-row">
+            <div
+              className="flex justify-around p-2 content-center space-x-2"
+              style={{ width: "18rem" }}
             >
-              buy
-            </button>
-            <button
-              className="w-full p-2 rounded-md text-gray-700"
-              style={{ backgroundColor: "rgba(0,0,0,0.2)" }}
-            >
-              add to cart
-            </button>
+              <div
+                style={{ backgroundColor: "#47817F" }}
+                className="flex flex-row content-center items-center justify-center w-full p-0 rounded-md"
+              >
+                <CreditCardIcon className="h-10 text-white m-0 p-2" />
+                <button className="p-1 text-gray-100 focus:outline-none">
+                  Buy
+                </button>
+              </div>
+              <div
+                className="flex flex-row content-center items-center justify-center w-full p-0 rounded-md"
+                style={{ backgroundColor: "rgba(0,0,0,0.2)" }}
+              >
+                <ShoppingCartIcon className="h-10 p-2 text-gray-700" />
+                <button className="text-gray-700">Add to Cart</button>
+              </div>
+            </div>
           </div>
         </div>
       </Modal>

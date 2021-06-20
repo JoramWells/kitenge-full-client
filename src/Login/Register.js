@@ -87,65 +87,58 @@ export default function SignUp(props) {
   }
 
   return (
-    <div >
-      <Row
-        justify="space-around"
-        align="middle"
-      >
-        <Card
-          style={{
-            width: "25rem",
-            marginTop: "4rem",
-            boxShadow:
-              "0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)",
-            border: "none",
-          }}
-        >
-          <Row justify="space-between" align="middle">
-            <Col>
-              <Avatar src={avatar} style={{ margin: "0.3rem" }} />
-            </Col>
-            <Col>
-              <CloseCircleOutlined
-                className="close"
-                style={{ fontSize: "1.5rem" }}
-                onClick={closeHandler}
-              />
-            </Col>
-          </Row>
-          <Divider>SIGN UP</Divider>
-          <Form layout="vertical" size="large" onSubmit={submitHandler}>
-            <Form.Item required label="Full name">
-              <Input
-                prefix={<UserOutlined style={iconStyles} />}
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="John Doe"
-                style={inputStyles}
-              />
-            </Form.Item>
-            <Form.Item
-              hidden
-              name="avatar"
-              value={avatar}
-              onChange={(e) => setAvatar(e.target.value)}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item required label="Email">
-              <Input
-                prefix={<MailOutlined style={iconStyles} />}
-                value={email}
-                id="email"
-                name="email"
-                placeholder="jorammanoah1@gmail.com"
-                onChange={(e) => setEmail(e.target.value)}
-                style={inputStyles}
-              />
-            </Form.Item>
+    <div
+      className="  flex flex-row justify-center content-center items-center"
+      style={{
+        paddingTop: "5rem",
+      }}
+    >
+      <div style={{ width: "25rem" }} className="ring-1 ring-gray-200 bg-white p-4 rounded-md">
+        <Row justify="space-between" align="middle">
+          <Col>
+            <Avatar src={avatar} style={{ margin: "0.3rem" }} />
+          </Col>
+          <Col>
+            <CloseCircleOutlined
+              className="close"
+              style={{ fontSize: "1.5rem" }}
+              onClick={closeHandler}
+            />
+          </Col>
+        </Row>
+        <Divider>SIGN UP</Divider>
+        <Form layout="vertical" size="large" onSubmit={submitHandler}>
+          <Form.Item required>
+            <Input
+              prefix={<UserOutlined style={iconStyles} />}
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="John Doe"
+              style={inputStyles}
+            />
+          </Form.Item>
+          <Form.Item
+            hidden
+            name="avatar"
+            value={avatar}
+            onChange={(e) => setAvatar(e.target.value)}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item required>
+            <Input
+              prefix={<MailOutlined style={iconStyles} />}
+              value={email}
+              id="email"
+              name="email"
+              placeholder="jorammanoah1@gmail.com"
+              onChange={(e) => setEmail(e.target.value)}
+              style={inputStyles}
+            />
+          </Form.Item>
 
-            {/* <Form.Item required>
+          {/* <Form.Item required>
               <Input
                 id="address"
                 name="address"
@@ -156,7 +149,7 @@ export default function SignUp(props) {
                 style={inputStyles}
               />
             </Form.Item> */}
-            {/* <Form.Item label="Location" required>
+          {/* <Form.Item label="Location" required>
                 <PlacesAutocomplete
                   value={address}
                   onChange={setAddress}
@@ -188,7 +181,7 @@ export default function SignUp(props) {
                   )}
                 </PlacesAutocomplete>
               </Form.Item> */}
-            {/* <Form.Item
+          {/* <Form.Item
               required
               id="phone"
               name="phone"
@@ -202,35 +195,32 @@ export default function SignUp(props) {
               />
             </Form.Item> */}
 
-            <Form.Item
-            label="Password"
-            >
-              <Input.Password
+          <Form.Item>
+            <Input.Password
+              prefix={<LockOutlined style={iconStyles} />}
+              id="password"
+              required
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={inputStyles}
+            />
+          </Form.Item>
 
-                prefix={<LockOutlined style={iconStyles} />}
-                id="password"
-                required
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                style={inputStyles}
-              />
-            </Form.Item>
-
-            <Form.Item>
-              <p onClick={login} style={{ color: "grey" }} className="login">
-                Already have an account? Sign in
-              </p>
-              <GoogleLogin
-                clientId={CLIENT_ID}
-                buttonText="Sign in with Google"
-                onSuccess={responseSuccess}
-                onFailure={responseFailure}
-                style={{ display: "block" }}
-                className="link"
-              />
-            </Form.Item>
-            {/* <Form.Item>
+          <Form.Item>
+            <p onClick={login} style={{ color: "grey" }} className="login">
+              Already have an account? Sign in
+            </p>
+            <GoogleLogin
+              clientId={CLIENT_ID}
+              buttonText="Sign in with Google"
+              onSuccess={responseSuccess}
+              onFailure={responseFailure}
+              style={{ display: "block" }}
+              className="link"
+            />
+          </Form.Item>
+          {/* <Form.Item>
               <Button
                 htmlType="submit"
                 type="primary"
@@ -243,11 +233,8 @@ export default function SignUp(props) {
                 SIGN UP
               </Button>
             </Form.Item> */}
-          </Form>
-        </Card>
-      </Row>
-
-
+        </Form>
+      </div>
     </div>
   );
 }

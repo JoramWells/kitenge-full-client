@@ -14,6 +14,7 @@ import {
   ThumbUpIcon,
   DotsCircleHorizontalIcon,
   HomeIcon,
+  ShoppingBagIcon,
 } from "@heroicons/react/solid";
 import styled from "styled-components";
 
@@ -36,7 +37,7 @@ function NavigationBar({ props, activateOption }) {
 
   return (
     <>
-      <Navbar className="desktop__navbar shadow-lg">
+      <Navbar className="desktop__navbar shadow-lg" data-testid="nav">
         <div className="p-2 flex flex-row space-x-2 items-center">
           <MenuIcon
             className="h-5 text-gray-800"
@@ -97,27 +98,31 @@ function NavigationBar({ props, activateOption }) {
         <ul className="leading-8 ">
           <Li>
             <HomeIcon className="h-5 ml-3 text-gray-500 mr-4" />
-            <div className=" text-sm text-gray-900">Home</div>
+            <div className=" text-sm text-gray-700">Home</div>
           </Li>
 
           <hr className="text-white p-2" />
           <Li>
             <CreditCardIcon className="h-5 ml-3  text-gray-500 mr-4" />
-            <div className="text-sm text-gray-900">Purchases </div>
+            <div className="text-sm text-gray-700">Purchases </div>
+          </Li>
+          <Li>
+            <ShoppingBagIcon className="h-5 ml-3  text-gray-500 mr-4" />
+            <div className="text-sm text-gray-700">Your products </div>
           </Li>
 
           <Li>
             <ClockIcon className="h-5 ml-3 text-gray-500 mr-4" />
-            <div className="text-sm text-gray-900">Recent purchases </div>
+            <div className="text-sm text-gray-700">Recent purchases </div>
           </Li>
           <hr className="text-white py-2" />
           <Li>
             <ThumbUpIcon className="h-5 ml-3  text-gray-500 mr-4" />
-            <div className="text-sm  text-gray-900">Liked Items</div>
+            <div className="text-sm  text-gray-700">Liked Items</div>
           </Li>
           <Li>
             <DotsCircleHorizontalIcon className="h-5 ml-3 text-gray-500 mr-4" />
-            <div className="text-sm  text-gray-900">More Items</div>
+            <div className="text-sm  text-gray-700">More Items</div>
           </Li>
         </ul>
       </Sidenav>
@@ -143,7 +148,7 @@ const Sidenav = styled.nav`
   padding-top: 3.77rem;
   width: 17%;
   height: 100%;
-  background-color: whitesmoke;
+  background-color: white;
   display: fixed;
   z-index: 1;
   text-align: center;

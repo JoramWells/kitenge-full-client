@@ -22,6 +22,7 @@
     "formik": "^2.2.6",
     "js-cookie": "^2.2.1",
     "lodash.debounce": "^4.0.8",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-google-login": "^5.2.2",
@@ -74,6 +75,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^9",
+    "check-prop-types": "^1.1.2",
     "postcss": "^7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
