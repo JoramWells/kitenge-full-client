@@ -154,8 +154,13 @@ export default function SignIn(props) {
                   >
                     Don't have an account? Sign Up.
                   </p>
-                  {errorUser && <div>{errorUser}</div>}
-                  <div style={{ backgroundColor: "#47817F" }} className="p-2">
+                  <div className="p-1 text-center text-xs text-red-400" >{errorUser && <p>{errorUser}</p>}</div>
+
+                  <div
+                    style={{ backgroundColor: "#47817F" }}
+                    className="p-2 rounded-md hover:cursor-pointer"
+                    onClick={handleSubmit}
+                  >
                     <div className="flex flex-row content-center items-center justify-center">
                       {isSubmitting && (
                         <div className="loader" style={{ padding: ".54rem" }} />
@@ -163,8 +168,7 @@ export default function SignIn(props) {
                     </div>
                     <div className="flex flex-row justify-center items-center content-center">
                       <button
-                        onClick={handleSubmit}
-                        className="block  focus:outline-none text-white  text-lg"
+                        className="  focus:outline-none text-white text-lg"
                         style={{
                           display: isSubmitting ? "none" : "block",
                         }}

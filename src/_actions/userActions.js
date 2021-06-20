@@ -26,8 +26,8 @@ const signin = (dataToSubmit) => async (dispatch) => {
           Cookie.set("userInfo", JSON.stringify(response.data));
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        dispatch({ type: USER_SIGNIN_FAIL, payload: error.message });
       });
   } catch (error) {
     dispatch({ type: USER_SIGNIN_FAIL, payload: error.message });
