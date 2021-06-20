@@ -44,12 +44,12 @@ function RightMenu(props) {
 
   if (!userInfo) {
     return (
-      <button
-        className="hover:shadow-md py-2 px-4 border ring-offset-gray-700 focus-within:ring-1 focus:outline-none rounded-md text-gray-600 font-bold"
+      <div
+        className="hover:cursor-pointer py-2 px-4 border ring-offset-gray-700 focus-within:ring-1 focus:outline-none rounded-md text-gray-600"
         onClick={login}
       >
         Login
-      </button>
+      </div>
     );
   } else {
     if (cartItems.length === 0) {

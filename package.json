@@ -36,6 +36,7 @@
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-test-renderer": "^17.0.2",
     "react-touch-events": "^3.0.0",
     "redux-thunk": "^2.3.0",
     "remark-gfm": "^1.0.0",
@@ -52,7 +53,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test",
+    "test": "craco test --detectOpenHandles",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

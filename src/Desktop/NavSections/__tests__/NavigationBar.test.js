@@ -2,6 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import { Provider } from "react-redux";
 import { render, cleanup } from "@testing-library/react";
+import renderer from "react-test-renderer";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NavigationBar from "../NavigationBar";
 import ReactDOM from "react-dom";
@@ -36,5 +37,35 @@ describe("Navigation bar", () => {
       </React.StrictMode>,
       nav
     );
+  });
+
+  it("renders correctly", () => {
+    const { getByTestId } = render(
+      <React.StrictMode>
+        <Provider store={store}>
+          <BrowserRouter>
+            <NavigationBar />
+
+            <Switch></Switch>
+          </BrowserRouter>
+        </Provider>
+      </React.StrictMode>
+    );
+    // expect(getByTestId("nav")).toHaveTextContent("Do3ensKE");
+  });
+
+  it("matches snapshot", () => {
+    const tree = renderer.create(
+      <React.StrictMode>
+        <Provider store={store}>
+          <BrowserRouter>
+            <NavigationBar />
+
+            <Switch></Switch>
+          </BrowserRouter>
+        </Provider>
+      </React.StrictMode>
+    );
+    expect(tree).toMatchSnapshot();
   });
 });
