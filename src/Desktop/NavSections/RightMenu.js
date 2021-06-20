@@ -45,7 +45,7 @@ function RightMenu(props) {
   if (!userInfo) {
     return (
       <div
-        className="hover:cursor-pointer py-2 px-4 border ring-offset-gray-700 focus-within:ring-1 focus:outline-none rounded-md text-gray-600"
+        className="hover:cursor-pointer py-2 px-4 border  focus:outline-none rounded-md text-gray-900"
         onClick={login}
       >
         Login
