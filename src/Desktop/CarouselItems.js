@@ -1,8 +1,8 @@
-import React, { useState, memo } from "react";
+import React, { useState, memo, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 // import NumberFormat from "react-number-format";
-import mpesa from '../img/mpesa.svg'
+import axios from "axios";
 import {
   ClockIcon,
   CreditCardIcon,
@@ -15,9 +15,41 @@ import Modal from "./modalComponent/Modal";
 export function CarouselItem({ product }) {
   const { id, product_name, image, price, description } = product;
   const [showModal, setShowModal] = useState(false);
+  const [ip, setIP] = useState("");
+
+  const [dot, setDot] = useState("hidden");
   function openModal() {
     setShowModal((prev) => !prev);
   }
+  const getIP = useCallback(async () => {
+    await axios
+      .get("https://api.ipify.org/")
+      .then((res) => setIP(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+  useEffect(() => {
+    getIP();
+  }, []);
+  const handleMouseEnter = (product_id) => {
+    setTimeout(async ()=>{
+      await axios
+      .post("/aidata", {
+        user_info: ip,
+        product_id:product_id,
+        start_time: new Date(),
+        stop_time: new Date(),
+      })
+      .catch((err) => console.log(err));
+
+    },10000)
+
+  };
+  const handleMouseLeave = () => {
+    setDot("hidden");
+  };
+  const handleMouseEntere = async () => {
+    setDot("visible");
+  };
 
   return (
     <>
@@ -25,8 +57,13 @@ export function CarouselItem({ product }) {
         style={{ width: "14rem", border: "1px solid #F0F0F0 " }}
         className="rounded-md bg-white mb-4"
         key={id}
+        onMouseEnter={handleMouseEntere}
+        onMouseLeave={handleMouseLeave}
       >
-        <div className="absolute bg-black bg-opacity-10  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20 z-10">
+        <div
+          className="absolute bg-black bg-opacity-10  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20 z-10"
+          style={{ visibility: dot }}
+        >
           <DotsVerticalIcon className="h-5" onClick={openModal} />
         </div>
         <LazyLoadImage
@@ -53,7 +90,10 @@ export function CarouselItem({ product }) {
         </div>
       </figure>
       <Modal showModal={showModal} setShowModal={setShowModal}>
-        <div className="p-4">
+        <div
+          className="p-4"
+          onMouseEnter={()=>handleMouseEnter(id)}
+        >
           <div className="flex flex-row justify-between content-center items-center">
             <img
               src={image}

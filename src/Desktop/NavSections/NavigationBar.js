@@ -7,7 +7,6 @@ import { searchItems } from "../../_actions/searchActions";
 import { useDispatch } from "react-redux";
 import {
   SearchIcon,
-  XIcon,
   MenuIcon,
   CreditCardIcon,
   ClockIcon,
@@ -17,6 +16,7 @@ import {
   ShoppingBagIcon,
 } from "@heroicons/react/solid";
 import styled from "styled-components";
+import { CameraIcon } from "@heroicons/react/outline";
 
 function NavigationBar({ props, activateOption }) {
   const [visible, setVisible] = useState("hidden");
@@ -57,13 +57,19 @@ function NavigationBar({ props, activateOption }) {
           style={{ width: "30rem" }}
           className="bg-gray-100 flex flex-row items-center content-center space-x-2 rounded-full"
         >
-          <SearchIcon className="h-10 text-gray-400 p-1.5" />
+          <div className="flex flex-row content-center items-center">
+          <CameraIcon className="h-10 p-2 mr-1 text-gray-400" />
+          
+          </div>
+
+
           <input
             placeholder="Search..."
             className=" text-sm w-full focus:outline-none bg-transparent"
             onClick={() => setVisible("visible")}
           />
-          <XIcon className="h-10 text-gray-400 p-1.5" />
+         <SearchIcon className="h-10 text-gray-400 p-1.5" />
+
         </div>
         {/* <div
           style={{

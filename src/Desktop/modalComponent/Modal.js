@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
+import { useSpring, animated } from "react-spring";
 import { XIcon } from "@heroicons/react/outline";
 
 const Background = styled.div`
@@ -40,8 +41,16 @@ const Modal = ({ showModal, setShowModal, children }) => {
 
   function closeModal(e) {
     if (modalRef.current === e.target) setShowModal(false);
+    console.log(new Date())
   }
 
+  const animation = useSpring({
+    config: {
+      duration: 350,
+    },
+    opacity: showModal ? 1 : 0,
+    // transform: showModal ? `translateY(0%)` : `translateY(-100%)`,
+  });
   const keyPress = useCallback(
     (e) => {
       if (e.key === "Escape" && showModal) setShowModal(false);
@@ -51,20 +60,23 @@ const Modal = ({ showModal, setShowModal, children }) => {
   useEffect(() => {
     document.addEventListener("keydown", keyPress);
     return document.removeEventListener("keydown", keyPress);
-  }, []);
+  }, [keyPress]);
   return (
     <>
       {showModal ? (
         <Background data-testid="modal_div" ref={modalRef} onClick={closeModal}>
-          <Content showModal={showModal}>
-            <ModalHeader className="flex flex-row justify-end p-1">
-              <XIcon
-                className="h-5 text-gray-600"
-                onClick={() => setShowModal((prev) => !prev)}
-              />
-            </ModalHeader>
-            {children}
-          </Content>
+          <animated.div style={animation}>
+            <Content showModal={showModal}>
+              <ModalHeader className="flex flex-row justify-end p-1">
+                <XIcon
+                  className="h-5 text-gray-600"
+                  onClick={() => setShowModal((prev) => !prev)}
+                />
+              </ModalHeader>
+              {children}
+            </Content>  
+          </animated.div>
+
         </Background>
       ) : null}
     </>

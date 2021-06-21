@@ -1,41 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { CarouselItem } from "./Mobile/CarouselItem";
 import { CarouselItems } from "./Desktop/CarouselItems";
 import { useDispatch, useSelector } from "react-redux";
-import {  Result } from "antd";
+import { Result } from "antd";
 import { listProducts } from "./_actions/productActions";
 import styled from "styled-components";
 import { RefreshIcon } from "@heroicons/react/outline";
 
-
 const renderSkeleton = [...Array(8).keys()].map((i) => {
   const Skeleton = styled.div`
-  height:240px;
-  width: 14rem;
-  background-color: white;
-  @media(max-width:767px){
-    width:18rem;
-
-
-  }
-
-`
-  return (
-    <Skeleton
-      key={i}
-      className="mb-4"
-    ></Skeleton>
-  );
+    height: 240px;
+    width: 14rem;
+    background-color: white;
+    @media (max-width: 767px) {
+      width: 18rem;
+    }
+  `;
+  return <Skeleton key={i} className="mb-4" />;
 });
 
 export default function DesktopMobile() {
   const ProductList = useSelector((state) => state.productList);
   const { posts, loading, error } = ProductList;
   const dispatch = useDispatch();
-  useEffect(() => {
+  const listItem = useCallback(() => {
     dispatch(listProducts());
-    return () => {};
   }, [dispatch]);
+  useEffect(() => {
+    listItem();
+    return () => {};
+  }, [listItem]);
   function reloadHandler() {
     window.location.reload();
   }
@@ -50,15 +44,15 @@ export default function DesktopMobile() {
             status="500"
             subTitle={error}
             extra={
-              <div className="flex flex-row justify-center content-center">
-                <div
+              <Flex>
+                <Flex
                   onClick={reloadHandler}
-                  className="flex flex-row hover:cursor-pointer justify-center content-center space-x-4 ring-1 ring-gray-500 w-1/4"
+                  className="hover:cursor-pointer space-x-4 ring-1 ring-gray-500 w-1/4"
                 >
                   <RefreshIcon className="h-5 font-extralight" />
                   RETRY
-                </div>
-              </div>
+                </Flex>
+              </Flex>
             }
           />
         ) : (
@@ -125,5 +119,3 @@ const Flex = styled.div`
     align-items: center;
   }
 `;
-
-

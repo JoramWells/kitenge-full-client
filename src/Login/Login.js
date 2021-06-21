@@ -7,12 +7,13 @@ import { signin } from "../_actions/userActions";
 import { message, Divider } from "antd";
 import Cookie from "js-cookie";
 import { LockClosedIcon, MailIcon } from "@heroicons/react/solid";
+import styled from "styled-components";
 
 export default function SignIn(props) {
   const history = useHistory();
   const [formErrorMessage, setFormErrorMessage] = useState("");
   const userSignin = useSelector((state) => state.userSignin);
-  const { loadingUser, userInfo, errorUser } = userSignin;
+  const { userInfo } = userSignin;
 
   const dispatch = useDispatch();
   function register() {
@@ -26,18 +27,27 @@ export default function SignIn(props) {
     return () => {};
   }, [userInfo]);
 
+  const Form = styled.div`
+    background-color:"white";
+    padding:.5rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display:block;
+    margin:auto;
+    width:25rem;
+    height:25rem;
+  `
   return (
     <div style={{ paddingTop: "5rem" }}>
-      <div
-        className=" bg-white p-1 rounded-md flex flex-col content-center justify-center items-center"
-        style={{
-          width: "25rem",
-          height: "25rem",
-          margin: "auto",
-          display: "block",
-        }}
-      >
-        <Divider>LOGIN</Divider>
+      <Form
+        className="rounded-md ring-1 ring-gray-300">
+        <Divider>Signin
+          <div className="text-gray-500 font-normal text-sm">
+            to continue to do3ensKE
+          </div>
+        </Divider>
 
         <Formik
           initialValues={{
@@ -131,19 +141,11 @@ export default function SignIn(props) {
                   </div>
                   <div>
                     {formErrorMessage && (
-                      <label>
-                        <p
-                          style={{
-                            color: "#ff0000bf",
-                            fontSize: "0.7rem",
-                            border: "1px solid",
-                            padding: "1rem",
-                            borderRadius: "10px",
-                          }}
+                        <div
+                        className="text-red-400 text-sm p-1"
                         >
                           {formErrorMessage}
-                        </p>
-                      </label>
+                        </div>
                     )}
                   </div>
                 </div>
@@ -154,7 +156,6 @@ export default function SignIn(props) {
                   >
                     Don't have an account? Sign Up.
                   </p>
-                  <div className="p-1 text-center text-xs text-red-400" >{errorUser && <p>{errorUser}</p>}</div>
 
                   <div
                     style={{ backgroundColor: "#47817F" }}
@@ -182,7 +183,7 @@ export default function SignIn(props) {
             );
           }}
         </Formik>
-      </div>
+      </Form>
     </div>
   );
 }
