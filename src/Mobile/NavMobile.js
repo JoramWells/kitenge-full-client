@@ -68,10 +68,7 @@ export default function NavMobile(props) {
     else {
       return (
         <>
-          <nav
-            className="flex justify-around bg-white p-1 content-center items-center shadow-md fixed  top-0 z-10 w-full"
-            style={{}}
-          >
+          <nav className="flex justify-around bg-white p-1 content-center items-center shadow-md fixed  top-0 z-50 w-full">
             <div className="focus:bg-gray-300 opacity-1 p-1 rounded-full">
               <ArrowLeftIcon
                 className="h-5 active:bg-gray-300 text-gray-500"
@@ -94,7 +91,7 @@ export default function NavMobile(props) {
           >
             <div className="">
               <Link to="/" className="font-bold text-lg text-gray-700">
-                Kitenge
+                Do3ensKE
               </Link>
             </div>
             <div className="flex flex-row space-x-2">

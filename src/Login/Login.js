@@ -62,13 +62,13 @@ export default function SignIn(props) {
               const userFailure = Cookie.getJSON("userFailure");
 
               if (!userFailure) {
-                console.log();
+                return null;
               } else {
                 setFormErrorMessage(userFailure.message);
               }
 
               const userSuccess = Cookie.getJSON("userInfo");
-              if (!userSuccess) console.log();
+              if (!userSuccess) return null;
               else {
                 message.success("Successfully login");
                 props.history.push("/");
@@ -126,7 +126,7 @@ export default function SignIn(props) {
                   </div>
                   <div>
                     {errors.password && touched.password && (
-                      <div className="input-password">{errors.password}</div>
+                      <div className="">{errors.password}</div>
                     )}
                   </div>
                   <div>

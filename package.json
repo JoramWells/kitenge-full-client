@@ -53,7 +53,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test --detectOpenHandles",
+    "test": "craco test --detectOpenHandles --all",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
