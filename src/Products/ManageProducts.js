@@ -20,6 +20,7 @@ import {
   Image,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import {Link} from 'react-router-dom'
 import {
   deleteProduct,
   listProducts,
@@ -33,6 +34,7 @@ import {
   UploadOutlined,
 } from "@ant-design/icons";
 import ReactMarkdown from "react-markdown";
+import { PlusIcon } from "@heroicons/react/solid";
 
 const renderTH = [...Array(4).keys()].map((i) => {
   return (
@@ -362,6 +364,14 @@ export default function ManageProducts() {
         </Row>
       </Modal>
       <main>
+        <div className="flex flex-col justify-center content-center bg-blue-200" style={{paddingTop:"3.5rem"}}>
+        <button className="text-gray-500 font-bold flex justify-center items-center content-center focus:outline-none text-lg">
+          <PlusIcon className="h-10 p-1" />
+          <Link to="/products/add" className="text-gray-500">
+          Add product</Link>
+        </button>
+        </div>
+
         {loading ? (
           <Row justify="space-around" align="middle">
             <Col>
@@ -445,6 +455,7 @@ export default function ManageProducts() {
             </Col>
           </Row>
         )}
+
       </main>
     </Fragment>
   );

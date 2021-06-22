@@ -1,51 +1,35 @@
-import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useCallback, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { saveProduct } from "../_actions/productActions";
 import {
-  CaretRightOutlined,
-  CloseCircleOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 
-
-import {
-  Row,
-  Form,
-  Input,
-  Button,
-  message,
-  Upload,
-  Card,
-  Col,
-} from "antd";
-
-const iconStyles = {
-  color: "#fdba45",
-};
-const inputStyles = {
-  borderTop: "0",
-  borderLeft: "0",
-  borderRight: "0",
-};
+import {  Form,  Button, message, Upload } from "antd";
+import { ChevronRightIcon } from "@heroicons/react/solid";
+import styled from "styled-components";
 
 
-export default function AddProduct(props) {
+export default function AddProduct() {
   const history = useHistory();
-  const [name, setName] = useState("");
-  const [shop, setShop] = useState("");
-  const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
-  const [category, setCategory] = useState("");
-  const [description, setDescription] = useState("");
-  const [ratings, setRatings] = useState("");
-  const [stock, setStock] = useState("");
+  const nameRef = useRef();
+  const priceRef = useRef();
+  const sellingPriceRef = useRef();
+  const categoryRef = useRef();
+  const descriptionRef = useRef();
+  const stockRef = useRef();
+  const imageRef = useRef();
 
 
   const dispatch = useDispatch();
-  function closeHandler() {
-    return history.goBack();
-  }
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+
+  // const handleImage = useCallback((img)=>{
+  //   setImage(img)
+  // },[setImage])
+
   const prop = {
     name: "file",
     listType: "picture",
@@ -54,10 +38,12 @@ export default function AddProduct(props) {
       return new Promise((resolve) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = () => {
+        reader.onload = (e) => {
+          e.preventDefault()
           const img = document.createElement("img");
           img.src = reader.result;
-          img.onload = () => {
+          img.onload = (e) => {
+            e.preventDefault()
             const canvas = document.createElement("canvas");
             canvas.width = img.naturalWidth;
             canvas.height = img.naturalHeight;
@@ -75,7 +61,7 @@ export default function AddProduct(props) {
       if (info.file.status === "done") {
         const ext = info.file.name.slice(0, info.file.name.lastIndexOf("."));
         const filename = ext + ".webp";
-        setImage(filename);
+        // handleImage(filename);
         message.success(`${info.file.name}`);
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed`);
@@ -83,123 +69,141 @@ export default function AddProduct(props) {
     },
   };
 
-
   const productAdd = useCallback((e) => {
     e.preventDefault();
-    dispatch(saveProduct(name, price, stock, shop, image, ratings, category, description));
+    const name = nameRef.current.value;
+    const price = priceRef.current.value;
+    const selling_price = sellingPriceRef.current.value;
+    const stock = stockRef.current.value;
+    const image = imageRef.current.value;
+
+    const category = categoryRef.current.value;
+    const description = descriptionRef.current.value;
+
+    dispatch(
+      saveProduct(
+        name,
+        price,
+        selling_price,
+        stock,
+        userInfo.id,
+        image,
+        category,
+        description
+      )
+    );
     setTimeout(() => {
       message.success("Product added succefully");
       history.go("/produc/manage");
     }, 2000);
   });
 
+  const Row = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+  `
+
+  const Flex = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid whitesmoke;
+  `
+
+  const Card = styled.div`
+    width: 25rem;
+    background-color: white;
+    padding: 1rem;
+  `
+
   return (
     <Row
-      justify="space-around"
-      align="middle"
-      style={{ marginTop: "4rem", marginBottom: "3rem" }}
+
     >
-      <Card style={{ width: "25rem" }}>
-        <Row justify="space-between" align="middle">
-          <Col>
-            <p style={{ fontSize: "1.1rem", margin: "0" }}>ADD PRODUCT</p>
-          </Col>
-          <Col>
-            <CloseCircleOutlined
-              className="close"
-              style={{ fontSize: "1.5rem" }}
-              onClick={closeHandler}
-            />
-          </Col>
-        </Row>
-
-        <Form layout="vertical"  encType="multipart/form-data">
-          <Form.Item
-            required
-            id="name"
-            name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+      <Card>
+        <Form layout="vertical" encType="multipart/form-data">
+          <Flex
           >
-            <Input
-              prefix={<CaretRightOutlined style={iconStyles} />}
-              style={inputStyles}
+            <ChevronRightIcon className="h-5 text-yellow-300" />
+            <input
+              name="name"
+              id="name"
+              className="focus:outline-none "
               placeholder="Item name"
+              ref={nameRef}
             />
-          </Form.Item>
-          <Form.Item
-            name="Price"
-            name="price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
+          </Flex>
+          <Flex
           >
-            <Input
-              prefix={<CaretRightOutlined style={iconStyles} />}
-              style={inputStyles}
-              placeholder="Enter price e.g 2030"
+            <ChevronRightIcon className="h-5 text-yellow-300" />
+            <input
+              name="price"
+              id="price"
+              className="focus:outline-none "
+              placeholder="Original price"
+              ref={priceRef}
             />
-          </Form.Item>
-          <Form.Item
-            id="shop"
-            name="shop"
-            value={shop}
-            onChange={(e) => setShop(e.target.value)}
-          >
-            <Input
-              prefix={<CaretRightOutlined style={iconStyles} />}
-              style={inputStyles}
-              placeholder="Shop name"
-            />
-          </Form.Item>
+          </Flex>
+          <Flex
 
-          <Form.Item
-            name="category"
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
           >
-            <Input
-              prefix={<CaretRightOutlined style={iconStyles} />}
-              style={inputStyles}
-              placeholder="shoes, shirt, kitchen"
+            <ChevronRightIcon className="h-5 text-yellow-300" />
+            <input
+              name="selling_price"
+              id="selling_price"
+              className="focus:outline-none "
+              placeholder="Selling price"
+              ref={sellingPriceRef}
             />
-          </Form.Item>
-          <Form.Item
-            name="ratings"
-            id="ratings"
-            value={ratings}
-            onChange={(e) => setRatings(e.target.value)}
+          </Flex>
+          <Flex
           >
-            <Input
-              prefix={<CaretRightOutlined style={iconStyles} />}
-              style={inputStyles}
-              placeholder="Ratings 4.3"
+            <ChevronRightIcon className="h-5 text-yellow-300" />
+            <input
+              name="category"
+              id="category"
+              className="focus:outline-none "
+              placeholder="shoes, skirt, dress"
+              ref={categoryRef}
             />
-          </Form.Item>
-      
+          </Flex>
+          <Flex
+          >
+            <ChevronRightIcon className="h-5 text-yellow-300" />
+            <input
+              name="stock"
+              id="stock"
+              className="focus:outline-none "
+              placeholder="Available stock"
+              ref={stockRef}
+            />
+          </Flex>
+          <div
+            className="flex flex-row w-full my-8"
+            style={{ borderBottom: "1px solid whitesmoke" }}
+          >
+            <ChevronRightIcon className="h-5 text-yellow-300" />
+            <textarea
+              name="description"
+              id="description"
+              className="focus:outline-none "
+              placeholder="Product description"
+              ref={descriptionRef}
+              cols={50}
+              row={20}
+              style={{border:"1px solid gray", padding:".5rem", borderRadius:"5px"}}
 
-          <Form.Item
-            name="stock"
-            id="stock"
-            value={stock}
-            onChange={(e) => setStock(e.target.value)}
-          >
-            <Input
-              prefix={<CaretRightOutlined style={iconStyles} />}
-              style={inputStyles}
-              placeholder="Add stock"
             />
-          </Form.Item>
-          <Form.Item
-            name="description"
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          >
-            <Input.TextArea placeholder="Description" />
-          </Form.Item>
+          </div>
+
           <Form.Item>
-            <Upload {...prop}>
+            <Upload {...prop} ref={imageRef}>
               <Button
                 icon={
                   <UploadOutlined style={{ backgroundColor: "whitesmoke" }} />
@@ -209,16 +213,14 @@ export default function AddProduct(props) {
               </Button>
             </Upload>
           </Form.Item>
-          
 
-          <Form.Item>
-            <Button block htmlType="submit" type="primary" onClick={productAdd}>
+            <button className="w-full bg-blue-500 rounded-md p-1.5" onClick={productAdd}>
               Add
-            </Button>
-          </Form.Item>
-
+            </button>
         </Form>
       </Card>
     </Row>
   );
 }
+
+

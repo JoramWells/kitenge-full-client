@@ -3,7 +3,6 @@ import { message } from "antd";
 import Cookie from "js-cookie";
 import { withRouter, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import SignedInDropdown from "./SignedInDropdown";
 
 // const cartItems = Cookie.getJSON("cartItems");
 
@@ -19,9 +18,6 @@ function RightMenu(props) {
   function login() {
     props.history.push("/login");
   }
-  function register() {
-    props.history.push("/register");
-  }
 
   function showModal() {
     setVisible(true);
@@ -35,12 +31,6 @@ function RightMenu(props) {
     history.goBack();
   }
 
-  function handleOk() {
-    setVisible(false);
-  }
-  function handleCancel() {
-    setVisible(false);
-  }
 
   if (!userInfo) {
     return (
@@ -54,8 +44,18 @@ function RightMenu(props) {
   } else {
     if (cartItems.length === 0) {
       return (
-        <div className="flex">
-          <SignedInDropdown />
+        <div className="flex flex-row justify-center items-center content-center">
+          <img
+            src={userInfo.avatar}
+            alt={userInfo.avatar}
+            loading="lazy"
+            style={{
+              width: "27px",
+              height: "27px",
+              borderRadius: "50px",
+              marginTop: ".65rem",
+            }}
+          />
           {/* <Menu mode="horizontal">
             <SubMenu
               style={{ borderRadius: "10px", marginLeft: "0" }}
@@ -96,7 +96,18 @@ function RightMenu(props) {
     } else {
       return (
         <>
-          hello
+          <img
+            src={userInfo.avatar}
+            alt={userInfo.avatar}
+            loading="lazy"
+            style={{
+              width: "27px",
+              height: "27px",
+              borderRadius: "50px",
+              marginTop: ".65rem",
+            }}
+          />
+
           {/* <Menu mode="horizontal">
             <Menu.Item>
               <Badge count={cartItems.length}>

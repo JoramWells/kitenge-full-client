@@ -1,6 +1,6 @@
-import { Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
-import {  CogIcon, LoginIcon, UserCircleIcon } from "@heroicons/react/solid";
+// import { Menu, Transition } from "@headlessui/react";
+// import { Fragment } from "react";
+// import {  CogIcon, LoginIcon, UserCircleIcon } from "@heroicons/react/solid";
 
 export default function SignedInDropdown() {
   return (

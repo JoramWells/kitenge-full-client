@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { GoogleLogin } from "react-google-login";
-import PhoneInput from "react-phone-input-2";
+// import PhoneInput from "react-phone-input-2";
 // import axios from "axios";
 import {
   Row,
   Col,
   Form,
   Input,
-  Button,
   Avatar,
-  Card,
   message,
   Divider,
 } from "antd";
@@ -54,13 +52,13 @@ export default function SignUp(props) {
     await dispatch(register(name, email, password, avatar, phone, address));
     const userFailure = Cookie.getJSON("userFailure");
     if (!userFailure) {
-      console.log();
+      return null;
     } else {
       message.warn(userFailure.message);
     }
 
     const userSuccess = Cookie.getJSON("userInfo");
-    if (!userSuccess) console.log();
+    if (!userSuccess) return null;
     else {
       message.success("Successfully registered");
       history.goBack();
@@ -74,16 +72,11 @@ export default function SignUp(props) {
     setName(response.profileObj.name);
     setEmail(response.profileObj.email);
     setAvatar(response.profileObj.imageUrl);
-
-    setPassword("JoramWells18.");
-    submitHandler();
-    // props.history.push('/')
-    console.log(response.tokenObj);
-    // await axios.post("/getToken", response.tokenObj.id_token);
+ 
+    // console.log(response.tokenObj);
   }
   function responseFailure(response) {
     console.log(response);
-    // props.history.push('/')
   }
 
   return (
@@ -93,7 +86,10 @@ export default function SignUp(props) {
         paddingTop: "5rem",
       }}
     >
-      <div style={{ width: "25rem" }} className="ring-1 ring-gray-200 bg-white p-4 rounded-md">
+      <div
+        style={{ width: "25rem" }}
+        className="ring-1 ring-gray-200 bg-white p-4 rounded-md"
+      >
         <Row justify="space-between" align="middle">
           <Col>
             <Avatar src={avatar} style={{ margin: "0.3rem" }} />
@@ -220,21 +216,17 @@ export default function SignUp(props) {
               className="link"
             />
           </Form.Item>
-          {/* <Form.Item>
-              <Button
-                htmlType="submit"
-                type="primary"
+          <Form.Item>
+              <button
                 onClick={submitHandler}
-                block
-                loading={load}
-                className="cart"
                 style={{borderRadius:"5px", border:"0" }}
               >
                 SIGN UP
-              </Button>
-            </Form.Item> */}
+              </button>
+            </Form.Item>
         </Form>
       </div>
+
     </div>
   );
 }

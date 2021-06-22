@@ -58,18 +58,15 @@ function NavigationBar({ props, activateOption }) {
           className="bg-gray-100 flex flex-row items-center content-center space-x-2 rounded-full"
         >
           <div className="flex flex-row content-center items-center">
-          <CameraIcon className="h-10 p-2 mr-1 text-gray-400" />
-          
+            <CameraIcon className="h-10 p-2 mr-1 text-gray-400" />
           </div>
-
 
           <input
             placeholder="Search..."
             className=" text-sm w-full focus:outline-none bg-transparent"
             onClick={() => setVisible("visible")}
           />
-         <SearchIcon className="h-10 text-gray-400 p-1.5" />
-
+          <SearchIcon className="h-10 text-gray-400 p-1.5" />
         </div>
         {/* <div
           style={{
@@ -114,7 +111,12 @@ function NavigationBar({ props, activateOption }) {
           </Li>
           <Li>
             <ShoppingBagIcon className="h-5 ml-3  text-gray-500 mr-4" />
-            <div className="text-sm text-gray-700">Your products </div>
+            <Link
+              to="/produc/manage"
+              className="text-sm text-gray-700 hover:text-gray-500"
+            >
+              Your products
+            </Link>
           </Li>
 
           <Li>

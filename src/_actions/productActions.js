@@ -79,89 +79,93 @@ const deleteProduct = (id) => async (dispatch, getState) => {
   }
 };
 
-const saveProduct = (
-  name,
-  price,
-  stock,
-  shop,
-  image,
-  ratings,
-  category,
-  description
-) => async (dispatch, getState) => {
-  try {
+const saveProduct =
+  (
+    name,
+    price,
+    selling_price,
+    stock,
+    userId,
+    image,
+    category,
+    description,
+  ) =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: PRODUCT_SAVE_REQUEST,
+        payload: {
+          name,
+          price,
+          selling_price,
+          stock,
+          userId,
+          image,
+          category,
+          description,
+        },
+      });
+      const {
+        userSignin: { userInfo },
+      } = getState();
+      await axios
+        .post(
+          `/productz/add`,
+          {
+            name,
+            price,
+            selling_price,
+            stock,
+            userId,
+            image,
+            category,
+            description,
+          },
+          {
+            headers: {
+              Authorization: "Bearer" + userInfo.token,
+            },
+          }
+        )
+        .then((response) => {
+          dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: response.data });
+        })
+        .catch((err) => console.log(err));
+    } catch (error) {
+      dispatch({ type: PRODUCT_SAVE_FAIL, payload: error.message });
+    }
+  };
+
+const updateProduct =
+  (id, name, price, stock, shop, image, category, description) =>
+  async (dispatch, getState) => {
     dispatch({
-      type: PRODUCT_SAVE_REQUEST,
-      payload: {
-        name,
-        price,
-        stock,
-        shop,
-        image,
-        ratings,
-        category,
-        description,
-      },
+      type: PRODUCT_UPDATE_REQUEST,
+      payload: { id, name, price, stock, shop, image, category, description },
     });
     const {
       userSignin: { userInfo },
     } = getState();
-    await axios
-      .post(
-        `/productz/add`,
-        { name, price, stock, shop, image, ratings, category, description },
-        {
-          headers: {
-            Authorization: "Bearer" + userInfo.token,
-          },
-        }
-      )
-      .then((response) => {
-        dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: response.data });
-      })
-      .catch((err) => console.log(err));
-  } catch (error) {
-    dispatch({ type: PRODUCT_SAVE_FAIL });
-  }
-};
-
-const updateProduct = (
-  id,
-  name,
-  price,
-  stock,
-  shop,
-  image,
-  category,
-  description
-) => async (dispatch, getState) => {
-  dispatch({
-    type: PRODUCT_UPDATE_REQUEST,
-    payload: {id, name, price, stock, shop, image, category, description },
-  });
-  const {
-    userSignin: { userInfo },
-  } = getState();
-  try {
-    await axios
-      .put(
-        `/product/add/${id}`,
-        { id,name, price, stock, shop, image, category, description },
-        {
-          headers: {
-            Authorization: "Bearer " + userInfo.token,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-        dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: response.data });
-      })
-      .catch((err) => console.log(err));
-  } catch (error) {
-    dispatch({ type: PRODUCT_UPDATE_FAIL, payload: error.message });
-  }
-};
+    try {
+      await axios
+        .put(
+          `/product/add/${id}`,
+          { id, name, price, stock, shop, image, category, description },
+          {
+            headers: {
+              Authorization: "Bearer " + userInfo.token,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: response.data });
+        })
+        .catch((err) => console.log(err));
+    } catch (error) {
+      dispatch({ type: PRODUCT_UPDATE_FAIL, payload: error.message });
+    }
+  };
 
 export {
   listProducts,
