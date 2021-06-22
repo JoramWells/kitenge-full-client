@@ -12,11 +12,20 @@ const renderSkeleton = [...Array(8).keys()].map((i) => {
     height: 240px;
     width: 14rem;
     background-color: white;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     @media (max-width: 767px) {
       width: 18rem;
     }
   `;
-  return <Skeleton key={i} className="mb-4" />;
+  return <Skeleton key={i} className="mb-4 p-2" >
+    <div className="bg-gray-400 w-full" style={{height:"100px"}}>
+      img
+    </div>
+    <div className="bg-red-500 w-full">dsds</div>
+  </Skeleton>;
 });
 
 export default function DesktopMobile() {

@@ -18,8 +18,16 @@ export function CarouselItem({ product }) {
   const [ip, setIP] = useState("");
 
   const [dot, setDot] = useState("hidden");
-  function openModal() {
+  async function openModal(product_id) {
     setShowModal((prev) => !prev);
+    await axios
+    .post("/aidata", {
+      user_info: ip,
+      product_id: product_id,
+      start_time: new Date(),
+      stop_time: new Date(),
+    })
+    .catch((err) => console.log(err));
   }
   const getIP = useCallback(async () => {
     await axios
@@ -31,18 +39,17 @@ export function CarouselItem({ product }) {
     getIP();
   }, []);
   const handleMouseEnter = (product_id) => {
-    setTimeout(async ()=>{
-      await axios
-      .post("/aidata", {
-        user_info: ip,
-        product_id:product_id,
-        start_time: new Date(),
-        stop_time: new Date(),
-      })
-      .catch((err) => console.log(err));
-
-    },10000)
-
+    console.log(product_id)
+    // setTimeout(async () => {
+    //   await axios
+    //     .post("/aidata", {
+    //       user_info: ip,
+    //       product_id: product_id,
+    //       start_time: new Date(),
+    //       stop_time: new Date(),
+    //     })
+    //     .catch((err) => console.log(err));
+    // }, 10000);
   };
   const handleMouseLeave = () => {
     setDot("hidden");
@@ -64,7 +71,13 @@ export function CarouselItem({ product }) {
           className="absolute bg-black bg-opacity-10  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20 z-10"
           style={{ visibility: dot }}
         >
-          <DotsVerticalIcon className="h-5" onClick={openModal} />
+          <DotsVerticalIcon className="h-5" onClick={()=>openModal(id)} />
+        </div>
+        <div
+          className="absolute z-10 mt-8 bg-black bg-opacity-20 p-0.5 font-bold text-xs text-gray-200"
+          style={{ visibility: dot }}
+        >
+          -20%
         </div>
         <LazyLoadImage
           src={image}
@@ -78,22 +91,24 @@ export function CarouselItem({ product }) {
           }}
           className="rounded-t-sm -z-10"
         />
-        <div className="p-2">
-          <Link to={`/product-detail/${id}`}>{product_name}</Link>
+        <div className="p-2 flex flex-row items-center content-center">
+          <div
+            className="p-2 mr-2 bg-gray-400 rounded-full"
+            style={{ width: "1.7rem", height: "1.7rem" }}
+          ></div>
+          <div>
+            <Link className="text-black" to={`/product-detail/${id}`}>
+              {product_name}
+            </Link>
 
-          <figcaption>
-            <div className="font-semibold text-gray-600">Kshs {price} /=</div>
-            <div className="line-through text-sm text-gray-300">
-              Kshs 4,321/=
-            </div>
-          </figcaption>
+            <figcaption>
+              <div className="font-semibold text-gray-600">Kshs {price} /=</div>
+            </figcaption>
+          </div>
         </div>
       </figure>
       <Modal showModal={showModal} setShowModal={setShowModal}>
-        <div
-          className="p-4"
-          onMouseEnter={()=>handleMouseEnter(id)}
-        >
+        <div className="p-4" onMouseEnter={() => handleMouseEnter(id)}>
           <div className="flex flex-row justify-between content-center items-center">
             <img
               src={image}
