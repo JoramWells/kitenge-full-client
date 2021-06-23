@@ -11,6 +11,7 @@ import {
   UserIcon,
   XIcon,
 } from "@heroicons/react/solid";
+import styled from "styled-components";
 
 const columns = [
   {
@@ -68,7 +69,7 @@ export default function NavMobile(props) {
     else {
       return (
         <>
-          <nav className="flex justify-around bg-white p-1 content-center items-center shadow-md fixed  top-0 z-50 w-full">
+          <Navbar className="shadow-md">
             <div className="focus:bg-gray-300 opacity-1 p-1 rounded-full">
               <ArrowLeftIcon
                 className="h-5 active:bg-gray-300 text-gray-500"
@@ -83,7 +84,7 @@ export default function NavMobile(props) {
               />
               <XIcon className="h-5 text-gray-400 m-2 cursor-pointer focus:text-gray-500" />
             </div>
-          </nav>
+          </Navbar>
 
           <nav
             className="flex justify-between p-2 bg-white items-center shadow-md  top-0 fixed z-10 w-full"
@@ -121,3 +122,16 @@ export default function NavMobile(props) {
     }
   }
 }
+
+const Navbar = styled.nav`
+display: flex;
+justify-content: space-around;
+background-color: white;
+padding: .5rem;
+align-items: center;
+flex-direction: row;
+position: fixed;
+top: 0;
+z-index: 50;
+width: 100%;
+`

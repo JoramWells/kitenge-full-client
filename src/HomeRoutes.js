@@ -1,4 +1,4 @@
-import React,{lazy} from "react";
+import React from "react";
 // import CarouselHeader from './Desktop/CarouselHeader'
 import DesktopMobile from "./DesktopMobile"
 

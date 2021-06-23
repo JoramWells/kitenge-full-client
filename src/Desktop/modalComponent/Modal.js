@@ -24,6 +24,11 @@ const Content = styled.div`
   margin: 15px;
   transition-duration: 500ms;
   width: 35rem;
+  @media(max-width:767px){
+    width:23rem;
+    margin: 10px;
+    /* height: 50%; */
+  }
 `;
 
 // const ModalImg = styled.img`

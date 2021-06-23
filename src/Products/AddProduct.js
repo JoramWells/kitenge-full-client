@@ -1,34 +1,26 @@
 import React, { useCallback, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveProduct } from "../_actions/productActions";
-import {
-  UploadOutlined,
-} from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 
-import {  Form,  Button, message, Upload } from "antd";
+import { Form, Button, message, Upload } from "antd";
 import { ChevronRightIcon } from "@heroicons/react/solid";
 import styled from "styled-components";
 
-
 export default function AddProduct() {
   const history = useHistory();
-  const nameRef = useRef();
   const priceRef = useRef();
+  const nameRef = useRef();
   const sellingPriceRef = useRef();
   const categoryRef = useRef();
   const descriptionRef = useRef();
   const stockRef = useRef();
-  const imageRef = useRef();
-
+  const [image, setImage] = useState("");
 
   const dispatch = useDispatch();
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
-
-  // const handleImage = useCallback((img)=>{
-  //   setImage(img)
-  // },[setImage])
 
   const prop = {
     name: "file",
@@ -39,11 +31,11 @@ export default function AddProduct() {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = (e) => {
-          e.preventDefault()
+          e.preventDefault();
           const img = document.createElement("img");
           img.src = reader.result;
           img.onload = (e) => {
-            e.preventDefault()
+            e.preventDefault();
             const canvas = document.createElement("canvas");
             canvas.width = img.naturalWidth;
             canvas.height = img.naturalHeight;
@@ -61,7 +53,7 @@ export default function AddProduct() {
       if (info.file.status === "done") {
         const ext = info.file.name.slice(0, info.file.name.lastIndexOf("."));
         const filename = ext + ".webp";
-        // handleImage(filename);
+        setImage(filename);
         message.success(`${info.file.name}`);
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed`);
@@ -69,67 +61,41 @@ export default function AddProduct() {
     },
   };
 
-  const productAdd = useCallback((e) => {
-    e.preventDefault();
-    const name = nameRef.current.value;
-    const price = priceRef.current.value;
-    const selling_price = sellingPriceRef.current.value;
-    const stock = stockRef.current.value;
-    const image = imageRef.current.value;
+  const productAdd = useCallback(
+    (e) => {
+      e.preventDefault();
+      const name = nameRef.current.value;
+      const price = priceRef.current.value;
+      const selling_price = sellingPriceRef.current.value;
+      const stock = stockRef.current.value;
+      const category = categoryRef.current.value;
+      const description = descriptionRef.current.value;
 
-    const category = categoryRef.current.value;
-    const description = descriptionRef.current.value;
-
-    dispatch(
-      saveProduct(
-        name,
-        price,
-        selling_price,
-        stock,
-        userInfo.id,
-        image,
-        category,
-        description
-      )
-    );
-    setTimeout(() => {
-      message.success("Product added succefully");
-      history.go("/produc/manage");
-    }, 2000);
-  });
-
-  const Row = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 4rem;
-    margin-bottom: 3rem;
-  `
-
-  const Flex = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid whitesmoke;
-  `
-
-  const Card = styled.div`
-    width: 25rem;
-    background-color: white;
-    padding: 1rem;
-  `
+      dispatch(
+        saveProduct(
+          name,
+          price,
+          selling_price,
+          stock,
+          userInfo.id,
+          image,
+          category,
+          description
+        )
+      );
+      setTimeout(() => {
+        message.success("Product added succefully");
+        history.go("/produc/manage");
+      }, 2000);
+    },
+    [dispatch,history,image,userInfo.id]
+  );
 
   return (
-    <Row
-
-    >
+    <Row>
       <Card>
         <Form layout="vertical" encType="multipart/form-data">
-          <Flex
-          >
+          <Flex>
             <ChevronRightIcon className="h-5 text-yellow-300" />
             <input
               name="name"
@@ -139,8 +105,7 @@ export default function AddProduct() {
               ref={nameRef}
             />
           </Flex>
-          <Flex
-          >
+          <Flex>
             <ChevronRightIcon className="h-5 text-yellow-300" />
             <input
               name="price"
@@ -150,9 +115,7 @@ export default function AddProduct() {
               ref={priceRef}
             />
           </Flex>
-          <Flex
-
-          >
+          <Flex>
             <ChevronRightIcon className="h-5 text-yellow-300" />
             <input
               name="selling_price"
@@ -162,8 +125,7 @@ export default function AddProduct() {
               ref={sellingPriceRef}
             />
           </Flex>
-          <Flex
-          >
+          <Flex>
             <ChevronRightIcon className="h-5 text-yellow-300" />
             <input
               name="category"
@@ -173,8 +135,7 @@ export default function AddProduct() {
               ref={categoryRef}
             />
           </Flex>
-          <Flex
-          >
+          <Flex>
             <ChevronRightIcon className="h-5 text-yellow-300" />
             <input
               name="stock"
@@ -197,13 +158,16 @@ export default function AddProduct() {
               ref={descriptionRef}
               cols={50}
               row={20}
-              style={{border:"1px solid gray", padding:".5rem", borderRadius:"5px"}}
-
+              style={{
+                border: "1px solid gray",
+                padding: ".5rem",
+                borderRadius: "5px",
+              }}
             />
           </div>
 
           <Form.Item>
-            <Upload {...prop} ref={imageRef}>
+            <Upload {...prop}>
               <Button
                 icon={
                   <UploadOutlined style={{ backgroundColor: "whitesmoke" }} />
@@ -214,13 +178,38 @@ export default function AddProduct() {
             </Upload>
           </Form.Item>
 
-            <button className="w-full bg-blue-500 rounded-md p-1.5" onClick={productAdd}>
-              Add
-            </button>
+          <button
+            className="w-full bg-blue-500 rounded-md p-1.5"
+            onClick={productAdd}
+          >
+            Add
+          </button>
         </Form>
       </Card>
     </Row>
   );
 }
 
+const Row = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+`;
 
+const Flex = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid whitesmoke;
+`;
+
+const Card = styled.div`
+  width: 25rem;
+  background-color: white;
+  padding: 1rem;
+`;

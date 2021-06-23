@@ -1,35 +1,19 @@
 import React, { useState } from "react";
-import {  useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { GoogleLogin } from "react-google-login";
 // import PhoneInput from "react-phone-input-2";
 // import axios from "axios";
-import {
-  Row,
-  Col,
-  Form,
-  Input,
-  Avatar,
-  message,
-  Divider,
-} from "antd";
+import {  Col, Avatar, message, Divider } from "antd";
 import {
   CloseCircleOutlined,
-  LockOutlined,
-  MailOutlined,
-  UserOutlined,
 } from "@ant-design/icons";
 import Cookie from "js-cookie";
 import { register } from "../_actions/userActions";
+import { LockClosedIcon, MailIcon } from "@heroicons/react/solid";
+import { UserAddIcon } from "@heroicons/react/outline";
+import styled from "styled-components";
 
-const iconStyles = {
-  color: "grey",
-};
-const inputStyles = {
-  borderTop: "0",
-  borderLeft: "0",
-  borderRight: "0",
-};
 
 export default function SignUp(props) {
   const CLIENT_ID =
@@ -72,67 +56,62 @@ export default function SignUp(props) {
     setName(response.profileObj.name);
     setEmail(response.profileObj.email);
     setAvatar(response.profileObj.imageUrl);
- 
+
     // console.log(response.tokenObj);
   }
   function responseFailure(response) {
     console.log(response);
   }
 
+
   return (
-    <div
-      className="  flex flex-row justify-center content-center items-center"
+    <Form
+    className="bg-white ring-1 ring-gray-300 rounded-md"
       style={{
         paddingTop: "5rem",
       }}
     >
-      <div
-        style={{ width: "25rem" }}
-        className="ring-1 ring-gray-200 bg-white p-4 rounded-md"
-      >
-        <Row justify="space-between" align="middle">
-          <Col>
+
+        <Row >
             <Avatar src={avatar} style={{ margin: "0.3rem" }} />
-          </Col>
-          <Col>
             <CloseCircleOutlined
               className="close"
               style={{ fontSize: "1.5rem" }}
               onClick={closeHandler}
             />
-          </Col>
         </Row>
         <Divider>SIGN UP</Divider>
-        <Form layout="vertical" size="large" onSubmit={submitHandler}>
-          <Form.Item required>
-            <Input
-              prefix={<UserOutlined style={iconStyles} />}
+        <form layout="vertical" size="large" onSubmit={submitHandler}>
+          <div className="flex my-4 flex-row ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+            <UserAddIcon className="h-5 text-gray-400 " />
+            <input
               id="name"
-              value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="John Doe"
-              style={inputStyles}
+              value={name}
+              placeholder="Enter name"
+              className={"focus:outline-none  p-1 w-full bg-transparent  "}
             />
-          </Form.Item>
-          <Form.Item
-            hidden
+          </div>
+
+          <input
             name="avatar"
+            id="avatar"
+            type="text"
+            hidden
             value={avatar}
             onChange={(e) => setAvatar(e.target.value)}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item required>
-            <Input
-              prefix={<MailOutlined style={iconStyles} />}
-              value={email}
+          />
+          <div className="flex flex-row my-4 ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+            <MailIcon className="h-5 text-gray-400 " />
+            <input
               id="email"
               name="email"
-              placeholder="jorammanoah1@gmail.com"
               onChange={(e) => setEmail(e.target.value)}
-              style={inputStyles}
+              value={email}
+              placeholder="Enter email"
+              className={"focus:outline-none  p-1 w-full bg-transparent  "}
             />
-          </Form.Item>
+          </div>
 
           {/* <Form.Item required>
               <Input
@@ -190,23 +169,24 @@ export default function SignUp(props) {
                 placeholder="254799980846"
               />
             </Form.Item> */}
-
-          <Form.Item>
-            <Input.Password
-              prefix={<LockOutlined style={iconStyles} />}
+          <div className="flex my-4 flex-row ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+            <LockClosedIcon className="h-5 text-gray-400 " />
+            <input
               id="password"
-              required
               name="password"
-              value={password}
               onChange={(e) => setPassword(e.target.value)}
-              style={inputStyles}
+              value={password}
+              placeholder="Enter password"
+              className={"focus:outline-none  p-1 w-full bg-transparent  "}
             />
-          </Form.Item>
+          </div>
 
-          <Form.Item>
+          <div>
             <p onClick={login} style={{ color: "grey" }} className="login">
               Already have an account? Sign in
             </p>
+          </div>
+          <div>
             <GoogleLogin
               clientId={CLIENT_ID}
               buttonText="Sign in with Google"
@@ -215,18 +195,36 @@ export default function SignUp(props) {
               style={{ display: "block" }}
               className="link"
             />
-          </Form.Item>
-          <Form.Item>
-              <button
-                onClick={submitHandler}
-                style={{borderRadius:"5px", border:"0" }}
-              >
-                SIGN UP
-              </button>
-            </Form.Item>
-        </Form>
-      </div>
-
-    </div>
+          </div>
+          <div>
+            <button
+              onClick={submitHandler}
+              style={{ borderRadius: "5px", border: "0" }}
+            >
+              SIGN UP
+            </button>
+          </div>
+        </form>
+    </Form>
   );
 }
+
+const Form = styled.div`
+padding:1rem;
+display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+display:block;
+margin:auto;
+width:25rem;
+@media(max-width: 767px){
+  width:22rem;
+}
+`
+const Row = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+`

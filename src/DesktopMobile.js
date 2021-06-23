@@ -27,7 +27,9 @@ const renderSkeleton = [...Array(8).keys()].map((i) => {
     <div className="bg-red-500 w-full">dsds</div>
   </Skeleton>;
 });
-
+function reloadHandler() {
+  window.location.reload();
+}
 export default function DesktopMobile() {
   const ProductList = useSelector((state) => state.productList);
   const { posts, loading, error } = ProductList;
@@ -39,9 +41,7 @@ export default function DesktopMobile() {
     listItem();
     return () => {};
   }, [listItem]);
-  function reloadHandler() {
-    window.location.reload();
-  }
+
 
   return (
     <>

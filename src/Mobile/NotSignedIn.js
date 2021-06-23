@@ -1,18 +1,32 @@
+import { SearchIcon } from "@heroicons/react/outline";
 import React from "react";
 import { Link } from "react-router-dom";
-import LoginDropdown from "./LoginDropdown";
+import styled from "styled-components";
+// import LoginDropdown from "./LoginDropdown";
 
 export default function NotSignedIn() {
   return (
-    <nav className="bg-white w-full p-2 flex content-center  items-center shadow-lg fixed top-0 z-10">
-      <div>
-        <Link to="/" className="text-gray-700 font-medium text-xl">
-          Do3ens
-        </Link>
+    <Navbar className=" shadow-md ">
+      <Link to="/" className="text-gray-800 font-bold text-xl">
+        Do3ens
+      </Link>
+      <SearchIcon className="text-gray-500 h-5" />
+      <div className="ring-1 ring-gray-300 py-0.5 rounded-md px-4 text-lg active:ring-gray-500 active:bg-black active:ring-0 active:bg-opacity-20">
+        <Link to="/login">Login</Link>
       </div>
-      <div>
-        <LoginDropdown />
-      </div>
-    </nav>
+    </Navbar>
   );
 }
+
+const Navbar = styled.nav`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  padding: 0.5rem;
+  width: 100%;
+  background-color: white;
+`;

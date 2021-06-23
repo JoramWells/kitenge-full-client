@@ -8,13 +8,11 @@ import { Link } from "react-router-dom";
 import NumberFormat from "react-number-format";
 
 import {
-  Row,
   Col,
   Button,
   Card,
   Divider,
   Rate,
-  Image,
   Skeleton,
   Form,
   Empty,
@@ -29,8 +27,12 @@ import { categoryProduct, detailsProduct } from "../_actions/productActions";
 
 import RecentItemsBar from "../Generic/RecentItemsBar";
 import { EyeOutlined, LikeFilled, RedoOutlined } from "@ant-design/icons";
-import { getByDisplayValue } from "@testing-library/dom";
+import { PlusIcon } from "@heroicons/react/outline";
+import styled from 'styled-components'
 
+function reloadHandler() {
+  window.location.reload();
+}
 export default function ProductDetail(props) {
   const productDetail = useSelector((state) => state.productDetail);
   const categoryDetail = useSelector((state) => state.categoryList);
@@ -84,9 +86,7 @@ export default function ProductDetail(props) {
   function handleAddToCart() {
     props.history.push("/cart/" + props.match.params.id + "?qty=" + qty);
   }
-  function reloadHandler() {
-    window.location.reload();
-  }
+
 
   return (
     <>
@@ -94,10 +94,7 @@ export default function ProductDetail(props) {
         <div className="flex flex-row justify-center items-center content-center">
           <div>
             {loading ? (
-              <Row
-                justify="space-around"
-                align="middle"
-                style={{ padding: "10px", marginTop: "2rem" }}
+              <Row style={{ padding: "10px", marginTop: "2rem" }}
               >
                 <Col md={6} sm={6}>
                   <Skeleton.Image
@@ -142,15 +139,16 @@ export default function ProductDetail(props) {
                 }
               />
             ) : (
-              <div className="m-4 flex flex-row flex-wrap sm:flex-col space-x-4">
-                <div className="flex lg:flex-row sm:flex-col flex-wrap bg-white shadow-md p-2 rounded-md justify-around mr-auto w-full">
+              <Row className="m-4">
+                <Flex className="bg-white p-2 rounded-md"
+                >
                   <div>
                     <p className="text-gray-600 m-0 font-bold text-lg">
                       {product.product_name}
                     </p>
-                    <Image
+                    <img
                       src={"/" + product.image}
-                      alt="shoes again"
+                      alt={product.image}
                       style={{
                         width: "250px",
                         height: "250px",
@@ -200,20 +198,20 @@ export default function ProductDetail(props) {
                     </select>
                     <Divider style={{ marginTop: ".5rem" }} />
                     {userInfo ? (
-                      <Row justify="space-around" style={{ margin: "1rem" }}>
-                        <Button
+                      <Row style={{ margin: "1rem" }}>
+                        <button
                           style={{
                             border: "0",
                             textDecoration: "none",
                             color: "white",
                             backgroundColor: "#47817F"
                           }}
-                          block
-                          size="large"
+                          className="w-full p-2 flex flex-row rounded-md"
                           onClick={handleAddToCart}
                         >
+                          <PlusIcon className="h-5" />
                           ADD TO CART
-                        </Button>
+                        </button>
                       </Row>
                     ) : (
                       <>
@@ -247,16 +245,15 @@ export default function ProductDetail(props) {
                       />
                     </Card>
                   </Col> */}
-                </div>
-              </div>
+                </Flex>
+              </Row>
             )}
           </div>
           <div
-            className=""
             style={{
               backgroundColor: "white",
               height: "200px",
-              width: "25rem",
+              width: "20rem",
             }}
           >
             Fulex
@@ -281,16 +278,12 @@ export default function ProductDetail(props) {
           }}
         >
           {products.length === 0 ? (
-            <Row justify="space-around" align="middle">
-              <Col>
+            <Row>
                 <Empty description="No category"></Empty>
-              </Col>
             </Row>
           ) : (
             <Row
               className=" p-2 rounded-md "
-              justify="space-around"
-              gutter={[0, 16]}
               style={{ marginTop: "2rem", paddingBottom: "2rem" }}
             >
               {products.map((item) => (
@@ -360,3 +353,27 @@ export default function ProductDetail(props) {
     </>
   );
 }
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+`
+
+const Flex = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 43rem;
+  @media(max-width:767px){
+    display: fixed;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 23rem;
+
+  }
+`

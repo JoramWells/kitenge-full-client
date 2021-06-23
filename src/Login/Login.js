@@ -25,24 +25,13 @@ export default function SignIn(props) {
       history.goBack();
     }
     return () => {};
-  }, [userInfo]);
+  }, [userInfo,history]);
 
-  const Form = styled.div`
-    background-color:"white";
-    padding:.5rem;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    display:block;
-    margin:auto;
-    width:25rem;
-    height:25rem;
-  `
+
   return (
     <div style={{ paddingTop: "5rem" }}>
       <Form
-        className="rounded-md ring-1 ring-gray-300">
+        className="rounded-md ring-1 ring-gray-200">
         <Divider>Signin
           <div className="text-gray-500 font-normal text-sm">
             to continue to do3ensKE
@@ -187,3 +176,18 @@ export default function SignIn(props) {
     </div>
   );
 }
+const Form = styled.div`
+background-color:white;
+padding:.5rem;
+display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+display:block;
+margin:auto;
+width:25rem;
+height:25rem;
+@media(max-width: 767px){
+  width:22rem;
+}
+`

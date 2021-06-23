@@ -5,36 +5,30 @@ import React, {
   useRef,
   useCallback,
 } from "react";
+import styled from "styled-components";
 import {
   Button,
-  Modal,
-  Input,
   Form,
   Upload,
-  Row,
   Col,
   message,
   Skeleton,
   Result,
-  Card,
-  Image,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import {
   deleteProduct,
   listProducts,
   updateProduct,
 } from "../_actions/productActions";
+import Modal from "../Desktop/modalComponent/Modal";
+import { DeleteFilled, EditOutlined, UploadOutlined } from "@ant-design/icons";
 import {
-  CaretRightOutlined,
-  DeleteFilled,
-  EditOutlined,
-  ReloadOutlined,
-  UploadOutlined,
-} from "@ant-design/icons";
-import ReactMarkdown from "react-markdown";
-import { PlusIcon } from "@heroicons/react/solid";
+  ChevronRightIcon,
+  PlusIcon,
+  RefreshIcon,
+} from "@heroicons/react/solid";
 
 const renderTH = [...Array(4).keys()].map((i) => {
   return (
@@ -45,50 +39,21 @@ const renderTH = [...Array(4).keys()].map((i) => {
     </Fragment>
   );
 });
-
-const inputStyles = {
-  borderTop: "0",
-  borderLeft: "0",
-  borderRight: "0",
-};
-
-const columns = [
-  {
-    title: "Product",
-    dataIndex: "product_name",
-    key: "product_name",
-  },
-  {
-    title: "Image",
-    dataIndex: "image",
-    key: "image",
-    render: (img) => (
-      <Image
-        src={"/" + img}
-        alt="image file"
-        style={{ width: "50px", height: "50px", objectFit: "contain" }}
-      />
-    ),
-  },
-
-  {
-    title: "Price",
-    dataIndex: "price",
-    key: "price",
-  },
-];
+function reloadHandler() {
+  window.location.reload();
+}
 export default function ManageProducts() {
   const ProductList = useSelector((state) => state.productList);
   const ProductUpdate = useSelector((state) => state.productUpdate);
-  const { product, loadingUpdate, errorUpdate } = ProductUpdate;
+  const { product } = ProductUpdate;
   const { posts, loading, error } = ProductList;
 
-  const ProductDelete = useSelector((state) => state.productDelete);
-  const {
-    loading: loadingSave,
-    success: successSave,
-    error: errorSave,
-  } = ProductList;
+  // const ProductDelete = useSelector((state) => state.productDelete);
+  // const {
+  //   loading: loadingSave,
+  //   success: successSave,
+  //   error: errorSave,
+  // } = ProductList;
   const renderTB = [...Array(4).keys()].map((i) => {
     return (
       <Fragment key={i}>
@@ -108,7 +73,7 @@ export default function ManageProducts() {
   const [image, setImage] = useState("");
   const [stock, setStock] = useState("");
   const [description, setDescription] = useState("");
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [showButton, setShowButton] = useState(true);
   const [showLoading, setShowLoading] = useState(false);
   const mountedRef = useRef(true);
@@ -117,7 +82,7 @@ export default function ManageProducts() {
     return () => {
       mountedRef.current = false;
     };
-  }, []);
+  }, [dispatch]);
 
   const productEdit = useCallback(() => {
     dispatch(
@@ -125,10 +90,10 @@ export default function ManageProducts() {
     );
     setTimeout(() => {
       dispatch(listProducts());
-      setIsModalVisible(false);
+      setShowModal(false);
       if (product) message.success("Product update successfully");
     }, 1000);
-  });
+  },[dispatch,id,name,price,stock,shop,image,category,description,product]);
   const deleteHandler = () => {
     dispatch(deleteProduct(id));
   };
@@ -142,8 +107,8 @@ export default function ManageProducts() {
   //   }, 2000);
   // };
 
-  const showModal = (item) => {
-    setIsModalVisible(true);
+  const showModa = (item) => {
+    setShowModal(true);
     setId(item.id);
     setImage(item.image);
     setStock(item.stock);
@@ -153,17 +118,6 @@ export default function ManageProducts() {
     setCategory(item.category);
     setDescription(item.description);
   };
-  function handleReload() {
-    window.location.reload();
-  }
-
-  function handleOk() {
-    setIsModalVisible(false);
-  }
-
-  function handleCancel() {
-    setIsModalVisible(false);
-  }
 
   const prop = {
     name: "file",
@@ -206,136 +160,102 @@ export default function ManageProducts() {
 
   return (
     <Fragment>
-      <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <Row justify="center">
-          <Col style={{ width: "20rem" }}>
+      <Modal  showModal={showModal} setShowModal={setShowModal} >
+        <Row>
+          <div style={{ width: "20rem",padding:"1rem" }}>
             <Form layout="vertical" name="basic" encType="multipart/form-data">
               <img
                 src={"/" + image}
                 style={{ width: "70px", marginBottom: ".3rem" }}
                 alt={name}
               />
-              <Form.Item
-                required
-                id="name"
-                name="name"
-                onChange={(e) => setName(e.target.value)}
-              >
-                <Input
-                  style={inputStyles}
-                  value={name}
-                  prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
-                  placeholder="Fendi"
-                />
-                <input hidden type="text" />
-              </Form.Item>
-              <Form.Item
-                name="price"
-                onChange={(e) => setPrice(e.target.value)}
-              >
-                <Input
-                  style={inputStyles}
-                  value={price}
-                  prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
-                />
-
+              <Flex>
+                <ChevronRightIcon className="h-5 text-yellow-300" />
                 <input
-                  hidden
-                  type="text"
+                  name="name"
+                  id="name"
+                  className="focus:outline-none "
+                  placeholder="Available stock"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </Flex>
+              <Flex>
+                <ChevronRightIcon className="h-5 text-yellow-300" />
+                <input
+                  name="price"
+                  id="price"
+                  className="focus:outline-none "
+                  placeholder="Available stock"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
-                  placeholder="2999 /="
                 />
-              </Form.Item>
-
-              <Form.Item
-                hidden
-                name="image"
-                name="image"
-                onChange={(e) => setImage(e.target.value)}
-              >
-                <Input value={image} />
-
+              </Flex>
+              <Flex hidden>
+                <ChevronRightIcon className="h-5 text-yellow-300" />
                 <input
-                  hidden
-                  type="text"
+                  name="image"
+                  id="image"
+                  className="focus:outline-none "
+                  placeholder="Available stock"
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
                 />
-              </Form.Item>
-
-              <Form.Item
-                id="shop"
-                name="shop"
-                onChange={(e) => setShop(e.target.value)}
-              >
-                <Input
-                  style={inputStyles}
-                  value={shop}
-                  placeholder="Shop name"
-                  prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
-                />
+              </Flex>
+              <Flex>
+                <ChevronRightIcon className="h-5 text-yellow-300" />
                 <input
-                  hidden
-                  type="text"
+                  name="shop"
+                  id="shop"
+                  className="focus:outline-none "
+                  placeholder="shop"
                   value={shop}
                   onChange={(e) => setShop(e.target.value)}
                 />
-              </Form.Item>
-
-              <Form.Item
-                name="category"
-                id="category"
-                onChange={(e) => setCategory(e.target.value)}
-              >
-                <Input
-                  style={inputStyles}
-                  value={category}
-                  placeholder="Category"
-                  prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
-                />
+              </Flex>
+              <Flex>
+                <ChevronRightIcon className="h-5 text-yellow-300" />
                 <input
-                  hidden
-                  type="text"
+                  name="category"
+                  id="category"
+                  className="focus:outline-none "
+                  placeholder="Shoes skirts"
+                  value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 />
-              </Form.Item>
-              <Form.Item
-                name="stock"
-                id="stock"
-                onChange={(e) => setStock(e.target.value)}
-              >
-                <Input
-                  style={inputStyles}
-                  value={stock}
-                  placeholder="Available stock"
-                  prefix={<CaretRightOutlined style={{ color: "#fdba45" }} />}
-                />
+              </Flex>
+              <Flex>
+                <ChevronRightIcon className="h-5 text-yellow-300" />
                 <input
-                  hidden
-                  type="text"
+                  name="stock"
+                  id="stock"
+                  className="focus:outline-none "
+                  placeholder="stock"
+                  value={stock}
                   onChange={(e) => setStock(e.target.value)}
                 />
-              </Form.Item>
-              <Card
-                style={{ height: 150, overflowY: "scroll", margin: ".3rem" }}
-              >
-                <ReactMarkdown>{description}</ReactMarkdown>
-              </Card>
-
-              <Form.Item
-                name="description"
-                id="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              >
-                <Input.TextArea rows={10} value={description} />
-                <input
-                  hidden
-                  type="text"
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </Form.Item>
+              </Flex>
+              <div
+            className="flex flex-row w-full my-8"
+            style={{ borderBottom: "1px solid whitesmoke" }}
+          >
+            <ChevronRightIcon className="h-5 text-yellow-300" />
+            <textarea
+              name="description"
+              id="description"
+              className="focus:outline-none "
+              placeholder="Product description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              cols={50}
+              row={0}
+              style={{
+                border: "1px solid gray",
+                padding: ".5rem",
+                borderRadius: "5px",
+              }}
+            />
+          </div>
               <Row justify="space-around" align="middle">
                 <Col>
                   <Form.Item>
@@ -360,21 +280,25 @@ export default function ManageProducts() {
                 </Col>
               </Row>
             </Form>
-          </Col>
+          </div>
         </Row>
       </Modal>
       <main>
-        <div className="flex flex-col justify-center content-center bg-blue-200" style={{paddingTop:"3.5rem"}}>
-        <button className="text-gray-500 font-bold flex justify-center items-center content-center focus:outline-none text-lg">
-          <PlusIcon className="h-10 p-1" />
-          <Link to="/products/add" className="text-gray-500">
-          Add product</Link>
-        </button>
+        <div
+          className="flex flex-col justify-center content-center bg-blue-200"
+          style={{ paddingTop: "3.5rem" }}
+        >
+          <button className="text-gray-500 font-bold flex justify-center items-center content-center focus:outline-none text-lg">
+            <PlusIcon className="h-10 p-1" />
+            <Link to="/products/add" className="text-gray-500">
+              Add product
+            </Link>
+          </button>
         </div>
 
         {loading ? (
-          <Row justify="space-around" align="middle">
-            <Col>
+          <Row>
+            <div>
               <table style={{ marginTop: "5rem" }}>
                 <thead>
                   <tr>{renderTH}</tr>
@@ -385,25 +309,26 @@ export default function ManageProducts() {
                   <tr>{renderTB}</tr>
                 </tbody>
               </table>
-            </Col>
+            </div>
           </Row>
         ) : error ? (
-          <Row
-            style={{ marginTop: "5rem" }}
-            justify="space-around"
-            align="middle"
-          >
-            <Col>
-              <Result
-                status="500"
-                subTitle={error}
-                extra={
-                  <Button icon={<ReloadOutlined />} onClick={handleReload}>
+          <Row>
+            <Result
+              status="500"
+              subTitle={error}
+              extra={
+                <Flex>
+                  <Flex
+                    onClick={reloadHandler}
+                    className="hover:cursor-pointer space-x-4 ring-1 ring-gray-500 "
+                    style={{ width: "5rem" }}
+                  >
+                    <RefreshIcon className="h-5 font-extralight" />
                     RETRY
-                  </Button>
-                }
-              />
-            </Col>
+                  </Flex>
+                </Flex>
+              }
+            />
           </Row>
         ) : (
           // <Table dataSource={posts} columns={columns}/>
@@ -433,11 +358,11 @@ export default function ManageProducts() {
                         />
                       </td>
                       <td>
-                        <Row justify="space-around">
+                        <Row>
                           <Col>
                             <EditOutlined
                               style={{ color: "green" }}
-                              onClick={() => showModal(item)}
+                              onClick={() => showModa(item)}
                             />
                           </Col>
                           <Col>
@@ -455,8 +380,23 @@ export default function ManageProducts() {
             </Col>
           </Row>
         )}
-
       </main>
     </Fragment>
   );
 }
+
+const Flex = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: .7rem;
+  margin-bottom: .7rem;
+  border-bottom: 1px solid whitesmoke;
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+`;

@@ -1,4 +1,4 @@
-import React,{lazy} from "react";
+import React from "react";
 import NavigationBar from "./Desktop/NavSections/NavigationBar"
 import NavMobile from "./Mobile/NavMobile"
 

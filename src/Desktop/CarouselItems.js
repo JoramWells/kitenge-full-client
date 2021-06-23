@@ -21,40 +21,29 @@ export function CarouselItem({ product }) {
   async function openModal(product_id) {
     setShowModal((prev) => !prev);
     await axios
-    .post("/aidata", {
-      user_info: ip,
-      product_id: product_id,
-      start_time: new Date(),
-      stop_time: new Date(),
-    })
-    .catch((err) => console.log(err));
+      .post("/aidata", {
+        user_info: ip,
+        product_id: product_id,
+      })
+      .catch((err) => console.log(err));
   }
   const getIP = useCallback(async () => {
-    await axios
-      .get("https://api.ipify.org/")
-      .then((res) => setIP(res.data))
-      .catch((err) => console.log(err));
+    try {
+      await axios
+        .get("https://api.ipify.org/")
+        .then((res) => setIP(res.data))
+        .catch((err) => console.log(err));
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
   useEffect(() => {
     getIP();
-  }, []);
-  const handleMouseEnter = (product_id) => {
-    console.log(product_id)
-    // setTimeout(async () => {
-    //   await axios
-    //     .post("/aidata", {
-    //       user_info: ip,
-    //       product_id: product_id,
-    //       start_time: new Date(),
-    //       stop_time: new Date(),
-    //     })
-    //     .catch((err) => console.log(err));
-    // }, 10000);
-  };
+  }, [getIP]);
   const handleMouseLeave = () => {
     setDot("hidden");
   };
-  const handleMouseEntere = async () => {
+  const handleMouseEnter = async () => {
     setDot("visible");
   };
 
@@ -64,14 +53,14 @@ export function CarouselItem({ product }) {
         style={{ width: "14rem", border: "1px solid #F0F0F0 " }}
         className="rounded-md bg-white mb-4"
         key={id}
-        onMouseEnter={handleMouseEntere}
+        onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
         <div
           className="absolute bg-black bg-opacity-10  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20 z-10"
           style={{ visibility: dot }}
         >
-          <DotsVerticalIcon className="h-5" onClick={()=>openModal(id)} />
+          <DotsVerticalIcon className="h-5" onClick={() => openModal(id)} />
         </div>
         <div
           className="absolute z-10 mt-8 bg-black bg-opacity-20 p-0.5 font-bold text-xs text-gray-200"
@@ -85,7 +74,7 @@ export function CarouselItem({ product }) {
           alt="productimage"
           style={{
             width: "14rem",
-            height: "135px",
+            height: "145px",
             display: "block",
             margin: "auto",
           }}
@@ -108,7 +97,7 @@ export function CarouselItem({ product }) {
         </div>
       </figure>
       <Modal showModal={showModal} setShowModal={setShowModal}>
-        <div className="p-4" onMouseEnter={() => handleMouseEnter(id)}>
+        <div className="p-4">
           <div className="flex flex-row justify-between content-center items-center">
             <img
               src={image}
