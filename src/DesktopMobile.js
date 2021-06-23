@@ -21,10 +21,6 @@ const renderSkeleton = [...Array(8).keys()].map((i) => {
     }
   `;
   return <Skeleton key={i} className="mb-4 p-2" >
-    <div className="bg-gray-400 w-full" style={{height:"100px"}}>
-      img
-    </div>
-    <div className="bg-red-500 w-full">dsds</div>
   </Skeleton>;
 });
 function reloadHandler() {

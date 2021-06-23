@@ -11,10 +11,13 @@ import {
   ShoppingCartIcon,
 } from "@heroicons/react/solid";
 import Modal from "./modalComponent/Modal";
+import {useViews} from "../hooks/useViews";
 
 export function CarouselItem({ product }) {
-  const { id, product_name, image, price, description } = product;
+  const { id, product_name, image, price, description,userId } = product;
   const [showModal, setShowModal] = useState(false);
+  const views = useViews(id);
+
   const [ip, setIP] = useState("");
 
   const [dot, setDot] = useState("hidden");
@@ -22,8 +25,8 @@ export function CarouselItem({ product }) {
     setShowModal((prev) => !prev);
     await axios
       .post("/aidata", {
-        user_info: ip,
-        product_id: product_id,
+        ipAddr: ip,
+        productId: product_id,
       })
       .catch((err) => console.log(err));
   }
@@ -81,10 +84,6 @@ export function CarouselItem({ product }) {
           className="rounded-t-sm -z-10"
         />
         <div className="p-2 flex flex-row items-center content-center">
-          <div
-            className="p-2 mr-2 bg-gray-400 rounded-full"
-            style={{ width: "1.7rem", height: "1.7rem" }}
-          ></div>
           <div>
             <Link className="text-black" to={`/product-detail/${id}`}>
               {product_name}
@@ -93,6 +92,7 @@ export function CarouselItem({ product }) {
             <figcaption>
               <div className="font-semibold text-gray-600">Kshs {price} /=</div>
             </figcaption>
+            <div className="text-gray-400 text-xs">{views} views</div>
           </div>
         </div>
       </figure>

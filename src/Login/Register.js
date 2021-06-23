@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { GoogleLogin } from "react-google-login";
 // import PhoneInput from "react-phone-input-2";
 // import axios from "axios";
-import {  Col, Avatar, message, Divider } from "antd";
+import {   Avatar, message, Divider } from "antd";
 import {
   CloseCircleOutlined,
 } from "@ant-design/icons";
