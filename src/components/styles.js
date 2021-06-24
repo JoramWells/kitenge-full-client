@@ -94,3 +94,29 @@ export const Li = styled.li`
   color: black;
   margin: 0.3rem;
 `;
+
+export const Col = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 5rem;
+  margin-bottom: 3rem;
+`;
+
+export const Card = styled.div`
+background-color:white;
+padding:1rem;
+display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+display:block;
+margin:auto;
+width:24rem;
+/* height:25rem; */
+@media(max-width: 767px){
+  width:22rem;
+}
+`;
+

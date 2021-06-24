@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { Form, Button, message, Upload } from "antd";
 import { ChevronRightIcon } from "@heroicons/react/solid";
 import styled from "styled-components";
+import { Col, Card } from "../components/styles";
 
 export default function AddProduct() {
   const history = useHistory();
@@ -88,15 +89,15 @@ export default function AddProduct() {
         history.go("/produc/manage");
       }, 2000);
     },
-    [dispatch,history,image,userInfo.id]
+    [dispatch, history, image, userInfo.id]
   );
 
   return (
-    <Row>
-      <Card>
+    <Col>
+      <Card className="rounded-md ring-1 ring-gray-300">
         <Form layout="vertical" encType="multipart/form-data">
-          <Flex>
-            <ChevronRightIcon className="h-5 text-yellow-300" />
+          <div className="flex my-4 flex-row ring-1 ring-gray-300 p-2 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md ">
+            <ChevronRightIcon className="h-5 text-gray-400 " />
             <input
               name="name"
               id="name"
@@ -104,9 +105,9 @@ export default function AddProduct() {
               placeholder="Item name"
               ref={nameRef}
             />
-          </Flex>
-          <Flex>
-            <ChevronRightIcon className="h-5 text-yellow-300" />
+          </div>
+          <div className="flex my-4 flex-row ring-1 ring-gray-300 p-2 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+            <ChevronRightIcon className="h-5 text-gray-400 " />
             <input
               name="price"
               id="price"
@@ -114,9 +115,10 @@ export default function AddProduct() {
               placeholder="Original price"
               ref={priceRef}
             />
-          </Flex>
-          <Flex>
-            <ChevronRightIcon className="h-5 text-yellow-300" />
+          </div>
+
+          <div className="flex my-4 flex-row ring-1 ring-gray-300 p-2 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+            <ChevronRightIcon className="h-5 text-gray-400 " />
             <input
               name="selling_price"
               id="selling_price"
@@ -124,9 +126,9 @@ export default function AddProduct() {
               placeholder="Selling price"
               ref={sellingPriceRef}
             />
-          </Flex>
-          <Flex>
-            <ChevronRightIcon className="h-5 text-yellow-300" />
+          </div>
+          <div className="flex my-4 flex-row ring-1 ring-gray-300 p-2 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+            <ChevronRightIcon className="h-5 text-gray-400 " />
             <input
               name="category"
               id="category"
@@ -134,22 +136,24 @@ export default function AddProduct() {
               placeholder="shoes, skirt, dress"
               ref={categoryRef}
             />
-          </Flex>
-          <Flex>
-            <ChevronRightIcon className="h-5 text-yellow-300" />
+          </div>
+          <div className="flex my-4 flex-row ring-1 ring-gray-300 p-2 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+            <ChevronRightIcon className="h-5 text-gray-400 " />
             <input
               name="stock"
               id="stock"
               className="focus:outline-none "
               placeholder="Available stock"
               ref={stockRef}
+              required
             />
-          </Flex>
+          </div>
+
           <div
             className="flex flex-row w-full my-8"
             style={{ borderBottom: "1px solid whitesmoke" }}
           >
-            <ChevronRightIcon className="h-5 text-yellow-300" />
+            <ChevronRightIcon className="h-5" />
             <textarea
               name="description"
               id="description"
@@ -179,25 +183,16 @@ export default function AddProduct() {
           </Form.Item>
 
           <button
-            className="w-full bg-blue-500 rounded-md p-1.5"
+            className="w-full bg-black bg-opacity-80 rounded-md p-1.5 text-white"
             onClick={productAdd}
           >
             Add
           </button>
         </Form>
       </Card>
-    </Row>
+    </Col>
   );
 }
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: 4rem;
-  margin-bottom: 3rem;
-`;
 
 const Flex = styled.div`
   display: flex;
@@ -206,10 +201,4 @@ const Flex = styled.div`
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   border-bottom: 1px solid whitesmoke;
-`;
-
-const Card = styled.div`
-  width: 25rem;
-  background-color: white;
-  padding: 1rem;
 `;

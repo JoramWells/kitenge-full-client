@@ -147,7 +147,7 @@ export default function SignIn(props) {
                   </p>
 
                   <div
-                    className="p-2 rounded-md hover:cursor-pointer bg-blue-500"
+                    className="p-2 rounded-md hover:cursor-pointer bg-black bg-opacity-80"
                     onClick={handleSubmit}
                   >
                     <div className="flex flex-row content-center items-center justify-center">

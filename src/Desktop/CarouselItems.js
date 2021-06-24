@@ -1,5 +1,5 @@
 import React, { useState, memo, useCallback, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 // import NumberFormat from "react-number-format";
 import axios from "axios";
@@ -13,8 +13,10 @@ import {
 import Modal from "./modalComponent/Modal";
 import { useViews } from "../hooks/useViews";
 import { Flex } from "../components/styles";
+// import useGeolocation from "../hooks/useGeolocation";
 
 export function CarouselItem({ product }) {
+  // const location = useGeolocation();
   const { id, product_name, image, price, description, userId } = product;
   const [showModal, setShowModal] = useState(false);
   const views = useViews(id);
@@ -22,7 +24,8 @@ export function CarouselItem({ product }) {
   const [ip, setIP] = useState("");
 
   const [dot, setDot] = useState("hidden");
-  async function openModal(product_id) {
+
+  const openModal = async (product_id) => {
     setShowModal((prev) => !prev);
     await axios
       .post("/aidata", {
@@ -30,7 +33,7 @@ export function CarouselItem({ product }) {
         productId: product_id,
       })
       .catch((err) => console.log(err));
-  }
+  };
   const getIP = useCallback(async () => {
     try {
       await axios
@@ -147,18 +150,18 @@ export function CarouselItem({ product }) {
             </div>
           </div>
           <hr />
-            <Flex>
-              <button className="w-full text-gray-100 focus:outline-none bg-red-400 flex flex-row items-center content-center rounded-md">
-                <CreditCardIcon className="h-10 text-white p-2" />
-                Buy
-              </button>
+          <Flex>
+            <button className="w-full text-gray-100 focus:outline-none bg-red-400 flex flex-row items-center content-center rounded-md">
+              <CreditCardIcon className="h-10 text-white p-2" />
+              Buy
+            </button>
 
-              <button className="text-gray-700 flex flex-row w-full content-center items-center bg-gray-300 rounded-md">
-                <ShoppingCartIcon className="h-10 p-2 text-gray-700" />
-                Add to Cart
-              </button>
-            </Flex>
-          </div>
+            <button className="text-gray-700 flex flex-row w-full content-center items-center bg-gray-300 rounded-md">
+              <ShoppingCartIcon className="h-10 p-2 text-gray-700" />
+              Add to Cart
+            </button>
+          </Flex>
+        </div>
       </Modal>
     </>
   );

@@ -30,20 +30,23 @@ export default function SignUp(props) {
     history.goBack();
   };
 
-  const submitHandler = useCallback(async (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     await dispatch(register(name, email, password, avatar, phone, address));
     const userFailure = Cookie.getJSON("userFailure");
-    if (loading) {
-      message.warn("wtf");
+    const userSuccess = Cookie.getJSON("userInfo");
+
+    if (userFailure) {
+      message.error("email already exists");
+    }else{
+      message.success("Successfully registered");
     }
 
-    const userSuccess = Cookie.getJSON("userInfo");
-    if (userInfo) {
-      message.success("Successfully registered");
-      // history.goBack();
-    }
-  }, []);
+    // if (userSuccess) {
+      
+    //   // history.goBack();
+    // }
+  };
   function login() {
     props.history.push("/login");
   }

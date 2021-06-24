@@ -6,7 +6,7 @@ const useGeolocation = () => {
     coordinates: { lat: "", lng: "" },
   });
 
-  const onSuccess = (location) => {
+  const onSuccess =(location) => {
     setLocation({
       loaded: true,
       coordinates: {
@@ -29,8 +29,9 @@ const useGeolocation = () => {
         code: 0,
         message: "Geolocation not supported",
       });
-      navigator.geolocation.getCurrentPosition(onSuccess, onError);
     }
+     navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
   }, []);
   return location;
 };
