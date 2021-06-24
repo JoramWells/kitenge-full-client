@@ -72,7 +72,7 @@ const Modal = ({ showModal, setShowModal, children }) => {
         <Background data-testid="modal_div" ref={modalRef} onClick={closeModal}>
           <animated.div style={animation}>
             <Content showModal={showModal}>
-              <ModalHeader className="flex flex-row justify-end p-1">
+              <ModalHeader className="flex flex-row justify-end p-2">
                 <XIcon
                   className="h-5 text-gray-600"
                   onClick={() => setShowModal((prev) => !prev)}

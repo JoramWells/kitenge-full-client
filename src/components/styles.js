@@ -100,7 +100,7 @@ export const Col = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  padding-top: 5rem;
+  padding-top: 4.4rem;
   margin-bottom: 3rem;
 `;
 
@@ -116,7 +116,7 @@ margin:auto;
 width:24rem;
 /* height:25rem; */
 @media(max-width: 767px){
-  width:22rem;
+  width:21.5rem;
 }
 `;
 

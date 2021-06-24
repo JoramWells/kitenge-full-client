@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Register from "./Login/Register";
@@ -16,7 +16,7 @@ import SearchedItems from "./Products/SearchedItems";
 
 function App() {
   return (
-    <Fragment>
+    <>
       <Router>
         <ScrollTop />
         <DesktopNavbarMobile />
@@ -34,7 +34,7 @@ function App() {
           <Route path="/searched" exact component={SearchedItems}  />
         </Switch>
       </Router>
-    </Fragment>
+    </>
   );
 }
 

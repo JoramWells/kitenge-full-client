@@ -1,8 +1,10 @@
 import React, { useState, memo, useCallback, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 // import NumberFormat from "react-number-format";
 import axios from "axios";
+import moment from 'moment'
+import {Image} from 'antd'
 import {
   ClockIcon,
   CreditCardIcon,
@@ -11,15 +13,16 @@ import {
   ShoppingCartIcon,
 } from "@heroicons/react/solid";
 import Modal from "./modalComponent/Modal";
-import { useViews } from "../hooks/useViews";
+import { useAvatar, useViews } from "../hooks/useViews";
 import { Flex } from "../components/styles";
-// import useGeolocation from "../hooks/useGeolocation";
+import useGeolocation from "../hooks/useGeolocation";
 
 export function CarouselItem({ product }) {
-  // const location = useGeolocation();
-  const { id, product_name, image, price, description, userId } = product;
+  const location = useGeolocation();
+  const { id, product_name, image, price, description, userId, updatedAt } = product;
   const [showModal, setShowModal] = useState(false);
   const views = useViews(id);
+  const avatar = useAvatar(userId);
 
   const [ip, setIP] = useState("");
 
@@ -27,13 +30,19 @@ export function CarouselItem({ product }) {
 
   const openModal = async (product_id) => {
     setShowModal((prev) => !prev);
-    await axios
+    if(location.loaded == true && location.coordinates){
+      await axios
       .post("/aidata", {
         ipAddr: ip,
+        lat:location.coordinates.lat,
+        lng:location.coordinates.lng,
         productId: product_id,
       })
       .catch((err) => console.log(err));
   };
+      
+    }
+
   const getIP = useCallback(async () => {
     try {
       await axios
@@ -45,6 +54,7 @@ export function CarouselItem({ product }) {
     }
   }, []);
   useEffect(() => {
+    console.log(location)
     getIP();
   }, [getIP]);
   const handleMouseLeave = () => {
@@ -87,23 +97,32 @@ export function CarouselItem({ product }) {
           }}
           className="rounded-t-sm -z-10"
         />
-        <div className="p-2 flex flex-row items-center content-center">
+        <div className="p-2 flex flex-row  space-x-2">
+          <LazyLoadImage effect="blur" src={avatar} alt="" className="rounded-full" style={{width:"30px", height:"30px"
+          
+        }} />
           <div>
-            <Link className="text-black" to={`/product-detail/${id}`}>
+            <Link className="text-gray-800 font-bold" to={`/product-detail/${id}`}>
               {product_name}
             </Link>
 
             <figcaption>
               <div className="font-semibold text-gray-600">Kshs {price} /=</div>
             </figcaption>
-            <div className="text-gray-400 text-xs">{views} views</div>
+            <div className="text-gray-400 text-xs flex flex-row space-x-2">
+              <div>
+              {views} views
+              </div>
+            <div>| {moment(updatedAt).fromNow("hh")}</div>
+            </div>
+            
           </div>
         </div>
       </figure>
       <Modal showModal={showModal} setShowModal={setShowModal}>
         <div className="p-4">
           <Flex>
-            <img
+            <Image
               src={image}
               alt=""
               style={{
@@ -151,15 +170,18 @@ export function CarouselItem({ product }) {
           </div>
           <hr />
           <Flex>
-            <button className="w-full text-gray-100 focus:outline-none bg-red-400 flex flex-row items-center content-center rounded-md">
+            <div style={{width:"55%", margin:"auto"}} className="flex flex-row justify-center content-center ">
+            <button className="w-full text-gray-100 focus:outline-none bg-black bg-opacity-80 m-1  flex flex-row items-center content-center justify-center rounded-md">
               <CreditCardIcon className="h-10 text-white p-2" />
               Buy
             </button>
 
-            <button className="text-gray-700 flex flex-row w-full content-center items-center bg-gray-300 rounded-md">
+            <button className="text-gray-700 flex flex-row w-full content-center m-1 items-center bg-gray-300 justify-center rounded-md">
               <ShoppingCartIcon className="h-10 p-2 text-gray-700" />
               Add to Cart
             </button>
+            </div>
+
           </Flex>
         </div>
       </Modal>
