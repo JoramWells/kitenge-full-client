@@ -1,21 +1,20 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GoogleLogin } from "react-google-login";
 // import PhoneInput from "react-phone-input-2";
 // import axios from "axios";
-import {   Avatar, message, Divider } from "antd";
-import {
-  CloseCircleOutlined,
-} from "@ant-design/icons";
+import { Avatar, message, Divider } from "antd";
+import { CloseCircleOutlined } from "@ant-design/icons";
 import Cookie from "js-cookie";
 import { register } from "../_actions/userActions";
 import { LockClosedIcon, MailIcon } from "@heroicons/react/solid";
 import { UserAddIcon } from "@heroicons/react/outline";
-import styled from "styled-components";
-
+import { Form, Row } from "../components/styles";
 
 export default function SignUp(props) {
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, userInfo,error } = userRegister;
   const CLIENT_ID =
     "266388441735-5a4sfpj0lpk8nvjkf52ppoqqul0139st.apps.googleusercontent.com";
   const history = useHistory();
@@ -31,23 +30,20 @@ export default function SignUp(props) {
     history.goBack();
   };
 
-  async function submitHandler() {
-    // e.preventDefault();
+  const submitHandler = useCallback(async (e) => {
+    e.preventDefault();
     await dispatch(register(name, email, password, avatar, phone, address));
     const userFailure = Cookie.getJSON("userFailure");
-    if (!userFailure) {
-      return null;
-    } else {
-      message.warn(userFailure.message);
+    if (loading) {
+      message.warn("wtf");
     }
 
     const userSuccess = Cookie.getJSON("userInfo");
-    if (!userSuccess) return null;
-    else {
+    if (userInfo) {
       message.success("Successfully registered");
-      history.goBack();
+      // history.goBack();
     }
-  }
+  }, []);
   function login() {
     props.history.push("/login");
   }
@@ -63,22 +59,20 @@ export default function SignUp(props) {
     console.log(response);
   }
 
-
   return (
-    <Form
-    className="bg-white ring-1 ring-gray-300 rounded-md"
+    <div
       style={{
         paddingTop: "5rem",
       }}
     >
-
-        <Row >
-            <Avatar src={avatar} style={{ margin: "0.3rem" }} />
-            <CloseCircleOutlined
-              className="close"
-              style={{ fontSize: "1.5rem" }}
-              onClick={closeHandler}
-            />
+      <Form className="bg-white ring-1 ring-gray-300 rounded-md">
+        <Row>
+          <Avatar src={avatar} style={{ margin: "0.3rem" }} />
+          <CloseCircleOutlined
+            className="close"
+            style={{ fontSize: "1.5rem" }}
+            onClick={closeHandler}
+          />
         </Row>
         <Divider>SIGN UP</Divider>
         <form layout="vertical" size="large" onSubmit={submitHandler}>
@@ -181,11 +175,9 @@ export default function SignUp(props) {
             />
           </div>
 
-          <div>
             <p onClick={login} style={{ color: "grey" }} className="login">
               Already have an account? Sign in
             </p>
-          </div>
           <div>
             <GoogleLogin
               clientId={CLIENT_ID}
@@ -196,35 +188,25 @@ export default function SignUp(props) {
               className="link"
             />
           </div>
-          <div>
+          <div className="bg-black bg-opacity-80 rounded-md" onClick={submitHandler}>
+            <div className="flex flex-row content-center items-center justify-center">
+              {loading && (
+                <div className="loader m-1" style={{ padding: ".54rem" }} />
+              )}
+            </div>
             <button
-              onClick={submitHandler}
-              style={{ borderRadius: "5px", border: "0" }}
+              style={{
+                borderRadius: "5px",
+                border: "0",
+                display: loading ? "none" : "block",
+              }}
+              className=" w-full p-1 focus:outline-none text-lg text-white"
             >
               SIGN UP
             </button>
           </div>
         </form>
-    </Form>
+      </Form>
+    </div>
   );
 }
-
-const Form = styled.div`
-padding:1rem;
-display:flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-display:block;
-margin:auto;
-width:25rem;
-@media(max-width: 767px){
-  width:22rem;
-}
-`
-const Row = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
-`

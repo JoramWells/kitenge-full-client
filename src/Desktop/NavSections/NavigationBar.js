@@ -15,8 +15,8 @@ import {
   HomeIcon,
   ShoppingBagIcon,
 } from "@heroicons/react/solid";
-import styled from "styled-components";
 import { CameraIcon } from "@heroicons/react/outline";
+import { Navbar,Sidenav,Li } from "../../components/styles";
 
 function NavigationBar({ props, activateOption }) {
   const [visible, setVisible] = useState("hidden");
@@ -140,40 +140,7 @@ function NavigationBar({ props, activateOption }) {
 
 export default withRouter(NavigationBar);
 
-const Navbar = styled.nav`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  position: fixed;
-  width: 100%;
-  top: 0%;
-  z-index: 20;
-  padding: 0.3rem;
-  background-color: white;
-`;
 
-const Sidenav = styled.nav`
-  padding-top: 3.77rem;
-  width: 17%;
-  height: 100%;
-  background-color: white;
-  display: fixed;
-  z-index: 1;
-  text-align: center;
-`;
 
-const Li = styled.li`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: start;
-  align-content: center;
-  padding: 0.2rem;
-  :hover {
-    cursor: pointer;
-    color: gray;
-    /* background-color: white; */
-  }
-  color: black;
-  margin: 0.3rem;
-`;
+
+

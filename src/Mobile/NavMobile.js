@@ -11,7 +11,7 @@ import {
   UserIcon,
   XIcon,
 } from "@heroicons/react/solid";
-import styled from "styled-components";
+import {Navbar} from '../components/styles'
 
 const columns = [
   {
@@ -123,15 +123,3 @@ export default function NavMobile(props) {
   }
 }
 
-const Navbar = styled.nav`
-display: flex;
-justify-content: space-around;
-background-color: white;
-padding: .5rem;
-align-items: center;
-flex-direction: row;
-position: fixed;
-top: 0;
-z-index: 50;
-width: 100%;
-`

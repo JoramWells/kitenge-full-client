@@ -3,7 +3,7 @@
 exports[`Navigation bar matches snapshot 1`] = `
 Array [
   <nav
-    className="sc-bdnxRM bBqHQE desktop__navbar shadow-lg"
+    className="sc-jSFjdj iRqQvS desktop__navbar shadow-lg"
     data-testid="nav"
   >
     <div
@@ -38,18 +38,30 @@ Array [
         }
       }
     >
-      <svg
-        className="h-10 text-gray-400 p-1.5"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        className="flex flex-row content-center items-center"
       >
-        <path
-          clipRule="evenodd"
-          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-          fillRule="evenodd"
-        />
-      </svg>
+        <svg
+          className="h-10 p-2 mr-1 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+          />
+          <path
+            d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+          />
+        </svg>
+      </div>
       <input
         className=" text-sm w-full focus:outline-none bg-transparent"
         onClick={[Function]}
@@ -63,7 +75,7 @@ Array [
       >
         <path
           clipRule="evenodd"
-          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
           fillRule="evenodd"
         />
       </svg>
@@ -78,13 +90,13 @@ Array [
     </div>
   </nav>,
   <nav
-    className="sc-gtsrHT iLPqLW nav-menu"
+    className="sc-gKAaRy Yyysv nav-menu"
   >
     <ul
       className="leading-8 "
     >
       <li
-        className="sc-dlnjwi hHwtZA"
+        className="sc-iCoGMd dawpJZ"
       >
         <svg
           className="h-5 ml-3 text-gray-500 mr-4"
@@ -106,7 +118,7 @@ Array [
         className="text-white p-2"
       />
       <li
-        className="sc-dlnjwi hHwtZA"
+        className="sc-iCoGMd dawpJZ"
       >
         <svg
           className="h-5 ml-3  text-gray-500 mr-4"
@@ -130,7 +142,7 @@ Array [
         </div>
       </li>
       <li
-        className="sc-dlnjwi hHwtZA"
+        className="sc-iCoGMd dawpJZ"
       >
         <svg
           className="h-5 ml-3  text-gray-500 mr-4"
@@ -144,14 +156,16 @@ Array [
             fillRule="evenodd"
           />
         </svg>
-        <div
-          className="text-sm text-gray-700"
+        <a
+          className="text-sm text-gray-700 hover:text-gray-500"
+          href="/produc/manage"
+          onClick={[Function]}
         >
-          Your products 
-        </div>
+          Your products
+        </a>
       </li>
       <li
-        className="sc-dlnjwi hHwtZA"
+        className="sc-iCoGMd dawpJZ"
       >
         <svg
           className="h-5 ml-3 text-gray-500 mr-4"
@@ -175,7 +189,7 @@ Array [
         className="text-white py-2"
       />
       <li
-        className="sc-dlnjwi hHwtZA"
+        className="sc-iCoGMd dawpJZ"
       >
         <svg
           className="h-5 ml-3  text-gray-500 mr-4"
@@ -194,7 +208,7 @@ Array [
         </div>
       </li>
       <li
-        className="sc-dlnjwi hHwtZA"
+        className="sc-iCoGMd dawpJZ"
       >
         <svg
           className="h-5 ml-3 text-gray-500 mr-4"

@@ -7,13 +7,13 @@ import { signin } from "../_actions/userActions";
 import { message, Divider } from "antd";
 import Cookie from "js-cookie";
 import { LockClosedIcon, MailIcon } from "@heroicons/react/solid";
-import styled from "styled-components";
+import {Form} from '../components/styles'
 
 export default function SignIn(props) {
   const history = useHistory();
   const [formErrorMessage, setFormErrorMessage] = useState("");
   const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const { loadingUser,userInfo } = userSignin;
 
   const dispatch = useDispatch();
   function register() {
@@ -147,12 +147,11 @@ export default function SignIn(props) {
                   </p>
 
                   <div
-                    style={{ backgroundColor: "#47817F" }}
-                    className="p-2 rounded-md hover:cursor-pointer"
+                    className="p-2 rounded-md hover:cursor-pointer bg-blue-500"
                     onClick={handleSubmit}
                   >
                     <div className="flex flex-row content-center items-center justify-center">
-                      {isSubmitting && (
+                      {loadingUser && (
                         <div className="loader" style={{ padding: ".54rem" }} />
                       )}
                     </div>
@@ -160,7 +159,7 @@ export default function SignIn(props) {
                       <button
                         className="  focus:outline-none text-white text-lg"
                         style={{
-                          display: isSubmitting ? "none" : "block",
+                          display: loadingUser ? "none" : "block",
                         }}
                       >
                         Sign In
@@ -176,18 +175,3 @@ export default function SignIn(props) {
     </div>
   );
 }
-const Form = styled.div`
-background-color:white;
-padding:.5rem;
-display:flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-display:block;
-margin:auto;
-width:25rem;
-height:25rem;
-@media(max-width: 767px){
-  width:22rem;
-}
-`

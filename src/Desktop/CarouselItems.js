@@ -11,10 +11,11 @@ import {
   ShoppingCartIcon,
 } from "@heroicons/react/solid";
 import Modal from "./modalComponent/Modal";
-import {useViews} from "../hooks/useViews";
+import { useViews } from "../hooks/useViews";
+import { Flex } from "../components/styles";
 
 export function CarouselItem({ product }) {
-  const { id, product_name, image, price, description,userId } = product;
+  const { id, product_name, image, price, description, userId } = product;
   const [showModal, setShowModal] = useState(false);
   const views = useViews(id);
 
@@ -98,7 +99,7 @@ export function CarouselItem({ product }) {
       </figure>
       <Modal showModal={showModal} setShowModal={setShowModal}>
         <div className="p-4">
-          <div className="flex flex-row justify-between content-center items-center">
+          <Flex>
             <img
               src={image}
               alt=""
@@ -135,7 +136,7 @@ export function CarouselItem({ product }) {
                 <div className="text-gray-500">5 mins</div>
               </div>
             </div>
-          </div>
+          </Flex>
           <div>
             <h3 style={{ textAlign: "center" }}>description</h3>
             <div
@@ -146,30 +147,18 @@ export function CarouselItem({ product }) {
             </div>
           </div>
           <hr />
-          <div className="justify-center content-center items-center flex flex-row">
-            <div
-              className="flex justify-around p-2 content-center space-x-2"
-              style={{ width: "18rem" }}
-            >
-              <div
-                style={{ backgroundColor: "#47817F" }}
-                className="flex flex-row content-center items-center justify-center w-full p-0 rounded-md"
-              >
-                <CreditCardIcon className="h-10 text-white m-0 p-2" />
-                <button className="p-1 text-gray-100 focus:outline-none">
-                  Buy
-                </button>
-              </div>
-              <div
-                className="flex flex-row content-center items-center justify-center w-full p-0 rounded-md"
-                style={{ backgroundColor: "rgba(0,0,0,0.2)" }}
-              >
+            <Flex>
+              <button className="w-full text-gray-100 focus:outline-none bg-red-400 flex flex-row items-center content-center rounded-md">
+                <CreditCardIcon className="h-10 text-white p-2" />
+                Buy
+              </button>
+
+              <button className="text-gray-700 flex flex-row w-full content-center items-center bg-gray-300 rounded-md">
                 <ShoppingCartIcon className="h-10 p-2 text-gray-700" />
-                <button className="text-gray-700">Add to Cart</button>
-              </div>
-            </div>
+                Add to Cart
+              </button>
+            </Flex>
           </div>
-        </div>
       </Modal>
     </>
   );

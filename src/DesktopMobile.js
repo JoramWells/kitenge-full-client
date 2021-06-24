@@ -4,24 +4,11 @@ import { CarouselItems } from "./Desktop/CarouselItems";
 import { useDispatch, useSelector } from "react-redux";
 import { Result } from "antd";
 import { listProducts } from "./_actions/productActions";
-import styled from "styled-components";
 import { RefreshIcon } from "@heroicons/react/outline";
+import { Flex, Container, Skeleton } from "./components/styles";
 
 const renderSkeleton = [...Array(8).keys()].map((i) => {
-  const Skeleton = styled.div`
-    height: 240px;
-    width: 14rem;
-    background-color: white;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    @media (max-width: 767px) {
-      width: 18rem;
-    }
-  `;
-  return <Skeleton key={i} className="mb-4 p-2" >
-  </Skeleton>;
+  return <Skeleton key={i} className="mb-4 p-2"></Skeleton>;
 });
 function reloadHandler() {
   window.location.reload();
@@ -37,7 +24,6 @@ export default function DesktopMobile() {
     listItem();
     return () => {};
   }, [listItem]);
-
 
   return (
     <>
@@ -104,23 +90,3 @@ export default function DesktopMobile() {
     </>
   );
 }
-
-const Container = styled.div`
-  max-width: 83%;
-  float: right;
-  margin-top: 5rem;
-  padding: 1.55rem;
-  background-color: rgba(248, 248, 248, 0.2);
-`;
-
-const Flex = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  @media (max-width: 767px) {
-    justify-content: space-around;
-    align-items: center;
-  }
-`;

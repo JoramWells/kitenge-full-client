@@ -16,7 +16,7 @@ const signin = (dataToSubmit) => async (dispatch) => {
     await axios
       .post("/user/login", dataToSubmit)
       .then((response) => {
-        if (response.data.success == 0) {
+        if (response.data.success === false) {
           dispatch({ type: USER_SIGNIN_FAIL, payload: "Email not found" });
           Cookie.set("userFailure", JSON.stringify(response.data), {
             expires: 1 / 28800,
@@ -53,10 +53,10 @@ const register = (name, email, password, avatar, phone, address) => async (
       })
       .then((response) => {
         console.log(response.data);
-        if (response.data.success == 0) {
+        if (response.data.success === false) {
           dispatch({
             type: USER_REGISTER_FAIL,
-            payload: "User already exists",
+            payload: response.data,
           });
           Cookie.set("userFailure", JSON.stringify(response.data), {
             expires: 1 / 28800,

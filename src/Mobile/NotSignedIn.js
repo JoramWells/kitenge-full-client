@@ -10,9 +10,10 @@ export default function NotSignedIn() {
       <Link to="/" className="text-gray-800 font-bold text-xl">
         Do3ens
       </Link>
+      
+      <div className=" rounded-md px-4 text-lg active:ring-gray-500 active:bg-black active:ring-0 active:bg-opacity-20 flex flex-row content-center items-center space-x-2">
       <SearchIcon className="text-gray-500 h-5" />
-      <div className="ring-1 ring-gray-300 py-0.5 rounded-md px-4 text-lg active:ring-gray-500 active:bg-black active:ring-0 active:bg-opacity-20">
-        <Link to="/login">Login</Link>
+        <Link to="/login"  className="ring-1 ring-gray-300 py-0.5 px-1 rounded-md">Login</Link>
       </div>
     </Navbar>
   );
