@@ -67,8 +67,8 @@ export function CarouselItem({ product }) {
   return (
     <>
       <figure
-        style={{ width: "14rem", border: "1px solid #F0F0F0 " }}
-        className="rounded-md bg-white mb-4"
+        style={{ width: "15rem", border: "1px solid #F0F0F0 " }}
+        className="rounded-md bg-white mb-8 shadow-md"
         key={id}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -90,8 +90,8 @@ export function CarouselItem({ product }) {
           effect="blur"
           alt="productimage"
           style={{
-            width: "14rem",
-            height: "145px",
+            width: "15rem",
+            height: "155px",
             display: "block",
             margin: "auto",
           }}

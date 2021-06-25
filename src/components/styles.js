@@ -42,7 +42,7 @@ justify-content: center;
 align-items: center;
 display:block;
 margin:auto;
-width:24rem;
+width:25rem;
 /* height:25rem; */
 @media(max-width: 767px){
   width:22rem;
@@ -59,7 +59,7 @@ align-items: center;
 export const Navbar = styled.nav`
 display: flex;
 justify-content: space-between;
-background-color: white;
+background-color: #F4C430;
 padding: .5rem;
 align-items: center;
 flex-direction: row;

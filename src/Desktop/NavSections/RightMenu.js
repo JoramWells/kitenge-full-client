@@ -3,6 +3,7 @@ import { message } from "antd";
 import Cookie from "js-cookie";
 import { withRouter, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { MailIcon, ShoppingCartIcon } from "@heroicons/react/outline";
 
 // const cartItems = Cookie.getJSON("cartItems");
 
@@ -31,11 +32,10 @@ function RightMenu(props) {
     history.goBack();
   }
 
-
   if (!userInfo) {
     return (
       <div
-        className="hover:cursor-pointer py-2 px-4 border  focus:outline-none rounded-md text-gray-900"
+        className="hover:cursor-pointer py-1 px-4 border  focus:outline-none rounded-md text-gray-900 font-semibold text-lg"
         onClick={login}
       >
         Login
@@ -45,15 +45,17 @@ function RightMenu(props) {
     if (cartItems.length === 0) {
       return (
         <div className="flex flex-row justify-center items-center content-center">
+          <MailIcon className="h-10 p-2 text-gray-700" />
+          <ShoppingCartIcon className="h-10 p-2 text-gray-700" />
+
           <img
             src={userInfo.avatar}
             alt={userInfo.avatar}
             loading="lazy"
             style={{
-              width: "27px",
-              height: "27px",
+              width: "30px",
+              height: "30px",
               borderRadius: "50px",
-              marginTop: ".65rem",
             }}
           />
           {/* <Menu mode="horizontal">

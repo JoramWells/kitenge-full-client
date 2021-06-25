@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 // import LeftMenu from "./NavSections/LeftMenu";
 import RightMenu from "./RightMenu";
 import { message } from "antd";
-import { Link, withRouter,useHistory } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { searchItems } from "../../_actions/searchActions";
 import { useDispatch } from "react-redux";
 import {
@@ -18,60 +18,59 @@ import {
 import { CameraIcon } from "@heroicons/react/outline";
 import { Navbar, Sidenav, Li } from "../../components/styles";
 
-function NavigationBar({activateOption }) {
-  const history = useHistory()
+function NavigationBar(props, activateOption) {
+  const searchRef = useRef();
   const [visible, setVisible] = useState("hidden");
   const [sidebar, setSidebar] = useState(false);
   const activate = () => setSidebar(!sidebar);
   const dispatch = useDispatch();
   async function handleSubmit(e) {
-    e.preventDefault()
-    dispatch(searchItems({ keyword: "amazing", min_videos: "1" }));
+    e.preventDefault();
+    const term = searchRef.current.value;
+    dispatch(searchItems({ searchTerm: term, min_search: "1" }));
     message.info("Waaaaaaat!!!");
+    props.history.push("/searched");
     // await axios.post('/andeyo',{keyword:"amazing",min_videos:1}).then(response=>{
     //   setPosts(response.data)
     //   console.log(posts)
     // }).catch(err=>console.log(err))
-    // setTimeout(() => {
-    //   history.go("/searched");
-    // }, 1000);
   }
 
   return (
     <>
-      <Navbar className="desktop__navbar shadow-lg" data-testid="nav">
-        <div className="p-2 flex flex-row space-x-2 items-center">
-          <MenuIcon
-            className="h-5 text-gray-800"
-            onClick={activateOption ? activate : null}
-          />
-          <Link to="/" className="text-gray-700 font-semibold text-xl">
+      <Navbar className="desktop__navbar" data-testid="nav">
+        <div className="p-2 flex flex-row space-x-2 items-center justify-center">
+          <div className="hover:cursor-pointer active:bg-black active:bg-opacity-20 hover:rounded-full p-1.5">
+            <MenuIcon
+              className="h-5 text-gray-700   "
+              onClick={activateOption ? activate : null}
+            />
+          </div>
+
+          <Link to="/" className=" font-semibold text-xl" style={{color:"#2F4858"}}>
             Do3ensKE
           </Link>
-          {/* <Row justify="center">
-          <Col span={6}>
-            <Search placeholder="Search.." onSearch={onSearch} />
-          </Col>
-        </Row> */}
         </div>
 
         <div
           style={{ width: "30rem" }}
-          className="bg-gray-100 flex flex-row items-center content-center space-x-2 rounded-full"
+          className="bg-gray-50 flex flex-row items-center content-center space-x-2 rounded-full"
         >
           <div className="flex flex-row content-center items-center">
-            <CameraIcon className="h-10 p-2 mr-1 text-gray-400" />
+            <CameraIcon className="h-10 p-2 mr-1 text-gray-300 hover:cursor-pointer" />
           </div>
           <form className="w-full flex flex-row" onSubmit={handleSubmit}>
-          <input
-            placeholder="Search..."
-            className=" text-sm w-full focus:outline-none bg-transparent"
-          />
+            <input
+              placeholder="Search..."
+              className=" text-sm w-full focus:outline-none bg-transparent"
+              ref={searchRef}
+            />
 
-          <SearchIcon className="h-10 text-gray-400 p-1.5" onClick={handleSubmit} />
-
+            <SearchIcon
+              className="h-10 text-gray-400 p-1.5 hover:cursor-pointer"
+              onClick={handleSubmit}
+            />
           </form>
-
         </div>
         {/* <div
           style={{
@@ -106,19 +105,23 @@ function NavigationBar({activateOption }) {
         <ul className="leading-8 ">
           <Li>
             <HomeIcon className="h-5 ml-3 text-gray-500 mr-4" />
-            <div className=" text-sm text-gray-700">Home</div>
+            <div className="hover:text-gray-700 text-gray-900 font-semibold">
+              Home
+            </div>
           </Li>
 
           <hr className="text-white p-2" />
           <Li>
             <CreditCardIcon className="h-5 ml-3  text-gray-500 mr-4" />
-            <div className="text-sm text-gray-700">Purchases </div>
+            <div className="hover:text-gray-700 text-gray-900 font-semibold">
+              Purchases{" "}
+            </div>
           </Li>
           <Li>
             <ShoppingBagIcon className="h-5 ml-3  text-gray-500 mr-4" />
             <Link
               to="/produc/manage"
-              className="text-sm text-gray-700 hover:text-gray-500"
+              className="hover:text-gray-700 text-gray-900 font-semibold"
             >
               Your products
             </Link>
@@ -126,16 +129,22 @@ function NavigationBar({activateOption }) {
 
           <Li>
             <ClockIcon className="h-5 ml-3 text-gray-500 mr-4" />
-            <div className="text-sm text-gray-700">Recent purchases </div>
+            <div className="hover:text-gray-700 text-gray-900 font-semibold">
+              Recent purchases{" "}
+            </div>
           </Li>
           <hr className="text-white py-2" />
           <Li>
             <ThumbUpIcon className="h-5 ml-3  text-gray-500 mr-4" />
-            <div className="text-sm  text-gray-700">Liked Items</div>
+            <div className="hover:text-gray-700 text-gray-900 font-semibold">
+              Liked Items
+            </div>
           </Li>
           <Li>
             <DotsCircleHorizontalIcon className="h-5 ml-3 text-gray-500 mr-4" />
-            <div className="text-sm  text-gray-700">More Items</div>
+            <div className="hover:text-gray-700 text-gray-900 font-semibold">
+              More Items
+            </div>
           </Li>
         </ul>
       </Sidenav>

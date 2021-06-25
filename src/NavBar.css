@@ -121,41 +121,6 @@
   }
 }
 
-.cart {
-  background-color: #595a5c;
-  border-radius: 5px;
-}
-.cart:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-  background-color: #595a5c;
-
-}
-
-.reverse__cart {
-  background-color: #a0a0a0;
-  border-radius: 5px;
-}
-.reverse__cart:hover {
-  background-color: #fdba45;
-}
-.close :hover{
-  cursor: pointer;
-  color: #fdba45;
-}
-.close{
-  color: #404040;
-}
-.close:focus{
-  color: #fdba45;
-  font-size: 1.7rem;
-}
-
-.skip-link:focus{
-  background-color: #fdba45;
-  border-radius: 50px;
-  padding: 0px;
-  
-}
 .tableClass tr,td,th{
     border: .11rem solid whitesmoke;
     padding: .5rem;

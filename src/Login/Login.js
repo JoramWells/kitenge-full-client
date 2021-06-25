@@ -32,8 +32,12 @@ export default function SignIn(props) {
     <div style={{ paddingTop: "5rem" }}>
       <Form
         className="rounded-md ring-1 ring-gray-200">
-        <Divider>Signin
-          <div className="text-gray-500 font-normal text-sm">
+        <Divider>
+          <div style={{color:"#F4C430"}} className="text-2xl font-bold">
+          Signin
+          </div>
+          
+          <div className="text-gray-500 font-normal text-lg">
             to continue to do3ensKE
           </div>
         </Divider>

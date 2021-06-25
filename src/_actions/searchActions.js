@@ -14,7 +14,8 @@ const searchItems = (dataToSubmit) => async (dispatch) => {
         dispatch({ type: SEARCH_QUERY_SUCCESS, payload: response.data });
       })
       .catch((err) => {
-        console.log(err);
+        dispatch({ type: SEARCH_QUERY_FAIL, payload: err.message });
+
       });
   } catch (error) {
     dispatch({ type: SEARCH_QUERY_FAIL, payload: error.message });
