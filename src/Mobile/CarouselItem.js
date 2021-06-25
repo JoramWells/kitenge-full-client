@@ -1,5 +1,5 @@
 import React, {  useState, memo } from "react";
-import { Col,  message, Divider } from "antd";
+import { Col,  message, Divider, Image } from "antd";
 import NumberFormat from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -18,7 +18,7 @@ import Modal from "../Desktop/modalComponent/Modal";
 
 
 function CarouselIte({ products }) {
-  const { id, product_name, image, price, like, src } = products;
+  const { id, product_name, image, price, views, src } = products;
   const [dot, setDot] = useState("hidden");
   const [showModal, setShowModal] = useState(false);
   const history = useHistory();
@@ -89,14 +89,41 @@ function CarouselIte({ products }) {
           <Divider style={{ margin: ".5rem" }} />
           <div className="text-gray-400 justify-between flex">
             <div className="flex flex-row">
-              21views{like}
+              21views{views}
             </div>
             <p className="m-0">Sold 93</p>
           </div>
         </div>
       </figure>
       <Modal showModal={showModal} setShowModal={setShowModal}>
-        hahah
+        <div className="flex flex-col p-2">
+        <div className="flex flex-row justify-center">
+          <img src={image} style={{width:"200px"}} className="rounded-md" />
+          </div>
+          <div className="flex flex-col content-center justify-center">
+          <div className="text-gray-700 font-semibold text-lg">
+          {product_name}
+          </div>
+          <div className="text-gray-500">
+            {price}
+          </div>
+          <div>
+            Umoja
+          </div>
+          <div>
+            2 min(s) out
+          </div>
+
+          </div>
+
+          <div className="flex flex-row justify-center content-center space-x-2">
+          <button className="bg-black bg-opacity-80 w-full py-1 rounded-md">Buy</button>
+          <button className="w-full bg-black bg-opacity-20 py-1 rounded-md">Add to cart</button>   
+          </div>
+
+
+        </div>
+
 
       </Modal>
     </Col>

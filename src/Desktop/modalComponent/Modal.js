@@ -25,7 +25,7 @@ const Content = styled.div`
   transition-duration: 500ms;
   width: 35rem;
   @media(max-width:767px){
-    width:23rem;
+    width:21.5rem;
     margin: 10px;
     /* height: 50%; */
   }
