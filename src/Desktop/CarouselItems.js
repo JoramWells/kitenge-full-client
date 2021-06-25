@@ -113,7 +113,7 @@ export function CarouselItem({ product }) {
               <div>
               {views} views
               </div>
-            <div>| {moment(updatedAt).fromNow("hh")}</div>
+            <div>| {moment(updatedAt).fromNow("yyyy")}</div>
             </div>
             
           </div>

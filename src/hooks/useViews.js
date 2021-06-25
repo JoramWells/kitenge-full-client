@@ -15,7 +15,7 @@ export const useViews = (id) => {
  
   useEffect(()=>{
       fetchLikes()
-  },[fetchLikes])
+  },[])
 
   return views
 };
@@ -29,7 +29,7 @@ export const useAvatar =(id)=>{
   }
   useEffect(()=>{
       fetchAvatar()
-  },[fetchAvatar])
+  },[])
   return avatar
   
 }

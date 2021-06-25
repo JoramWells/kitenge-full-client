@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import LeftMenu from "./NavSections/LeftMenu";
 import RightMenu from "./RightMenu";
 import { message } from "antd";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter,useHistory } from "react-router-dom";
 import { searchItems } from "../../_actions/searchActions";
 import { useDispatch } from "react-redux";
 import {
@@ -16,23 +16,25 @@ import {
   ShoppingBagIcon,
 } from "@heroicons/react/solid";
 import { CameraIcon } from "@heroicons/react/outline";
-import { Navbar,Sidenav,Li } from "../../components/styles";
+import { Navbar, Sidenav, Li } from "../../components/styles";
 
-function NavigationBar({ props, activateOption }) {
+function NavigationBar({activateOption }) {
+  const history = useHistory()
   const [visible, setVisible] = useState("hidden");
   const [sidebar, setSidebar] = useState(false);
   const activate = () => setSidebar(!sidebar);
   const dispatch = useDispatch();
-  async function onSearch() {
+  async function handleSubmit(e) {
+    e.preventDefault()
     dispatch(searchItems({ keyword: "amazing", min_videos: "1" }));
     message.info("Waaaaaaat!!!");
     // await axios.post('/andeyo',{keyword:"amazing",min_videos:1}).then(response=>{
     //   setPosts(response.data)
     //   console.log(posts)
     // }).catch(err=>console.log(err))
-    setTimeout(() => {
-      props.history.push("/searched");
-    }, 1000);
+    // setTimeout(() => {
+    //   history.go("/searched");
+    // }, 1000);
   }
 
   return (
@@ -60,13 +62,16 @@ function NavigationBar({ props, activateOption }) {
           <div className="flex flex-row content-center items-center">
             <CameraIcon className="h-10 p-2 mr-1 text-gray-400" />
           </div>
-
+          <form className="w-full flex flex-row" onSubmit={handleSubmit}>
           <input
             placeholder="Search..."
             className=" text-sm w-full focus:outline-none bg-transparent"
-            onClick={() => setVisible("visible")}
           />
-          <SearchIcon className="h-10 text-gray-400 p-1.5" />
+
+          <SearchIcon className="h-10 text-gray-400 p-1.5" onClick={handleSubmit} />
+
+          </form>
+
         </div>
         {/* <div
           style={{
@@ -139,8 +144,3 @@ function NavigationBar({ props, activateOption }) {
 }
 
 export default withRouter(NavigationBar);
-
-
-
-
-
