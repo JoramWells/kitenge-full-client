@@ -13,12 +13,14 @@ import DesktopNavbarMobile from "./DesktopNavbarMobile";
 import Product from "./Products/Product";
 import ScrollTop from "./Generic/ScrollTop";
 import SearchedItems from "./Products/SearchedItems";
+import Header from "./header/Header";
 
 function App() {
   return (
     <>
       <Router>
         <ScrollTop />
+       <Header />
         <DesktopNavbarMobile />
 
         <Switch>

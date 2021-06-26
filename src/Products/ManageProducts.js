@@ -5,16 +5,7 @@ import React, {
   useRef,
   useCallback,
 } from "react";
-import styled from "styled-components";
-import {
-  Button,
-  Form,
-  Upload,
-  Col,
-  message,
-  Skeleton,
-  Result,
-} from "antd";
+import { Button,  Upload, message, Skeleton, Result } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -29,6 +20,7 @@ import {
   PlusIcon,
   RefreshIcon,
 } from "@heroicons/react/solid";
+import { Flex, Col, Row, InputDiv } from "../components/styles";
 
 const renderTH = [...Array(4).keys()].map((i) => {
   return (
@@ -93,7 +85,18 @@ export default function ManageProducts() {
       setShowModal(false);
       if (product) message.success("Product update successfully");
     }, 1000);
-  },[dispatch,id,name,price,stock,shop,image,category,description,product]);
+  }, [
+    dispatch,
+    id,
+    name,
+    price,
+    stock,
+    shop,
+    image,
+    category,
+    description,
+    product,
+  ]);
   const deleteHandler = () => {
     dispatch(deleteProduct(id));
   };
@@ -160,28 +163,28 @@ export default function ManageProducts() {
 
   return (
     <Fragment>
-      <Modal  showModal={showModal} setShowModal={setShowModal} >
+      <Modal showModal={showModal} setShowModal={setShowModal}>
         <Row>
-          <div style={{ width: "20rem",padding:"1rem" }}>
-            <Form layout="vertical" name="basic" encType="multipart/form-data">
+          <div style={{ width: "20rem", padding: "1rem" }}>
+            <form  encType="multipart/form-data">
               <img
                 src={"/" + image}
                 style={{ width: "70px", marginBottom: ".3rem" }}
                 alt={name}
               />
-              <Flex>
-                <ChevronRightIcon className="h-5 text-yellow-300" />
+              <InputDiv>
+                <ChevronRightIcon className="h-5 text-gray-400 " />
                 <input
                   name="name"
                   id="name"
                   className="focus:outline-none "
-                  placeholder="Available stock"
+                  placeholder="Item name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
-              </Flex>
-              <Flex>
-                <ChevronRightIcon className="h-5 text-yellow-300" />
+              </InputDiv>
+              <InputDiv>
+                <ChevronRightIcon className="h-5 text-gray-400 " />
                 <input
                   name="price"
                   id="price"
@@ -190,20 +193,19 @@ export default function ManageProducts() {
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                 />
-              </Flex>
-              <Flex hidden>
-                <ChevronRightIcon className="h-5 text-yellow-300" />
-                <input
-                  name="image"
-                  id="image"
-                  className="focus:outline-none "
-                  placeholder="Available stock"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                />
-              </Flex>
-              <Flex>
-                <ChevronRightIcon className="h-5 text-yellow-300" />
+              </InputDiv>
+
+              <input
+                name="image"
+                hidden
+                id="image"
+                className="focus:outline-none "
+                placeholder="Available stock"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+              />
+              <InputDiv>
+                <ChevronRightIcon className="h-5 text-gray-400 " />
                 <input
                   name="shop"
                   id="shop"
@@ -212,9 +214,9 @@ export default function ManageProducts() {
                   value={shop}
                   onChange={(e) => setShop(e.target.value)}
                 />
-              </Flex>
-              <Flex>
-                <ChevronRightIcon className="h-5 text-yellow-300" />
+              </InputDiv>
+              <InputDiv>
+                <ChevronRightIcon className="h-5 text-gray-400 " />
                 <input
                   name="category"
                   id="category"
@@ -223,9 +225,9 @@ export default function ManageProducts() {
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 />
-              </Flex>
-              <Flex>
-                <ChevronRightIcon className="h-5 text-yellow-300" />
+              </InputDiv>
+              <InputDiv>
+                <ChevronRightIcon className="h-5 text-gray-400 " />
                 <input
                   name="stock"
                   id="stock"
@@ -234,38 +236,31 @@ export default function ManageProducts() {
                   value={stock}
                   onChange={(e) => setStock(e.target.value)}
                 />
-              </Flex>
+              </InputDiv>
               <div
-            className="flex flex-row w-full my-8"
-            style={{ borderBottom: "1px solid whitesmoke" }}
-          >
-            <ChevronRightIcon className="h-5 text-yellow-300" />
-            <textarea
-              name="description"
-              id="description"
-              className="focus:outline-none "
-              placeholder="Product description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              cols={50}
-              row={0}
-              style={{
-                border: "1px solid gray",
-                padding: ".5rem",
-                borderRadius: "5px",
-              }}
-            />
-          </div>
-              <Row justify="space-around" align="middle">
-                <Col>
-                  <Form.Item>
+                className="flex flex-row w-full my-8"
+                style={{ borderBottom: "1px solid whitesmoke" }}
+              >
+                <textarea
+                  name="description"
+                  id="description"
+                  className="focus:outline-none "
+                  placeholder="Product description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  cols={50}
+                  row={0}
+                  style={{
+                    border: "1px solid gray",
+                    padding: ".5rem",
+                    borderRadius: "5px",
+                  }}
+                />
+              </div>
+              <Row>
                     <Upload {...prop}>
                       <Button icon={<UploadOutlined />}>UPLOAD IMAGE</Button>
                     </Upload>
-                  </Form.Item>
-                </Col>
-                <Col>
-                  <Form.Item>
                     <Button
                       loading={showLoading}
                       disabled={showButton}
@@ -276,10 +271,8 @@ export default function ManageProducts() {
                     >
                       COMPLETE
                     </Button>
-                  </Form.Item>
-                </Col>
               </Row>
-            </Form>
+            </form>
           </div>
         </Row>
       </Modal>
@@ -297,7 +290,7 @@ export default function ManageProducts() {
         </div>
 
         {loading ? (
-          <Row>
+          <Col>
             <div>
               <table style={{ marginTop: "5rem" }}>
                 <thead>
@@ -310,9 +303,9 @@ export default function ManageProducts() {
                 </tbody>
               </table>
             </div>
-          </Row>
+          </Col>
         ) : error ? (
-          <Row>
+          <Col>
             <Result
               status="500"
               subTitle={error}
@@ -329,10 +322,10 @@ export default function ManageProducts() {
                 </Flex>
               }
             />
-          </Row>
+          </Col>
         ) : (
           // <Table dataSource={posts} columns={columns}/>
-          <Row
+          <Col
             style={{ marginTop: "3rem", marginBottom: "3rem" }}
             justify="space-around"
             align="middle"
@@ -378,25 +371,9 @@ export default function ManageProducts() {
                 </tbody>
               </table>
             </Col>
-          </Row>
+          </Col>
         )}
       </main>
     </Fragment>
   );
 }
-
-const Flex = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  margin-top: .7rem;
-  margin-bottom: .7rem;
-  border-bottom: 1px solid whitesmoke;
-`;
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-`;

@@ -6,8 +6,7 @@ import { useHistory } from "react-router-dom";
 
 import { Form, Button, message, Upload } from "antd";
 import { ChevronRightIcon } from "@heroicons/react/solid";
-import styled from "styled-components";
-import { Col, Card } from "../components/styles";
+import { Col, Card,InputDiv } from "../components/styles";
 
 export default function AddProduct() {
   const history = useHistory();
@@ -22,6 +21,9 @@ export default function AddProduct() {
   const dispatch = useDispatch();
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+  const ProductSave = useSelector(state=>state.productSave)
+  const {loading}  = ProductSave
+
 
   const prop = {
     name: "file",
@@ -71,6 +73,17 @@ export default function AddProduct() {
       const stock = stockRef.current.value;
       const category = categoryRef.current.value;
       const description = descriptionRef.current.value;
+      if (
+        name == "" ||
+        price == "" ||
+        selling_price == "" ||
+        stock == "" ||
+        category == "" ||
+        description == ""
+      ) {
+        message.error("wacha ufala");
+        return null;
+      }
 
       dispatch(
         saveProduct(
@@ -84,10 +97,11 @@ export default function AddProduct() {
           description
         )
       );
-      setTimeout(() => {
-        message.success("Product added succefully");
-        history.go("/produc/manage");
-      }, 2000);
+      message.success("Product added succesfully")
+      // setTimeout(() => {
+      //   message.success("Product added succefully");
+      //   // history.go("/produc/manage");
+      // }, 2000);
     },
     [dispatch, history, image, userInfo.id]
   );
@@ -96,7 +110,7 @@ export default function AddProduct() {
     <Col>
       <Card className="rounded-md ring-1 ring-gray-300">
         <Form layout="vertical" encType="multipart/form-data">
-          <div className="flex my-4 flex-row ring-1 ring-gray-300 p-2 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md ">
+          <InputDiv>
             <ChevronRightIcon className="h-5 text-gray-400 " />
             <input
               name="name"
@@ -105,8 +119,8 @@ export default function AddProduct() {
               placeholder="Item name"
               ref={nameRef}
             />
-          </div>
-          <div className="flex my-4 flex-row ring-1 ring-gray-300 p-2 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+          </InputDiv>
+          <InputDiv >
             <ChevronRightIcon className="h-5 text-gray-400 " />
             <input
               name="price"
@@ -115,9 +129,9 @@ export default function AddProduct() {
               placeholder="Original price"
               ref={priceRef}
             />
-          </div>
+          </InputDiv>
 
-          <div className="flex my-4 flex-row ring-1 ring-gray-300 p-2 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+          <InputDiv >
             <ChevronRightIcon className="h-5 text-gray-400 " />
             <input
               name="selling_price"
@@ -126,8 +140,8 @@ export default function AddProduct() {
               placeholder="Selling price"
               ref={sellingPriceRef}
             />
-          </div>
-          <div className="flex my-4 flex-row ring-1 ring-gray-300 p-2 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+          </InputDiv>
+          <InputDiv >
             <ChevronRightIcon className="h-5 text-gray-400 " />
             <input
               name="category"
@@ -136,8 +150,8 @@ export default function AddProduct() {
               placeholder="shoes, skirt, dress"
               ref={categoryRef}
             />
-          </div>
-          <div className="flex my-4 flex-row ring-1 ring-gray-300 p-2 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+          </InputDiv>
+          <InputDiv >
             <ChevronRightIcon className="h-5 text-gray-400 " />
             <input
               name="stock"
@@ -147,13 +161,12 @@ export default function AddProduct() {
               ref={stockRef}
               required
             />
-          </div>
+          </InputDiv>
 
           <div
             className="flex flex-row w-full my-8"
             style={{ borderBottom: "1px solid whitesmoke" }}
           >
-            <ChevronRightIcon className="h-5" />
             <textarea
               name="description"
               id="description"
@@ -170,7 +183,7 @@ export default function AddProduct() {
             />
           </div>
 
-          <Form.Item>
+          <div className="mb-4">
             <Upload {...prop}>
               <Button
                 icon={
@@ -180,25 +193,27 @@ export default function AddProduct() {
                 Select image
               </Button>
             </Upload>
-          </Form.Item>
+          </div>
 
-          <button
-            className="w-full bg-black bg-opacity-80 rounded-md p-1.5 text-white"
-            onClick={productAdd}
-          >
-            Add
-          </button>
+          <div className="bg-black bg-opacity-80 rounded-md" onClick={productAdd}>
+            <div className="flex flex-row content-center items-center justify-center">
+              {loading && (
+                <div className="loader m-1" style={{ padding: ".54rem" }} />
+              )}
+            </div>
+            <button
+              style={{
+                borderRadius: "5px",
+                border: "0",
+                display: loading ? "none" : "block",
+              }}
+              className=" w-full p-1 focus:outline-none text-lg text-white"
+            >
+              Add
+            </button>
+          </div>
         </Form>
       </Card>
     </Col>
   );
 }
-
-const Flex = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid whitesmoke;
-`;

@@ -1,5 +1,5 @@
-import React, {  useState, memo } from "react";
-import { Col,  message, Divider, Image } from "antd";
+import React, { useState, memo } from "react";
+import { Col, message, Divider } from "antd";
 import NumberFormat from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -7,15 +7,9 @@ import { useHistory } from "react-router-dom";
 
 // import { listProducts } from "../../_actions/productActions";
 import { addToCart } from "../_actions/cartActions";
-import {
-  HeartIcon,
-  ThumbUpIcon,
-} from "@heroicons/react/solid";
 import { DotsVerticalIcon } from "@heroicons/react/outline";
 import Modal from "../Desktop/modalComponent/Modal";
 // import { likedItem } from "../_actions/likedActions";
-
-
 
 function CarouselIte({ products }) {
   const { id, product_name, image, price, views, src } = products;
@@ -52,25 +46,28 @@ function CarouselIte({ products }) {
 
   return (
     <Col key={id} className="mb-4">
-      <figure className="shadow-md bg-white"
-      onMouseEnter={()=>setDot("visible")}
-      onMouseLeave={()=>setDot("hidden")}
-
+      <figure
+        className="shadow-md bg-white"
+        onMouseEnter={() => setDot("visible")}
+        onMouseLeave={() => setDot("hidden")}
       >
         {/* <div className="absolute bg-yellow-500 px-2 bg-opacity-40 rounded-br-md font-bold text-gray-300">
         20
       </div> */}
-        <div className="absolute mx-auto bg-black p-2 top-0 right-0 bg-opacity-20 rounded-full z-5"
-        style={{visibility:dot}}
-      
+        <div
+          className="absolute mx-auto bg-black p-2 top-0 right-0 bg-opacity-20 rounded-full z-5"
+          style={{ visibility: dot }}
         >
-          <DotsVerticalIcon className="h-5 text-gray-200 active:text-red-400" onClick={() => openModal(id)}/>
+          <DotsVerticalIcon
+            className="h-5 text-gray-200 active:text-red-400"
+            onClick={() => openModal(id)}
+          />
         </div>
         <img
           alt={src}
           loading="lazy"
           src={image}
-          style={{ width: "18rem", height: "12rem",zIndex:"-1" }}
+          style={{ width: "18rem", height: "12rem", zIndex: "-1" }}
         />
         <div className="p-2">
           <div className="text-gray-500 font-medium">{product_name}</div>
@@ -88,43 +85,31 @@ function CarouselIte({ products }) {
 
           <Divider style={{ margin: ".5rem" }} />
           <div className="text-gray-400 justify-between flex">
-            <div className="flex flex-row">
-              21views{views}
-            </div>
+            <div className="flex flex-row">21views{views}</div>
             <p className="m-0">Sold 93</p>
           </div>
         </div>
       </figure>
       <Modal showModal={showModal} setShowModal={setShowModal}>
         <div className="flex flex-col p-2">
-        <div className="flex flex-row justify-center">
-          <img src={image} style={{width:"200px"}} className="rounded-md" />
-          </div>
           <div className="flex flex-col content-center justify-center">
-          <div className="text-gray-700 font-semibold text-lg">
-          {product_name}
-          </div>
-          <div className="text-gray-500">
-            {price}
-          </div>
-          <div>
-            Umoja
-          </div>
-          <div>
-            2 min(s) out
-          </div>
-
+            <div className="text-gray-700 font-semibold text-lg">
+              {product_name}
+            </div>
+            <div className="text-gray-500">{price}</div>
+            <div>Umoja</div>
+            <div>2 min(s) out</div>
           </div>
 
           <div className="flex flex-row justify-center content-center space-x-2">
-          <button className="bg-black bg-opacity-80 w-full py-1 rounded-md">Buy</button>
-          <button className="w-full bg-black bg-opacity-20 py-1 rounded-md">Add to cart</button>   
+            <button className="bg-black bg-opacity-80 w-full py-1 rounded-md">
+              Buy
+            </button>
+            <button className="w-full bg-black bg-opacity-20 py-1 rounded-md">
+              Add to cart
+            </button>
           </div>
-
-
         </div>
-
-
       </Modal>
     </Col>
   );

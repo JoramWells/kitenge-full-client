@@ -80,34 +80,25 @@ const deleteProduct = (id) => async (dispatch, getState) => {
 };
 
 const saveProduct =
-  (
-    name,
-    price,
-    selling_price,
-    stock,
-    userId,
-    image,
-    category,
-    description,
-  ) =>
+  (name, price, selling_price, stock, userId, image, category, description) =>
   async (dispatch, getState) => {
+    dispatch({
+      type: PRODUCT_SAVE_REQUEST,
+      payload: {
+        name,
+        price,
+        selling_price,
+        stock,
+        userId,
+        image,
+        category,
+        description,
+      },
+    });
+    const {
+      userSignin: { userInfo },
+    } = getState();
     try {
-      dispatch({
-        type: PRODUCT_SAVE_REQUEST,
-        payload: {
-          name,
-          price,
-          selling_price,
-          stock,
-          userId,
-          image,
-          category,
-          description,
-        },
-      });
-      const {
-        userSignin: { userInfo },
-      } = getState();
       await axios
         .post(
           `/productz/add`,
@@ -130,7 +121,9 @@ const saveProduct =
         .then((response) => {
           dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: response.data });
         })
-        .catch((err) => console.log(err));
+        .catch((error) => {
+          dispatch({ type: PRODUCT_SAVE_FAIL, payload: error.message });
+        });
     } catch (error) {
       dispatch({ type: PRODUCT_SAVE_FAIL, payload: error.message });
     }

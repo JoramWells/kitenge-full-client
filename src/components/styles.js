@@ -59,11 +59,12 @@ align-items: center;
 export const Navbar = styled.nav`
 display: flex;
 justify-content: space-between;
-background-color: #F4C430;
+background-color: white;
 padding: .5rem;
 align-items: center;
 flex-direction: row;
-position: fixed;
+position: static;
+position: -webkit-sticky;
 top: 0;
 z-index: 50;
 width: 100%;
@@ -119,4 +120,17 @@ width:24rem;
   width:21.5rem;
 }
 `;
+
+export const InputDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top:.7rem;
+  margin-bottom: .7rem;
+  border: solid 1px gray;
+  padding:.5rem;
+
+`
 
