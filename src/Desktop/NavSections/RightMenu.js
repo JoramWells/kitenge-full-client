@@ -4,6 +4,7 @@ import Cookie from "js-cookie";
 import { withRouter, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { MailIcon, ShoppingCartIcon } from "@heroicons/react/outline";
+import SignedInDropdown from "./SignedInDropdown";
 
 // const cartItems = Cookie.getJSON("cartItems");
 
@@ -58,6 +59,7 @@ function RightMenu(props) {
               borderRadius: "50px",
             }}
           />
+          {/* <SignedInDropdown /> */}
           {/* <Menu mode="horizontal">
             <SubMenu
               style={{ borderRadius: "10px", marginLeft: "0" }}

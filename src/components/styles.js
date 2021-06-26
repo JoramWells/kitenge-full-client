@@ -63,20 +63,20 @@ background-color: white;
 padding: .5rem;
 align-items: center;
 flex-direction: row;
-position: static;
 position: -webkit-sticky;
 top: 0;
-z-index: 50;
+z-index: 100 !important;
 width: 100%;
 `
 
 export const Sidenav = styled.nav`
-  padding-top: 3.77rem;
+  /* padding-top: 3.77rem; */
   width: 17%;
   height: 100%;
+  top:0;
   background-color: white;
-  display: fixed;
-  z-index: 1;
+  /* display: fixed; */
+  z-index: -1 !important;
   text-align: center;
 `;
 

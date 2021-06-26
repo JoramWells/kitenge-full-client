@@ -54,7 +54,7 @@ export default function DesktopMobile() {
           </Flex>
         )}
       </div>
-      <div className="desktop__carousel">
+      <div className="desktop__carousel" style={{ zIndex:"-1 !important" }}>
         {loading ? (
           <Container>
             <Flex>{renderSkeleton}</Flex>

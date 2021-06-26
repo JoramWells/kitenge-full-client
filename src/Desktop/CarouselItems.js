@@ -65,7 +65,8 @@ export function CarouselItem({ product }) {
   };
 
   return (
-    <>
+    <div
+    >
       <figure
         style={{ width: "15rem", border: "1px solid #F0F0F0 " }}
         className="rounded-md bg-white mb-8 shadow-md"
@@ -74,13 +75,14 @@ export function CarouselItem({ product }) {
         onMouseLeave={handleMouseLeave}
       >
         <div
-          className="absolute bg-black bg-opacity-10  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20 z-10"
+          className="absolute z-0 bg-black bg-opacity-10  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20"
+          
           style={{ visibility: dot }}
         >
-          <DotsVerticalIcon className="h-5" onClick={() => openModal(id)} />
+          {/* <DotsVerticalIcon className="h-5" onClick={() => openModal(id)} /> */}
         </div>
         <div
-          className="absolute z-10 mt-8 bg-black bg-opacity-20 p-0.5 font-bold text-xs text-gray-200"
+          className="absolute mt-8 bg-black bg-opacity-20 p-0.5 font-bold text-xs text-gray-200"
           style={{ visibility: dot }}
         >
           -20%
@@ -94,11 +96,12 @@ export function CarouselItem({ product }) {
             height: "155px",
             display: "block",
             margin: "auto",
+            zIndex:"-1 !important"
           }}
           className="rounded-t-sm -z-10"
         />
         <div className="p-2 flex flex-row  space-x-2">
-          <LazyLoadImage effect="blur" src={avatar} alt="" className="rounded-full" style={{width:"30px", height:"30px"
+          <img loading="lazy" effect="blur" src={avatar} alt="" className="rounded-full" style={{width:"30px", height:"30px"
           
         }} />
           <div>
@@ -122,7 +125,7 @@ export function CarouselItem({ product }) {
       <Modal showModal={showModal} setShowModal={setShowModal}>
         <div className="p-4">
           <Flex>
-            <Image
+            <LazyLoadImage
               src={image}
               alt=""
               style={{
@@ -130,6 +133,7 @@ export function CarouselItem({ product }) {
                 height: "150px",
                 objectFit: "contain",
                 paddingTop: "0",
+
               }}
               loading="lazy"
               className="rounded-md"
@@ -185,7 +189,7 @@ export function CarouselItem({ product }) {
           </Flex>
         </div>
       </Modal>
-    </>
+    </div>
   );
 }
 
