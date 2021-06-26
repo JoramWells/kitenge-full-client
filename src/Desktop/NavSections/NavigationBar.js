@@ -8,19 +8,13 @@ import { useDispatch } from "react-redux";
 import {
   SearchIcon,
   MenuIcon,
-  CreditCardIcon,
-  ClockIcon,
-  ThumbUpIcon,
-  DotsCircleHorizontalIcon,
-  HomeIcon,
-  ShoppingBagIcon,
 } from "@heroicons/react/solid";
 import { CameraIcon } from "@heroicons/react/outline";
-import { Navbar, Sidenav, Li } from "../../components/styles";
+import { Navbar } from "../../components/styles";
+import Sidenav from '../sidenav/Sidenav'
 
 function NavigationBar(props, activateOption) {
   const searchRef = useRef();
-  const [visible, setVisible] = useState("hidden");
   const [sidebar, setSidebar] = useState(false);
   const activate = () => setSidebar(!sidebar);
   const dispatch = useDispatch();
@@ -95,59 +89,8 @@ function NavigationBar(props, activateOption) {
           <RightMenu mode="horizontal" />
         </div>
       </Navbar>
-      <Sidenav
-        className={
-          sidebar
-            ? "nav-menu active flex flex-row items-center content-center"
-            : "nav-menu"
-        }
-      >
-        <ul className="leading-8 ">
-          <Li>
-            <HomeIcon className="h-5 ml-3 text-gray-500 mr-4" />
-            <div className="hover:text-gray-700 text-gray-900 font-semibold">
-              Home
-            </div>
-          </Li>
+      <Sidenav sidebar={sidebar} />
 
-          <hr className="text-white p-2" />
-          <Li>
-            <CreditCardIcon className="h-5 ml-3  text-gray-500 mr-4" />
-            <div className="hover:text-gray-700 text-gray-900 font-semibold">
-              Purchases{" "}
-            </div>
-          </Li>
-          <Li>
-            <ShoppingBagIcon className="h-5 ml-3  text-gray-500 mr-4" />
-            <Link
-              to="/produc/manage"
-              className="hover:text-gray-700 text-gray-900 font-semibold"
-            >
-              Your products
-            </Link>
-          </Li>
-
-          <Li>
-            <ClockIcon className="h-5 ml-3 text-gray-500 mr-4" />
-            <div className="hover:text-gray-700 text-gray-900 font-semibold">
-              Recent purchases{" "}
-            </div>
-          </Li>
-          <hr className="text-white py-2" />
-          <Li>
-            <ThumbUpIcon className="h-5 ml-3  text-gray-500 mr-4" />
-            <div className="hover:text-gray-700 text-gray-900 font-semibold">
-              Liked Items
-            </div>
-          </Li>
-          <Li>
-            <DotsCircleHorizontalIcon className="h-5 ml-3 text-gray-500 mr-4" />
-            <div className="hover:text-gray-700 text-gray-900 font-semibold">
-              More Items
-            </div>
-          </Li>
-        </ul>
-      </Sidenav>
     </>
   );
 }

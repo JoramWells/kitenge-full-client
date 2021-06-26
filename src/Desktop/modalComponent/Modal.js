@@ -46,7 +46,6 @@ const Modal = ({ showModal, setShowModal, children }) => {
 
   function closeModal(e) {
     if (modalRef.current === e.target) setShowModal(false);
-    console.log(new Date())
   }
 
   const animation = useSpring({
