@@ -63,6 +63,7 @@ background-color: white;
 padding: .5rem;
 align-items: center;
 flex-direction: row;
+position: sticky !important;
 position: -webkit-sticky;
 top: 0;
 z-index: 100 !important;
@@ -73,10 +74,10 @@ export const Sidenav = styled.nav`
   /* padding-top: 3.77rem; */
   width: 17%;
   height: 100%;
+  /* position: fixed; */
   top:0;
   background-color: white;
-  /* display: fixed; */
-  z-index: -1 !important;
+  z-index: -2 !important;
   text-align: center;
 `;
 

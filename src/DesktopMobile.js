@@ -54,7 +54,7 @@ export default function DesktopMobile() {
           </Flex>
         )}
       </div>
-      <div className="desktop__carousel" style={{ zIndex:"-1 !important" }}>
+      <div className="desktop__carousel" style={{ zIndex:"-1 !important", overflow:"hidden" }}>
         {loading ? (
           <Container>
             <Flex>{renderSkeleton}</Flex>
@@ -79,7 +79,7 @@ export default function DesktopMobile() {
           </div>
         ) : (
           <Container>
-            <Flex>
+            <Flex style={{zIndex:"-1"}}>
               {posts.map((product) => (
                 <CarouselItems key={product.id} product={product} />
               ))}

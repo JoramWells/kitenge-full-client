@@ -66,6 +66,7 @@ export function CarouselItem({ product }) {
 
   return (
     <div
+    // style={{zIndex:"-1"}}
     >
       <figure
         style={{ width: "15rem", border: "1px solid #F0F0F0 " }}
@@ -79,7 +80,7 @@ export function CarouselItem({ product }) {
           
           style={{ visibility: dot }}
         >
-          {/* <DotsVerticalIcon className="h-5" onClick={() => openModal(id)} /> */}
+          <DotsVerticalIcon className="h-5" onClick={() => openModal(id)} />
         </div>
         <div
           className="absolute mt-8 bg-black bg-opacity-20 p-0.5 font-bold text-xs text-gray-200"
@@ -96,9 +97,9 @@ export function CarouselItem({ product }) {
             height: "155px",
             display: "block",
             margin: "auto",
-            zIndex:"-1 !important"
+            zIndex:"0 !important"
           }}
-          className="rounded-t-sm -z-10"
+      
         />
         <div className="p-2 flex flex-row  space-x-2">
           <img loading="lazy" effect="blur" src={avatar} alt="" className="rounded-full" style={{width:"30px", height:"30px"
@@ -135,7 +136,7 @@ export function CarouselItem({ product }) {
                 paddingTop: "0",
 
               }}
-              loading="lazy"
+              // loading="lazy"
               className="rounded-md"
             />
             <div>
