@@ -69,7 +69,7 @@ export default function NavMobile(props) {
     else {
       return (
         <>
-          <Navbar className="shadow-md">
+          <Navbar className="shadow-md ">
             <div className="focus:bg-gray-300 opacity-1 p-1 rounded-full">
               <ArrowLeftIcon
                 className="h-5 active:bg-gray-300 text-gray-500"

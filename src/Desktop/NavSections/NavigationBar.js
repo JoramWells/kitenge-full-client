@@ -8,10 +8,10 @@ import { SearchIcon, MenuIcon } from "@heroicons/react/solid";
 import { CameraIcon } from "@heroicons/react/outline";
 import { Navbar } from "../../components/styles";
 import Sidenav from "../sidenav/Sidenav";
-import {UserContext} from '../../users/UserContext'
+import { UserContext } from "../../users/UserContext";
 
 function NavigationBar(props, activateOption) {
-  const value = useContext(UserContext)
+  const value = useContext(UserContext);
   const searchRef = useRef();
   const [sidebar, setSidebar] = useState(true);
   const activate = () => setSidebar(!sidebar);
@@ -30,7 +30,7 @@ function NavigationBar(props, activateOption) {
 
   return (
     <>
-      <Navbar className="desktop__navbar" data-testid="nav">
+      <Navbar className="desktop__navbar" data-testid="nav" style={{position:"sticky", top:"0", overflow:"hidden"}}>
         <div className="p-2 flex flex-row space-x-2 items-center justify-center content-center">
           <div className="hover:cursor-pointer active:bg-black active:bg-opacity-20 hover:rounded-full p-1.5">
             <MenuIcon
@@ -38,7 +38,7 @@ function NavigationBar(props, activateOption) {
               onClick={activateOption ? activate : null}
             />
           </div>
-          <h1 style={{marginBottom:".2rem"}}>
+          <h1 style={{ marginBottom: ".2rem" }}>
             <Link
               to="/"
               className=" font-extrabold text-xl"

@@ -15,8 +15,8 @@ export const Flex = styled.div`
 export const Container = styled.div`
   max-width: 83%;
   float: right;
-  margin-top: 5rem;
   padding: 1.55rem;
+  z-index: -1 !important;
   background-color: rgba(248, 248, 248, 0.2);
 `;
 
@@ -71,7 +71,7 @@ width: 100%;
 `
 
 export const Sidenav = styled.nav`
-  /* padding-top: 3.77rem; */
+  padding-top: -3.77rem;
   width: 17%;
   height: 100%;
   /* position: fixed; */
@@ -79,6 +79,9 @@ export const Sidenav = styled.nav`
   background-color: white;
   z-index: -2 !important;
   text-align: center;
+  @media(max-width: 767px){
+  display: none !important;
+}
 `;
 
 export const Li = styled.li`
@@ -135,3 +138,16 @@ export const InputDiv = styled.div`
 
 `
 
+export const HeaderDiv = styled.div`
+background-color: black;
+color: white;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 1rem;
+@media(max-width: 767px){
+  display: none !important;
+}
+
+`

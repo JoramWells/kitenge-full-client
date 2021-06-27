@@ -10,9 +10,7 @@ export default function DesktopNavbarMobile() {
         <div className="mobile__navbar">
           <NavMobile />
         </div>
-        <div className="desktop__navbar" style={{position:"sticky", top:"0"}}>
           <NavigationBar activateOption />
-        </div>
       </UserProvider>
     </>
   );

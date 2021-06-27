@@ -20,6 +20,12 @@ export default function SideNav({sidebar}) {
             Home
           </div>
         </Li>
+        <Li>
+          <HomeIcon className="h-5 ml-3 text-gray-500 mr-4" />
+          <div className="hover:text-gray-700 text-gray-900 font-semibold">
+            Coupons
+          </div>
+        </Li>
 
         <hr className="text-white p-2" />
         <Li>

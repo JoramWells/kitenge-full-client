@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 // import NumberFormat from "react-number-format";
 import axios from "axios";
-import moment from 'moment'
-import {Image} from 'antd'
+import moment from "moment";
 import {
   ClockIcon,
   CreditCardIcon,
@@ -19,7 +18,8 @@ import useGeolocation from "../hooks/useGeolocation";
 
 export function CarouselItem({ product }) {
   const location = useGeolocation();
-  const { id, product_name, image, price, description, userId, updatedAt } = product;
+  const { id, product_name, image, price, description, userId, updatedAt } =
+    product;
   const [showModal, setShowModal] = useState(false);
   const views = useViews(id);
   const avatar = useAvatar(userId);
@@ -30,18 +30,17 @@ export function CarouselItem({ product }) {
 
   const openModal = async (product_id) => {
     setShowModal((prev) => !prev);
-    if(location.loaded == true && location.coordinates){
+    if (location.loaded == true && location.coordinates) {
       await axios
-      .post("/aidata", {
-        ipAddr: ip,
-        lat:location.coordinates.lat,
-        lng:location.coordinates.lng,
-        productId: product_id,
-      })
-      .catch((err) => console.log(err));
-  };
-      
+        .post("/aidata", {
+          ipAddr: ip,
+          lat: location.coordinates.lat,
+          lng: location.coordinates.lng,
+          productId: product_id,
+        })
+        .catch((err) => console.log(err));
     }
+  };
 
   const getIP = useCallback(async () => {
     try {
@@ -54,7 +53,7 @@ export function CarouselItem({ product }) {
     }
   }, []);
   useEffect(() => {
-    console.log(location)
+    console.log(location);
     getIP();
   }, [getIP]);
   const handleMouseLeave = () => {
@@ -77,7 +76,6 @@ export function CarouselItem({ product }) {
       >
         <div
           className="absolute z-0 bg-black bg-opacity-10  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20"
-          
           style={{ visibility: dot }}
         >
           <DotsVerticalIcon className="h-5" onClick={() => openModal(id)} />
@@ -88,25 +86,33 @@ export function CarouselItem({ product }) {
         >
           -20%
         </div>
-        <LazyLoadImage
+        <img
           src={image}
-          effect="blur"
+          // effect="blur"
           alt="productimage"
           style={{
             width: "15rem",
             height: "155px",
             display: "block",
             margin: "auto",
-            zIndex:"0 !important"
+            zIndex: "0 !important",
           }}
-      
+          loading="eager"
         />
         <div className="p-2 flex flex-row  space-x-2">
-          <img loading="lazy" effect="blur" src={avatar} alt="" className="rounded-full" style={{width:"30px", height:"30px"
-          
-        }} />
+          <img
+            loading="lazy"
+            effect="blur"
+            src={avatar}
+            alt=""
+            className="rounded-full"
+            style={{ width: "30px", height: "30px" }}
+          />
           <div>
-            <Link className="text-gray-800 font-bold" to={`/product-detail/${id}`}>
+            <Link
+              className="text-gray-800 font-bold"
+              to={`/product-detail/${id}`}
+            >
               {product_name}
             </Link>
 
@@ -114,12 +120,9 @@ export function CarouselItem({ product }) {
               <div className="font-semibold text-gray-600">Kshs {price} /=</div>
             </figcaption>
             <div className="text-gray-400 text-xs flex flex-row space-x-2">
-              <div>
-              {views} views
-              </div>
-            <div>| {moment(updatedAt).fromNow("yyyy")}</div>
+              <div>{views} views</div>
+              <div>| {moment(updatedAt).fromNow("yyyy")}</div>
             </div>
-            
           </div>
         </div>
       </figure>
@@ -134,7 +137,6 @@ export function CarouselItem({ product }) {
                 height: "150px",
                 objectFit: "contain",
                 paddingTop: "0",
-
               }}
               // loading="lazy"
               className="rounded-md"
@@ -175,18 +177,20 @@ export function CarouselItem({ product }) {
           </div>
           <hr />
           <Flex>
-            <div style={{width:"55%", margin:"auto"}} className="flex flex-row justify-center content-center ">
-            <button className="w-full text-gray-100 focus:outline-none bg-black bg-opacity-80 m-1  flex flex-row items-center content-center justify-center rounded-md">
-              <CreditCardIcon className="h-10 text-white p-2" />
-              Buy
-            </button>
+            <div
+              style={{ width: "55%", margin: "auto" }}
+              className="flex flex-row justify-center content-center "
+            >
+              <button className="w-full text-gray-100 focus:outline-none bg-black bg-opacity-80 m-1  flex flex-row items-center content-center justify-center rounded-md">
+                <CreditCardIcon className="h-10 text-white p-2" />
+                Buy
+              </button>
 
-            <button className="text-gray-700 flex flex-row w-full content-center m-1 items-center bg-gray-300 justify-center rounded-md">
-              <ShoppingCartIcon className="h-10 p-2 text-gray-700" />
-              Add to Cart
-            </button>
+              <button className="text-gray-700 flex flex-row w-full content-center m-1 items-center bg-gray-300 justify-center rounded-md">
+                <ShoppingCartIcon className="h-10 p-2 text-gray-700" />
+                Add to Cart
+              </button>
             </div>
-
           </Flex>
         </div>
       </Modal>
