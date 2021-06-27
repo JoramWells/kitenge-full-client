@@ -1,16 +1,14 @@
 import React from "react";
-// import CarouselHeader from './Desktop/CarouselHeader'
 import DesktopMobile from "./DesktopMobile"
+import {ProductProvider} from './Products/ProductContext'
 
 
 export default function HomeRoutes() {
   return (
-    <>      
-    {/* <CarouselHeader /> */}
+    <ProductProvider>      
 
-      {/* <RecentItemsBar title="Available Now!!"  /> */}
       <DesktopMobile />      
 
-    </>
+    </ProductProvider>
   );
 }
