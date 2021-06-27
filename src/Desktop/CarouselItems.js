@@ -14,10 +14,10 @@ import {
 import Modal from "./modalComponent/Modal";
 import { useAvatar, useViews } from "../hooks/useViews";
 import { Flex } from "../components/styles";
-import useGeolocation from "../hooks/useGeolocation";
+// import useGeolocation from "../hooks/useGeolocation";
 
 export function CarouselItem({ product }) {
-  const location = useGeolocation();
+  // const location = useGeolocation();
   const { id, product_name, image, price, description, userId, updatedAt } =
     product;
   const [showModal, setShowModal] = useState(false);
@@ -30,16 +30,14 @@ export function CarouselItem({ product }) {
 
   const openModal = async (product_id) => {
     setShowModal((prev) => !prev);
-    if (location.loaded == true && location.coordinates) {
+    // if (location.loaded == true && location.coordinates) {
       await axios
         .post("/aidata", {
           ipAddr: ip,
-          lat: location.coordinates.lat,
-          lng: location.coordinates.lng,
           productId: product_id,
         })
         .catch((err) => console.log(err));
-    }
+    // }
   };
 
   const getIP = useCallback(async () => {
@@ -53,7 +51,6 @@ export function CarouselItem({ product }) {
     }
   }, []);
   useEffect(() => {
-    console.log(location);
     getIP();
   }, [getIP]);
   const handleMouseLeave = () => {
@@ -75,7 +72,7 @@ export function CarouselItem({ product }) {
         onMouseLeave={handleMouseLeave}
       >
         <div
-          className="absolute z-0 bg-black bg-opacity-10  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20"
+          className="absolute z-1 bg-black bg-opacity-10  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20"
           style={{ visibility: dot }}
         >
           <DotsVerticalIcon className="h-5" onClick={() => openModal(id)} />
@@ -100,14 +97,14 @@ export function CarouselItem({ product }) {
           loading="eager"
         />
         <div className="p-2 flex flex-row  space-x-2">
-          <img
+          {/* <img
             loading="lazy"
             effect="blur"
             src={avatar}
             alt=""
             className="rounded-full"
             style={{ width: "30px", height: "30px" }}
-          />
+          /> */}
           <div>
             <Link
               className="text-gray-800 font-bold"
