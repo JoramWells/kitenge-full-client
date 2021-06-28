@@ -31,12 +31,12 @@ export function CarouselItem({ product }) {
   const openModal = async (product_id) => {
     setShowModal((prev) => !prev);
     // if (location.loaded == true && location.coordinates) {
-      await axios
-        .post("/aidata", {
-          ipAddr: ip,
-          productId: product_id,
-        })
-        .catch((err) => console.log(err));
+    await axios
+      .post("/aidata", {
+        ipAddr: ip,
+        productId: product_id,
+      })
+      .catch((err) => console.log(err));
     // }
   };
 
@@ -61,9 +61,7 @@ export function CarouselItem({ product }) {
   };
 
   return (
-    <div
-    // style={{zIndex:"-1"}}
-    >
+    <>
       <figure
         style={{ width: "15rem", border: "1px solid #F0F0F0 " }}
         className="rounded-md bg-white mb-8 ring-1 ring-gray-200"
@@ -191,7 +189,7 @@ export function CarouselItem({ product }) {
           </Flex>
         </div>
       </Modal>
-    </div>
+    </>
   );
 }
 

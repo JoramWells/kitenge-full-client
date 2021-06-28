@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { CarouselItem } from "./Mobile/CarouselItem";
 import { CarouselItems } from "./Desktop/CarouselItems";
-import { Flex, Container,FlexDiv } from "./components/styles";
+import { Flex, Container, FlexDiv } from "./components/styles";
 import { ProductContext } from "./Products/ProductContext";
 
 export default function DesktopMobile() {
@@ -15,18 +15,17 @@ export default function DesktopMobile() {
           ))}
         </Flex>
       </div>
-      <div
+
+      <Container
         className="desktop__carousel"
         style={{ zIndex: "-1 !important", overflow: "hidden" }}
       >
-        <Container>
-          <FlexDiv>
-            {products.map((product) => (
-              <CarouselItems key={product.id} product={product} />
-            ))}
-          </FlexDiv>
-        </Container>
-      </div>
+        <FlexDiv>
+          {products.map((product) => (
+            <CarouselItems key={product.id} product={product} />
+          ))}
+        </FlexDiv>
+      </Container>
     </>
   );
 }

@@ -6,12 +6,12 @@ import NotCartItems from "./NotCartItems";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
-  ArrowLeftIcon,
   SearchIcon,
   UserIcon,
   XIcon,
 } from "@heroicons/react/solid";
 import {Navbar} from '../components/styles'
+import { ChevronLeftIcon } from "@heroicons/react/outline";
 
 const columns = [
   {
@@ -39,14 +39,14 @@ const columns = [
   },
 ];
 
-export default function NavMobile(props) {
+export default function NavMobile() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const CartItems = useSelector((state) => state.cart);
   const { cartItems } = CartItems;
 
   const [visible, setVisible] = useState(false);
-  const [diVisible, setDiVisible] = useState("visible");
+  const [diVisible, setDiVisible] = useState("hidden");
 
   function handleOk() {
     setVisible(false);
@@ -56,11 +56,11 @@ export default function NavMobile(props) {
   }
 
   const showDiv = useCallback(() => {
-    setDiVisible("hidden");
+    setDiVisible("visible");
   }, [setDiVisible]);
 
   const hideDiv = useCallback(() => {
-    setDiVisible("visible");
+    setDiVisible("hidden");
   }, [setDiVisible]);
 
   if (!userInfo) return <NotSignedIn />;
@@ -69,33 +69,36 @@ export default function NavMobile(props) {
     else {
       return (
         <>
-          <Navbar className="shadow-md ">
-            <div className="focus:bg-gray-300 opacity-1 p-1 rounded-full">
-              <ArrowLeftIcon
-                className="h-5 active:bg-gray-300 text-gray-500"
+          <Navbar className="shadow-md "
+            style={{ visibility: diVisible }}
+
+          >
+              <div className="active:bg-black active:bg-opacity-20 active:rounded-full p-2">
+                <ChevronLeftIcon
+                className="h-5 text-gray-500 "
                 onClick={hideDiv}
-              />
-            </div>
-            <div className="bg-yellow-100 rounded-full  flex items-center justify-end -ml-8">
+              />     
+              </div>
+
+            <div className="bg-gray-200 rounded-full  flex items-center justify-end flex-1">
               <SearchIcon className="h-5 text-gray-400 m-2 cursor-pointer focus:text-gray-500" />
               <input
                 placeholder="Search.."
-                className=" focus:outline-none rounded-full bg-yellow-100"
+                className=" focus:outline-none w-full rounded-full bg-transparent"
               />
               <XIcon className="h-5 text-gray-400 m-2 cursor-pointer focus:text-gray-500" />
             </div>
           </Navbar>
 
           <nav
-            className="flex justify-between p-2 bg-white items-center shadow-md  top-0 fixed z-10 w-full"
-            style={{ visibility: diVisible }}
+            className="flex justify-between p-2 bg-white items-center shadow-md  w-full fixed top-0"
           >
             <div className="">
               <Link to="/" className="font-bold text-lg text-gray-700">
-                Do3ensKE
+                Dozens
               </Link>
             </div>
-            <div className="flex flex-row space-x-2">
+            <div className="flex flex-row space-x-2 p-2">
               <SearchIcon
                 onClick={showDiv}
                 className="h-5 w-5 text-gray-500 font-bold -mb-2 rounded-full "

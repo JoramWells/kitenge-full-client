@@ -9,10 +9,13 @@ import { useHistory } from "react-router-dom";
 import { addToCart } from "../_actions/cartActions";
 import { DotsVerticalIcon } from "@heroicons/react/outline";
 import Modal from "../Desktop/modalComponent/Modal";
+import { useViews } from "../hooks/useViews";
+import moment from "moment";
 // import { likedItem } from "../_actions/likedActions";
 
 function CarouselIte({ products }) {
-  const { id, product_name, image, price, views, src } = products;
+  const { id, product_name, image, price, src,updatedAt } = products;
+  const views = useViews(id)
   const [dot, setDot] = useState("hidden");
   const [showModal, setShowModal] = useState(false);
   const history = useHistory();
@@ -83,11 +86,7 @@ function CarouselIte({ products }) {
             </p>
           </div>
 
-          <Divider style={{ margin: ".5rem" }} />
-          <div className="text-gray-400 justify-between flex">
-            <div className="flex flex-row">21views{views}</div>
-            <p className="m-0">Sold 93</p>
-          </div>
+            <div className="flex flex-row text-sm text-gray-400 mt-4">{views} views | {moment(updatedAt).fromNow("yyyy")}</div>
         </div>
       </figure>
       <Modal showModal={showModal} setShowModal={setShowModal}>
