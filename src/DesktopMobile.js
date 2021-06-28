@@ -8,7 +8,7 @@ export default function DesktopMobile() {
   const products = useContext(ProductContext);
   return (
     <>
-      <div className="mobile__carousel" style={{ marginTop: "5rem" }}>
+      <div className="mobile__carousel" style={{ marginTop: "1rem" }}>
         <Flex>
           {products.map((item) => (
             <CarouselItem key={item.id} products={item} />

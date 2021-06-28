@@ -1,17 +1,20 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { Col, Image, Row, Modal, Table } from "antd";
 // import { Link } from "react-router-dom";
 import NotSignedIn from "./NotSignedIn";
 import NotCartItems from "./NotCartItems";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
+  
   SearchIcon,
-  UserIcon,
+  
   XIcon,
 } from "@heroicons/react/solid";
+import {QuestionMarkCircleIcon,ShoppingCartIcon,InboxInIcon} from '@heroicons/react/outline'
 import {Navbar} from '../components/styles'
 import { ChevronLeftIcon } from "@heroicons/react/outline";
+import { UserContext } from "../users/UserContext";
+import { useSelector } from "react-redux";
 
 const columns = [
   {
@@ -40,8 +43,7 @@ const columns = [
 ];
 
 export default function NavMobile() {
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const userInfo = useContext(UserContext)
   const CartItems = useSelector((state) => state.cart);
   const { cartItems } = CartItems;
 
@@ -91,7 +93,8 @@ export default function NavMobile() {
           </Navbar>
 
           <nav
-            className="flex justify-between p-2 bg-white items-center shadow-md  w-full fixed top-0"
+            className="flex justify-between p-2 bg-white items-center shadow-md  w-full fixed top-0 z-50"
+
           >
             <div className="">
               <Link to="/" className="font-bold text-lg text-gray-700">
@@ -99,12 +102,17 @@ export default function NavMobile() {
               </Link>
             </div>
             <div className="flex flex-row space-x-2 p-2">
+
               <SearchIcon
                 onClick={showDiv}
                 className="h-5 w-5 text-gray-500 font-bold -mb-2 rounded-full "
               />
+
+              <ShoppingCartIcon className="h-5 text-gray-400" />
+              <InboxInIcon className="h-5 text-gray-400" />
+              <QuestionMarkCircleIcon className="h-5 text-gray-500" />
               <div className="bg-gray-500 rounded-full">
-                <UserIcon className="h-5 text-gray-400" />
+                <img src={userInfo.avatar} style={{width:"21px", height:"21px",borderRadius:"50px"}} />
               </div>
             </div>
 

@@ -44,7 +44,7 @@ function NavigationBar(props, activateOption) {
               className=" font-extrabold text-xl"
               style={{ color: "#2F4858" }}
             >
-              {value}
+              Dozens
             </Link>
           </h1>
         </div>

@@ -11,6 +11,7 @@ import { DotsVerticalIcon } from "@heroicons/react/outline";
 import Modal from "../Desktop/modalComponent/Modal";
 import { useViews } from "../hooks/useViews";
 import moment from "moment";
+import { EyeIcon } from "@heroicons/react/solid";
 // import { likedItem } from "../_actions/likedActions";
 
 function CarouselIte({ products }) {
@@ -86,7 +87,7 @@ function CarouselIte({ products }) {
             </p>
           </div>
 
-            <div className="flex flex-row text-sm text-gray-400 mt-4">{views} views | {moment(updatedAt).fromNow("yyyy")}</div>
+            <div className="flex flex-row text-sm text-gray-400 mt-4"><EyeIcon className="h-5" />  {views} views | {moment(updatedAt).fromNow("yyyy")} .ago</div>
         </div>
       </figure>
       <Modal showModal={showModal} setShowModal={setShowModal}>
