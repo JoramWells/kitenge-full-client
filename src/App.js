@@ -20,7 +20,6 @@ function App() {
     <>
       <Router>
         <ScrollTop />
-       <Header />
         <DesktopNavbarMobile />
 
         <Switch>

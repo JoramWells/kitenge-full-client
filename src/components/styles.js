@@ -5,6 +5,19 @@ export const Flex = styled.div`
    flex-direction: row;
    flex-wrap: wrap;
    align-items: center;
+   align-items: flex-start;
+   justify-content: space-between;
+   @media(max-width:767px){
+       justify-content: space-around;
+       align-items: center;
+   }
+`
+
+export const FlexDiv = styled.div`
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   align-items: flex-start;
    justify-content: space-between;
    @media(max-width:767px){
        justify-content: space-around;
@@ -77,7 +90,6 @@ export const Sidenav = styled.nav`
   /* position: fixed; */
   top:0;
   background-color: white;
-  z-index: -2 !important;
   text-align: center;
   @media(max-width: 767px){
   display: none !important;
@@ -107,6 +119,12 @@ export const Col = styled.div`
   align-items: center;
   padding-top: 4.4rem;
   margin-bottom: 3rem;
+`;
+export const ColDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 `;
 
 export const Card = styled.div`
@@ -145,6 +163,7 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
+z-index: 100 !important;
 padding: 1rem;
 @media(max-width: 767px){
   display: none !important;

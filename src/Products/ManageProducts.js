@@ -20,7 +20,7 @@ import {
   PlusIcon,
   RefreshIcon,
 } from "@heroicons/react/solid";
-import { Flex, Col, Row, InputDiv } from "../components/styles";
+import { Flex, Col, Row, InputDiv,ColDiv } from "../components/styles";
 
 const renderTH = [...Array(4).keys()].map((i) => {
   return (
@@ -279,7 +279,6 @@ export default function ManageProducts() {
       <main>
         <div
           className="flex flex-col justify-center content-center bg-blue-200"
-          style={{ paddingTop: "3.5rem" }}
         >
           <button className="text-gray-500 font-bold flex justify-center items-center content-center focus:outline-none text-lg">
             <PlusIcon className="h-10 p-1" />
@@ -290,7 +289,7 @@ export default function ManageProducts() {
         </div>
 
         {loading ? (
-          <Col>
+          <ColDiv>
             <div>
               <table style={{ marginTop: "5rem" }}>
                 <thead>
@@ -303,9 +302,9 @@ export default function ManageProducts() {
                 </tbody>
               </table>
             </div>
-          </Col>
+          </ColDiv>
         ) : error ? (
-          <Col>
+          <ColDiv>
             <Result
               status="500"
               subTitle={error}
@@ -322,15 +321,15 @@ export default function ManageProducts() {
                 </Flex>
               }
             />
-          </Col>
+          </ColDiv>
         ) : (
           // <Table dataSource={posts} columns={columns}/>
-          <Col
+          <ColDiv
             style={{ marginTop: "3rem", marginBottom: "3rem" }}
             justify="space-around"
             align="middle"
           >
-            <Col>
+            <ColDiv>
               <table className="tableClass" style={{ width: "100%" }}>
                 <thead>
                   <th>name</th>
@@ -352,26 +351,26 @@ export default function ManageProducts() {
                       </td>
                       <td>
                         <Row>
-                          <Col>
+                          <ColDiv>
                             <EditOutlined
                               style={{ color: "green" }}
                               onClick={() => showModa(item)}
                             />
-                          </Col>
-                          <Col>
+                          </ColDiv>
+                          <ColDiv>
                             <DeleteFilled
                               style={{ color: "rgba(207, 0, 15, 0.6)" }}
                               onClick={() => deleteHandler(item.id)}
                             />
-                          </Col>
+                          </ColDiv>
                         </Row>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-            </Col>
-          </Col>
+            </ColDiv>
+          </ColDiv>
         )}
       </main>
     </Fragment>

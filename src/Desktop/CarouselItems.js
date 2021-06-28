@@ -66,7 +66,7 @@ export function CarouselItem({ product }) {
     >
       <figure
         style={{ width: "15rem", border: "1px solid #F0F0F0 " }}
-        className="rounded-md bg-white mb-8 shadow-md"
+        className="rounded-md bg-white mb-8 ring-1 ring-gray-200"
         key={id}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -78,7 +78,7 @@ export function CarouselItem({ product }) {
           <DotsVerticalIcon className="h-5" onClick={() => openModal(id)} />
         </div>
         <div
-          className="absolute mt-8 bg-black bg-opacity-20 p-0.5 font-bold text-xs text-gray-200"
+          className="absolute mt-8 bg-red-900 bg-opacity-50 p-0.5 font-bold text-xs text-gray-200"
           style={{ visibility: dot }}
         >
           -20%
@@ -89,7 +89,7 @@ export function CarouselItem({ product }) {
           alt="productimage"
           style={{
             width: "15rem",
-            height: "155px",
+            height: "160px",
             display: "block",
             margin: "auto",
             zIndex: "0 !important",
