@@ -15,7 +15,7 @@ import { EyeIcon } from "@heroicons/react/solid";
 // import { likedItem } from "../_actions/likedActions";
 
 function CarouselIte({ products }) {
-  const { id, product_name, image, price, src,updatedAt } = products;
+  const { id, product_name, image, price, description,src,updatedAt } = products;
   const views = useViews(id)
   const [dot, setDot] = useState("hidden");
   const [showModal, setShowModal] = useState(false);
@@ -99,14 +99,15 @@ function CarouselIte({ products }) {
             <div className="text-gray-500">{price}</div>
             <div>Umoja</div>
             <div>2 min(s) out</div>
+            <div dangerouslySetInnerHTML={{ __html: description }} />
           </div>
 
           <div className="flex flex-row justify-center content-center space-x-2">
-            <button className="bg-black bg-opacity-80 w-full py-1 rounded-md">
-              Buy
+            <button className="bg-black bg-opacity-80 w-full py-1 rounded-md text-white">
+            Add to cart
             </button>
-            <button className="w-full bg-black bg-opacity-20 py-1 rounded-md">
-              Add to cart
+            <button className="w-full py-1 rounded-md  font-semibold" style={{backgroundColor:"#F4C430"}}>
+              Buy
             </button>
           </div>
         </div>
