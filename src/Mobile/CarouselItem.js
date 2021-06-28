@@ -1,8 +1,8 @@
-import React, { useState, memo } from "react";
-import { Col, message, Divider } from "antd";
+import React, { useState } from "react";
+import { Col, message } from "antd";
 import NumberFormat from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter,Link } from "react-router-dom";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 
 // import { listProducts } from "../../_actions/productActions";
@@ -14,7 +14,7 @@ import moment from "moment";
 import { EyeIcon } from "@heroicons/react/solid";
 // import { likedItem } from "../_actions/likedActions";
 
-function CarouselIte({ products }) {
+ function CarouselItem({ props,products }) {
   const { id, product_name, image, price, description,src,updatedAt } = products;
   const views = useViews(id)
   const [dot, setDot] = useState("hidden");
@@ -47,6 +47,9 @@ function CarouselIte({ products }) {
     }
   };
   // console.log(RequestIp.getClientIp)
+  const handleAddToCart = ()=>{
+    props.history.push("/"+id+"?qty=")
+  }
 
   return (
     <Col key={id} className="mb-4">
@@ -103,8 +106,13 @@ function CarouselIte({ products }) {
           </div>
 
           <div className="flex flex-row justify-center content-center space-x-2">
-            <button className="bg-black bg-opacity-80 w-full py-1 rounded-md text-white">
+            <button className="bg-black bg-opacity-80 w-full py-1 rounded-md text-white"
+            
+            >
+              <Link to={"/cart/"+id+"?qty=" + 1}>
             Add to cart
+
+              </Link>
             </button>
             <button className="w-full py-1 rounded-md  font-semibold" style={{backgroundColor:"#F4C430"}}>
               Buy
@@ -116,4 +124,4 @@ function CarouselIte({ products }) {
   );
 }
 
-export const CarouselItem = memo(CarouselIte);
+export default withRouter(CarouselItem)

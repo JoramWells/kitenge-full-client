@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { CarouselItem } from "./Mobile/CarouselItem";
+import CarouselItem  from "./Mobile/CarouselItem";
 import { CarouselItems } from "./Desktop/CarouselItems";
 import { Flex, Container, FlexDiv } from "./components/styles";
 import { ProductContext } from "./Products/ProductContext";

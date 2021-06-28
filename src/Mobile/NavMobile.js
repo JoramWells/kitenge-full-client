@@ -82,7 +82,7 @@ export default function NavMobile() {
               />     
               </div>
 
-            <div className="bg-gray-200 rounded-full  flex items-center justify-end flex-1">
+            <div className="bg-gray-200 rounded-full  flex items-center justify-end flex-1 mt-1 mb-0.5">
               <SearchIcon className="h-5 text-gray-400 m-2 cursor-pointer focus:text-gray-500" />
               <input
                 placeholder="Search.."

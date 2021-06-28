@@ -9,9 +9,11 @@ import { CameraIcon } from "@heroicons/react/outline";
 import { Navbar } from "../../components/styles";
 import Sidenav from "../sidenav/Sidenav";
 import { UserContext } from "../../users/UserContext";
+import { useIp } from "../../hooks/useViews";
 
 function NavigationBar(props, activateOption) {
-  const value = useContext(UserContext);
+  const userInfo = useContext(UserContext);
+  const ip = useIp()
   const searchRef = useRef();
   const [sidebar, setSidebar] = useState(true);
   const activate = () => setSidebar(!sidebar);
@@ -19,7 +21,7 @@ function NavigationBar(props, activateOption) {
   async function handleSubmit(e) {
     e.preventDefault();
     const term = searchRef.current.value;
-    dispatch(searchItems({ searchTerm: term, min_search: "1" }));
+    dispatch(searchItems({userInfo:userInfo?userInfo.id:ip, searchTerm: term, min_search: "1" }));
     message.info("Waaaaaaat!!!");
     props.history.push("/searched");
     // await axios.post('/andeyo',{keyword:"amazing",min_videos:1}).then(response=>{

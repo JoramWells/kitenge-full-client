@@ -12,7 +12,7 @@ import {
   ShoppingCartIcon,
 } from "@heroicons/react/solid";
 import Modal from "./modalComponent/Modal";
-import { useAvatar, useViews } from "../hooks/useViews";
+import { useAvatar, useIp, useViews } from "../hooks/useViews";
 import { Flex } from "../components/styles";
 // import useGeolocation from "../hooks/useGeolocation";
 
@@ -22,10 +22,8 @@ export function CarouselItem({ product }) {
     product;
   const [showModal, setShowModal] = useState(false);
   const views = useViews(id);
+  const ip = useIp()
   const avatar = useAvatar(userId);
-
-  const [ip, setIP] = useState("");
-
   const [dot, setDot] = useState("hidden");
 
   const openModal = async (product_id) => {
@@ -40,19 +38,6 @@ export function CarouselItem({ product }) {
     // }
   };
 
-  const getIP = useCallback(async () => {
-    try {
-      await axios
-        .get("https://api.ipify.org/")
-        .then((res) => setIP(res.data))
-        .catch((err) => console.log(err));
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-  useEffect(() => {
-    getIP();
-  }, [getIP]);
   const handleMouseLeave = () => {
     setDot("hidden");
   };
