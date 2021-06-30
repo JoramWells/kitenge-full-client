@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Col, message } from "antd";
 import NumberFormat from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, withRouter,Link } from "react-router-dom";
+import { useHistory, withRouter, Link } from "react-router-dom";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 
 // import { listProducts } from "../../_actions/productActions";
@@ -14,9 +14,10 @@ import moment from "moment";
 import { EyeIcon } from "@heroicons/react/solid";
 // import { likedItem } from "../_actions/likedActions";
 
- function CarouselItem({ props,products }) {
-  const { id, product_name, image, price, description,src,updatedAt } = products;
-  const views = useViews(id)
+function CarouselItem({ props, products }) {
+  const { id, product_name, image, price, description, src, updatedAt } =
+    products;
+  const views = useViews(id);
   const [dot, setDot] = useState("hidden");
   const [showModal, setShowModal] = useState(false);
   const history = useHistory();
@@ -47,9 +48,9 @@ import { EyeIcon } from "@heroicons/react/solid";
     }
   };
   // console.log(RequestIp.getClientIp)
-  const handleAddToCart = ()=>{
-    props.history.push("/"+id+"?qty=")
-  }
+  const handleAddToCart = () => {
+    props.history.push("/" + id + "?qty=");
+  };
 
   return (
     <Col key={id} className="mb-4">
@@ -90,7 +91,10 @@ import { EyeIcon } from "@heroicons/react/solid";
             </p>
           </div>
 
-            <div className="flex flex-row text-sm text-gray-400 mt-4"><EyeIcon className="h-5" />  {views} views | {moment(updatedAt).fromNow("yyyy")} .ago</div>
+          <div className="flex flex-row text-sm text-gray-400 mt-4">
+            <EyeIcon className="h-5" /> {views} view(s) |{" "}
+            {moment(updatedAt).fromNow("yyyy")} .ago
+          </div>
         </div>
       </figure>
       <Modal showModal={showModal} setShowModal={setShowModal}>
@@ -106,15 +110,15 @@ import { EyeIcon } from "@heroicons/react/solid";
           </div>
 
           <div className="flex flex-row justify-center content-center space-x-2">
-            <button className="bg-black bg-opacity-80 w-full py-1 rounded-md text-white"
-            
-            >
-              <Link to={"/cart/"+id+"?qty=" + 1}>
-            Add to cart
-
+            <button className="bg-black bg-opacity-80 w-full py-1 rounded-md text-white">
+              <Link to={"/cart/" + id + "?qty=" + 1} className="text-white">
+                Add to cart
               </Link>
             </button>
-            <button className="w-full py-1 rounded-md  font-semibold" style={{backgroundColor:"#F4C430"}}>
+            <button
+              className="w-full py-1 rounded-md  font-semibold text-white"
+              style={{ backgroundColor: "#F4C430" }}
+            >
               Buy
             </button>
           </div>
@@ -124,4 +128,4 @@ import { EyeIcon } from "@heroicons/react/solid";
   );
 }
 
-export default withRouter(CarouselItem)
+export default withRouter(CarouselItem);

@@ -46,12 +46,12 @@ function RightMenu(props) {
     if (cartItems.length === 0) {
       return (
         <div className="flex flex-row justify-center items-center content-center">
-          <MailIcon className="h-10 p-2 text-gray-700" />
-          <ShoppingCartIcon className="h-10 p-2 text-gray-700" />
+          <MailIcon className="h-10 p-2 text-gray-400" />
+          <ShoppingCartIcon className="h-10 p-2 text-gray-400" />
 
           <img
             src={userInfo.avatar}
-            alt={userInfo.avatar}
+            alt="logo"
             loading="lazy"
             style={{
               width: "30px",

@@ -4,6 +4,8 @@ import {
   SEARCH_QUERY_SUCCESS,
 } from "../_constants/searchConstants";
 import axios from "axios";
+import Cookie from 'js-cookie'
+
 
 const searchItems = (dataToSubmit) => async (dispatch) => {
   dispatch({ type: SEARCH_QUERY_REQUEST, payload: dataToSubmit });
@@ -12,6 +14,7 @@ const searchItems = (dataToSubmit) => async (dispatch) => {
       .post("/andeyo", dataToSubmit)
       .then((response) => {
         dispatch({ type: SEARCH_QUERY_SUCCESS, payload: response.data });
+        Cookie.set("searchedItems", JSON.stringify(response.data))
       })
       .catch((err) => {
         dispatch({ type: SEARCH_QUERY_FAIL, payload: err.message });

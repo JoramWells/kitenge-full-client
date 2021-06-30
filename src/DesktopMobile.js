@@ -18,7 +18,7 @@ export default function DesktopMobile() {
 
       <Container
         className="desktop__carousel"
-        style={{ zIndex: "-1 !important", overflow: "hidden" }}
+        style={{overflow: "hidden" }}
       >
         <FlexDiv>
           {products.map((product) => (

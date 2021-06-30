@@ -7,13 +7,14 @@ import { signin } from "../_actions/userActions";
 import { message, Divider } from "antd";
 import Cookie from "js-cookie";
 import { LockClosedIcon, MailIcon } from "@heroicons/react/solid";
-import {Form} from '../components/styles'
+import { Form } from "../components/styles";
+import Btn from "../buttonComponent/Button";
 
 export default function SignIn(props) {
   const history = useHistory();
   const [formErrorMessage, setFormErrorMessage] = useState("");
   const userSignin = useSelector((state) => state.userSignin);
-  const { loadingUser,userInfo } = userSignin;
+  const { loadingUser, userInfo } = userSignin;
 
   const dispatch = useDispatch();
   function register() {
@@ -25,18 +26,16 @@ export default function SignIn(props) {
       history.goBack();
     }
     return () => {};
-  }, [userInfo,history]);
-
+  }, [userInfo, history]);
 
   return (
-    <div style={{ paddingTop: "5rem" }}>
-      <Form
-        className="rounded-md ring-1 ring-gray-200">
+    <div style={{ paddingTop: "1rem" }}>
+      <Form className="rounded-md ring-1 ring-gray-200">
         <Divider>
-          <div style={{color:"#F4C430"}} className="text-2xl font-bold">
-          Signin
+          <div style={{ color: "#F4C430" }} className="text-2xl font-bold">
+            Signin
           </div>
-          
+
           <div className="text-gray-500 font-normal text-lg">
             to continue to do3ensKE
           </div>
@@ -134,11 +133,9 @@ export default function SignIn(props) {
                   </div>
                   <div>
                     {formErrorMessage && (
-                        <div
-                        className="text-red-400 text-sm p-1"
-                        >
-                          {formErrorMessage}
-                        </div>
+                      <div className="text-red-400 text-sm p-1">
+                        {formErrorMessage}
+                      </div>
                     )}
                   </div>
                 </div>
@@ -149,28 +146,12 @@ export default function SignIn(props) {
                   >
                     Don't have an account? Sign Up.
                   </p>
-
-                  <div
-                    className="p-2 rounded-md hover:cursor-pointer bg-black bg-opacity-80"
-                    onClick={handleSubmit}
-                  >
-                    <div className="flex flex-row content-center items-center justify-center">
-                      {loadingUser && (
-                        <div className="loader" style={{ padding: ".54rem" }} />
-                      )}
-                    </div>
-                    <div className="flex flex-row justify-center items-center content-center">
-                      <button
-                        className="  focus:outline-none text-white text-lg"
-                        style={{
-                          display: loadingUser ? "none" : "block",
-                        }}
-                      >
-                        Sign In
-                      </button>
-                    </div>
-                  </div>
                 </div>
+                <Btn
+                  text="Sign In"
+                  Icon={LockClosedIcon}
+                  loading={loadingUser}
+                />
               </form>
             );
           }}

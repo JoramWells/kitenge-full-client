@@ -13,19 +13,19 @@ export default function SearchedItems() {
       ) : errorSearch ? (
         <div>{errorSearch}</div>
       ) : (
-        <div className="flex flex-row">
-          <div style={{ paddingTop: "5rem", width: "85%" }}>
+        <div className="flex flex-row justify-center">
+          <div style={{width: "59.5%", paddingTop:"1rem" }}>
             {searchQuery.map((item) => (
-              <div className="flex flex-row justify-center items-center space-x-4">
+              <div className="flex flex-row justify-center items-center space-x-4 mb-2 bg-white p-2 rounded-md">
                 <img
                   src={item.image}
                   style={{
                     width: "250px",
-                    height: "250px",
+                    height: "150px",
                     objectFit: "contain",
                   }}
                 />
-                <div className="flex flex-col bg-white">
+                <div className="flex flex-col bg-white flex-1">
                   <div className="text-gray-800 font-bold text-xl">
                     {item.productName}
                   </div>
@@ -50,7 +50,6 @@ export default function SearchedItems() {
               </div>
             ))}
           </div>
-          <div style={{ paddingTop: "5rem" }}>Related items</div>
         </div>
       )}
     </>

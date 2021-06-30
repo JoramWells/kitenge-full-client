@@ -9,11 +9,11 @@ export default function SideNav({sidebar}) {
     <Sidenav
       className={
         sidebar
-          ? "nav-menu active flex flex-row items-center content-center"
+          ? "nav-menu active flex flex-row  content-center"
           : "nav-menu"
       }
     >
-      <ul className="leading-8 ">
+      <ul className="leading-8 mt-14">
         <Li>
           <HomeIcon className="h-5 ml-3 text-gray-500 mr-4" />
           <div className="hover:text-gray-700 text-gray-900 font-semibold">

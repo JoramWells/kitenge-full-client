@@ -84,13 +84,11 @@ width: 100%;
 `
 
 export const Sidenav = styled.nav`
-  padding-top: -3.77rem;
   width: 17%;
   height: 100%;
-  /* position: fixed; */
+  position: fixed;
   top:0;
   background-color: white;
-  text-align: center;
   @media(max-width: 767px){
   display: none !important;
 }

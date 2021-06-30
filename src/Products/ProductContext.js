@@ -4,6 +4,7 @@ import { Result } from "antd";
 import { RefreshIcon } from "@heroicons/react/outline";
 import { listProducts } from "../_actions/productActions";
 import { Skeleton, Flex } from "../components/styles";
+import Cookie from 'js-cookie'
 
 export const ProductContext = createContext();
 
@@ -16,6 +17,7 @@ function reloadHandler() {
 export function ProductProvider(props) {
   const ProductList = useSelector((state) => state.productList);
   const { posts, loading, error } = ProductList;
+  const searchedItems = Cookie.getJSON("searchedITems")
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listProducts());

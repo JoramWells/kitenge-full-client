@@ -23,21 +23,12 @@ const Content = styled.div`
   border-radius: 5px;
   margin: 15px;
   transition-duration: 500ms;
-  width: 35rem;
+  width: 48rem;
   @media(max-width:767px){
     width:21.5rem;
     margin: 10px;
-    /* height: 50%; */
   }
 `;
-
-// const ModalImg = styled.img`
-//   width: 100%;
-//   height: 100%;
-//   border-radius: 10px 0 0 10px;
-//   background:#000;
-
-// `
 
 const ModalHeader = styled.div``;
 

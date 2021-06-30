@@ -11,10 +11,11 @@ import { register } from "../_actions/userActions";
 import { LockClosedIcon, MailIcon } from "@heroicons/react/solid";
 import { UserAddIcon } from "@heroicons/react/outline";
 import { Form, Row } from "../components/styles";
+import Btn from "../buttonComponent/Button";
 
 export default function SignUp(props) {
   const userRegister = useSelector((state) => state.userRegister);
-  const { loading, userInfo,error } = userRegister;
+  const { loading } = userRegister;
   const CLIENT_ID =
     "266388441735-5a4sfpj0lpk8nvjkf52ppoqqul0139st.apps.googleusercontent.com";
   const history = useHistory();
@@ -38,12 +39,12 @@ export default function SignUp(props) {
 
     if (userFailure) {
       message.error("email already exists");
-    }else{
+    } else {
       message.success("Successfully registered");
     }
 
     // if (userSuccess) {
-      
+
     //   // history.goBack();
     // }
   };
@@ -65,7 +66,7 @@ export default function SignUp(props) {
   return (
     <div
       style={{
-        paddingTop: "5rem",
+        paddingTop: "1rem",
       }}
     >
       <Form className="bg-white ring-1 ring-gray-300 rounded-md">
@@ -78,8 +79,8 @@ export default function SignUp(props) {
           />
         </Row>
         <Divider>
-        <div style={{color:"#F4C430"}} className="text-2xl font-bold">
-          Sign up
+          <div style={{ color: "#F4C430" }} className="text-2xl font-bold">
+            Sign up
           </div>
         </Divider>
         <form layout="vertical" size="large" onSubmit={submitHandler}>
@@ -182,9 +183,9 @@ export default function SignUp(props) {
             />
           </div>
 
-            <p onClick={login} style={{ color: "grey" }} className="login">
-              Already have an account? Sign in
-            </p>
+          <p onClick={login} style={{ color: "grey" }} className="login">
+            Already have an account? Sign in
+          </p>
           <div>
             <GoogleLogin
               clientId={CLIENT_ID}
@@ -195,23 +196,7 @@ export default function SignUp(props) {
               className="link"
             />
           </div>
-          <div className="bg-black bg-opacity-80 rounded-md" onClick={submitHandler}>
-            <div className="flex flex-row content-center items-center justify-center">
-              {loading && (
-                <div className="loader m-1" style={{ padding: ".54rem" }} />
-              )}
-            </div>
-            <button
-              style={{
-                borderRadius: "5px",
-                border: "0",
-                display: loading ? "none" : "block",
-              }}
-              className=" w-full p-1 focus:outline-none text-lg text-white"
-            >
-              SIGN UP
-            </button>
-          </div>
+          <Btn text="Sign Up" loading={loading} />
         </form>
       </Form>
     </div>

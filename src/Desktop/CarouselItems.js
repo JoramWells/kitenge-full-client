@@ -1,6 +1,5 @@
-import React, { useState, memo, useCallback, useEffect } from "react";
+import React, { useState, memo } from "react";
 import { Link } from "react-router-dom";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 // import NumberFormat from "react-number-format";
 import axios from "axios";
 import moment from "moment";
@@ -14,15 +13,16 @@ import {
 import Modal from "./modalComponent/Modal";
 import { useAvatar, useIp, useViews } from "../hooks/useViews";
 import { Flex } from "../components/styles";
+import Btn from "../buttonComponent/Button";
 // import useGeolocation from "../hooks/useGeolocation";
 
 export function CarouselItem({ product }) {
   // const location = useGeolocation();
-  const { id, product_name, image, price, description, userId, updatedAt } =
+  const { id, product_name, image, price,category, description, userId, updatedAt } =
     product;
   const [showModal, setShowModal] = useState(false);
   const views = useViews(id);
-  const ip = useIp()
+  const ip = useIp();
   const avatar = useAvatar(userId);
   const [dot, setDot] = useState("hidden");
 
@@ -91,7 +91,7 @@ export function CarouselItem({ product }) {
           <div>
             <Link
               className="text-gray-800 font-bold"
-              to={`/product-detail/${id}`}
+              to={`/product-detail/${id}/?category=${category}`}
             >
               {product_name}
             </Link>
@@ -109,29 +109,41 @@ export function CarouselItem({ product }) {
       <Modal showModal={showModal} setShowModal={setShowModal}>
         <div className="p-4">
           <Flex>
-            <LazyLoadImage
-              src={image}
-              alt=""
-              style={{
-                width: "150px",
-                height: "150px",
-                objectFit: "contain",
-                paddingTop: "0",
-              }}
-              // loading="lazy"
-              className="rounded-md"
-            />
             <div>
-              <div className="text-lg font-semibold">{product_name}</div>
-              <div className="text-gray-700 font-semibold">Kshs {price}/=</div>
-              <div className="text-gray-400 text-sm line-through">
+              <img
+                src={image}
+                alt=""
+                style={{
+                  width: "250px",
+                  height: "175px",
+                  // objectFit: "contain",
+                }}
+                loading="lazy"
+                className="rounded-md"
+              />
+              <h1 className="text-lg font-bold text-gray-700 m-0 p-0">
+                {product_name}
+              </h1>
+              <h2 className="m-0 p-0 font-semibold text-gray-500">
                 Kshs {price}/=
+              </h2>
+              <div className="text-xs text-gray-400">
+                {views} view(s) | {moment(updatedAt).fromNow("yyyy")}
+              </div>
+            </div>
+            <div className="p-2 flex-1">
+                <h1 className="text-lg m-0 p-0">Description</h1>
+                <div
+                  style={{ height: 100, overflowY: "scroll", marginTop: 2}
+                }
+                className="text-gray-500"
+                >
+                  <div dangerouslySetInnerHTML={{ __html: description }}/>
               </div>
             </div>
 
             <div>
               <div
-                style={{ textAlign: "center" }}
                 className="text-gray-600 font-semibold text-lg"
               >
                 Delivery details
@@ -146,32 +158,14 @@ export function CarouselItem({ product }) {
               </div>
             </div>
           </Flex>
-          <div>
-            <h3 style={{ textAlign: "center" }}>description</h3>
-            <div
-              className="flex justify-center"
-              style={{ height: 100, overflowY: "scroll", marginTop: 10 }}
-            >
-              <div dangerouslySetInnerHTML={{ __html: description }} />
-            </div>
-          </div>
-          <hr />
-          <Flex>
-            <div
-              style={{ width: "55%", margin: "auto" }}
-              className="flex flex-row justify-center content-center "
-            >
-              <button className="w-full text-gray-100 focus:outline-none bg-black bg-opacity-80 m-1  flex flex-row items-center content-center justify-center rounded-md">
-                <CreditCardIcon className="h-10 text-white p-2" />
-                Buy
-              </button>
 
-              <button className="text-gray-700 flex flex-row w-full content-center m-1 items-center bg-gray-300 justify-center rounded-md">
-                <ShoppingCartIcon className="h-10 p-2 text-gray-700" />
-                Add to Cart
-              </button>
-            </div>
-          </Flex>
+          <div
+            style={{ width: "55%", margin: "auto" }}
+            className="flex flex-row justify-center content-center "
+          >
+            <Btn Icon={CreditCardIcon} text="Buy" />
+            <Btn Icon={ShoppingCartIcon} text="Add to cart" />
+          </div>
         </div>
       </Modal>
     </>

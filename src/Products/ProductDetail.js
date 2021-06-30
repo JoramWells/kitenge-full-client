@@ -28,7 +28,7 @@ import { categoryProduct, detailsProduct } from "../_actions/productActions";
 import RecentItemsBar from "../Generic/RecentItemsBar";
 import { EyeOutlined, LikeFilled, RedoOutlined } from "@ant-design/icons";
 import { PlusIcon } from "@heroicons/react/outline";
-import styled from 'styled-components'
+import styled from "styled-components";
 
 function reloadHandler() {
   window.location.reload();
@@ -87,15 +87,13 @@ export default function ProductDetail(props) {
     props.history.push("/cart/" + props.match.params.id + "?qty=" + qty);
   }
 
-
   return (
     <>
-      <div className="m-auto block" style={{paddingTop:"5rem"}}>
+      <div className="m-auto block" style={{ paddingTop: "1rem" }}>
         <div className="flex flex-row justify-center items-center content-center">
           <div>
             {loading ? (
-              <Row style={{ padding: "10px", marginTop: "2rem" }}
-              >
+              <Row style={{ padding: "10px", marginTop: "2rem" }}>
                 <Col md={6} sm={6}>
                   <Skeleton.Image
                     style={{
@@ -140,8 +138,7 @@ export default function ProductDetail(props) {
               />
             ) : (
               <Row className="m-4">
-                <Flex className="bg-white p-2 rounded-md"
-                >
+                <Flex className="bg-white p-2 rounded-md">
                   <div>
                     <p className="text-gray-600 m-0 font-bold text-lg">
                       {product.product_name}
@@ -204,7 +201,7 @@ export default function ProductDetail(props) {
                             border: "0",
                             textDecoration: "none",
                             color: "white",
-                            backgroundColor: "#47817F"
+                            backgroundColor: "#47817F",
                           }}
                           className="w-full p-2 flex flex-row rounded-md"
                           onClick={handleAddToCart}
@@ -218,13 +215,14 @@ export default function ProductDetail(props) {
                         <div className="flex lg:flex-row md:flex-col space-x-4">
                           <button
                             onClick={loginHandler}
-                            
-                            style={{backgroundColor: "#47817F"}}
-                            className="transition hover:shadow-lg focus-within:shadow-lg duration-150 ease-out-in p-2 focus:outline-none  rounded-md  text-white"
+                            className="bg-black opacity-80 transition hover:shadow-lg focus-within:shadow-lg duration-150 ease-out-in p-2 focus:outline-none  rounded-md  text-white"
                           >
                             SignIn & Checkout
                           </button>
-                          <button className="transition hover:shadow-lg focus-within:shadow-lg duration-150 ease-out-in p-2 focus:outline-none bg-black bg-opacity-50 rounded-md text-white">
+                          <button
+                            style={{ backgroundColor: "#F4C430" }}
+                            className="transition hover:shadow-lg focus-within:shadow-lg duration-150 ease-out-in p-2 focus:outline-none bg-black bg-opacity-50 rounded-md text-white"
+                          >
                             Continue Shopping
                           </button>
                         </div>
@@ -232,124 +230,95 @@ export default function ProductDetail(props) {
                     )}
                     <Divider />
                   </div>
-                  {/* <Col>
-                    <Card
-                      style={{
-                        width: "18rem",
-                      }}
-                    >
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: product.description,
-                        }}
-                      />
-                    </Card>
-                  </Col> */}
                 </Flex>
               </Row>
             )}
           </div>
           <div
-            style={{
-              backgroundColor: "white",
-              height: "200px",
-              width: "20rem",
-            }}
+          style={{
+            backgroundColor: "white",
+          }}
           >
-            Fulex
+            <h1 className="text-lg m-0 p-1 text-center">
+            Related Items
+            </h1>
+            <div
+              style={{
+                height: "317px",
+                width: "17rem",
+                overflowY: "scroll",
+              }}
+            >
+              {loadingCategory ? (
+                <div>Loading...</div>
+              ) : errorCategory ? (
+                <>err</>
+              ) : (
+                <div
+                  style={{
+                    margin: "auto",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  {products.length === 0 ? (
+                    <Row>
+                      <Empty description="No category"></Empty>
+                    </Row>
+                  ) : (
+                    <Row
+                      className=" rounded-md bg-white"
+                      style={{ paddingBottom: "2rem" }}
+                    >
+                      {products.map((item) => (
+                        <figure
+                          key={item.id}
+                          className="rounded-md bg-white ring-1 ring-gray-100 cursor-pointer hover:rounded-md"
+                          style={{
+                            width: "11rem",
+                            height: "177px",
+                            border: "none",
+                          }}
+                        >
+                          <LazyLoadImage
+                            src={"/" + item.image}
+                            effect="blur"
+                            alt="productimage"
+                            style={{
+                              width: "11rem",
+                              height: "7.5rem",
+                              display: "flex",
+                              margin: "auto",
+                            }}
+                            // visibleByDefault={product.image}
+                          />
+                          <div className="p-2">
+                            <Link
+                              to={`/product-detail/${item.id}/?category=${item.category}`}
+                              className="m-0 text-gray-700 text-sm"
+                            >
+                              {item.product_name}
+                            </Link>
+                            <div className="text-gray-700 font-medium m-0">
+                              <NumberFormat
+                                value={item.price}
+                                thousandSeparator={true}
+                                displayType={"text"}
+                                prefix="Kshs: "
+                                suffix=" /="
+                              />
+                            </div>
+                          </div>
+                        </figure>
+                      ))}
+                    </Row>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-
-      <RecentItemsBar title="Related Items" />
-      {loadingCategory ? (
-        <Row justify="space-around" align="middle">
-          {renderSkeleton}
-        </Row>
-      ) : errorCategory ? (
-        <></>
-      ) : (
-        <div
-          style={{
-            maxWidth: "85%",
-            margin: "auto",
-            display: "block",
-            alignItems: "center",
-          }}
-        >
-          {products.length === 0 ? (
-            <Row>
-                <Empty description="No category"></Empty>
-            </Row>
-          ) : (
-            <Row
-              className=" p-2 rounded-md "
-              style={{ marginTop: "2rem", paddingBottom: "2rem" }}
-            >
-              {products.map((item) => (
-                <Col key={item.id}>
-                  <Card
-                    className="hover:shadow-lg cursor-pointer hover:rounded-md"
-                    style={{
-                      width: "15rem",
-                      height: "290px",
-                      border: "none",
-                    }}
-                    cover={
-                      <LazyLoadImage
-                        src={"/" + item.image}
-                        effect="blur"
-                        alt="productimage"
-                        style={{
-                          width: "14.8rem",
-                          height: "10.5rem",
-                          display: "flex",
-                          margin: "auto",
-                        }}
-                        // visibleByDefault={product.image}
-                      />
-                    }
-                  >
-                    <Link
-                      to={`/product-detail/${item.id}/?category=${item.category}`}
-                      className="m-0 text-gray-700 text-sm"
-                    >
-                      {item.product_name}
-                    </Link>
-                    {/* <Rate
-                      allowHalf={true}
-                      style={{
-                        fontSize: "1rem",
-                        color: "#434343",
-
-                        marginBottom: ".6rem",
-                      }}
-                      defaultValue={item.ratings}
-                    /> */}
-                    <p className="text-gray-700 font-medium m-0">
-                      <NumberFormat
-                        value={item.price}
-                        thousandSeparator={true}
-                        displayType={"text"}
-                        prefix="Kshs: "
-                        suffix=" /="
-                      />
-                    </p>
-                    <div className="flex space-x-4 items-center content-center bg-gray-50 rounded-sm p-1">
-                      <div className="flex items-center">
-                        <EyeOutlined style={{ color: "grey" }} />{" "}
-                        <LikeFilled style={{ color: "#bfbfbf" }} />{" "}
-                        <span style={{ color: "grey" }}>{item.likes}</span>
-                      </div>
-                      <div className="text-gray-300">Sold 93</div>
-                    </div>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
-          )}
-        </div>
-      )}
     </>
   );
 }
@@ -360,7 +329,7 @@ const Row = styled.div`
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-`
+`;
 
 const Flex = styled.div`
   display: flex;
@@ -369,11 +338,10 @@ const Flex = styled.div`
   align-items: center;
   flex-wrap: wrap;
   width: 43rem;
-  @media(max-width:767px){
+  @media (max-width: 767px) {
     display: fixed;
     flex-direction: row;
     flex-wrap: wrap;
     width: 23rem;
-
   }
-`
+`;
