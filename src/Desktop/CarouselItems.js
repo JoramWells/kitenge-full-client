@@ -44,6 +44,10 @@ export function CarouselItem({ product }) {
   const handleMouseEnter = async () => {
     setDot("visible");
   };
+  const handleClick=(e)=>{
+    e.preventDefault()
+    alert("wtf")
+  }
 
   return (
     <>
@@ -163,7 +167,7 @@ export function CarouselItem({ product }) {
             style={{ width: "55%", margin: "auto" }}
             className="flex flex-row justify-center content-center "
           >
-            <Btn Icon={CreditCardIcon} text="Buy" />
+            <Btn Icon={CreditCardIcon} text="Buy" onClick={handleClick} />
             <Btn Icon={ShoppingCartIcon} text="Add to cart" />
           </div>
         </div>

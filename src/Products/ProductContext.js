@@ -4,13 +4,29 @@ import { Result } from "antd";
 import { RefreshIcon } from "@heroicons/react/outline";
 import { listProducts } from "../_actions/productActions";
 import { Skeleton, Flex, Container } from "../components/styles";
-import Cookie from 'js-cookie'
+import Cookie from "js-cookie";
 
 export const ProductContext = createContext();
 
 const renderSkeleton = [...Array(10).keys()].map((i) => {
-  
-  return <div style={{maxWidth:"83%", float:"right", marginTop:"1rem"}}><Skeleton key={i} className="mb-4 p-2"></Skeleton></div>
+  return (
+    <div style={{ maxWidth: "83%", float: "right", marginTop: "1rem", marginBottom:"1rem" }}>
+      {/* Skeleton */}
+      <div
+        style={{ width: "15rem", backgroundColor: "white" }}
+        className="pb-4"
+      >
+        <div className="image"></div>
+        <div className="content">
+          <div className="avatar"></div>
+          <div className="w-full mt-4 space-y-2 p-2">
+            <div className="item-name"></div>
+            <div className="item-price"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 });
 function reloadHandler() {
   window.location.reload();
@@ -18,7 +34,7 @@ function reloadHandler() {
 export function ProductProvider(props) {
   const ProductList = useSelector((state) => state.productList);
   const { posts, loading, error } = ProductList;
-  const searchedItems = Cookie.getJSON("searchedITems")
+  const searchedItems = Cookie.getJSON("searchedITems");
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listProducts());

@@ -21,6 +21,7 @@ export default function DesktopMobile() {
         style={{overflow: "hidden" }}
       >
         <FlexDiv>
+          
           {products.map((product) => (
             <CarouselItems key={product.id} product={product} />
           ))}

@@ -14,7 +14,7 @@ const Button = ({ color, Icon, text, loading = false,onClick }) => {
         )}
       </Flex>
       <Flex>
-          <Btn  type="submit" style={{display:loading? "none":"flex"}}>
+          <Btn  type="submit" style={{display:loading? "none":"flex"}} onClick={onClick?(e)=>onClick(e):""}>
               {Icon && <Icon className="h-5" />}
               <div>
                 {text}  
@@ -55,7 +55,8 @@ Button.propTypes={
     color:PropTypes.string,
     text:PropTypes.string,
     Icon:PropTypes.object,
-    loading:PropTypes.bool
+    loading:PropTypes.bool,
+    onClick:PropTypes.func
 }
 Button.defaultProps = {
     color:"",
