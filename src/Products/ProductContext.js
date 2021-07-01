@@ -3,19 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { Result } from "antd";
 import { RefreshIcon } from "@heroicons/react/outline";
 import { listProducts } from "../_actions/productActions";
-import { Skeleton, Flex, Container } from "../components/styles";
+import {Flex, Container } from "../components/styles";
 import Cookie from "js-cookie";
 
 export const ProductContext = createContext();
 
 const renderSkeleton = [...Array(10).keys()].map((i) => {
   return (
-    <div style={{ maxWidth: "83%", float: "right", marginTop: "1rem", marginBottom:"1rem" }}>
+    <div className="sizing">
       {/* Skeleton */}
-      <div
-        style={{ width: "15rem", backgroundColor: "white" }}
-        className="pb-4"
-      >
+      <div className="body">
         <div className="image"></div>
         <div className="content">
           <div className="avatar"></div>

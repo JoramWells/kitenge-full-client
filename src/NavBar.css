@@ -163,6 +163,31 @@
   width: 5rem;
 
 }
+.body{
+  width: 15rem;
+  background-color: white;
+  padding-bottom: 2rem;
+}
+.sizing{
+  max-width: "83%";
+  float: "right";
+  margin-top: "1rem";
+  margin-bottom:"1rem";
+}
+@media(max-width:767px){
+  .body{
+    width: 18rem;
+  }
+  .sizing{
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    float: none;
+  }
+}
 
 @keyframes loader{
   0%{
