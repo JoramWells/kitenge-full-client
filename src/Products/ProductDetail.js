@@ -8,13 +8,9 @@ import { Link } from "react-router-dom";
 import NumberFormat from "react-number-format";
 
 import {
-  Col,
   Button,
-  Card,
   Divider,
   Rate,
-  Skeleton,
-  Form,
   Empty,
   Result,
 } from "antd";
@@ -23,10 +19,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import { categoryProduct, detailsProduct } from "../_actions/productActions";
 
-// import RecentItemsBar from "../RecentItemsBar";
-
-import RecentItemsBar from "../Generic/RecentItemsBar";
-import { EyeOutlined, LikeFilled, RedoOutlined } from "@ant-design/icons";
+import { RedoOutlined } from "@ant-design/icons";
 import { PlusIcon } from "@heroicons/react/outline";
 import styled from "styled-components";
 
@@ -45,32 +38,6 @@ export default function ProductDetail(props) {
   const search = props.location.search;
   const params = new URLSearchParams(search);
   const category = params.getAll("category");
-
-  const renderSkeleton = [...Array(4).keys()].map((i) => {
-    return (
-      <Col key={i}>
-        <Form layout="vertical">
-          <Form.Item>
-            <Skeleton.Input style={{ width: "16rem", height: "150px" }} />{" "}
-            <br />
-          </Form.Item>
-
-          <Form.Item>
-            <Skeleton.Input
-              style={{ width: "150px", height: "1rem" }}
-              active={true}
-            />
-          </Form.Item>
-          <Form.Item>
-            <Skeleton.Input
-              style={{ width: "200px", height: "1rem" }}
-              active={true}
-            />
-          </Form.Item>
-        </Form>
-      </Col>
-    );
-  });
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -93,39 +60,21 @@ export default function ProductDetail(props) {
         <div className="flex flex-row justify-center items-center content-center">
           <div>
             {loading ? (
-              <Row style={{ padding: "10px", marginTop: "2rem" }}>
-                <Col md={6} sm={6}>
-                  <Skeleton.Image
-                    style={{
-                      width: "250px",
-                      height: "250px",
-                      objectFit: "contain",
-                    }}
-                  />
-                </Col>
-                <Col md={6} sm={6} style={{ marginTop: "2rem" }}>
-                  <Form>
-                    <Form.Item>
-                      <Skeleton.Input
-                        style={{ width: "250px", height: "1rem" }}
-                      />
-                    </Form.Item>
-                    <Form.Item>
-                      <Skeleton.Input
-                        style={{ width: "150px", height: "1rem" }}
-                      />
-                    </Form.Item>
-                    <Form.Item>
-                      <Skeleton.Input
-                        style={{ width: "200px", height: "1rem" }}
-                      />
-                    </Form.Item>
-                  </Form>
-                </Col>
-                <Col>
-                  <Skeleton.Input style={{ width: "300px", height: "300px" }} />
-                </Col>
-              </Row>
+              <div className="details">
+                <div className="details-item">
+                  <div>
+                    <div className="details-div"></div>
+                    <div className="details-img"></div>
+                  </div>
+                  <div>
+                    <div className="details-div"></div>
+                    <div className="details-reviews"></div>
+                    <div className="details-div"></div>
+                    <div className="details-category"></div>
+                  </div>
+                </div>
+                <div className="description"></div>
+              </div>
             ) : error ? (
               <Result
                 status="500"
@@ -235,13 +184,11 @@ export default function ProductDetail(props) {
             )}
           </div>
           <div
-          style={{
-            backgroundColor: "white",
-          }}
+            style={{
+              backgroundColor: "white",
+            }}
           >
-            <h1 className="text-lg m-0 p-1 text-center">
-            Related Items
-            </h1>
+            <h1 className="text-lg m-0 p-1 text-center">Related Items</h1>
             <div
               style={{
                 height: "317px",

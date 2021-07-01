@@ -214,7 +214,64 @@
 
 }
 
+.details{
+  width: 45rem;
+  background-color: white;
+  height: 22rem;
 
+}
+.details-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+
+}
+.details-img{
+  width: 15rem;
+  height: 12rem;
+  margin-top: 1rem;
+  animation: loader 1s infinite ease-in-out;
+  --webkit-animation: loader 1s infinite ease-in-out;
+}
+.details-div{
+  background-color: gray;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  width: 15rem;
+  height: 1rem;
+  animation: loader 1s infinite ease-in-out;
+  --webkit-animation: loader 1s infinite ease-in-out;
+}
+.details-reviews{
+  background-color: gray;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  height: 1rem;
+  width: 10rem;
+  animation: loader 1s infinite ease-in-out;
+  --webkit-animation: loader 1s infinite ease-in-out;
+}
+.details-category{
+  background-color: gray;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  height: 1rem;
+  width: 12rem;
+  animation: loader 1s infinite ease-in-out;
+  --webkit-animation: loader 1s infinite ease-in-out;
+}
+
+.description{
+  background-color: gray;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding: 1rem;
+  animation: loader 1s infinite ease-in-out;
+  --webkit-animation: loader 1s infinite ease-in-out;
+}
 
 
 

@@ -10,7 +10,7 @@ export default function DesktopMobile() {
     <>
       <div className="mobile__carousel" style={{ marginTop: "1rem" }}>
         <Flex>
-          {products.map((item) => (
+          {products.rows.map((item) => (
             <CarouselItem key={item.id} products={item} />
           ))}
         </Flex>
@@ -22,7 +22,7 @@ export default function DesktopMobile() {
       >
         <FlexDiv>
           
-          {products.map((product) => (
+          {products.rows.map((product) => (
             <CarouselItems key={product.id} product={product} />
           ))}
         </FlexDiv>
