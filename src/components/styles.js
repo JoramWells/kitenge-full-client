@@ -83,7 +83,7 @@ z-index: 100 !important;
 width: 100%;
 `
 
-export const Sidenav = styled.nav`
+export const Sidenav = styled.div`
   width: 17%;
   height: 100%;
   position: fixed;

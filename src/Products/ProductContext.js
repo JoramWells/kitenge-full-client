@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Result } from "antd";
 import { RefreshIcon } from "@heroicons/react/outline";
 import { listProducts } from "../_actions/productActions";
-import { Skeleton, Flex } from "../components/styles";
+import { Skeleton, Flex, Container } from "../components/styles";
 import Cookie from 'js-cookie'
 
 export const ProductContext = createContext();
 
-const renderSkeleton = [...Array(8).keys()].map((i) => {
-  return <Skeleton key={i} className="mb-4 p-2"></Skeleton>;
+const renderSkeleton = [...Array(10).keys()].map((i) => {
+  
+  return <div style={{maxWidth:"83%", float:"right", marginTop:"1rem"}}><Skeleton key={i} className="mb-4 p-2"></Skeleton></div>
 });
 function reloadHandler() {
   window.location.reload();
@@ -26,7 +27,9 @@ export function ProductProvider(props) {
   return (
     <>
       {loading ? (
-        <Flex>{renderSkeleton}</Flex>
+        <Container>
+          <Flex>{renderSkeleton}</Flex>
+        </Container>
       ) : error ? (
         <Result
           status="500"

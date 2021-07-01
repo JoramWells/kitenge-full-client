@@ -11,7 +11,7 @@ const searchItems = (dataToSubmit) => async (dispatch) => {
   dispatch({ type: SEARCH_QUERY_REQUEST, payload: dataToSubmit });
   try {
     await axios
-      .post("/andeyo", dataToSubmit)
+      .post("/nancy/search", dataToSubmit)
       .then((response) => {
         dispatch({ type: SEARCH_QUERY_SUCCESS, payload: response.data });
         Cookie.set("searchedItems", JSON.stringify(response.data))
