@@ -1,4 +1,4 @@
-import React, { useState, memo } from "react";
+import React, { useState, memo,useRef } from "react";
 import { Link } from "react-router-dom";
 // import NumberFormat from "react-number-format";
 import axios from "axios";
@@ -48,6 +48,17 @@ export function CarouselItem({ product }) {
     e.preventDefault()
     alert("wtf")
   }
+  const scrollRef = useRef();
+
+  const onScroll = () => {
+    if (scrollRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+      if (scrollTop + clientHeight === scrollHeight) {
+        // TO SOMETHING HERE
+        console.log("Reached bottom");
+      }
+    }
+  };
 
   return (
     <>
@@ -57,6 +68,8 @@ export function CarouselItem({ product }) {
         key={id}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        ref={scrollRef}
+        onScroll={()=>console.log("fuck")}
       >
         <div
           className="absolute z-1 bg-black bg-opacity-10  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20"

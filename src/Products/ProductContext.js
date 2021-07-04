@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Result } from "antd";
 import { RefreshIcon } from "@heroicons/react/outline";
@@ -29,14 +29,29 @@ function reloadHandler() {
   window.location.reload();
 }
 export function ProductProvider(props) {
+
+
   const ProductList = useSelector((state) => state.productList);
   const { posts, loading, error } = ProductList;
+  const [page, setPage] = useState(1)
   const searchedItems = Cookie.getJSON("searchedITems");
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listProducts());
+    dispatch(listProducts({page}));
     return () => {};
   }, []);
+  
+  const onScroll = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight
+    if(scrollable == Math.ceil(window.scrollY)){console.log("pussy")
+    // dispatch(listProducts(page+1))
+  }
+  console.log(scrollable)
+  console.log(window.scrollY)
+
+  };
+  window.addEventListener('scroll',onScroll)
+
   return (
     <>
       {loading ? (
