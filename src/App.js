@@ -34,7 +34,7 @@ function App() {
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/shipping" exact component={ShippingScreen} />
           <Route path="/searched" exact component={SearchedItems}  />
-          <Route path="/searched" exact component={Scrollable}  />
+          <Route path="/scrollable" exact component={Scrollable}  />
 
         </Switch>
       </Router>
