@@ -37,7 +37,7 @@ export function ProductProvider(props) {
   const searchedItems = Cookie.getJSON("searchedITems");
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listProducts({page}));
+    dispatch(listProducts(page));
     return () => {};
   }, []);
   

@@ -20,7 +20,7 @@ import {
   PRODUCT_UPDATE_SUCCESS,
 } from "../_constants/productConstants";
 
-const listProducts = ({page}) => async (dispatch) => {
+const listProducts = (page) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
     const { data } = await axios.get(`/products?page=${page}&size=8`);
