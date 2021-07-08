@@ -32,7 +32,7 @@ function NavigationBar(props, activateOption) {
 
   return (
     <>
-      <Navbar className="desktop__navbar" data-testid="nav" style={{position:"sticky", top:"0"}}>
+      <nav className="desktop__navbar navbar" data-testid="nav">
         <div className="p-2 flex flex-row space-x-2 items-center justify-center content-center">
           <div className="hover:cursor-pointer active:bg-black active:bg-opacity-20 hover:rounded-full p-1.5">
             <MenuIcon
@@ -93,7 +93,7 @@ function NavigationBar(props, activateOption) {
         <div>
           <RightMenu mode="horizontal" />
         </div>
-      </Navbar>
+      </nav>
       <Sidenav sidebar={sidebar} />
     </>
   );
