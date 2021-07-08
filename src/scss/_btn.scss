@@ -1,0 +1,50 @@
+:root {
+  --cart: #f4c430;
+  --primary: rgb(40, 44, 53);
+}
+
+.btn {
+  @include flex(row, space-between);
+  border-radius: 10px;
+  font-size: 1.1rem;
+  padding: 0.32rem;
+  color: var(--primary);
+  cursor: pointer;
+  align-items: center;
+  &:active {
+    outline: none;
+  }
+  &:focus{
+      outline: none;
+  }
+}
+
+.btn-primary-solid {
+  background-color: var(--primary);
+  color: var(--primary);
+}
+.btn-cart-solid {
+  background-color: var(--cart);
+  color: white;
+}
+
+.btn-primary-outline{
+    background-color: transparent;
+    color:black;
+    border: .01rem solid var(--primary);
+}
+
+.btn-background {
+  border-radius: 5px;
+  color: white;
+  padding: 0.1rem;
+  width: 100%;
+  &:hover{
+      cursor: pointer;
+  }
+}
+
+.btn-flex {
+  @include flex(row, center);
+  align-items: center;
+}

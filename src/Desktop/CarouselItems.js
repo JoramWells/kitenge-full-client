@@ -185,7 +185,7 @@ export function CarouselItem({ product }) {
           style={{ width: "55%", margin: "auto" }}
           className="flex flex-row justify-center content-center space-x-2 p-4"
         >
-          <Btn Icon={CreditCardIcon} text="Buy" onClick={handleClick} />
+          <Btn Icon={CreditCardIcon} text="Buy" onClick={handleClick} buttonStyle="btn-primary-outline" />
           <Btn Icon={ShoppingCartIcon} text="Add to cart" />
         </div>
       </Modal>

@@ -1,10 +1,11 @@
 @import './flex';
 .navbar{
-    @include flex(row,space-between,center);
+    @include flex(row,space-between);
+    align-items: center;
     background-color: white;
     padding: .5rem;
     position: sticky;
     top: 0;
     z-index: 100 !important;
-    width: 1%;
+    width: 100%;
 }

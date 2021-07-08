@@ -63,7 +63,6 @@ export function ProductProvider(props) {
           status="500"
           subTitle={error}
           extra={
-            <Flex>
               <Flex
                 onClick={reloadHandler}
                 className="hover:cursor-pointer space-x-4 ring-1 ring-gray-500 w-1/4"
@@ -71,7 +70,6 @@ export function ProductProvider(props) {
                 <RefreshIcon className="h-5 font-extralight" />
                 RETRY
               </Flex>
-            </Flex>
           }
         />
       ) : (

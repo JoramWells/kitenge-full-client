@@ -1,11 +1,12 @@
 import React from "react";
-import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const STYLES = [
-  "btn-primary-solid",
+  "btn-cart-solid",
   "btn-warning-solid",
+  "btn-primary-solid",
   "btn-primary-outline",
+
 ];
 
 const SIZES = ["btn-medium", "btn-small"];
@@ -25,38 +26,22 @@ const Button = ({
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
   return (
-    <Background>
-      <Flex>
+    <div className={`btn-background ${checkButtonStyle}`} onClick={onClick ? (e) => onClick(e) : ""} >
+      <div className="btn-flex">
         {loading && <div className="loader" style={{ padding: "0.83rem" }} />}
-      </Flex>
-      <Flex>
+      </div>
+      <div className="btn-flex">
         <button
-        className="btn"
+          className="btn"
           type="submit"
-          style={{ display: loading ? "none" : "flex" }}
-          onClick={onClick ? (e) => onClick(e) : ""}
-        >
+          style={{ display: loading ? "none" : "flex" }}>
           {Icon && <Icon className="h-5" />}
-          <div style={{ color: "whitesmoke" }}>{text}</div>
+          <div>{text}</div>
         </button>
-      </Flex>
-    </Background>
+      </div>
+    </div>
   );
 };
-
-const Background = styled.div`
-  border-radius: 5px;
-  background-color: black;
-  color: white;
-  padding: 0.1rem;
-  width: 100%;
-`;
-const Flex = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
 
 Button.propTypes = {
   color: PropTypes.string,

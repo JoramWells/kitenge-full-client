@@ -1,6 +1,7 @@
 @import "~antd/dist/antd.css";
 @import './navbar';
 @import './flex';
+@import './btn';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -266,12 +267,5 @@ Input {
   }
 }
 
-.btn{
-  @include flex(row,space-between );
-  border-radius: 10px;
-  color: white;
-  font-size: 1.1rem;
-  padding: 0.32rem;
-}
 
 
