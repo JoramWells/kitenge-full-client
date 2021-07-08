@@ -1,70 +1,25 @@
 @import "~antd/dist/antd.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.menu {
-  padding: 20 20px;
-  overflow: hidden;
-  background-color: white;
-
-  border-bottom: solid 1px #e8e8e8;
-  box-shadow: 0 0 5px #595a5c;
-}
-
-.menu__logo {
-  /* width: 150px; */
-  float: left;
-}
-
-.menu__logo a {
-  display: inline-block;
-  font-size: 20px;
-  margin-left: 1rem;
-  text-decoration: none;
-  /* background-color: cornflowerblue; */
-}
-
-.menu__container .ant-menu-item {
-  padding: 0px 5px;
-  position: sticky;
-}
-
-.menu__container .ant-menu-submenu-title {
-  padding: 10px 20px;
-}
-
-.menu__container .ant-menu-item a,
-.menu__container .ant-menu-submenu-title a {
-  padding: 10px 15px;
-}
-
-.menu__container .ant-menu-horizontal {
-  border-bottom: none;
-}
-
-.menu__container .menu_left {
-  float: left;
-}
-
-.menu__container .menu_rigth {
-  float: right;
-}
-
-.menu__mobile-button {
-  float: right;
-  height: 32px;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
   border: 0;
-  padding: 6px;
-  margin-top: 8px;
-  display: none !important; /* use of important to overwrite ant-btn */
+  margin: 0;
 }
 
-.menu_drawer .ant-drawer-body {
-  padding: 0 !important;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
-/* align header of Drawer with header of page */
-.menu_drawer .ant-drawer-header {
-  padding: 14px 24px !important;
-}
 .mobile__carousel {
   display: none !important;
 }
@@ -121,64 +76,59 @@
   }
 }
 
-.tableClass tr,td,th{
-    border: .11rem solid whitesmoke;
-    padding: .5rem;
-
+.tableClass tr,
+td,
+th {
+  border: 0.11rem solid whitesmoke;
+  padding: 0.5rem;
 }
 
-.image{
+.image {
   height: 160px;
   animation: loader 1s infinite ease-in-out;
   --webkit-animation: loader 1s infinite ease-in-out;
-
-
-
 }
-.content{
+.content {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-.avatar{
+.avatar {
   border-radius: 100px;
   margin-top: 1rem;
-    animation: loader 1s infinite ease-in-out;
+  animation: loader 1s infinite ease-in-out;
   --webkit-animation: loader 1s infinite ease-in-out;
   width: 3.3rem;
   height: 2.65rem;
-  
 }
-.item-name{
-    animation: loader 1s infinite ease-in-out;
+.item-name {
+  animation: loader 1s infinite ease-in-out;
   --webkit-animation: loader 1s infinite ease-in-out;
   height: 1rem;
-
 }
-.item-price{
-    animation: loader 1s infinite ease-in-out;
+.item-price {
+  animation: loader 1s infinite ease-in-out;
   --webkit-animation: loader 1s infinite ease-in-out;
   height: 1rem;
   width: 5rem;
-
 }
-.body{
+.body {
   width: 15rem;
   background-color: white;
   padding-bottom: 2rem;
 }
-.sizing{
+.sizing {
   max-width: "83%";
   float: "right";
   margin-top: "1rem";
-  margin-bottom:"1rem";
+  margin-bottom: "1rem";
 }
-@media(max-width:767px){
-  .body{
+@media (max-width: 767px) {
+  .body {
     width: 18rem;
   }
-  .sizing{
+  .sizing {
     max-width: 100%;
     width: 100%;
     display: flex;
@@ -189,81 +139,77 @@
   }
 }
 
-@keyframes loader{
-  0%{
-    background-color: rgba(165,165,165,0.3);
+@keyframes loader {
+  0% {
+    background-color: rgba(165, 165, 165, 0.3);
   }
-  50%{
+  50% {
     background-color: rgba(158, 165, 165, 0.4);
   }
-  100%{
-    background-color: rgba(165,165,165,0.3);
+  100% {
+    background-color: rgba(165, 165, 165, 0.3);
   }
 }
 
-@-webkit-keyframes loader{
-  0%{
-    background-color: rgba(165,165,165,0.3);
+@-webkit-keyframes loader {
+  0% {
+    background-color: rgba(165, 165, 165, 0.3);
   }
-  50%{
+  50% {
     background-color: rgba(158, 165, 165, 0.4);
   }
-  100%{
-    background-color: rgba(165,165,165,0.3);
+  100% {
+    background-color: rgba(165, 165, 165, 0.3);
   }
-
 }
 
-.details{
+.details {
   width: 45rem;
   background-color: white;
   height: 22rem;
-
 }
-.details-item{
+.details-item {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-
-
 }
-.details-img{
+.details-img {
   width: 15rem;
   height: 12rem;
   margin-top: 1rem;
   animation: loader 1s infinite ease-in-out;
   --webkit-animation: loader 1s infinite ease-in-out;
 }
-.details-div{
+.details-div {
   background-color: gray;
-  margin-top: .5rem;
-  margin-bottom: .5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   width: 15rem;
   height: 1rem;
   animation: loader 1s infinite ease-in-out;
   --webkit-animation: loader 1s infinite ease-in-out;
 }
-.details-reviews{
+.details-reviews {
   background-color: gray;
-  margin-top: .5rem;
-  margin-bottom: .5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   height: 1rem;
   width: 10rem;
   animation: loader 1s infinite ease-in-out;
   --webkit-animation: loader 1s infinite ease-in-out;
 }
-.details-category{
+.details-category {
   background-color: gray;
-  margin-top: .5rem;
-  margin-bottom: .5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   height: 1rem;
   width: 12rem;
   animation: loader 1s infinite ease-in-out;
   --webkit-animation: loader 1s infinite ease-in-out;
 }
 
-.description{
+.description {
   background-color: gray;
   margin-top: 1rem;
   margin-left: 1rem;
@@ -273,5 +219,53 @@
   --webkit-animation: loader 1s infinite ease-in-out;
 }
 
+Input {
+  border: gray;
+}
 
+.login:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
 
+.nav-menu {
+  background-color: black;
+  position: fixed;
+  left: -100%;
+  transition: 850ms;
+  height: 100vh;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+}
+
+.loader {
+  border: 5px solid #F4C430;
+  border-radius: 50%;
+  border-top: 5px solid transparent;
+  width: 5px;
+  height: 5px;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+/* safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

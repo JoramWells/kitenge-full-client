@@ -11,7 +11,7 @@ export default function DesktopMobile() {
     <>
       <div className="mobile__carousel" style={{ marginTop: "1rem" }}>
         <Flex>
-          {products.rows.map((item) => (
+          {products.map((item) => (
             <CarouselItem key={item.id} products={item} />
           ))}
         </Flex>
@@ -19,7 +19,7 @@ export default function DesktopMobile() {
 
       <Container className="desktop__carousel" style={{ overflow: "hidden" }} onScroll={()=>console.log('fuck')}>
         <FlexDiv>
-          {products.rows.map((product) => (
+          {products.map((product) => (
             <CarouselItems key={product.id} product={product} />
           ))}
         </FlexDiv>

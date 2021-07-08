@@ -10,13 +10,13 @@ const Button = ({ color, Icon, text, loading = false,onClick }) => {
     <Background>
       <Flex>
         {loading && (
-          <div className="loader" style={{ padding: "0.87rem" }} />
+          <div className="loader" style={{ padding: "0.83rem" }} />
         )}
       </Flex>
       <Flex>
           <Btn  type="submit" style={{display:loading? "none":"flex"}} onClick={onClick?(e)=>onClick(e):""}>
               {Icon && <Icon className="h-5" />}
-              <div>
+              <div style={{color:"whitesmoke"}} >
                 {text}  
               </div>
               
