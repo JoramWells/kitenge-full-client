@@ -23,7 +23,7 @@ import {
 const listProducts = (page) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
-    const { data } = await axios.get(`/products?page=${page}&size=8`);
+    const { data } = await axios.get(`/products?page=${page}&size=16`);
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });

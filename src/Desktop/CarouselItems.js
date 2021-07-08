@@ -133,20 +133,22 @@ export function CarouselItem({ product }) {
         </div>
       </Figure>
       <Modal showModal={showModal} setShowModal={setShowModal}>
-        <Flex className="p-4">
+        <Flex>
           <div>
             <img
               src={image}
               alt=""
               style={{
-                width: "250px",
-                height: "175px",
+                width: "350px",
+                height: "250px",
                 // objectFit: "contain",
               }}
               loading="lazy"
-              className="rounded-md"
+              // className="rounded-md"
             />
-            <h1 className="text-lg font-bold text-gray-700 m-0 p-0">
+          </div>
+          <div className="p-2 flex-1">
+          <h1 className="text-lg font-bold text-gray-700 m-0 p-0">
               {product_name}
             </h1>
             <h2 className="m-0 p-0 font-semibold text-gray-500">
@@ -155,8 +157,6 @@ export function CarouselItem({ product }) {
             <div className="text-xs text-gray-400">
               {views} view(s) | {moment(updatedAt).fromNow("yyyy")}
             </div>
-          </div>
-          <div className="p-2 flex-1">
             <h1 className="text-lg m-0 p-0">Description</h1>
             <div
               style={{ height: 100, overflowY: "scroll", marginTop: 2 }}
@@ -166,7 +166,7 @@ export function CarouselItem({ product }) {
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <div className="text-gray-600 font-semibold text-lg">
               Delivery details
             </div>
@@ -178,14 +178,14 @@ export function CarouselItem({ product }) {
               <ClockIcon className="h-5 text-gray-300" />
               <div className="text-gray-500">5 mins</div>
             </div>
-          </div>
+          </div> */}
         </Flex>
 
         <div
           style={{ width: "55%", margin: "auto" }}
           className="flex flex-row justify-center content-center space-x-2 p-4"
         >
-          <Btn Icon={CreditCardIcon} text="Buy" onClick={handleClick} buttonStyle="btn-primary-outline" />
+          <Btn Icon={CreditCardIcon} text="Buy" onClick={handleClick} buttonStyle="btn-primary-solid" />
           <Btn Icon={ShoppingCartIcon} text="Add to cart" />
         </div>
       </Modal>
