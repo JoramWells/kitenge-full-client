@@ -1,4 +1,4 @@
-import React, { useState, memo,useRef } from "react";
+import React, { useState, memo, useRef } from "react";
 import { Link } from "react-router-dom";
 // import NumberFormat from "react-number-format";
 import axios from "axios";
@@ -14,12 +14,21 @@ import Modal from "./modalComponent/Modal";
 import { useAvatar, useIp, useViews } from "../hooks/useViews";
 import { Flex } from "../components/styles";
 import Btn from "../buttonComponent/Button";
+import { Figure } from "../components/styles";
 // import useGeolocation from "../hooks/useGeolocation";
 
 export function CarouselItem({ product }) {
   // const location = useGeolocation();
-  const { id, product_name, image, price,category, description, userId, updatedAt } =
-    product;
+  const {
+    id,
+    product_name,
+    image,
+    price,
+    category,
+    description,
+    userId,
+    updatedAt,
+  } = product;
   const [showModal, setShowModal] = useState(false);
   const views = useViews(id);
   const ip = useIp();
@@ -44,10 +53,10 @@ export function CarouselItem({ product }) {
   const handleMouseEnter = async () => {
     setDot("visible");
   };
-  const handleClick=(e)=>{
-    e.preventDefault()
-    alert("wtf")
-  }
+  const handleClick = (e) => {
+    e.preventDefault();
+    alert("wtf");
+  };
   const scrollRef = useRef();
 
   const onScroll = () => {
@@ -62,14 +71,12 @@ export function CarouselItem({ product }) {
 
   return (
     <>
-      <figure
-        style={{ width: "15rem", border: "1px solid #F0F0F0 " }}
-        className="rounded-md bg-white mb-8 ring-1 ring-gray-200"
+      <Figure
+        className=" mb-8 ring-1 ring-gray-200"
         key={id}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         ref={scrollRef}
-        onScroll={()=>console.log("fuck")}
       >
         <div
           className="absolute z-1 bg-black bg-opacity-10  text-white p-1 rounded-full flex justify-end flex-row items-end focus:bg-opacity-20 active:bg-opacity-20"
@@ -122,67 +129,62 @@ export function CarouselItem({ product }) {
             </div>
           </div>
         </div>
-      </figure>
+      </Figure>
       <Modal showModal={showModal} setShowModal={setShowModal}>
-        <div className="p-4">
-          <Flex>
-            <div>
-              <img
-                src={image}
-                alt=""
-                style={{
-                  width: "250px",
-                  height: "175px",
-                  // objectFit: "contain",
-                }}
-                loading="lazy"
-                className="rounded-md"
-              />
-              <h1 className="text-lg font-bold text-gray-700 m-0 p-0">
-                {product_name}
-              </h1>
-              <h2 className="m-0 p-0 font-semibold text-gray-500">
-                Kshs {price}/=
-              </h2>
-              <div className="text-xs text-gray-400">
-                {views} view(s) | {moment(updatedAt).fromNow("yyyy")}
-              </div>
+        <Flex className="p-4">
+          <div>
+            <img
+              src={image}
+              alt=""
+              style={{
+                width: "250px",
+                height: "175px",
+                // objectFit: "contain",
+              }}
+              loading="lazy"
+              className="rounded-md"
+            />
+            <h1 className="text-lg font-bold text-gray-700 m-0 p-0">
+              {product_name}
+            </h1>
+            <h2 className="m-0 p-0 font-semibold text-gray-500">
+              Kshs {price}/=
+            </h2>
+            <div className="text-xs text-gray-400">
+              {views} view(s) | {moment(updatedAt).fromNow("yyyy")}
             </div>
-            <div className="p-2 flex-1">
-                <h1 className="text-lg m-0 p-0">Description</h1>
-                <div
-                  style={{ height: 100, overflowY: "scroll", marginTop: 2}
-                }
-                className="text-gray-500"
-                >
-                  <div dangerouslySetInnerHTML={{ __html: description }}/>
-              </div>
-            </div>
-
-            <div>
-              <div
-                className="text-gray-600 font-semibold text-lg"
-              >
-                Delivery details
-              </div>
-              <div className="flex flex-row space-x-2">
-                <LocationMarkerIcon className="h-5 text-gray-300" />
-                <div className="text-gray-500">Umoja, Egessa Villa</div>
-              </div>
-              <div className="flex flex-row space-x-2">
-                <ClockIcon className="h-5 text-gray-300" />
-                <div className="text-gray-500">5 mins</div>
-              </div>
-            </div>
-          </Flex>
-
-          <div
-            style={{ width: "55%", margin: "auto" }}
-            className="flex flex-row justify-center content-center "
-          >
-            <Btn Icon={CreditCardIcon} text="Buy" onClick={handleClick} />
-            <Btn Icon={ShoppingCartIcon} text="Add to cart" />
           </div>
+          <div className="p-2 flex-1">
+            <h1 className="text-lg m-0 p-0">Description</h1>
+            <div
+              style={{ height: 100, overflowY: "scroll", marginTop: 2 }}
+              className="text-gray-500"
+            >
+              <div dangerouslySetInnerHTML={{ __html: description }} />
+            </div>
+          </div>
+
+          <div>
+            <div className="text-gray-600 font-semibold text-lg">
+              Delivery details
+            </div>
+            <div className="flex flex-row space-x-2">
+              <LocationMarkerIcon className="h-5 text-gray-300" />
+              <div className="text-gray-500">Umoja, Egessa Villa</div>
+            </div>
+            <div className="flex flex-row space-x-2">
+              <ClockIcon className="h-5 text-gray-300" />
+              <div className="text-gray-500">5 mins</div>
+            </div>
+          </div>
+        </Flex>
+
+        <div
+          style={{ width: "55%", margin: "auto" }}
+          className="flex flex-row justify-center content-center space-x-2 p-4"
+        >
+          <Btn Icon={CreditCardIcon} text="Buy" onClick={handleClick} />
+          <Btn Icon={ShoppingCartIcon} text="Add to cart" />
         </div>
       </Modal>
     </>
