@@ -7,7 +7,6 @@ import { signin } from "../_actions/userActions";
 import { message, Divider } from "antd";
 import Cookie from "js-cookie";
 import { LockClosedIcon, MailIcon } from "@heroicons/react/solid";
-import { Form } from "../components/styles";
 import Btn from "../buttonComponent/Button";
 
 export default function SignIn(props) {
@@ -29,8 +28,7 @@ export default function SignIn(props) {
   }, [userInfo, history]);
 
   return (
-    <div style={{ paddingTop: "1rem" }}>
-      <Form className="rounded-md ring-1 ring-gray-200">
+      <div className="form">
         <Divider>
           <div style={{ color: "#F4C430" }} className="text-2xl font-bold">
             Signin
@@ -139,7 +137,7 @@ export default function SignIn(props) {
                     )}
                   </div>
                 </div>
-                <div className="flex flex-col m-4">
+                <div className="flex flex-col mt-14">
                   <p
                     onClick={register}
                     className="text-gray-500  tx-sm text-center cursor-pointer"
@@ -147,16 +145,19 @@ export default function SignIn(props) {
                     Don't have an account? Sign Up.
                   </p>
                 </div>
+                <div style={{marginTop:"2rem"}}>
                 <Btn
                   text="Sign In"
                   Icon={LockClosedIcon}
                   loading={loadingUser}
+                  
                 />
+                </div>
+
               </form>
             );
           }}
         </Formik>
-      </Form>
-    </div>
+      </div>
   );
 }

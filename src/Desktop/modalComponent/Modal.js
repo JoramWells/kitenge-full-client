@@ -30,7 +30,9 @@ const Content = styled.div`
   }
 `;
 
-const ModalHeader = styled.div``;
+const ModalHeader = styled.div`
+  position: absolute;
+`;
 
 const Modal = ({ showModal, setShowModal, children }) => {
   const modalRef = useRef();
@@ -62,9 +64,9 @@ const Modal = ({ showModal, setShowModal, children }) => {
         <Background data-testid="modal_div" ref={modalRef} onClick={closeModal}>
           <animated.div style={animation}>
             <Content showModal={showModal}>
-              <ModalHeader className="flex flex-row justify-end p-2">
+              <ModalHeader className="p-2 bg-black rounded-full cursor-pointer bg-opacity-80">
                 <XIcon
-                  className="h-5 text-gray-600"
+                  className="h-5 text-white"
                   onClick={() => setShowModal((prev) => !prev)}
                 />
               </ModalHeader>

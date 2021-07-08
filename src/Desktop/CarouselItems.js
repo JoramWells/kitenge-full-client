@@ -157,37 +157,41 @@ export function CarouselItem({ product }) {
             <div className="text-xs text-gray-400">
               {views} view(s) | {moment(updatedAt).fromNow("yyyy")}
             </div>
-            <h1 className="text-lg m-0 p-0">Description</h1>
+            <hr className="my-1" />
             <div
               style={{ height: 100, overflowY: "scroll", marginTop: 2 }}
               className="text-gray-500"
             >
               <div dangerouslySetInnerHTML={{ __html: description }} />
             </div>
+            <hr className="my-1" />
+            <div
+          style={{ width: "55%", margin: "auto" }}
+          className="flex flex-column justify-center content-center space-x-2 p-1"
+        >
+          <Btn Icon={CreditCardIcon} text="Buy" onClick={handleClick} buttonStyle="btn-primary-solid" />
+          <Btn Icon={ShoppingCartIcon} text="Cart" />
+        </div>
           </div>
 
-          {/* <div>
-            <div className="text-gray-600 font-semibold text-lg">
+          <div>
+            <div className="text-gray-600 font-semibold text-lg m-2">
               Delivery details
             </div>
-            <div className="flex flex-row space-x-2">
+            <div className="flex flex-row space-x-1">
               <LocationMarkerIcon className="h-5 text-gray-300" />
               <div className="text-gray-500">Umoja, Egessa Villa</div>
             </div>
-            <div className="flex flex-row space-x-2">
+            <div className="flex flex-row space-x-1">
               <ClockIcon className="h-5 text-gray-300" />
               <div className="text-gray-500">5 mins</div>
             </div>
-          </div> */}
+
+
+          </div>
         </Flex>
 
-        <div
-          style={{ width: "55%", margin: "auto" }}
-          className="flex flex-row justify-center content-center space-x-2 p-4"
-        >
-          <Btn Icon={CreditCardIcon} text="Buy" onClick={handleClick} buttonStyle="btn-primary-solid" />
-          <Btn Icon={ShoppingCartIcon} text="Add to cart" />
-        </div>
+
       </Modal>
     </>
   );

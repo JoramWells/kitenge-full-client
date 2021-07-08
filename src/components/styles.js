@@ -4,7 +4,7 @@ export const Flex = styled.div`
    display: flex;
    flex-direction: row;
    flex-wrap: wrap;
-   align-items: center;
+   /* align-items: center; */
    align-items: flex-start;
    justify-content: space-between;
    @media(max-width:767px){
@@ -53,8 +53,8 @@ display:flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-display:block;
-margin:auto;
+/* display:block; */
+/* margin:auto; */
 width:25rem;
 /* height:25rem; */
 @media(max-width: 767px){
