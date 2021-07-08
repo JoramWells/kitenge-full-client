@@ -85,7 +85,7 @@ export function CarouselItem({ product }) {
           <DotsVerticalIcon className="h-5" onClick={() => openModal(id)} />
         </div>
         <div
-          className="absolute mt-8 bg-red-900 bg-opacity-50 p-0.5 font-bold text-xs text-gray-200"
+          className="absolute mt-8 bg-black bg-opacity-50 p-0.5 font-bold text-xs text-gray-200"
           style={{ visibility: dot }}
         >
           -20%
@@ -113,12 +113,14 @@ export function CarouselItem({ product }) {
             style={{ width: "30px", height: "30px" }}
           /> */}
           <div>
-            <Link
-              className="text-gray-800 font-bold"
-              to={`/product-detail/${id}/?category=${category}`}
-            >
-              {product_name}
-            </Link>
+            <blockquote>
+              <Link
+                className="text-gray-800 font-bold"
+                to={`/product-detail/${id}/?category=${category}`}
+              >
+                {product_name}
+              </Link>
+            </blockquote>
 
             <figcaption>
               <div className="font-semibold text-gray-600">Kshs {price} /=</div>
@@ -183,7 +185,7 @@ export function CarouselItem({ product }) {
           style={{ width: "55%", margin: "auto" }}
           className="flex flex-row justify-center content-center space-x-2 p-4"
         >
-          <Btn Icon={CreditCardIcon} text="Buy" onClick={handleClick} />
+          <Btn Icon={CreditCardIcon} text="Buy" onClick={handleClick} buttonStyle="btn-primary-outline" />
           <Btn Icon={ShoppingCartIcon} text="Add to cart" />
         </div>
       </Modal>
