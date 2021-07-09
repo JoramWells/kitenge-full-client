@@ -115,8 +115,8 @@ export const Col = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  padding-top: 4.4rem;
-  margin-bottom: 3rem;
+  padding-top: 1rem;
+  margin-bottom: 1rem;
 `;
 export const ColDiv = styled.div`
   display: flex;

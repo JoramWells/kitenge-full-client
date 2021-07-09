@@ -147,10 +147,10 @@ export default function SignIn(props) {
                 </div>
                 <div style={{marginTop:"2rem"}}>
                 <Btn
+                  buttonStyle="btn-primary-solid"
                   text="Sign In"
                   Icon={LockClosedIcon}
-                  loading={loadingUser}
-                  
+                  loading={loadingUser} 
                 />
                 </div>
 

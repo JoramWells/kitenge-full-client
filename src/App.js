@@ -13,7 +13,8 @@ import DesktopNavbarMobile from "./DesktopNavbarMobile";
 import Product from "./Products/Product";
 import ScrollTop from "./Generic/ScrollTop";
 import SearchedItems from "./Products/SearchedItems";
-import Header from "./header/Header";
+// import Header from "./header/Header";
+import MapComponent from './maps/MapComponent'
 import Scrollable from "./Products/Scrollable";
 
 function App() {
@@ -35,6 +36,8 @@ function App() {
           <Route path="/shipping" exact component={ShippingScreen} />
           <Route path="/searched" exact component={SearchedItems}  />
           <Route path="/scrollable" exact component={Scrollable}  />
+          <Route path="/map" exact component={MapComponent}  />
+
 
         </Switch>
       </Router>

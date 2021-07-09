@@ -103,15 +103,16 @@ export function CarouselItem({ product }) {
           }}
           loading="eager"
         />
-        <div className="p-2 flex flex-row  space-x-2">
-          {/* <img
+        <div className="p-2 flex flex-row  space-x-2 items-center">
+          <img
             loading="lazy"
             effect="blur"
             src={avatar}
             alt=""
             className="rounded-full"
             style={{ width: "30px", height: "30px" }}
-          /> */}
+          />
+
           <div>
             <blockquote>
               <Link
@@ -139,8 +140,8 @@ export function CarouselItem({ product }) {
               src={image}
               alt=""
               style={{
-                width: "350px",
-                height: "250px",
+                width: "370px",
+                height: "270px",
                 // objectFit: "contain",
               }}
               loading="lazy"
@@ -148,7 +149,7 @@ export function CarouselItem({ product }) {
             />
           </div>
           <div className="p-2 flex-1">
-          <h1 className="text-lg font-bold text-gray-700 m-0 p-0">
+            <h1 className="text-lg font-bold text-gray-700 m-0 p-0">
               {product_name}
             </h1>
             <h2 className="m-0 p-0 font-semibold text-gray-500">
@@ -166,12 +167,17 @@ export function CarouselItem({ product }) {
             </div>
             <hr className="my-1" />
             <div
-          style={{ width: "55%", margin: "auto" }}
-          className="flex flex-column justify-center content-center space-x-2 p-1"
-        >
-          <Btn Icon={CreditCardIcon} text="Buy" onClick={handleClick} buttonStyle="btn-primary-solid" />
-          <Btn Icon={ShoppingCartIcon} text="Cart" />
-        </div>
+              style={{ width: "55%", margin: "auto" }}
+              className="flex flex-column justify-center content-center space-x-2 p-1"
+            >
+              <Btn
+                Icon={CreditCardIcon}
+                text="Buy"
+                onClick={handleClick}
+                buttonStyle="btn-primary-solid"
+              />
+              <Btn Icon={ShoppingCartIcon} text="Cart" />
+            </div>
           </div>
 
           <div>
@@ -186,12 +192,8 @@ export function CarouselItem({ product }) {
               <ClockIcon className="h-5 text-gray-300" />
               <div className="text-gray-500">5 mins</div>
             </div>
-
-
           </div>
         </Flex>
-
-
       </Modal>
     </>
   );

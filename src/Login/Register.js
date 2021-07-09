@@ -10,7 +10,7 @@ import Cookie from "js-cookie";
 import { register } from "../_actions/userActions";
 import { LockClosedIcon, MailIcon } from "@heroicons/react/solid";
 import { UserAddIcon } from "@heroicons/react/outline";
-import { Form, Row } from "../components/styles";
+import { Row } from "../components/styles";
 import Btn from "../buttonComponent/Button";
 
 export default function SignUp(props) {
@@ -64,58 +64,53 @@ export default function SignUp(props) {
   }
 
   return (
-    <div
-      style={{
-        paddingTop: "1rem",
-      }}
-    >
-      <Form className="bg-white ring-1 ring-gray-300 rounded-md">
-        <Row>
-          <Avatar src={avatar} style={{ margin: "0.3rem" }} />
-          <CloseCircleOutlined
-            className="close"
-            style={{ fontSize: "1.5rem" }}
-            onClick={closeHandler}
-          />
-        </Row>
-        <Divider>
-          <div style={{ color: "#F4C430" }} className="text-2xl font-bold">
-            Sign up
-          </div>
-        </Divider>
-        <form layout="vertical" size="large" onSubmit={submitHandler}>
-          <div className="flex my-4 flex-row ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
-            <UserAddIcon className="h-5 text-gray-400 " />
-            <input
-              id="name"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              placeholder="Enter name"
-              className={"focus:outline-none  p-1 w-full bg-transparent  "}
-            />
-          </div>
-
+    <div className="form">
+      <Row>
+        <Avatar src={avatar} style={{ margin: "0.3rem" }} />
+        <CloseCircleOutlined
+          className="close"
+          style={{ fontSize: "1.5rem" }}
+          onClick={closeHandler}
+        />
+      </Row>
+      <Divider>
+        <div style={{ color: "#F4C430" }} className="text-2xl font-bold">
+          Sign up
+        </div>
+      </Divider>
+      <form layout="vertical" size="large" onSubmit={submitHandler}>
+        <div className="flex my-4 flex-row ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+          <UserAddIcon className="h-5 text-gray-400 " />
           <input
-            name="avatar"
-            id="avatar"
-            type="text"
-            hidden
-            value={avatar}
-            onChange={(e) => setAvatar(e.target.value)}
+            id="name"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            placeholder="Enter name"
+            className={"focus:outline-none  p-1 w-full bg-transparent  "}
           />
-          <div className="flex flex-row my-4 ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
-            <MailIcon className="h-5 text-gray-400 " />
-            <input
-              id="email"
-              name="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              placeholder="Enter email"
-              className={"focus:outline-none  p-1 w-full bg-transparent  "}
-            />
-          </div>
+        </div>
 
-          {/* <Form.Item required>
+        <input
+          name="avatar"
+          id="avatar"
+          type="text"
+          hidden
+          value={avatar}
+          onChange={(e) => setAvatar(e.target.value)}
+        />
+        <div className="flex flex-row my-4 ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+          <MailIcon className="h-5 text-gray-400 " />
+          <input
+            id="email"
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            placeholder="Enter email"
+            className={"focus:outline-none  p-1 w-full bg-transparent  "}
+          />
+        </div>
+
+        {/* <Form.Item required>
               <Input
                 id="address"
                 name="address"
@@ -126,7 +121,7 @@ export default function SignUp(props) {
                 style={inputStyles}
               />
             </Form.Item> */}
-          {/* <Form.Item label="Location" required>
+        {/* <Form.Item label="Location" required>
                 <PlacesAutocomplete
                   value={address}
                   onChange={setAddress}
@@ -158,7 +153,7 @@ export default function SignUp(props) {
                   )}
                 </PlacesAutocomplete>
               </Form.Item> */}
-          {/* <Form.Item
+        {/* <Form.Item
               required
               id="phone"
               name="phone"
@@ -171,34 +166,33 @@ export default function SignUp(props) {
                 placeholder="254799980846"
               />
             </Form.Item> */}
-          <div className="flex my-4 flex-row ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
-            <LockClosedIcon className="h-5 text-gray-400 " />
-            <input
-              id="password"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              placeholder="Enter password"
-              className={"focus:outline-none  p-1 w-full bg-transparent  "}
-            />
-          </div>
+        <div className="flex my-4 flex-row ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+          <LockClosedIcon className="h-5 text-gray-400 " />
+          <input
+            id="password"
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            placeholder="Enter password"
+            className={"focus:outline-none  p-1 w-full bg-transparent  "}
+          />
+        </div>
 
-          <p onClick={login} style={{ color: "grey" }} className="login">
-            Already have an account? Sign in
-          </p>
-          <div>
-            <GoogleLogin
-              clientId={CLIENT_ID}
-              buttonText="Sign in with Google"
-              onSuccess={responseSuccess}
-              onFailure={responseFailure}
-              style={{ display: "block" }}
-              className="link"
-            />
-          </div>
-          <Btn text="Sign Up" loading={loading} />
-        </form>
-      </Form>
+        <p onClick={login} style={{ color: "grey" }} className="login">
+          Already have an account? Sign in
+        </p>
+        <div>
+          <GoogleLogin
+            clientId={CLIENT_ID}
+            buttonText="Sign in with Google"
+            onSuccess={responseSuccess}
+            onFailure={responseFailure}
+            style={{ display: "block" }}
+            className="link"
+          />
+        </div>
+        <Btn text="Sign Up" buttonStyle="btn-primary-solid" loading={loading} />
+      </form>
     </div>
   );
 }
