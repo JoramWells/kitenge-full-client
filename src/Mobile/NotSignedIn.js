@@ -6,7 +6,7 @@ import { Navbar } from "../components/styles";
 
 export default function NotSignedIn() {
   return (
-    <Navbar className=" shadow-md">
+    <nav className="mobile__nav shadow-md ">
       <Link to="/" className="text-gray-800 font-extrabold text-lg">
         ShopTime
       </Link>
@@ -20,6 +20,6 @@ export default function NotSignedIn() {
           Login
         </Link>
       </div>
-    </Navbar>
+    </nav>
   );
 }
