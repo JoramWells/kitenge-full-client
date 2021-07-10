@@ -2,40 +2,65 @@ import React, { useCallback, useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../_actions/productActions";
+import axios from "axios";
 
 export default function Scrollable() {
   const ProductList = useSelector((state) => state.productList);
-  const { posts, loading, error } = ProductList;
+  const { posts, loadi, erro } = ProductList;
+  const [products, setProducts] = useState("");
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const dispatch = useDispatch();
 
+  // const fetchData = useCallback(()=>{
+  //     setPage(page+1)
+  //     dispatch(listProducts(page))
+  // },[])
+  async function fetchData() {
+    setPage(page + 1);
+    setLoading(true);
+    await axios
+      .get(`/products?page=${page}&size=8`)
+      .then((response) => {
+        setProducts([...products, ...response.data]);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(err.message);
+      });
+  }
 
-  const fetchData = useCallback(()=>{
-      setPage(page+1)
-      dispatch(listProducts(page))
-  },[])
-  useEffect(() => {
-    dispatch(listProducts(page));
+  useEffect(async () => {
+    fetchData();
+
     return () => {};
-  }, [dispatch]);
+  }, []);
 
-  const onScroll = () => {
-    const scrollable =
-      document.documentElement.scrollHeight - window.innerHeight;
-    if (scrollable === Math.ceil(window.scrollY)) {
-      //   console.log("pussy");
-      setPage(page + 1);
 
-      //
-    }
-    // break
-    // console.log(page)
-    // dispatch(listProducts(page));
-  };
-//   window.addEventListener("scroll", onScroll);
   return (
     <>
-      {loading ? (
+      {products && (
+        <InfiniteScroll
+          dataLength="31"
+          next={() => fetchData()}
+          hasMore={true}
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
+          {products.map((product) => (
+            <div key={product.id}>
+              <img src={product.image} alt="wtf" />
+            </div>
+          ))}
+        </InfiniteScroll>
+      )}
+      {/* {loading ? (
         <div>Loading...</div>
       ) : error ? (
         <div>{error}</div>
@@ -55,7 +80,7 @@ export default function Scrollable() {
             </div>
           ))}
         </InfiniteScroll>
-      )}
+      )} */}
     </>
   );
 }

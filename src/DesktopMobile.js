@@ -3,7 +3,7 @@ import CarouselItem from "./Mobile/CarouselItem";
 import { CarouselItems } from "./Desktop/CarouselItems";
 import { Flex, Container, FlexDiv } from "./components/styles";
 import { ProductContext } from "./Products/ProductContext";
-import Footer from './Desktop/Footer'
+// import Footer from './Desktop/Footer'
 
 export default function DesktopMobile() {
   const products = useContext(ProductContext);
@@ -27,7 +27,7 @@ export default function DesktopMobile() {
           ))}
         </FlexDiv>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

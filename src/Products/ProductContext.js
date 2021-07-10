@@ -50,7 +50,7 @@ export function ProductProvider(props) {
   console.log(window.scrollY)
 
   };
-  window.addEventListener('scroll',onScroll)
+  // window.addEventListener('scroll',onScroll)
 
   return (
     <>
