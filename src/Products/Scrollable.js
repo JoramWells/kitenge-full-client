@@ -5,8 +5,6 @@ import { listProducts } from "../_actions/productActions";
 import axios from "axios";
 
 export default function Scrollable() {
-  const ProductList = useSelector((state) => state.productList);
-  const { posts, loadi, erro } = ProductList;
   const [products, setProducts] = useState("");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);

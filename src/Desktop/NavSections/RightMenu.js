@@ -46,7 +46,7 @@ function RightMenu(props) {
     if (cartItems.length === 0) {
       return (
         <div className="flex flex-row justify-center items-center content-center">
-          <MailIcon className="h-10 p-2 text-gray-400" />
+          {/* <MailIcon className="h-10 p-2 text-gray-400" />
           <ShoppingCartIcon className="h-10 p-2 text-gray-400" />
 
           <img
@@ -58,8 +58,8 @@ function RightMenu(props) {
               height: "30px",
               borderRadius: "50px",
             }}
-          />
-          {/* <SignedInDropdown /> */}
+          /> */}
+          <SignedInDropdown />
           {/* <Menu mode="horizontal">
             <SubMenu
               style={{ borderRadius: "10px", marginLeft: "0" }}

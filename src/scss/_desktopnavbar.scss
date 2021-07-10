@@ -1,0 +1,16 @@
+.desktop__navbar {
+  @include flex(row, space-between);
+  align-items: center;
+  background-color: white;
+  padding: 0.5rem;
+//   position: sticky;
+//   top: 0;
+//   z-index: 100 !important;
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .desktop__navbar {
+    display: none !important;
+  }
+}
