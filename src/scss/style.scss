@@ -6,6 +6,7 @@
 @import './productmanage';
 @import './mobilefooter';
 @import './mobilenavbar';
+@import './desktopfooter';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -71,9 +72,6 @@ code {
     color: rgb(40, 44, 53);
   }
   .carousel__header {
-    display: none;
-  }
-  .footer {
     display: none;
   }
   .desktop__carousel {

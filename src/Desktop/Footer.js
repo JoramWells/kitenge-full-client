@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import { Row, Col, Typography, Space } from "antd";
 import mpesa from "../img/mpesa.png";
 import {
@@ -9,14 +9,10 @@ import {
 
 const { Title, Text } = Typography;
 
-
 export default class Footer extends Component {
   render() {
     return (
-      <footer
-      className="footer"
-  
-      >
+      <footer className="desktop__footer">
         <Row
           justify="space-around"
           align="middle"
@@ -85,6 +81,6 @@ export default class Footer extends Component {
           Conditions
         </div>
       </footer>
-    )
+    );
   }
 }

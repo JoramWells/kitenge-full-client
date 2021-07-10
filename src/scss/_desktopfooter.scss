@@ -1,0 +1,14 @@
+
+.desktop__footer{
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    height: 200px;
+    display: inline-block !important;
+}
+
+@media (max-width: 767px) {
+  .desktop__footer {
+    display: none !important;
+  }
+}
