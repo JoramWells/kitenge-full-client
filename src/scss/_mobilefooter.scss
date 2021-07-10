@@ -1,0 +1,16 @@
+.mobile__footer {
+  display: none !important;
+}
+@media (max-width: 767px) {
+  .mobile__footer {
+    // @include flex(row, space-between);
+    display: block !important;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 1rem;
+  }
+}
+

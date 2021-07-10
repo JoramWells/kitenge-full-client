@@ -5,7 +5,6 @@ import { Flex, Container, FlexDiv } from "./components/styles";
 import { ProductContext } from "./Products/ProductContext";
 
 export default function DesktopMobile() {
-
   const products = useContext(ProductContext);
   return (
     <>
@@ -17,7 +16,10 @@ export default function DesktopMobile() {
         </Flex>
       </div>
 
-      <Container className="desktop__carousel" style={{ overflow: "hidden" }} onScroll={()=>console.log('fuck')}>
+      <Container
+        className="desktop__carousel"
+        style={{ overflow: "hidden" }}
+      >
         <FlexDiv>
           {products.map((product) => (
             <CarouselItems key={product.id} product={product} />

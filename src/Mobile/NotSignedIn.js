@@ -6,9 +6,9 @@ import { Navbar } from "../components/styles";
 
 export default function NotSignedIn() {
   return (
-    <Navbar className=" shadow-md ">
-      <Link to="/" className="text-gray-800 font-bold text-xl">
-        Do3ens
+    <Navbar className=" shadow-md">
+      <Link to="/" className="text-gray-800 font-extrabold text-lg">
+        ShopTime
       </Link>
 
       <div className=" rounded-md px-4 text-lg  flex flex-row content-center items-center space-x-2">

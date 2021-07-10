@@ -22,8 +22,6 @@ function App() {
     <>
       <Router>
         <ScrollTop />
-        <DesktopNavbarMobile />
-
         <Switch>
           <Route path="/" exact component={HomeRoutes} />
           <Route path="/login" exact component={Login} />

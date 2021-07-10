@@ -20,7 +20,7 @@ import {
   PlusIcon,
   RefreshIcon,
 } from "@heroicons/react/solid";
-import { Flex, Col, Row, InputDiv,ColDiv } from "../components/styles";
+import { Flex, Row, InputDiv,ColDiv } from "../components/styles";
 
 const renderTH = [...Array(4).keys()].map((i) => {
   return (
@@ -163,6 +163,110 @@ export default function ManageProducts() {
 
   return (
     <Fragment>
+      <nav className="desktop__manage" >
+        <div>
+          <Link to="/">
+          Home
+          </Link>
+        </div>
+        <div>
+        <Link to="/products/add" className="text-gray-500">
+              Add product
+          </Link>
+        </div>
+        <div>
+          Edit product
+        </div>
+        <div>
+          A/c
+        </div>
+      </nav>
+      <main>
+        {loading ? (
+          <ColDiv>
+            <div>
+              <table style={{ marginTop: "5rem" }}>
+                <thead>
+                  <tr>{renderTH}</tr>
+                </thead>
+                <tbody>
+                  <tr>{renderTB}</tr>
+                  <tr>{renderTB}</tr>
+                  <tr>{renderTB}</tr>
+                </tbody>
+              </table>
+            </div>
+          </ColDiv>
+        ) : error ? (
+          <ColDiv>
+            <Result
+              status="500"
+              subTitle={error}
+              extra={
+                <Flex>
+                  <Flex
+                    onClick={reloadHandler}
+                    className="hover:cursor-pointer space-x-4 ring-1 ring-gray-500 "
+                    style={{ width: "5rem" }}
+                  >
+                    <RefreshIcon className="h-5 font-extralight" />
+                    RETRY
+                  </Flex>
+                </Flex>
+              }
+            />
+          </ColDiv>
+        ) : (
+          // <Table dataSource={posts} columns={columns}/>
+          <ColDiv
+            style={{ marginTop: "3rem", marginBottom: "3rem" }}
+            justify="space-around"
+            align="middle"
+          >
+            <ColDiv>
+              <table className="tableClass" style={{ width: "100%" }}>
+                <thead>
+                  <th>name</th>
+                  <th>price</th>
+                  <th>image</th>
+                  <th>action</th>
+                </thead>
+                <tbody>
+                  {posts.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.product_name}</td>
+                      <td>{item.price}</td>
+                      <td>
+                        <img
+                          src={"/" + item.image}
+                          style={{ width: "50px", height: "auto" }}
+                          alt={item.product_name}
+                        />
+                      </td>
+                      <td>
+                        <Row>
+                          <ColDiv>
+                            <EditOutlined
+                              style={{ color: "green" }}
+                              onClick={() => showModa(item)}
+                            />
+                          </ColDiv>
+                          <ColDiv>
+                            <DeleteFilled
+                              style={{ color: "rgba(207, 0, 15, 0.6)" }}
+                              onClick={() => deleteHandler(item.id)}
+                            />
+                          </ColDiv>
+                        </Row>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </ColDiv>
+          </ColDiv>
+        )}
+      </main>
       <Modal showModal={showModal} setShowModal={setShowModal}>
         <Row>
           <div style={{ width: "20rem", padding: "1rem" }}>
@@ -276,103 +380,6 @@ export default function ManageProducts() {
           </div>
         </Row>
       </Modal>
-      <main>
-        <div
-          className="flex flex-col justify-center content-center bg-blue-200"
-        >
-          <button className="text-gray-500 font-bold flex justify-center items-center content-center focus:outline-none text-lg">
-            <PlusIcon className="h-10 p-1" />
-            <Link to="/products/add" className="text-gray-500">
-              Add product
-            </Link>
-          </button>
-        </div>
-
-        {loading ? (
-          <ColDiv>
-            <div>
-              <table style={{ marginTop: "5rem" }}>
-                <thead>
-                  <tr>{renderTH}</tr>
-                </thead>
-                <tbody>
-                  <tr>{renderTB}</tr>
-                  <tr>{renderTB}</tr>
-                  <tr>{renderTB}</tr>
-                </tbody>
-              </table>
-            </div>
-          </ColDiv>
-        ) : error ? (
-          <ColDiv>
-            <Result
-              status="500"
-              subTitle={error}
-              extra={
-                <Flex>
-                  <Flex
-                    onClick={reloadHandler}
-                    className="hover:cursor-pointer space-x-4 ring-1 ring-gray-500 "
-                    style={{ width: "5rem" }}
-                  >
-                    <RefreshIcon className="h-5 font-extralight" />
-                    RETRY
-                  </Flex>
-                </Flex>
-              }
-            />
-          </ColDiv>
-        ) : (
-          // <Table dataSource={posts} columns={columns}/>
-          <ColDiv
-            style={{ marginTop: "3rem", marginBottom: "3rem" }}
-            justify="space-around"
-            align="middle"
-          >
-            <ColDiv>
-              <table className="tableClass" style={{ width: "100%" }}>
-                <thead>
-                  <th>name</th>
-                  <th>price</th>
-                  <th>image</th>
-                  <th>action</th>
-                </thead>
-                <tbody>
-                  {posts.map((item) => (
-                    <tr key={item.id}>
-                      <td>{item.product_name}</td>
-                      <td>{item.price}</td>
-                      <td>
-                        <img
-                          src={"/" + item.image}
-                          style={{ width: "50px", height: "auto" }}
-                          alt={item.product_name}
-                        />
-                      </td>
-                      <td>
-                        <Row>
-                          <ColDiv>
-                            <EditOutlined
-                              style={{ color: "green" }}
-                              onClick={() => showModa(item)}
-                            />
-                          </ColDiv>
-                          <ColDiv>
-                            <DeleteFilled
-                              style={{ color: "rgba(207, 0, 15, 0.6)" }}
-                              onClick={() => deleteHandler(item.id)}
-                            />
-                          </ColDiv>
-                        </Row>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </ColDiv>
-          </ColDiv>
-        )}
-      </main>
     </Fragment>
   );
 }

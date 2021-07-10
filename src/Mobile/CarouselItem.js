@@ -11,7 +11,9 @@ import { DotsVerticalIcon } from "@heroicons/react/outline";
 import Modal from "../Desktop/modalComponent/Modal";
 import { useViews } from "../hooks/useViews";
 import moment from "moment";
-import { EyeIcon } from "@heroicons/react/solid";
+import { EyeIcon } from "@heroicons/react/outline";
+import MobileFooter from './MobileFooter'
+
 // import { likedItem } from "../_actions/likedActions";
 
 function CarouselItem({ props, products }) {
@@ -53,7 +55,8 @@ function CarouselItem({ props, products }) {
   };
 
   return (
-    <Col key={id} className="mb-4">
+<>
+<Col key={id} className="mb-4">
       <figure
         className="shadow-md bg-white"
         onMouseEnter={() => setDot("visible")}
@@ -92,8 +95,8 @@ function CarouselItem({ props, products }) {
           </div>
 
           <div className="flex flex-row text-sm text-gray-400 mt-4">
-            <EyeIcon className="h-5" /> {views} view(s) |{" "}
-            {moment(updatedAt).fromNow("yyyy")} .ago
+            <EyeIcon className="h-5 mr-1" /> {views} | {" "}
+            {moment(updatedAt).fromNow("yyyy")}
           </div>
         </div>
       </figure>
@@ -125,6 +128,8 @@ function CarouselItem({ props, products }) {
         </div>
       </Modal>
     </Col>
+    <MobileFooter />
+</>
   );
 }
 

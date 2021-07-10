@@ -1,0 +1,10 @@
+.mobile__navbar{
+    display: none !important;
+}
+
+@media (max-width:767px) {
+    .mobile__navbar{
+        display: block;
+    }
+    
+}

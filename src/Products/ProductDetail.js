@@ -22,6 +22,7 @@ import { categoryProduct, detailsProduct } from "../_actions/productActions";
 import { RedoOutlined } from "@ant-design/icons";
 import { PlusIcon } from "@heroicons/react/outline";
 import styled from "styled-components";
+import DesktopNavbarMobile from "../DesktopNavbarMobile";
 
 function reloadHandler() {
   window.location.reload();
@@ -56,6 +57,7 @@ export default function ProductDetail(props) {
 
   return (
     <>
+      <DesktopNavbarMobile />
       <div className="m-auto block" style={{ paddingTop: "1rem" }}>
         <div className="flex flex-row justify-center items-center content-center">
           <div>

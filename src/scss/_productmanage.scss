@@ -1,0 +1,8 @@
+.desktop__manage{
+    @include flex(row, space-between);
+    background-color: white;
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
