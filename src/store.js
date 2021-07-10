@@ -15,6 +15,7 @@ import {
   // userGoogleReducer,
   userRegisterReducer,
   userSigninReducer,
+  userUpdateReducer,
 } from "./_reducers/userReducers";
 import { cartReducer } from "./_reducers/cartReducers";
 import {
@@ -35,6 +36,7 @@ const reducer = combineReducers({
   productDetail: productDetailReducer,
   userSignin: userSigninReducer,
   userRegister: userRegisterReducer,
+  userUpdate:userUpdateReducer,
   productSave: productSaveReducer,
   cart: cartReducer,
   liked:likedReducer,

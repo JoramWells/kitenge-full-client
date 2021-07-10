@@ -151,7 +151,6 @@ const updateProduct =
           }
         )
         .then((response) => {
-          console.log(response);
           dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: response.data });
         })
         .catch((err) => console.log(err));
