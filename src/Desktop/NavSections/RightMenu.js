@@ -49,17 +49,8 @@ function RightMenu(props) {
           {/* <MailIcon className="h-10 p-2 text-gray-400" />
           <ShoppingCartIcon className="h-10 p-2 text-gray-400" />
 
-          <img
-            src={userInfo.avatar}
-            alt="logo"
-            loading="lazy"
-            style={{
-              width: "30px",
-              height: "30px",
-              borderRadius: "50px",
-            }}
-          /> */}
-          <SignedInDropdown />
+ */}
+          <SignedInDropdown avatar={userInfo.avatar} userId={userInfo.id} />
           {/* <Menu mode="horizontal">
             <SubMenu
               style={{ borderRadius: "10px", marginLeft: "0" }}

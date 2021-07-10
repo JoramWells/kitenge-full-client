@@ -8,13 +8,23 @@ import {
 } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 
-export default function LoginDropdown() {
+export default function LoginDropdown({ avatar, userId }) {
   return (
     <div className="w-56 text-right ">
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="inline-flex justify-center p-2 text-sm font-medium text-white bg-black rounded-full bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-            <UserCircleIcon className="w-5 h-5  text-yellow-200 hover:text-yellow-100" />
+          <Menu.Button className="inline-flex justify-center text-sm font-medium text-white bg-black rounded-full bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+            <img
+              src={avatar}
+              alt="logo"
+              loading="lazy"
+              style={{
+                width: "30px",
+                height: "30px",
+                borderRadius: "50px",
+              }}
+            />
+            {/* <UserCircleIcon className="w-5 h-5  hover:text-yellow-100" /> */}
           </Menu.Button>
         </div>
         <Transition
@@ -59,12 +69,11 @@ export default function LoginDropdown() {
                       active ? "bg-violet-500 text-white" : "text-gray-900"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
-                    {active ? (
-                      <CogIcon className="w-5 h-5 mr-2" aria-hidden="true" />
-                    ) : (
-                      <CogIcon className="w-5 h-5 mr-2" aria-hidden="true" />
-                    )}
-                    Settings
+                    <CogIcon className="w-5 h-5 mr-2" aria-hidden="true" />
+                    <Link to={`/settings/${userId}`}>
+                      Settings
+                    </Link>
+                    
                   </button>
                 )}
               </Menu.Item>

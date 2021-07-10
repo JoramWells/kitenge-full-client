@@ -16,6 +16,7 @@ import SearchedItems from "./Products/SearchedItems";
 // import Header from "./header/Header";
 import MapComponent from './maps/MapComponent'
 import Scrollable from "./Products/Scrollable";
+import AccountSettings from "./Generic/AccountSettings";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/" exact component={HomeRoutes} />
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
+          <Route path="/settings/:id?" component={AccountSettings} />
           <Route path="/products/add" exact component={AddProduct} />
           <Route path="/produc/manage" exact component={ManageProducts} />
           <Route path="/product-detail/:id?" exact component={ProductDetail} />
