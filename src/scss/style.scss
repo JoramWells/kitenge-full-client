@@ -250,6 +250,8 @@ Input {
 .nav-menu.active {
   left: 0;
   transition: 350ms;
+  position: fixed;
+  top: 45px;
 }
 
 .loader {

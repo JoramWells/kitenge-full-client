@@ -91,6 +91,7 @@ export const Sidenav = styled.div`
   background-color: white;
   @media(max-width: 767px){
   display: none !important;
+  z-index: -10 !important;
 }
 `;
 

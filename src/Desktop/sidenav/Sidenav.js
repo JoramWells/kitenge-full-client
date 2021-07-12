@@ -1,10 +1,11 @@
-import { ClockIcon, CreditCardIcon, DotsCircleHorizontalIcon, HomeIcon, ShoppingBagIcon, ThumbUpIcon } from "@heroicons/react/outline";
-import React from "react";
+import { ClockIcon, CreditCardIcon, DotsCircleHorizontalIcon, HomeIcon, ShoppingBagIcon, ThumbUpIcon, XIcon } from "@heroicons/react/outline";
+import React, { useState } from "react";
 import {Link} from 'react-router-dom'
 import { Sidenav, Li } from "../../components/styles";
 
 export default function SideNav({sidebar}) {
-//   const [sidebar, setSidebar] = useState(false);
+
+
   return (
     <Sidenav
       className={
@@ -13,8 +14,10 @@ export default function SideNav({sidebar}) {
           : "nav-menu"
       }
     >
-      <ul className="leading-8 mt-14">
-        <Li>
+
+        
+      <ul className="leading-8 ">
+         <Li>
           <HomeIcon className="h-5 ml-3 text-gray-500 mr-4" />
           <div className="hover:text-gray-700 text-gray-900 font-semibold">
             Home
