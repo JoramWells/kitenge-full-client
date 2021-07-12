@@ -9,17 +9,26 @@ import { useHistory, withRouter, Link } from "react-router-dom";
 import { addToCart } from "../_actions/cartActions";
 import { DotsVerticalIcon } from "@heroicons/react/outline";
 import Modal from "../Desktop/modalComponent/Modal";
-import { useViews } from "../hooks/useViews";
+import { useAvatar, useViews } from "../hooks/useViews";
 import moment from "moment";
-import { EyeIcon } from "@heroicons/react/outline";
 import MobileFooter from "./MobileFooter";
 
 // import { likedItem } from "../_actions/likedActions";
 
 function CarouselItem({ props, products }) {
-  const { id, product_name, image, price, description, src, updatedAt } =
-    products;
+  const {
+    id,
+    product_name,
+    image,
+    price,
+    category,
+    description,
+    src,
+    userId,
+    updatedAt,
+  } = products;
   const views = useViews(id);
+  const avatar = useAvatar(userId);
   const [dot, setDot] = useState("hidden");
   const [showModal, setShowModal] = useState(false);
   const history = useHistory();
@@ -62,7 +71,7 @@ function CarouselItem({ props, products }) {
           onMouseEnter={() => setDot("visible")}
           onMouseLeave={() => setDot("hidden")}
         >
-        <div
+          <div
             className="absolute mx-auto bg-black p-2 top-0 right-0 bg-opacity-20 rounded-full z-5"
             style={{ visibility: dot }}
           >
@@ -77,23 +86,37 @@ function CarouselItem({ props, products }) {
             src={image}
             style={{ width: "18rem", height: "12rem", zIndex: "-1" }}
           />
-          <div className="p-1">
-            <div className="text-gray-500 font-medium">{product_name}</div>
+          <div className="p-1 flex flex-row space-x-4">
+            <img
+              loading="lazy"
+              effect="blur"
+              src={avatar}
+              alt=""
+              className="rounded-full"
+              style={{ width: "30px", height: "30px" }}
+            />
             <div>
-              <p className="text-gray-700 font-medium  m-0">
-                <NumberFormat
-                  value={price}
-                  thousandSeparator={true}
-                  displayType={"text"}
-                  prefix="Kshs: "
-                  suffix=" /="
-                />
-              </p>
-            </div>
+              <Link
+                className="text-gray-800 font-bold"
+                to={`/product-detail/${id}/?category=${category}`}
+              >
+                {product_name}
+              </Link>
+              <div>
+                <p className="text-gray-700 font-medium  m-0">
+                  <NumberFormat
+                    value={price}
+                    thousandSeparator={true}
+                    displayType={"text"}
+                    prefix="Kshs: "
+                    suffix=" /="
+                  />
+                </p>
+              </div>
 
-            <div className="flex flex-row text-xs text-gray-400 mt-1">
-               {views} views |{" "}
-              {moment(updatedAt).fromNow("yyyy")}
+              <div className="flex flex-row text-xs text-gray-400 mt-1">
+                {views} views | {moment(updatedAt).fromNow("yyyy")}
+              </div>
             </div>
           </div>
         </figure>

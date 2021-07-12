@@ -19,7 +19,6 @@ const Background = styled.div`
 `;
 
 const Content = styled.div`
-  background-color: #fff;
   border-radius: 5px;
   margin: 15px;
   transition-duration: 500ms;
@@ -27,11 +26,22 @@ const Content = styled.div`
   @media(max-width:767px){
     width:21.5rem;
     margin: 10px;
+    background-color: #fff;
+
   }
 `;
 
 const ModalHeader = styled.div`
-  position: absolute;
+  /* position: absolute; */
+  /* right: 16%; */
+  /* top: 0; */
+  width: 2.2rem;
+  display: flex;
+  justify-content: end;
+  align-items: flex-end;
+  justify-items: end;
+  flex-direction: row;
+  /* float: right; */
 `;
 
 const Modal = ({ showModal, setShowModal, children }) => {
@@ -62,14 +72,18 @@ const Modal = ({ showModal, setShowModal, children }) => {
     <>
       {showModal ? (
         <Background data-testid="modal_div" ref={modalRef} onClick={closeModal}>
+          
           <animated.div style={animation}>
             <Content showModal={showModal}>
-              <ModalHeader className="p-2 bg-black rounded-full cursor-pointer bg-opacity-80">
+              <div>
+                <ModalHeader className="p-2 bg-black rounded-full cursor-pointer bg-opacity-80 ">
                 <XIcon
                   className="h-5 text-white"
                   onClick={() => setShowModal((prev) => !prev)}
                 />
               </ModalHeader>
+              </div>
+
               {children}
             </Content>  
           </animated.div>

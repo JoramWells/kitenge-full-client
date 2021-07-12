@@ -1,8 +1,27 @@
-.desktop__manage{
+@import "./variables";
+
+.desktop {
+  &__manage {
     @include flex(row, space-between);
     background-color: white;
-    padding: 1rem;
+    align-items: center;
+    padding: 0.5rem;
     position: fixed;
     width: 100%;
     top: 0;
+  }
+
+  &__right {
+    @include flex(row, space-between);
+
+    width: 50%;
+  }
+  &__item {
+    @include flex(row, space-between);
+    @include mobile {
+      @include flex(column, center);
+      flex-wrap: wrap;
+      font-size: .7rem;
+    }
+  }
 }

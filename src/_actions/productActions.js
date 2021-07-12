@@ -18,6 +18,9 @@ import {
   PRODUCT_UPDATE_FAIL,
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
+  USER_PRODUCTS_FAIL,
+  USER_PRODUCTS_REQUEST,
+  USER_PRODUCTS_SUCCESS,
 } from "../_constants/productConstants";
 
 const listProducts = (page) => async (dispatch) => {
@@ -57,6 +60,16 @@ const detailsProduct = (productId) => async (dispatch) => {
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_DETAILS_FAIL, payload: error.message });
+  }
+};
+
+const userProducts = (userID) => async (dispatch) => {
+  dispatch({ type: USER_PRODUCTS_REQUEST, payload: userID });
+  try {
+    const { data } = await axios.get("/my_products/" + userID);
+    dispatch({ type: USER_PRODUCTS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: USER_PRODUCTS_FAIL, payload: error.message });
   }
 };
 
@@ -167,4 +180,5 @@ export {
   updateProduct,
   deleteProduct,
   listCategory,
+  userProducts,
 };

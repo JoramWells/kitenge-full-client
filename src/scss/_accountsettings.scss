@@ -1,0 +1,6 @@
+.account__settings{
+    @include flex(row, space-between);
+    background-color: white;
+    align-items: center;
+    // padding: 1rem;
+}

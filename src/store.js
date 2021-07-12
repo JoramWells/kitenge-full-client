@@ -4,6 +4,7 @@ import Cookie from "js-cookie";
 import {
   categoryListReducer,
   categoryListsReducer,
+  myProductsReducer,
 //   productDeleteReducer,
   productDetailReducer,
   productListReducer,
@@ -12,6 +13,7 @@ import {
 } from "./_reducers/productListReducer";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import {
+  listUserReducer,
   // userGoogleReducer,
   userRegisterReducer,
   userSigninReducer,
@@ -37,6 +39,7 @@ const reducer = combineReducers({
   userSignin: userSigninReducer,
   userRegister: userRegisterReducer,
   userUpdate:userUpdateReducer,
+  listUser:listUserReducer,
   productSave: productSaveReducer,
   cart: cartReducer,
   liked:likedReducer,
@@ -49,6 +52,7 @@ const reducer = combineReducers({
   payment: paymentReducer,
   confirmDetails: confirmPaymentReducer,
   paymentList: paymentListReducer,
+  myProducts:myProductsReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

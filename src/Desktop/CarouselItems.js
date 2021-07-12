@@ -141,33 +141,52 @@ export function CarouselItem({ product }) {
               alt=""
               style={{
                 width: "370px",
-                height: "270px",
+                height: "272px",
                 // objectFit: "contain",
               }}
               loading="lazy"
               // className="rounded-md"
             />
           </div>
-          <div className="p-2 flex-1">
+          <div className="p-2 flex-1 bg-white">
             <h1 className="text-lg font-bold text-gray-700 m-0 p-0">
               {product_name}
             </h1>
             <h2 className="m-0 p-0 font-semibold text-gray-500">
-              Kshs {price}/=
+            Selling Price:  Kshs {price}/=
             </h2>
+            <p className="m-0 p-0  text-gray-400 line-through text-xs">
+            Orgn. Price: Kshs {price}/=
+            </p>
             <div className="text-xs text-gray-400">
               {views} view(s) | {moment(updatedAt).fromNow("yyyy")}
             </div>
             <hr className="my-1" />
+            <div>
+              <div className="text-gray-600 font-semibold text-lg">
+                Delivery details
+              </div>
+              <div className="flex flex-row space-x-1">
+                <LocationMarkerIcon className="h-5 text-gray-300" />
+                <div className="text-gray-500">Free within: Umoja, Egessa Villa</div>
+              </div>
+              <div className="flex flex-row space-x-1">
+                <ClockIcon className="h-5 text-gray-300" />
+                <div className="text-gray-500">Time-out: 5 mins</div>
+              </div>
+            </div>
+            <hr className="my-1" />
             <div
-              style={{ height: 100, overflowY: "scroll", marginTop: 2 }}
+              style={{ height: 90, overflowY: "scroll", marginTop: 2 }}
               className="text-gray-500"
             >
               <div dangerouslySetInnerHTML={{ __html: description }} />
             </div>
-            <hr className="my-1" />
+
+          </div>
+          <hr className="my-1" />
             <div
-              style={{ width: "55%", margin: "auto" }}
+              style={{ width: "55%", margin: "auto", backgroundColor:"transparent" }}
               className="flex flex-column justify-center content-center space-x-2 p-1"
             >
               <Btn
@@ -176,23 +195,8 @@ export function CarouselItem({ product }) {
                 onClick={handleClick}
                 buttonStyle="btn-primary-solid"
               />
-              <Btn Icon={ShoppingCartIcon} text="Cart" />
+              <Btn Icon={ShoppingCartIcon} text="Cart" onClick={handleClick} />
             </div>
-          </div>
-
-          <div>
-            <div className="text-gray-600 font-semibold text-lg m-2">
-              Delivery details
-            </div>
-            <div className="flex flex-row space-x-1">
-              <LocationMarkerIcon className="h-5 text-gray-300" />
-              <div className="text-gray-500">Umoja, Egessa Villa</div>
-            </div>
-            <div className="flex flex-row space-x-1">
-              <ClockIcon className="h-5 text-gray-300" />
-              <div className="text-gray-500">5 mins</div>
-            </div>
-          </div>
         </Flex>
       </Modal>
     </>

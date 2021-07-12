@@ -9,6 +9,9 @@ import {
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_FAIL,
+  USER_DETAILS_SUCCESS,
 } from "../_constants/userConstants";
 import axios from "axios";
 import Cookie from "js-cookie";
@@ -74,6 +77,18 @@ const register =
     }
   };
 
+const detailsUser = (userID) => async (dispatch) => {
+  dispatch({ type: USER_DETAILS_REQUEST, payload: userID });
+  await axios
+    .get("/user/list/" + userID)
+    .then((response) =>
+      dispatch({ type: USER_DETAILS_SUCCESS, payload: response.data })
+    )
+    .catch((error) =>
+      dispatch({ type: USER_DETAILS_FAIL, payload: error.message })
+    );
+};
+
 const updateUser =
   (userID, username, email, password, avatar, phone, address) =>
   async (dispatch, getState) => {
@@ -86,7 +101,7 @@ const updateUser =
     } = getState();
     await axios
       .put(
-        `/me/${userID}`,
+        `/user/me/${userID}`,
         { userID, username, email, password, avatar, phone, address },
         {
           headers: {
@@ -108,4 +123,4 @@ const saveUser = (name, email, avatar, token) => (dispatch) => {
     payload: { name, email, avatar, token },
   });
 };
-export { signin, register, saveUser,updateUser };
+export { signin, register, saveUser, updateUser,detailsUser };

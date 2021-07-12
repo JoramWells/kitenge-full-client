@@ -78,7 +78,7 @@ export default function SignUp(props) {
           Sign up
         </div>
       </Divider>
-      <form layout="vertical" size="large" onSubmit={submitHandler}>
+      <form  onSubmit={submitHandler}>
         <div className="flex my-4 flex-row ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
           <UserAddIcon className="h-5 text-gray-400 " />
           <input

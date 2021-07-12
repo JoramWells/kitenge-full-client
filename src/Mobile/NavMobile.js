@@ -101,7 +101,7 @@ export default function NavMobile() {
                 Dozens
               </Link>
             </div>
-            <div className="flex flex-row space-x-2 p-2">
+            <div className="flex flex-row justify-between space-x-2 p-2">
 
               <SearchIcon
                 onClick={showDiv}
@@ -109,8 +109,6 @@ export default function NavMobile() {
               />
 
               <ShoppingCartIcon className="h-5 text-gray-400" />
-              <InboxInIcon className="h-5 text-gray-400" />
-              <QuestionMarkCircleIcon className="h-5 text-gray-500" />
               <div className="bg-gray-500 rounded-full">
                 <img src={userInfo.avatar} style={{width:"21px", height:"21px",borderRadius:"50px"}} />
               </div>

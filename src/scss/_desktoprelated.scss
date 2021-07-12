@@ -1,0 +1,23 @@
+@import './variables';
+
+.desktop__content{
+    @include flex(row,center);
+    align-items: center;
+
+}
+
+@include mobile {
+    .desktop__related{
+        display: none !important;
+    }
+    .desktop__details{
+        padding-top: 2rem;
+        display: block;
+        margin: auto;
+    }
+    .desktop_detail_div{
+        display: block;
+        margin: auto;
+    }
+    
+}

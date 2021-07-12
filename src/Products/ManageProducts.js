@@ -5,22 +5,20 @@ import React, {
   useRef,
   useCallback,
 } from "react";
-import { Button,  Upload, message, Skeleton, Result } from "antd";
+import { Button, Upload, message, Skeleton, Result } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   deleteProduct,
   listProducts,
   updateProduct,
+  userProducts,
 } from "../_actions/productActions";
 import Modal from "../Desktop/modalComponent/Modal";
 import { DeleteFilled, EditOutlined, UploadOutlined } from "@ant-design/icons";
-import {
-  ChevronRightIcon,
-  PlusIcon,
-  RefreshIcon,
-} from "@heroicons/react/solid";
-import { Flex, Row, InputDiv,ColDiv } from "../components/styles";
+import { ChevronRightIcon, RefreshIcon } from "@heroicons/react/solid";
+import { Flex, Row, InputDiv, ColDiv } from "../components/styles";
+import { PlusIcon,EmojiSadIcon } from "@heroicons/react/outline";
 
 const renderTH = [...Array(4).keys()].map((i) => {
   return (
@@ -34,11 +32,15 @@ const renderTH = [...Array(4).keys()].map((i) => {
 function reloadHandler() {
   window.location.reload();
 }
-export default function ManageProducts() {
+export default function ManageProducts(props) {
   const ProductList = useSelector((state) => state.productList);
+  const UserProducts = useSelector((state) => state.myProducts);
+  const { loadingProducts, items, errorProducts } = UserProducts;
   const ProductUpdate = useSelector((state) => state.productUpdate);
   const { product } = ProductUpdate;
   const { posts, loading, error } = ProductList;
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
 
   // const ProductDelete = useSelector((state) => state.productDelete);
   // const {
@@ -70,7 +72,9 @@ export default function ManageProducts() {
   const [showLoading, setShowLoading] = useState(false);
   const mountedRef = useRef(true);
   useEffect(() => {
-    dispatch(listProducts());
+    // dispatch(listProducts());
+    dispatch(userProducts(userInfo.id));
+    if (items != null) console.log(items);
     return () => {
       mountedRef.current = false;
     };
@@ -163,26 +167,25 @@ export default function ManageProducts() {
 
   return (
     <Fragment>
-      <nav className="desktop__manage" >
+      <nav className="desktop__manage">
         <div>
-          <Link to="/">
-          Home
-          </Link>
+          <Link to="/">Home</Link>
         </div>
-        <div>
-        <Link to="/products/add" className="text-gray-500">
-              Add product
-          </Link>
-        </div>
-        <div>
-          Edit product
-        </div>
-        <div>
-          A/c
+        <div className="desktop__right">
+          <div className="desktop__item">
+            <PlusIcon className="h-5" />
+            <Link to="/products/add" className="text-gray-500">
+              Add
+            </Link>
+          </div>
+          <div className="desktop__item">
+            <EmojiSadIcon className="h-5"  />
+            Edit</div>
+          <div className="desktop__item">A/c</div>
         </div>
       </nav>
       <main>
-        {loading ? (
+        {loadingProducts ? (
           <ColDiv>
             <div>
               <table style={{ marginTop: "5rem" }}>
@@ -197,11 +200,11 @@ export default function ManageProducts() {
               </table>
             </div>
           </ColDiv>
-        ) : error ? (
+        ) : errorProducts ? (
           <ColDiv>
             <Result
               status="500"
-              subTitle={error}
+              subTitle={errorProducts}
               extra={
                 <Flex>
                   <Flex
@@ -226,13 +229,15 @@ export default function ManageProducts() {
             <ColDiv>
               <table className="tableClass" style={{ width: "100%" }}>
                 <thead>
-                  <th>name</th>
-                  <th>price</th>
-                  <th>image</th>
-                  <th>action</th>
+                  <tr>
+                    <td>name</td>
+                    <td>price</td>
+                    <td>image</td>
+                    <td>action</td>
+                  </tr>
                 </thead>
                 <tbody>
-                  {posts.map((item) => (
+                  {items.map((item) => (
                     <tr key={item.id}>
                       <td>{item.product_name}</td>
                       <td>{item.price}</td>
@@ -270,7 +275,7 @@ export default function ManageProducts() {
       <Modal showModal={showModal} setShowModal={setShowModal}>
         <Row>
           <div style={{ width: "20rem", padding: "1rem" }}>
-            <form  encType="multipart/form-data">
+            <form encType="multipart/form-data">
               <img
                 src={"/" + image}
                 style={{ width: "70px", marginBottom: ".3rem" }}
@@ -362,19 +367,19 @@ export default function ManageProducts() {
                 />
               </div>
               <Row>
-                    <Upload {...prop}>
-                      <Button icon={<UploadOutlined />}>UPLOAD IMAGE</Button>
-                    </Upload>
-                    <Button
-                      loading={showLoading}
-                      disabled={showButton}
-                      htmlType="submit"
-                      type="primary"
-                      onClick={() => productEdit()}
-                      style={{ backgroundColor: "#fdba45", border: "0" }}
-                    >
-                      COMPLETE
-                    </Button>
+                <Upload {...prop}>
+                  <Button icon={<UploadOutlined />}>UPLOAD IMAGE</Button>
+                </Upload>
+                <Button
+                  loading={showLoading}
+                  disabled={showButton}
+                  htmlType="submit"
+                  type="primary"
+                  onClick={() => productEdit()}
+                  style={{ backgroundColor: "#fdba45", border: "0" }}
+                >
+                  COMPLETE
+                </Button>
               </Row>
             </form>
           </div>

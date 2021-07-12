@@ -6,7 +6,6 @@ import { searchItems } from "../../_actions/searchActions";
 import { useDispatch } from "react-redux";
 import { SearchIcon, MenuIcon } from "@heroicons/react/solid";
 import { CameraIcon } from "@heroicons/react/outline";
-import { Navbar } from "../../components/styles";
 import Sidenav from "../sidenav/Sidenav";
 import { UserContext } from "../../users/UserContext";
 import { useIp } from "../../hooks/useViews";
@@ -15,7 +14,7 @@ function NavigationBar(props, activateOption) {
   const userInfo = useContext(UserContext);
   const ip = useIp()
   const searchRef = useRef();
-  const [sidebar, setSidebar] = useState(true);
+  const [sidebar, setSidebar] = useState(false);
   const activate = () => setSidebar(!sidebar);
   const dispatch = useDispatch();
   async function handleSubmit(e) {
@@ -32,7 +31,7 @@ function NavigationBar(props, activateOption) {
 
   return (
     <>
-      <nav className="desktop__navbar navbar" data-testid="nav">
+      <nav className="desktop__navbar " data-testid="nav">
         <div className="p-2 flex flex-row space-x-2 items-center justify-center content-center">
           <div className="hover:cursor-pointer active:bg-black active:bg-opacity-20 hover:rounded-full p-1.5">
             <MenuIcon

@@ -31,7 +31,7 @@ export default function Scrollable() {
       });
   }
 
-  useEffect(async () => {
+  useEffect(() => {
     fetchData();
 
     return () => {};

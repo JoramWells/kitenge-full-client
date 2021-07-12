@@ -8,6 +8,9 @@
 @import './mobilenavbar';
 @import './desktopfooter';
 @import './desktopnavbar';
+@import './accountsettings';
+@import './variables';
+@import './desktoprelated';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -277,6 +280,4 @@ Input {
     transform: rotate(360deg);
   }
 }
-
-
 
