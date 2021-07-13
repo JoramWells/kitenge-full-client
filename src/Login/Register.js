@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, {useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { GoogleLogin } from "react-google-login";
@@ -12,10 +12,7 @@ import { LockClosedIcon, MailIcon } from "@heroicons/react/solid";
 import { UserAddIcon } from "@heroicons/react/outline";
 import { Row } from "../components/styles";
 import Btn from "../buttonComponent/Button";
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from 'react-places-autocomplete';
+
 
 export default function SignUp(props) {
   const userRegister = useSelector((state) => state.userRegister);
@@ -34,17 +31,6 @@ export default function SignUp(props) {
   const closeHandler = () => {
     history.goBack();
   };
-
-  const handleChange = (e) =>{
-    setAddress(e.target.value)
-  }
-
-  const handleSelect = (addr) =>{
-    geocodeByAddress(addr)
-    .then(results=>getLatLng(results[0]))
-    .catch(error=>console.log(error))
-
-  }
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -124,62 +110,6 @@ export default function SignUp(props) {
             className={"focus:outline-none  p-1 w-full bg-transparent  "}
           />
         </div>
-
-        {/* <Form.Item required>
-              <Input
-                id="address"
-                name="address"
-                placeholder="Enter your location"
-                prefix={<StopOutlined style={iconStyles} />}
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                style={inputStyles}
-              />
-            </Form.Item> */}
-                <PlacesAutocomplete
-                  value={address}
-                  onChange={handleChange}
-                  
-                  onSelect={handleSelect}
-                >
-                  {({
-                    getInputProps,
-                    suggestions,
-                    getSuggestionItemProps,
-                    loading,
-                  }) => (
-                    <div>
-                      <input
-                        {...getInputProps({
-                          placeholder: "Enter your location",
-                        })}
-                      />
-                      <div>
-                        {loading ? <div>Loading...</div> : null}
-                        {suggestions.map((suggestion) => {
-                          return (
-                            <div {...getSuggestionItemProps(suggestion)}>
-                              <p>{suggestion.description}</p>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-                </PlacesAutocomplete>
-        {/* <Form.Item
-              required
-              id="phone"
-              name="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            >
-              <PhoneInput
-                country={"ke"}
-                preferredCountries={["ke", "ug", "tz"]}
-                placeholder="254799980846"
-              />
-            </Form.Item> */}
         <div className="flex my-4 flex-row ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
           <LockClosedIcon className="h-5 text-gray-400 " />
           <input
