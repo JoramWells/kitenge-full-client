@@ -11,6 +11,7 @@ import { DotsVerticalIcon } from "@heroicons/react/outline";
 import Modal from "../Desktop/modalComponent/Modal";
 import { useAvatar, useViews } from "../hooks/useViews";
 import moment from "moment";
+import Btn from "../buttonComponent/Button";
 import MobileFooter from "./MobileFooter";
 
 // import { likedItem } from "../_actions/likedActions";
@@ -60,7 +61,7 @@ function CarouselItem({ props, products }) {
   };
   // console.log(RequestIp.getClientIp)
   const handleAddToCart = () => {
-    props.history.push("/" + id + "?qty=");
+    history.push("/cart/" + id + "?qty=" + 1);
   };
 
   return (
@@ -131,28 +132,31 @@ function CarouselItem({ props, products }) {
         </figure>
         <Modal showModal={showModal} setShowModal={setShowModal}>
           <div className="flex flex-col p-2">
-            <div className="flex flex-col content-center justify-center">
-              <div className="text-gray-700 font-semibold text-lg">
+            <div className="mobile__modal">
+              <Link
+                className="text-gray-800 font-bold text-xl"
+                to={`/product-detail/${id}/?category=${category}`}
+              >
                 {product_name}
+              </Link>
+              <div className="text-gray-800">Price: Kshs {price}/=</div>
+              <div className="text-gray-500 line-through text-xs">
+                Price: Kshs {price}/=
               </div>
-              <div className="text-gray-500">{price}</div>
-              <div>Umoja</div>
-              <div>2 min(s) out</div>
-              <div dangerouslySetInnerHTML={{ __html: description }} />
+
+              <div>Location: Umoja | Time out: 2 min(s)</div>
+              <div style={{ height: 50, overflowY: "scroll", marginTop: 2 }}>
+                <div dangerouslySetInnerHTML={{ __html: description }} />
+              </div>
             </div>
 
             <div className="flex flex-row justify-center content-center space-x-2">
-              <button className="bg-black bg-opacity-80 w-full py-1 rounded-md text-white">
-                <Link to={"/cart/" + id + "?qty=" + 1} className="text-white">
-                  Add to cart
-                </Link>
-              </button>
-              <button
-                className="w-full py-1 rounded-md  font-semibold text-white"
-                style={{ backgroundColor: "#F4C430" }}
-              >
-                Buy
-              </button>
+              <Btn
+                text="Cart"
+                buttonStyle="btn-primary-solid"
+                onClick={handleAddToCart}
+              />
+              <Btn text="Buy" buttonStyle="" onClick={handleAddToCart} />
             </div>
           </div>
         </Modal>

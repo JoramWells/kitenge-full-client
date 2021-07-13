@@ -16,12 +16,15 @@ const Background = styled.div`
   transition-duration: 500ms;
   flex-direction: column;
   z-index: 50;
+  @media (max-width:800px){
+
+  }
 `;
 
 const Content = styled.div`
   border-radius: 5px;
   margin: 15px;
-  transition-duration: 500ms;
+  transition-duration:all 500ms ease-in-out;
   width: 48rem;
   @media(max-width:767px){
     width:21.5rem;
@@ -42,6 +45,9 @@ const ModalHeader = styled.div`
   justify-items: end;
   flex-direction: row;
   /* float: right; */
+  @media (max-width:800px){
+    display:none !important;
+  }
 `;
 
 const Modal = ({ showModal, setShowModal, children }) => {
@@ -72,7 +78,6 @@ const Modal = ({ showModal, setShowModal, children }) => {
     <>
       {showModal ? (
         <Background data-testid="modal_div" ref={modalRef} onClick={closeModal}>
-          
           <animated.div style={animation}>
             <Content showModal={showModal}>
               <div>
