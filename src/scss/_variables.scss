@@ -1,8 +1,15 @@
 $mobile: 800px;
+$primary: rgb(40, 44, 53);
+$cart: #f4c430;
+$bold: 800;
+$semi-bold: 400;
+$lg: 2rem;
+$md: 0.9rem;
+$label: #686868;
+$border-radius: #E0E0E0;
+
 @mixin mobile {
-    @media (max-width:$mobile) {
-      @content
-      
-    }
-    
+  @media (max-width: $mobile) {
+    @content;
   }
+}

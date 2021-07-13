@@ -8,6 +8,7 @@ import { message, Divider } from "antd";
 import Cookie from "js-cookie";
 import { LockClosedIcon, MailIcon } from "@heroicons/react/solid";
 import Btn from "../buttonComponent/Button";
+import { Helmet } from "react-helmet";
 
 export default function SignIn(props) {
   const history = useHistory();
@@ -28,14 +29,21 @@ export default function SignIn(props) {
   }, [userInfo, history]);
 
   return (
+    <>
+      <Helmet>
+        <title>Dozens Kenya login to your account</title>
+        <link rel="canonical" href="https://dozenskenya.co.ke/login"></link>
+        <meta
+          name="description"
+          content="Quality goods,affordable prices, same day delivary"
+        />
+      </Helmet>
+      <div className="form__container">Dozens Kenya</div>
+
       <div className="form">
         <Divider>
           <div style={{ color: "#F4C430" }} className="text-2xl font-bold">
-            Signin
-          </div>
-
-          <div className="text-gray-500 font-normal text-lg">
-            to continue to do3ensKE
+            Sign- In
           </div>
         </Divider>
 
@@ -90,8 +98,8 @@ export default function SignIn(props) {
             } = props;
             return (
               <form onSubmit={handleSubmit}>
-                <div className="flex flex-col space-x-4 items-place-start mx-2 ">
-                  <div className="flex flex-row ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
+                  <label className="form__label">Email Address</label>
+                  <div className="form__div">
                     <MailIcon className="h-5 text-gray-400 " />
                     <input
                       id="email"
@@ -109,10 +117,10 @@ export default function SignIn(props) {
                       <div className="text-red-400 m-0">{errors.email}</div>
                     )}
                   </div>
-                </div>
 
-                <div className="mx-2 mt-8">
-                  <div className="ring-1 ring-gray-300 p-1 rounded-md flex flex-row items-center m-1 cursor-pointer">
+                <div className=" mt-8">
+                  <label className="form__label">Password</label>
+                  <div className="form__div">
                     <LockClosedIcon className="h-5 text-gray-400" />
                     <input
                       id="password"
@@ -145,19 +153,38 @@ export default function SignIn(props) {
                     Don't have an account? Sign Up.
                   </p>
                 </div>
-                <div style={{marginTop:"2rem"}}>
-                <Btn
-                  buttonStyle="btn-primary-solid"
-                  text="Sign In"
-                  Icon={LockClosedIcon}
-                  loading={loadingUser} 
-                />
+                <div style={{ marginTop: "2rem" }}>
+                  <Btn
+                    buttonStyle="btn-primary-solid"
+                    text="Sign In"
+                    Icon={LockClosedIcon}
+                    loading={loadingUser}
+                  />
                 </div>
-
               </form>
             );
           }}
         </Formik>
       </div>
+      <footer style={{ bottom: "0", position: "fixed", width: "100%" }}>
+        <div className="form__footer">
+          <div className="form__item" className="form__item">
+            Conditions
+          </div>
+          <div className="form__item">Terms of Service</div>
+          <div className="form__item">Help</div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
+          <div className="form__item">&copy;2020-2021</div>
+          <div className="form__item">dozenskenya.co.ke,Inc</div>
+        </div>
+      </footer>
+    </>
   );
 }

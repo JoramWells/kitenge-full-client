@@ -1,8 +1,4 @@
-:root {
-  --cart: #f4c430;
-  --primary: rgb(40, 44, 53);
-}
-
+@import './variables';
 .btn {
   @include flex(row, space-between);
   border-radius: 10px;
@@ -20,18 +16,18 @@
 }
 
 .btn-primary-solid {
-  background-color: var(--primary);
+  background-color: $primary;
   color: whitesmoke;
 }
 .btn-cart-solid {
-  background-color: var(--cart);
+  background-color: $cart;
   color: white;
 }
 
 .btn-primary-outline{
     background-color: transparent;
     color:black;
-    border: .01rem solid var(--primary);
+    border: .01rem solid $primary;
 }
 
 .btn-background {

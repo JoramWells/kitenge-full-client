@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { GoogleLogin } from "react-google-login";
@@ -12,7 +12,7 @@ import { LockClosedIcon, MailIcon } from "@heroicons/react/solid";
 import { UserAddIcon } from "@heroicons/react/outline";
 import { Row } from "../components/styles";
 import Btn from "../buttonComponent/Button";
-
+import { Helmet } from "react-helmet";
 
 export default function SignUp(props) {
   const userRegister = useSelector((state) => state.userRegister);
@@ -65,78 +65,105 @@ export default function SignUp(props) {
   }
 
   return (
-    <div className="form">
-      <Row>
-        <Avatar src={avatar} style={{ margin: "0.3rem" }} />
-        <CloseCircleOutlined
-          className="close"
-          style={{ fontSize: "1.5rem" }}
-          onClick={closeHandler}
+    <>
+      <Helmet>
+        <title>Dozens Kenya - Register account, Welcome</title>
+        <link rel="canonical" href="https://dozenskenya.co.ke"></link>
+        <meta
+          name="description"
+          content="Quality goods,affordable prices, same day delivary"
         />
-      </Row>
-      <Divider>
-        <div style={{ color: "#F4C430" }} className="text-2xl font-bold">
-          Sign up
-        </div>
-      </Divider>
-      <form  onSubmit={submitHandler}>
-        <div className="flex my-4 flex-row ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
-          <UserAddIcon className="h-5 text-gray-400 " />
-          <input
-            id="name"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            placeholder="Enter name"
-            className={"focus:outline-none  p-1 w-full bg-transparent  "}
-          />
-        </div>
+      </Helmet>
+      <div className="form__container">Dozens Kenya</div>
 
-        <input
-          name="avatar"
-          id="avatar"
-          type="text"
-          hidden
-          value={avatar}
-          onChange={(e) => setAvatar(e.target.value)}
-        />
-        <div className="flex flex-row my-4 ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
-          <MailIcon className="h-5 text-gray-400 " />
-          <input
-            id="email"
-            name="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            placeholder="Enter email"
-            className={"focus:outline-none  p-1 w-full bg-transparent  "}
+      <div className="form">
+        <Row>
+          <Avatar src={avatar} />
+          <CloseCircleOutlined
+            className="close"
+            style={{ fontSize: "1.5rem" }}
+            onClick={closeHandler}
           />
-        </div>
-        <div className="flex my-4 flex-row ring-1 ring-gray-300 p-1 items-center rounded-md text-gray-600 txt-sm cursor-pointer hover:shadow-md">
-          <LockClosedIcon className="h-5 text-gray-400 " />
-          <input
-            id="password"
-            name="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            placeholder="Enter password"
-            className={"focus:outline-none  p-1 w-full bg-transparent  "}
-          />
-        </div>
+        </Row>
+        {/* <Divider> */}
+          <div style={{ color: "#F4C430" }} className="text-2xl font-bold flex justify-center">
+            Sign-up
+          </div>
+        {/* </Divider> */}
+        <form onSubmit={submitHandler}>
+          <div style={{ margin: "1rem 0 1rem 0" }}>
+            <label className="form__label">Name</label>
+            <div className="form__div ">
+              <UserAddIcon className="h-5 text-gray-400 " />
+              <input
+                id="name"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                placeholder="Enter name"
+                className={"focus:outline-none  p-1 w-full bg-transparent  "}
+              />
+            </div>
+          </div>
 
-        <p onClick={login} style={{ color: "grey" }} className="login">
-          Already have an account? Sign in
-        </p>
-        <div>
-          <GoogleLogin
-            clientId={CLIENT_ID}
-            buttonText="Sign in with Google"
-            onSuccess={responseSuccess}
-            onFailure={responseFailure}
-            style={{ display: "block" }}
-            className="link"
+          <input
+            name="avatar"
+            id="avatar"
+            type="text"
+            hidden
+            value={avatar}
+            onChange={(e) => setAvatar(e.target.value)}
           />
-        </div>
-        <Btn text="Sign Up" buttonStyle="btn-primary-solid" loading={loading} />
-      </form>
-    </div>
+          <div style={{ margin: "1rem 0 1rem 0" }}>
+            <label className="form__label">Email Address</label>
+            <div className="form__div">
+              <MailIcon className="h-5 text-gray-400 " />
+              <input
+                id="email"
+                name="email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                placeholder="Enter email"
+                className={"focus:outline-none  p-1 w-full bg-transparent  "}
+              />
+            </div>
+          </div>
+          <div style={{ margin: "1rem 0 1rem 0" }}>
+            <label className="form__label">Password</label>
+            <div className="form__div">
+              <LockClosedIcon className="h-5 text-gray-400 " />
+              <input
+                id="password"
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                type="password"
+                placeholder="Enter password"
+                className={"focus:outline-none  p-1 w-full bg-transparent  "}
+              />
+            </div>
+          </div>
+
+          <p onClick={login} style={{ color: "grey" }} className="login">
+            Already have an account? Sign in
+          </p>
+          <div style={{margin:".9rem 0 .9rem 0", display:"flex", flexDirection:"row", justifyContent:"center"}}>
+            <GoogleLogin
+              clientId={CLIENT_ID}
+              buttonText="Sign in with Google"
+              onSuccess={responseSuccess}
+              onFailure={responseFailure}
+              style={{ display: "block" }}
+              className="link"
+            />
+          </div>
+          <Btn
+            text="Sign Up"
+            buttonStyle="btn-primary-solid"
+            loading={loading}
+            onClick={submitHandler}
+          />
+        </form>
+      </div>
+    </>
   );
 }

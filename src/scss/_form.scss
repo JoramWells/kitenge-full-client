@@ -1,16 +1,48 @@
-.form{
-    @include flex(column,center);
-    background-color: white;
-    align-items: center;
-    padding: 1rem;
-    width: 25rem;
-    border-radius: 5px;
-    display: block;
-    margin: auto;
-    border: 1px solid rgb(211,211,211);
-    margin-top: 4rem;
-    height: 25rem;
-    @media (max-width: 767px) {
-        width: 22rem !important;
+.form {
+  @include flex(column, center);
+  background-color: white;
+  align-items: center;
+  padding: 1rem;
+  width: 25rem;
+  border-radius: 5px;
+  display: block;
+  margin: auto;
+  border: 1px solid rgb(211, 211, 211);
+  margin-top: 0.5rem;
+//   height: 25rem;
+  @media (max-width: 767px) {
+    width: 22rem !important;
+  }
+  &__container {
+    @include flex(row, center);
+    font-weight: $bold;
+    font-size: $lg;
+    margin-top: 0rem;
+    color: $primary;
+    @include mobile {
+      margin-top: 0 !important;
     }
+  }
+  &__footer {
+    @include flex(row, center);
+    padding-top: 0.5rem;
+    bottom: 0;
+  }
+  &__item {
+    padding: 0 0.5rem 0 0.5rem;
+    color: gray;
+  }
+  &__label {
+    color: $label;
+    font-weight: $semi-bold;
+    font-size: $md;
+    margin-bottom: 1rem;
+  }
+  &__div {
+    @include flex(row, center);
+    border-radius: 5px;
+    padding: .3rem;
+    align-items: center;
+    border: solid 1px $border-radius;
+  }
 }
