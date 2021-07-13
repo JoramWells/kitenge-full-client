@@ -17,7 +17,7 @@ export default function SignIn(props) {
   const { loadingUser, userInfo } = userSignin;
 
   const dispatch = useDispatch();
-  function register() {
+  const  register = () => {
     props.history.push("/register");
   }
 
@@ -159,6 +159,7 @@ export default function SignIn(props) {
                     text="Sign In"
                     Icon={LockClosedIcon}
                     loading={loadingUser}
+                    onClick={handleSubmit}
                   />
                 </div>
               </form>

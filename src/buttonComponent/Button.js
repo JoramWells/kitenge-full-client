@@ -46,14 +46,13 @@ const Button = ({
 Button.propTypes = {
   color: PropTypes.string,
   text: PropTypes.string,
-  Icon: PropTypes.object,
+  // Icon: PropTypes.object,
   loading: PropTypes.bool,
   onClick: PropTypes.func,
 };
 Button.defaultProps = {
   color: "",
   text: "",
-  Icon: "",
   loading: false,
 };
 
