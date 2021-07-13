@@ -2,13 +2,12 @@ import { SearchIcon } from "@heroicons/react/outline";
 import React from "react";
 import { Link } from "react-router-dom";
 // import LoginDropdown from "./LoginDropdown";
-import { Navbar } from "../components/styles";
 
 export default function NotSignedIn() {
   return (
-    <nav className="mobile__nav shadow-md ">
+    <nav className="mobile__nav">
       <Link to="/" className="text-gray-800 font-extrabold text-lg">
-        ShopTime
+        DOzENS
       </Link>
 
       <div className=" rounded-md px-4 text-lg  flex flex-row content-center items-center space-x-2">

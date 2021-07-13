@@ -71,7 +71,7 @@ export default function NavMobile() {
     else {
       return (
         <>
-          <Navbar className="shadow-md "
+          <Navbar 
             style={{ visibility: diVisible }}
 
           >

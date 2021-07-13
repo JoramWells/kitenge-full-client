@@ -112,6 +112,15 @@ function CarouselItem({ props, products }) {
                     suffix=" /="
                   />
                 </p>
+                <p className="text-gray-400 font-medium text-xs  m-0 line-through">
+                  <NumberFormat
+                    value={price}
+                    thousandSeparator={true}
+                    displayType={"text"}
+                    prefix="Kshs: "
+                    suffix=" /="
+                  />
+                </p>
               </div>
 
               <div className="flex flex-row text-xs text-gray-400 mt-1">
