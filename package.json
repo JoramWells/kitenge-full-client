@@ -36,6 +36,7 @@
     "react-multi-carousel": "^2.6.2",
     "react-number-format": "^4.5.5",
     "react-phone-input-2": "^2.14.0",
+    "react-places-autocomplete": "^7.3.0",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",

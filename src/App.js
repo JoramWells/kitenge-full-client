@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Register from "./Login/Register";
 import Login from "./Login/Login";
+import Places from "./Login/Places";
+
 import AddProduct from "./Products/AddProduct";
 import ManageProducts from "./Products/ManageProducts";
 import ProductDetail from "./Products/ProductDetail";
 import CartScreen from "./Cart/CartScreen";
 import ShippingScreen from "./Cart/ShippingScreen";
 import HomeRoutes from "./HomeRoutes";
-import DesktopNavbarMobile from "./DesktopNavbarMobile";
 import Product from "./Products/Product";
 import ScrollTop from "./Generic/ScrollTop";
 import SearchedItems from "./Products/SearchedItems";
@@ -37,6 +38,8 @@ function App() {
           <Route path="/searched" exact component={SearchedItems}  />
           <Route path="/scrollable" exact component={Scrollable}  />
           <Route path="/map" exact component={MapComponent}  />
+          <Route path="/places" exact component={Places}  />
+
 
 
         </Switch>

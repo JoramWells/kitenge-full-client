@@ -12,6 +12,10 @@ import { LockClosedIcon, MailIcon } from "@heroicons/react/solid";
 import { UserAddIcon } from "@heroicons/react/outline";
 import { Row } from "../components/styles";
 import Btn from "../buttonComponent/Button";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from 'react-places-autocomplete';
 
 export default function SignUp(props) {
   const userRegister = useSelector((state) => state.userRegister);
@@ -24,12 +28,23 @@ export default function SignUp(props) {
   const [avatar, setAvatar] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState("wtf");
   const dispatch = useDispatch();
 
   const closeHandler = () => {
     history.goBack();
   };
+
+  const handleChange = (e) =>{
+    setAddress(e.target.value)
+  }
+
+  const handleSelect = (addr) =>{
+    geocodeByAddress(addr)
+    .then(results=>getLatLng(results[0]))
+    .catch(error=>console.log(error))
+
+  }
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -121,10 +136,10 @@ export default function SignUp(props) {
                 style={inputStyles}
               />
             </Form.Item> */}
-        {/* <Form.Item label="Location" required>
                 <PlacesAutocomplete
                   value={address}
-                  onChange={setAddress}
+                  onChange={handleChange}
+                  
                   onSelect={handleSelect}
                 >
                   {({
@@ -134,7 +149,7 @@ export default function SignUp(props) {
                     loading,
                   }) => (
                     <div>
-                      <Input
+                      <input
                         {...getInputProps({
                           placeholder: "Enter your location",
                         })}
@@ -152,7 +167,6 @@ export default function SignUp(props) {
                     </div>
                   )}
                 </PlacesAutocomplete>
-              </Form.Item> */}
         {/* <Form.Item
               required
               id="phone"
