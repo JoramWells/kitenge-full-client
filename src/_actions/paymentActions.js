@@ -11,7 +11,6 @@ import {
   MAKE_PAYMENT_SUCCESS,
 } from "../_constants/paymentsConstant";
 import Cookie from 'js-cookie'
-
 const makePayment = (phone, amount) => async (dispatch) => {
   dispatch({ type: MAKE_PAYMENT_REQUEST, payload: { phone, amount } });
   try {
