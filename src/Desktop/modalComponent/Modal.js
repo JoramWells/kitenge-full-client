@@ -32,6 +32,27 @@ const Content = styled.div`
     background-color: #fff;
 
   }
+  /* Motor G4, Galaxy S5 */
+  @media(max-width:360px){
+    width: 22rem;
+
+  }
+  /* Pixel 2 */
+  @media(max-width:411px){
+    width: 25rem;
+  }
+  /* iPhone5 */
+  @media(max-width:320px){
+    width: 19.5rem;
+  }
+    /* iPhone6 */
+    @media(max-width:375px){
+    width: 22.5rem;
+  }
+      /* iPhone6 */
+    @media(max-width:280px){
+    width: 17rem;
+  }
 `;
 
 const ModalHeader = styled.div`
