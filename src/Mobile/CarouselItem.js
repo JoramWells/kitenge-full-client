@@ -103,7 +103,7 @@ function CarouselItem({ props, products }) {
               >
                 {product_name}
               </Link>
-              <div>
+              <div className="flex flex-row items-center space-x-2">
                 <p className="text-gray-700 font-medium  m-0">
                   <NumberFormat
                     value={price}
@@ -149,7 +149,6 @@ function CarouselItem({ props, products }) {
                 <div dangerouslySetInnerHTML={{ __html: description }} />
               </div>
             </div>
-
             <div className="flex flex-row justify-center content-center space-x-2">
               <Btn
                 text="Cart"

@@ -47,7 +47,7 @@ const Content = styled.div`
   }
     /* iPhone6 */
     @media(max-width:375px){
-    width: 22.5rem;
+    width: 19.5rem;
   }
       /* iPhone6 */
     @media(max-width:280px){

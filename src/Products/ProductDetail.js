@@ -51,7 +51,7 @@ export default function ProductDetail(props) {
 
   return (
     <>
-      <DesktopNavbarMobile />
+      {/* <DesktopNavbarMobile /> */}
       <div className="desktop_detail_div">
         <div className="desktop__details">
           <div className="desktop__content">
