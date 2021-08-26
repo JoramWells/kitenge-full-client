@@ -109,7 +109,7 @@ export function CarouselItem({ product }) {
           <img
             loading="lazy"
             effect="blur"
-            src={avatar ? avatar :`https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png`}
+            src={avatar ? avatar :`https://www.anchormortgagellc.com/wp-content/uploads/2015/09/placeholder.png`}
             alt=""
             className="rounded-full"
             style={{ width: "35px", height: "35px",
