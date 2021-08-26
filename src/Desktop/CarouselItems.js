@@ -133,6 +133,13 @@ export function CarouselItem({ product }) {
             <figcaption>
               <div className="font-semibold text-gray-600">Kshs {price} /=</div>
             </figcaption>
+            <div
+            style = {{whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis", width:"9.5rem", height:"1.5rem", color:"gray"}}
+            dangerouslySetInnerHTML={{ __html: description }} 
+            className="descriptio"
+            />
+
+          
             <div className="text-gray-400 text-xs flex flex-row space-x-2">
               <div>{views} views</div>
               <div>| {moment(updatedAt).fromNow("yyyy")}</div>

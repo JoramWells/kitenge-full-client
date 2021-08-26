@@ -219,6 +219,11 @@ th {
   animation: loader 1s infinite ease-in-out;
   --webkit-animation: loader 1s infinite ease-in-out;
 }
+.descriptio{
+  h1,h2,p{
+    color: gray;
+  }
+}
 
 .description {
   background-color: gray;
