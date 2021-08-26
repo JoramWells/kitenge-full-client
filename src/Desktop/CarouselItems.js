@@ -91,18 +91,17 @@ export function CarouselItem({ product }) {
           -20%
         </div>
         <img
-          src={image}
+          src={image ? image : "https://endodonticsonly.com.au/wp-content/uploads/placeholder.png"}
           // effect="blur"
           alt="productimage"
           style={{
-            width: "15rem",
-            maxWidth: "15rem",
+            width: "14.9rem",
+            maxWidth: "14.9rem",
             height: "160px",
             maxHeight: "160px",
             display: "block",
             margin: "auto",
             zIndex: "0 !important",
-            backgroundImage:"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAw…<stripped base 64>…PjwvZz48L3N2Zz4="
           }}
           loading="eager"
         />
@@ -110,11 +109,13 @@ export function CarouselItem({ product }) {
           <img
             loading="lazy"
             effect="blur"
-            src={avatar}
+            src={avatar ? avatar :`https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png`}
             alt=""
             className="rounded-full"
-            style={{ width: "30px", height: "30px",
-            backgroundColor:"grey"
+            style={{ width: "35px", height: "35px",
+            backgroundColor:"grey",
+            // image: ``
+
 
            }}
           />
@@ -147,7 +148,10 @@ export function CarouselItem({ product }) {
               alt=""
               style={{
                 width: "370px",
+                maxWidth: "370px",
                 height: "272px",
+                maxHeight: "272px",
+
                 // objectFit: "contain",
               }}
               loading="lazy"

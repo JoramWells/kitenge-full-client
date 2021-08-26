@@ -174,7 +174,7 @@ export const Figure = styled.figure`
   width: 15.2rem;
   max-width: 15.1rem;
   max-height: 20rem;
-  border: 2px solid orange;
+  border: 1px solid #F0F0F0;
   border-radius: 5px;
   background-color: white;
 `
